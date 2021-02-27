@@ -1,0 +1,13 @@
+/dist/
+node_modules
+.cache
+.env*
+
+/coverage
+
+npm-debug.log
+yarn-error.log
+
+# Storybook
+.out
+/coverage
