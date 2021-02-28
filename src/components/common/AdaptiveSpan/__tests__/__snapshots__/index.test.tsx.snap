@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdaptiveSpan Component should apply general styling correctly 1`] = `
+<span
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<b>Foobar</b>",
+    }
+  }
+/>
+`;
+
+exports[`AdaptiveSpan Component should apply general styling correctly 2`] = `
+<span
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<i>Foobar</i>",
+    }
+  }
+/>
+`;
+
+exports[`AdaptiveSpan Component should renders 1`] = `
+<span
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "Foobar",
+    }
+  }
+/>
+`;
