@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 // From: https://github.com/facebook/jest/issues/2663#issuecomment-317109798
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

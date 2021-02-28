@@ -55,6 +55,8 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 	}
 
 	const remainingAmount = props.amount.toPay - (props.amount.received ?? 0);
+
+	/* istanbul ignore next */
 	if (!strings) return null;
 
 	return (

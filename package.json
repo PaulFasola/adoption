@@ -26,9 +26,8 @@
     "lint:script": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "storybook:start": "start-storybook -p 9001 -s ./src/assets -c .storybook",
     "storybook:build": "build-storybook -o doc",
-    "test": "jest --maxWorkers=4",
+    "test": "jest --coverage --colors --maxWorkers=4",
     "test:watch": "npm run test --watch",
-    "test:coverage": "jest --coverage --colors --maxWorkers=2",
     "publish": "npx semantic-release --no-ci"
   },
   "main": "index.js",
