@@ -4,7 +4,7 @@ import { QRCode as QRSvg } from 'react-qr-svg';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
 import { IProps, IStrings } from './interfaces';
 import { Item } from './item';
-import { Body, CancelButton, Container, DetailedView, Footer, Header, HelpLink, Request, Spinner, TransactionList } from './styles';
+import { Body, CancelButton, Container, DetailedView, Footer, Header, HelpIcon, HelpLink, Request, Spinner, TransactionList } from './styles';
 import { padDigits } from '../../utils/arithmetic';
 import { shortenHash } from '../../utils/string';
 
@@ -112,9 +112,11 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 			</Body>
 			<Footer>
 				{props.onCancel && <CancelButton onClick={props.onCancel}>{strings.cancel}</CancelButton>}
-				{props.helpUrl && <HelpLink href={props.helpUrl} title={strings.help}>{strings.help}</HelpLink>}
+				<HelpLink href={props.helpUrl} title={strings.help}>
+					<HelpIcon />{strings.help}
+				</HelpLink>
 			</Footer>
-		</Container>
+		</Container >
 	);
 };
 

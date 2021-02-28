@@ -97,14 +97,52 @@ export const Footer = styled.div``;
 
 export const CancelButton = styled.button`
 	display: block;
+	cursor: pointer;
 	margin: 0 auto 5px auto;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #fff;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 300;
+    color: #000;
+    text-align: center;
+
+	&:hover {
+		color: #FFFFFF;
+		background-color: #f7931a;
+	}
 `;
 
 export const HelpLink = styled.a`
-	display: block;
+	position: absolute;
+	margin: auto;
+	left: 0;
+	right: 0;
+	bottom: 15px;
+	text-align: center;
 	margin: 10px auto 0 auto;
 	text-align: center;
 	text-decoration: none;
-	font-weight: bold;
+	font-weight: 700;
 	color: #000;
+`;
+
+export const HelpIcon = styled.div`
+	display: inline-block;
+	margin-right: 5px;
+	text-align: center;
+	background-color: transparent;
+	border: solid 1px #000;
+	border-radius: 50%;
+	width: 12px;
+	height: 12px;
+	line-height: 13px;
+
+	&:before {
+		content: '?';
+		font-size: 6px
+		font-weight: 700;
+		color: #000;
+	}
 `;
