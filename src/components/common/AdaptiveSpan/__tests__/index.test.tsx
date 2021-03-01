@@ -23,12 +23,12 @@ describe('AdaptiveSpan Component', () => {
 
   it('should replace a tag accordingly', () => {
     const wrapper = shallow(<AdaptiveSpan text="Foo{test}" mapping={[{ tag: '{test}', value: 'bar' }]} />);
-    expect(wrapper.html()).toEqual('<span>Foobar</span>');
+    expect(wrapper.html()).toEqual('<span title=\"Foobar"\>Foobar</span>');
   });
 
   it('should replace occurencies matching tags defined in mapping property correctly', () => {
     const wrapper = shallow(<AdaptiveSpan text="{test1} is not {test2}, but {test1} is {test1}" mapping={[{ tag: '{test1}', value: 'foo' }, { tag: '{test2}', value: 'bar' }]} />);
-    expect(wrapper.html()).toEqual('<span>foo is not bar, but foo is foo</span>');
+    expect(wrapper.html()).toEqual('<span title=\"foo is not bar, but foo is foo\">foo is not bar, but foo is foo</span>');
   });
 
   it('should replace occurencies and apply the requested styles', () => {
@@ -39,7 +39,7 @@ describe('AdaptiveSpan Component', () => {
         { tag: '{test2}', value: 'bar', style: 'italic' },
         { tag: '{test3}', value: 'foobar' }
       ]} />);
-    expect(wrapper.html()).toEqual('<span><b>foo</b> is not <i>bar</i>, and <i>bar</i> is not foobar.</span>');
+    expect(wrapper.html()).toEqual('<span title=\"foo is not bar, and bar is not foobar.\"><b>foo</b> is not <i>bar</i>, and <i>bar</i> is not foobar.</span>');
   });
 
 });

@@ -24,6 +24,8 @@ export const AdaptiveSpan: React.FC<IProps> = ({ text, mapping, style }) => {
 	}
 
 	mapping?.forEach((map) => {
+		text = text.replace(new RegExp(map.tag, "g"), map.value.toString());
+
 		if (map.style) {
 			map.value = _toTag(map.value, map.style);
 		}

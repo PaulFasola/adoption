@@ -7,6 +7,7 @@ exports[`AdaptiveSpan Component should apply general styling correctly 1`] = `
       "__html": "<b>Foobar</b>",
     }
   }
+  title="Foobar"
 />
 `;
 
@@ -17,6 +18,7 @@ exports[`AdaptiveSpan Component should apply general styling correctly 2`] = `
       "__html": "<i>Foobar</i>",
     }
   }
+  title="Foobar"
 />
 `;
 
@@ -27,5 +29,6 @@ exports[`AdaptiveSpan Component should renders 1`] = `
       "__html": "Foobar",
     }
   }
+  title="Foobar"
 />
 `;
