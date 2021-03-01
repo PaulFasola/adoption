@@ -73,7 +73,8 @@ export const Request = styled.div`
 
 	> div {
 		margin-top: 15px;
-
+		overflow: hidden;
+		text-overflow: ellipsis;
 		border-top: 1px solid #dedede;
 		border-bottom: 1px solid #dedede;
 		font-weight: bold;

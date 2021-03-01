@@ -74,7 +74,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 							{ tag: '{symbol}', value: props.symbol }
 						]}
 					/>
-					<div>{props.address}</div>
+					<div title={props.address}>{props.address}</div>
 				</Request>
 				{props.showQRCode && <QRCode
 					bgColor="transparent"
@@ -83,7 +83,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 					style={{ width: 100 }}
 					value={props.address} />}
 				<DetailedView>
-					{props.sellerName ? <Item title={strings.seller}>{props.sellerName}</Item> : null}
+					{props.sellerName ? <Item title={strings.seller}><span title={props.sellerName}>{props.sellerName}</span></Item> : null}
 					{typeof props.amount.received === 'number' ? <Fragment>
 						<Item title={strings.receivedAmount}>{padDigits(props.amount.received, props.decimalPlaces)} {props.symbol}</Item>
 						<Item title={strings.remainingAmount}>{padDigits(remainingAmount, props.decimalPlaces)} {props.symbol}</Item>

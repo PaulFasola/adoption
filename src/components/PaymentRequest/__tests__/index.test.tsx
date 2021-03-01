@@ -2,8 +2,12 @@ import React from 'react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { render } from '@testing-library/react';
 import { PaymentRequest } from '../';
+import { ITransaction } from '../interfaces';
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 expect.extend(toHaveNoViolations);
+configure({ adapter: new Adapter() });
 
 const BasicComponent = (<PaymentRequest
   symbol='BTC'
@@ -67,5 +71,25 @@ Object.keys(components).forEach(name => (
 ));
 
 describe(`PaymentRequest - Edge cases`, () => {
+  it('should prevent transaction container to overflow', () => {
+    const txs = new Array<ITransaction>(30).fill({
+      txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
+      txUrl: 'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
+      amount: 0.1
+    }, 0, 20);
 
+    const component = render(<PaymentRequest
+      symbol='BTC'
+      decimalPlaces={8}
+      logos={{
+        coin: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+      }}
+      transactions={txs}
+      address="1BitcoinEaterAddressDontSendf59kuE"
+      amount={{ toPay: 0.9 }} />);
+
+    const lastLi = component.container.querySelector('li:last-child') as HTMLLIElement;
+    if (!lastLi) fail();
+    expect(lastLi.offsetParent).toBe(null); // null offsetParent = the element is not visible
+  });
 });
