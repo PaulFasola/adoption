@@ -85,11 +85,32 @@ export const TransactionList = styled.ul`
 	padding: 0;
 	margin: 0;
 	list-style: none;
+    max-height: 60px;
+	overflow-x: hidden;
+    overflow-y: auto;
 
 	li {
 		i {
 			margin-left: 5px;
 		}
+	}
+
+	&::-webkit-scrollbar-track
+	{
+		background-color: #fff;
+		border: 1px solid #dedede;
+	}
+
+	&::-webkit-scrollbar
+	{
+		width: 9px;
+		background-color: #dedede;
+	}
+ 
+	&::-webkit-scrollbar-thumb
+	{
+		background-color: #000000;
+		border: 1px solid #dedede;
 	}
 `;
 
@@ -117,6 +138,7 @@ export const CancelButton = styled.button`
 export const HelpLink = styled.a`
 	position: absolute;
 	margin: auto;
+	cursor: pointer;
 	left: 0;
 	right: 0;
 	bottom: 15px;

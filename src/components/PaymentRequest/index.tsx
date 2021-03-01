@@ -112,9 +112,9 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 			</Body>
 			<Footer>
 				{props.onCancel && <CancelButton onClick={props.onCancel}>{strings.cancel}</CancelButton>}
-				<HelpLink href={props.helpUrl} title={strings.help}>
+				{props.helpUrl && <HelpLink href={props.helpUrl} title={strings.help} target="blank">
 					<HelpIcon />{strings.help}
-				</HelpLink>
+				</HelpLink>}
 			</Footer>
 		</Container >
 	);

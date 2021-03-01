@@ -1,5 +1,5 @@
 import React from 'react';
-import { sanitize } from 'dompurify';
+import dompurify from 'dompurify';
 
 type TextStyle = 'bold' | 'italic';
 
@@ -18,8 +18,9 @@ interface IProps {
 export const AdaptiveSpan: React.FC<IProps> = ({ text, mapping, style }) => {
 	const _toTag = (value: string | number, style: TextStyle) => style === 'bold' ? `<b>${value}</b>` : `<i>${value}</i>`;
 
+	let html = text;
 	if (style) {
-		text = _toTag(text, style);
+		html = _toTag(html, style);
 	}
 
 	mapping?.forEach((map) => {
@@ -27,10 +28,10 @@ export const AdaptiveSpan: React.FC<IProps> = ({ text, mapping, style }) => {
 			map.value = _toTag(map.value, map.style);
 		}
 
-		text = text.replace(new RegExp(map.tag, "g"), map.value.toString());
+		html = html.replace(new RegExp(map.tag, "g"), map.value.toString());
 	});
 
 	return (
-		<span dangerouslySetInnerHTML={{ __html: sanitize(text) }} />
+		<span title={text} dangerouslySetInnerHTML={{ __html: dompurify.sanitize(html) }} />
 	);
 };

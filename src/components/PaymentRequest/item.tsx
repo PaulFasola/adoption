@@ -31,6 +31,9 @@ const Value = styled.div`
 	padding-left: 8px;
 	width: 50%;
 	box-sizing: border-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 
 	@media only screen and (max-width: 480px) {
 		padding-left: 2px;
@@ -41,7 +44,7 @@ const Value = styled.div`
 export const Item: React.FC<IProps> = ({ title, children }) => {
 	return (
 		<Container>
-			<Title>{title}:</Title>
+			<Title title={title}>{title}:</Title>
 			<Value>{children}</Value>
 		</Container>
 	);
