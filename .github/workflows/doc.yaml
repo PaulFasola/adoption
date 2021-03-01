@@ -1,3 +1,4 @@
+# TODO: restrict trigger branch to master after the first release.
 name: Documentation deployment
 on:
   push:
@@ -18,7 +19,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: dev
+          BRANCH: gh-pages
           FOLDER: doc
           CLEAN: true
           TARGET_FOLDER: docs
