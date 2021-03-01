@@ -1,5 +1,6 @@
 import React from 'react';
 import { PaymentRequest } from '../PaymentRequest';
+import { ITransaction } from './interfaces';
 
 export default {
   title: 'PaymentRequest',
@@ -107,6 +108,14 @@ export const Transacted = (): React.ReactNode => {
   )
 };
 
+
+const txs = new Array<ITransaction>(30);
+txs.fill({
+  txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
+  txUrl: 'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
+  amount: 0.01
+}, 0, 20);
+
 export const Completed = (): React.ReactNode => {
   const dueDate = new Date();
   dueDate.setTime(dueDate.setMinutes(dueDate.getMinutes() + 15));
@@ -121,18 +130,7 @@ export const Completed = (): React.ReactNode => {
       }}
       address="1BitcoinEaterAddressDontSendf59kuE"
       amount={{ toPay: 0.2, received: 0.2 }}
-      transactions={[
-        {
-          txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-          txUrl: 'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-          amount: 0.1
-        },
-        {
-          txHash: '519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-          txUrl: 'https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-          amount: 0.1
-        }
-      ]}
+      transactions={txs}
       status={'Waiting for payment'}
       deadline={{
         dateLocale: 'en-US',
