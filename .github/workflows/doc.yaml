@@ -1,5 +1,5 @@
 # TODO: restrict trigger branch to master after the first release.
-name: Documentation deployment
+name: Documentation
 on:
   push:
     paths: ["src/components/**"]

@@ -10,6 +10,14 @@ module.exports = {
         controls: false
       },
     },
+    {
+      name: '@storybook/addon-docs/preset',
+      options: {
+        sourceLoaderOptions: {
+          parser: 'typescript',
+        }
+      }
+    },
     '@storybook/addon-storysource',
     'storybook-addon-react-docgen'
   ],
