@@ -107,7 +107,7 @@ export const TransactionList = styled.ul`
 		width: 9px;
 		background-color: #dedede;
 	}
- 
+
 	&::-webkit-scrollbar-thumb
 	{
 		background-color: #000000;
@@ -134,6 +134,10 @@ export const CancelButton = styled.button`
 		color: #FFFFFF;
 		background-color: #f7931a;
 	}
+
+	&:focus {
+		outline: none;
+	}
 `;
 
 export const HelpLink = styled.a`
@@ -149,23 +153,4 @@ export const HelpLink = styled.a`
 	text-decoration: none;
 	font-weight: 700;
 	color: #000;
-`;
-
-export const HelpIcon = styled.div`
-	display: inline-block;
-	margin-right: 5px;
-	text-align: center;
-	background-color: transparent;
-	border: solid 1px #000;
-	border-radius: 50%;
-	width: 12px;
-	height: 12px;
-	line-height: 13px;
-
-	&:before {
-		content: '?';
-		font-size: 6px
-		font-weight: 700;
-		color: #000;
-	}
 `;

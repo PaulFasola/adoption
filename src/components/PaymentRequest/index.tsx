@@ -4,9 +4,10 @@ import { QRCode as QRSvg } from 'react-qr-svg';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
 import { IProps, IStrings } from './interfaces';
 import { Item } from './item';
-import { Body, CancelButton, Container, DetailedView, Footer, Header, HelpIcon, HelpLink, Request, Spinner, TransactionList } from './styles';
+import { Body, CancelButton, Container, DetailedView, Footer, Header, HelpLink, Request, Spinner, TransactionList } from './styles';
 import { padDigits } from '../../utils/arithmetic';
 import { shortenHash } from '../../utils/string';
+import { Icon } from '../common/Icon';
 
 const QRCode = styled(QRSvg)`
 	display: block;
@@ -55,9 +56,6 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 	}
 
 	const remainingAmount = props.amount.toPay - (props.amount.received ?? 0);
-
-	/* istanbul ignore next */
-	if (!strings) return null;
 
 	return (
 		<Container>
@@ -113,7 +111,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 			<Footer>
 				{props.onCancel && <CancelButton onClick={props.onCancel}>{strings.cancel}</CancelButton>}
 				{props.helpUrl && <HelpLink href={props.helpUrl} title={strings.help} target="blank">
-					<HelpIcon />{strings.help}
+					<Icon type="help-circle-o" style={{ width: 13, lineHeight: '15px' }} />{strings.help}
 				</HelpLink>}
 			</Footer>
 		</Container >
