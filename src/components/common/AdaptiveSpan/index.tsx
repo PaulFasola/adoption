@@ -24,6 +24,12 @@ export const AdaptiveSpan: React.FC<IProps> = ({ text, mapping, style }) => {
 	}
 
 	mapping?.forEach((map) => {
+		/*
+			let's not be that restrictive regarding null/undefined values here.
+			Impact will be poor UX wise but maybe high when it comes to test.
+		*/
+		map.value = map.value ?? '';
+
 		text = text.replace(new RegExp(map.tag, "g"), map.value.toString());
 
 		if (map.style) {
