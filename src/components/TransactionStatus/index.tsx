@@ -86,8 +86,8 @@ const TransactionStatus: React.FC<IProps> = (props) => {
           {props.customDetailComponent}
         </div>
       </DetailedView>}
-      {props.date && <Date>
-        <span>{new Intl.DateTimeFormat(props.date.locale, props.date.options).format(props.date.value)}</span>
+      {props.date?.value && <Date>
+        <span>{new Intl.DateTimeFormat(props.date.locale ?? 'en-US', props.date.options).format(props.date.value)}</span>
       </Date>}
     </Container>
   );
@@ -95,7 +95,6 @@ const TransactionStatus: React.FC<IProps> = (props) => {
 
 TransactionStatus.defaultProps = {
   date: {
-    value: new window.Date(),
     locale: 'en-US',
     options: {
       day: 'numeric',

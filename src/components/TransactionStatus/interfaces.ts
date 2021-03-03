@@ -6,7 +6,7 @@ export interface IProps {
 	status?: TxStatus;
 	animated?: boolean;
 	date?: {
-		value: Date,
+		value?: Date,
 		locale?: string,
 		options?: Intl.DateTimeFormatOptions
 	};
