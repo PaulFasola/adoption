@@ -17,7 +17,7 @@ describe('TransactionStatus component', () => {
 
   const ComplexTx = (<TransactionStatus
     date={{
-      value: new Date(2009, 1, 3)
+      value: new Date(2009, 1, 3, 10, 42, 0)
     }}
     animated
     autoShowDetails

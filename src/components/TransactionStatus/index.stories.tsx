@@ -19,7 +19,9 @@ export const Basic = (): React.ReactNode => {
       amount="0.1"
       symbol="BTC"
       txURL="https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1"
-      date={new Date()}
+      date={{
+        value: new Date(2009, 1, 3, 10, 42, 0)
+      }}
     />
   )
 };
