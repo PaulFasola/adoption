@@ -1,10 +1,15 @@
 import React from 'react';
 import { IconContainer, Link } from './style';
 
-export type IconType = 'outbound-link' | 'help-circle-o' | 'arrow-up' | 'arrow-down';
+export enum IconType {
+	OutboundLink = 'outbound-link',
+	HelpCircleO = 'help-circle-o',
+	ArrowUp = 'arrow-up',
+	ArrowDown = 'arrow-down'
+}
 
 interface IProps {
-	type: IconType
+	type: IconType;
 	url?: string;
 	style?: React.CSSProperties;
 	targetBlank?: boolean;
