@@ -14,7 +14,6 @@ const Container = styled.div`
 const Title = styled.div`
 	display: inline-block;
 	width: 50%;
-	padding-right: 8px;
 	box-sizing: border-box;
 	vertical-align: top;
 	font-size: 12px;

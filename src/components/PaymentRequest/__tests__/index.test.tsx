@@ -28,7 +28,6 @@ const DetailedComponent = (<PaymentRequest
   }}
   address="1BitcoinEaterAddressDontSendf59kuE"
   amount={{ toPay: 0.9, received: 0 }}
-  status={'Waiting for payment'}
   transactions={[
     {
       txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',

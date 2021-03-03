@@ -1,3 +1,5 @@
+import { PaymentStatus } from "./enums/paymentStatus";
+
 export interface IProps {
 	address: string;
 	symbol: string;
@@ -15,9 +17,10 @@ export interface IProps {
 	strings?: Partial<IStrings>;
 	onCancel?: () => void;
 	helpUrl?: string;
-	status?: string;
 	showQRCode?: boolean;
 	transactions?: ITransaction[];
+	customStatusText?: string;
+	status?: PaymentStatus;
 	deadline?: {
 		dateLocale?: string;
 		datetime: Date;
@@ -31,7 +34,11 @@ export interface IStrings {
 	seller: string;
 	status: string;
 	help: string;
-	completed: string;
+	txStatus: {
+		pending: string;
+		complete: string;
+		failed: string;
+	}
 	deadline: string;
 	receivedAmount: string;
 	remainingAmount: string;

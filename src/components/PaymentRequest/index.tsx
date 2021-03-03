@@ -4,10 +4,12 @@ import { QRCode as QRSvg } from 'react-qr-svg';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
 import { IProps, IStrings } from './interfaces';
 import { Item } from './item';
-import { Body, CancelButton, Container, DetailedView, Footer, Header, HelpLink, Request, Spinner, TransactionList } from './styles';
+import { CancelButton, Container, DetailedView, Header, HelpLink, Request, Spinner, TransactionList, Visual } from './styles';
+import { Icon } from '../common/Icon';
 import { padDigits } from '../../utils/arithmetic';
 import { shortenHash } from '../../utils/string';
-import { Icon } from '../common/Icon';
+import { PaymentStatus } from './enums/paymentStatus';
+import { AnimatedStatus } from '../common/AnimatedIcon';
 
 const QRCode = styled(QRSvg)`
 	display: block;
@@ -15,11 +17,16 @@ const QRCode = styled(QRSvg)`
 `;
 
 const PaymentRequest: React.FC<IProps> = (props) => {
+	const remainingAmount = props.amount.toPay - (props.amount.received ?? 0);
 	const [strings, setStrings] = useState<IStrings>({
 		request: 'Please send {amount} {symbol} to address:',
-		status: 'Status',
+		status: 'Current status:',
 		seller: 'Merchant',
-		completed: 'Payment complete',
+		txStatus: {
+			complete: 'Payment complete',
+			failed: 'Payment failed',
+			pending: 'Waiting for payment'
+		},
 		cancel: 'Cancel',
 		help: 'Need help? Click here!',
 		deadline: 'Send before',
@@ -55,7 +62,33 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 		return new Intl.RelativeTimeFormat(props.deadline?.dateLocale ?? 'en-US').format(Math.ceil(value), unit)
 	}
 
-	const remainingAmount = props.amount.toPay - (props.amount.received ?? 0);
+	const _getStatus = (): string => {
+		if (remainingAmount <= 0) {
+			return strings.txStatus.complete;
+		} else if (props.customStatusText) {
+			return props.customStatusText;
+		}
+		return props.status ? strings.txStatus[props.status] : '';
+	}
+
+	const _renderVisual = (): React.ReactNode => {
+		if (props.status && [PaymentStatus.FAILED, PaymentStatus.COMPLETE].includes(props.status)) {
+			return <AnimatedStatus key={props.status}
+				type={props.status === PaymentStatus.FAILED ? 'failure' : 'success'}
+				style={{ display: 'flex', margin: 'auto' }}
+			/>;
+		} else if (props.showQRCode) {
+			return (
+				<QRCode
+					bgColor="transparent"
+					fgColor="#000000"
+					level="L"
+					style={{ width: 100 }}
+					value={props.address} />
+			)
+		}
+		return null;
+	}
 
 	return (
 		<Container>
@@ -63,7 +96,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 				<img src={props.logos.coin} alt={`${props.symbol} logo`} />
 				{props.logos.company && <img src={props.logos.company} alt={`Company logo`} />}
 			</Header>
-			<Body>
+			<div>
 				<Request>
 					<AdaptiveSpan
 						text={strings.request}
@@ -74,12 +107,9 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 					/>
 					<div title={props.address}>{props.address}</div>
 				</Request>
-				{props.showQRCode && <QRCode
-					bgColor="transparent"
-					fgColor="#000000"
-					level="L"
-					style={{ width: 100 }}
-					value={props.address} />}
+				<Visual>
+					{_renderVisual()}
+				</Visual>
 				<DetailedView>
 					{props.sellerName ? <Item title={strings.seller}><span title={props.sellerName}>{props.sellerName}</span></Item> : null}
 					{typeof props.amount.received === 'number' ? <Fragment>
@@ -102,24 +132,25 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 							))}
 						</TransactionList>
 					</Item> : null}
-					{props.status ? <Item title={strings.status}>
-						{(props.waitAnimation && remainingAmount > 0) && <Spinner />}
-						<AdaptiveSpan text={remainingAmount > 0 ? props.status : strings.completed} style='bold' />
-					</Item> : null}
+					<Item title={strings.status}>
+						{(props.waitAnimation && props.status === PaymentStatus.PENDING) && <Spinner />}
+						<AdaptiveSpan text={_getStatus()} style='bold' />
+					</Item>
 				</DetailedView>
-			</Body>
-			<Footer>
+			</div>
+			<div>
 				{props.onCancel && <CancelButton onClick={props.onCancel}>{strings.cancel}</CancelButton>}
 				{props.helpUrl && <HelpLink href={props.helpUrl} title={strings.help} target="blank">
 					<Icon type="help-circle-o" style={{ width: 13, lineHeight: '15px' }} />{strings.help}
 				</HelpLink>}
-			</Footer>
-		</Container >
+			</div>
+		</Container>
 	);
 };
 
 PaymentRequest.defaultProps = {
 	symbol: 'BTC',
+	status: PaymentStatus.PENDING,
 	showQRCode: true
 }
 

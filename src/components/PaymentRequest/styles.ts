@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-	position: absolute;
 	color: #000000;
 	background-color: #ffffff;
 	width: 360px;
@@ -60,8 +59,6 @@ export const Spinner = styled.div`
   	}
 `;
 
-export const Body = styled.div``;
-
 export const DetailedView = styled.div`
 	display: block;
 	margin: 15px 0 15px 0;
@@ -115,7 +112,9 @@ export const TransactionList = styled.ul`
 	}
 `;
 
-export const Footer = styled.div``;
+export const Visual = styled.div`
+	
+`;
 
 export const CancelButton = styled.button`
 	display: block;
@@ -141,7 +140,7 @@ export const CancelButton = styled.button`
 `;
 
 export const HelpLink = styled.a`
-	position: absolute;
+	display: block;
 	margin: auto;
 	cursor: pointer;
 	left: 0;
