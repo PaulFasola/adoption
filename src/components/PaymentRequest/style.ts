@@ -112,9 +112,7 @@ export const TransactionList = styled.ul`
 	}
 `;
 
-export const Visual = styled.div`
-	
-`;
+export const Visual = styled.div``;
 
 export const CancelButton = styled.button`
 	display: block;

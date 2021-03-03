@@ -4,12 +4,12 @@ import { QRCode as QRSvg } from 'react-qr-svg';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
 import { IProps, IStrings } from './interfaces';
 import { Item } from './item';
-import { CancelButton, Container, DetailedView, Header, HelpLink, Request, Spinner, TransactionList, Visual } from './styles';
-import { Icon } from '../common/Icon';
+import { Icon, IconType } from '../common/Icon';
 import { padDigits } from '../../utils/arithmetic';
 import { shortenHash } from '../../utils/string';
 import { PaymentStatus } from './enums/paymentStatus';
-import { AnimatedStatus } from '../common/AnimatedIcon';
+import { CancelButton, Container, DetailedView, Header, HelpLink, Request, Spinner, TransactionList, Visual } from './style';
+import { AnimatedIcon, IconType as AnimatedIconType } from '../common/AnimatedIcon';
 
 const QRCode = styled(QRSvg)`
 	display: block;
@@ -73,8 +73,8 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 
 	const _renderVisual = (): React.ReactNode => {
 		if (props.status && [PaymentStatus.FAILED, PaymentStatus.COMPLETE].includes(props.status)) {
-			return <AnimatedStatus key={props.status}
-				type={props.status === PaymentStatus.FAILED ? 'failure' : 'success'}
+			return <AnimatedIcon key={props.status}
+				type={props.status === PaymentStatus.FAILED ? AnimatedIconType.Failure : AnimatedIconType.Sucess}
 				style={{ display: 'flex', margin: 'auto' }}
 			/>;
 		} else if (props.showQRCode) {
@@ -141,7 +141,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 			<div>
 				{props.onCancel && <CancelButton onClick={props.onCancel}>{strings.cancel}</CancelButton>}
 				{props.helpUrl && <HelpLink href={props.helpUrl} title={strings.help} target="blank">
-					<Icon type="help-circle-o" style={{ width: 13, lineHeight: '15px' }} />{strings.help}
+					<Icon type={IconType.HelpCircleO} style={{ width: 13, lineHeight: '15px' }} />{strings.help}
 				</HelpLink>}
 			</div>
 		</Container>
