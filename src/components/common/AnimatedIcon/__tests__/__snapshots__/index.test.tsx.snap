@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AnimatedIcon Should be styleable 1`] = `
+<styled.div>
+  <styled.svg
+    viewBox="0 0 52 52"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <styled.circle
+      cx="26"
+      cy="26"
+      fill="none"
+      r="25"
+    />
+    <styled.path
+      d="M14.1 27.2l7.1 7.2 16.7-16.8"
+      fill="none"
+    />
+  </styled.svg>
+</styled.div>
+`;

@@ -1,14 +1,17 @@
 import React from 'react';
 import { CheckMark, Circle, Container, IconContainer, Times } from './style';
 
-export type IconType = 'success' | 'failure';
+export enum IconType {
+	Sucess = 'success',
+	Failure = 'failure'
+}
 
 interface IProps {
 	type: IconType
 	style?: React.CSSProperties;
 }
 
-export const AnimatedStatus: React.FC<IProps> = ({ type, style }: IProps) => {
+export const AnimatedIcon: React.FC<IProps> = ({ type, style }: IProps) => {
 	const successCircle: React.ReactNode = (
 		<Container xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
 			<Circle cx="26" cy="26" r="25" fill="none" />
