@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Amount, Arrow, Container, Content, Date, DetailedView, IconWrapper, Row, Side, Status, StatusBar, Trajectory, TxFees } from './style';
-import { Icon } from '../common/Icon';
+import { Icon, IconType } from '../common/Icon';
 import { IAdress, IProps } from './interfaces';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
 import { defaultColorMap } from './defaultProps';
@@ -27,9 +27,7 @@ const TransactionStatus: React.FC<IProps> = (props) => {
     setColorMap({ ...defaultColorMap, ...props.colorMap })
   }, [props.status, props.colorMap, props.autoShowDetails, shouldRenderDetails])
 
-  const _handleToggleClick = (): void => {
-    setIsToggled(!isToggled);
-  }
+  const _handleToggleClick = (): void => setIsToggled(!isToggled);
 
   const _getStatus = (): string => {
     let output = status.toUpperCase() + status.slice(1);
@@ -67,10 +65,10 @@ const TransactionStatus: React.FC<IProps> = (props) => {
         </Status>
         <Side>
           {props.txURL && <IconWrapper>
-            <Icon type="outbound-link" style={{ width: 21 }} url={props.txURL} targetBlank />
+            <Icon type={IconType.OutboundLink} style={{ width: 21 }} url={props.txURL} targetBlank />
           </IconWrapper>}
           {shouldRenderDetails && <IconWrapper clickable onClick={_handleToggleClick}>
-            <Icon type={isToggled ? 'arrow-up' : 'arrow-down'} style={{ width: 15 }} />
+            <Icon type={isToggled ? IconType.ArrowUp : IconType.ArrowDown} style={{ width: 15 }} />
           </IconWrapper>}
         </Side>
       </Row>
