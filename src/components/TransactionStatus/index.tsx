@@ -13,6 +13,7 @@ const TransactionStatus: React.FC<IProps> = (props) => {
   const [isToggled, setIsToggled] = useState<boolean>(false);
 
   const shouldRenderDetails = props.txFees || props.sender || props.receiver || props.customDetailComponent;
+  const shouldRenderTrajectory = props.sender || props.receiver;
 
   useEffect(() => {
     if (props.status) {
@@ -74,7 +75,7 @@ const TransactionStatus: React.FC<IProps> = (props) => {
         </Side>
       </Row>
       {shouldRenderDetails && <DetailedView>
-        {true && <div>
+        {shouldRenderTrajectory && <div>
           <Trajectory>
             {_getTransaction(props.sender)}
             {props.sender && props.receiver && <Arrow />}
@@ -87,12 +88,24 @@ const TransactionStatus: React.FC<IProps> = (props) => {
           {props.customDetailComponent}
         </div>
       </DetailedView>}
+      {props.date && <Date>
+        <span>{new Intl.DateTimeFormat(props.date.locale, props.date.options).format(props.date.value)}</span>
+      </Date>}
     </Container>
   );
 };
 
 TransactionStatus.defaultProps = {
-
+  date: {
+    value: new window.Date(),
+    locale: 'en-US',
+    options: {
+      day: 'numeric',
+      month: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    }
+  }
 }
 
 export { TransactionStatus };

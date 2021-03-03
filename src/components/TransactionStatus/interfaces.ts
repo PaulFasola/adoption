@@ -5,6 +5,11 @@ export interface IProps {
 	symbol: string;
 	status?: TxStatus;
 	animated?: boolean;
+	date?: {
+		value: Date,
+		locale?: string,
+		options?: Intl.DateTimeFormatOptions
+	};
 	txURL?: string;
 	colorMap?: Record<TxStatus, string>;
 	uncapitalizeStatus?: boolean;

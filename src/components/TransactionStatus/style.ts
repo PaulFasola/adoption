@@ -1,4 +1,5 @@
-import styled, { css, FlattenSimpleInterpolation, keyframes } from "styled-components";
+import styled, { css, FlattenSimpleInterpolation } from "styled-components";
+import { infiniteProgress, finiteProgress } from "../common/animations";
 import { defaultColorMap } from "./defaultProps";
 import { TxStatus } from "./txStatus";
 
@@ -15,7 +16,7 @@ export const Container = styled.div`
 	position: relative;
 	width: 100%;
 	max-width: 375px;
-    max-height: 70px;
+    max-height: 60px;
     text-align: left;
     box-shadow: 0 12px 28px rgb(0 0 0 / 10%);
     border-radius: 3px;
@@ -57,10 +58,25 @@ export const Amount = styled.div`
 	}
 `;
 
+export const Date = styled.div`
+	font-size: 10px;
+	position: absolute;
+	bottom: -4px;
+	width: 100%;
+	height: 20px;
+	color: rgba(0, 0, 0, 0.5);
+	background-color: #fff;
+
+	> span {
+		margin: 0 15px 0 10px;
+	}
+`;
+
 export const Status = styled.div`
 	width: 60%;
     align-self: center;
 	font-size: 14px;
+    margin-top: 5px;
 `;
 
 export const Side = styled.div`
@@ -88,6 +104,7 @@ export const Side = styled.div`
 export const DetailedView = styled.div`
 	  padding: 20px;
 	  min-height: 30px;
+	  margin-bottom: 10px;
 `;
 
 export const Trajectory = styled.div`
@@ -117,24 +134,6 @@ export const TxFees = styled.div`
 // # DetailedView end
 
 // # StatusBar start
-export const Date = styled.p`
-	font-size: 10px;
-	position: absolute;
-	bottom: 0;
-`;
-
-const _infiniteProgress = keyframes`
-	0% { left: -200%; right: 100%; }
-  	50% { left: 107%; right: -8%; }
-  	100% { left: 107%; right: -8%; }
-`;
-
-const _finiteProgress = keyframes`
-	0% {width: 0%; left: 0; right: 0 }
-	50% { width: 100%; left: 0; right: 0 }
-	100% { width: 100%; left: 0; right: 0 }
-`;
-
 const _pendingAnim = (bgColor?: string) => css`
 	transition: width .3s linear;
 	&:before {
@@ -145,7 +144,7 @@ const _pendingAnim = (bgColor?: string) => css`
 		top: 0;
 		left: 0;
 		bottom: 0;
-		animation: ${_infiniteProgress} 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+		animation: ${infiniteProgress} 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
 	}
 `;
 
@@ -159,7 +158,7 @@ const _finiteAnim = (bgColor?: string) => css`
 		top: 0;
 		left: 0;
 		bottom: 0;
-		animation: ${_finiteProgress} 0.8s linear 0.5s 1 normal forwards;
+		animation: ${finiteProgress} 0.8s linear 0s 1 normal forwards;
 	}
 `;
 
