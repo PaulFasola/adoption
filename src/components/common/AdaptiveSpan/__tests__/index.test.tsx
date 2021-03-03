@@ -1,9 +1,8 @@
 import React from 'react';
-import { AdaptiveSpan } from '..';
 import toJson from "enzyme-to-json";
 import Adapter from 'enzyme-adapter-react-16';
-
 import { configure, shallow } from 'enzyme';
+import { AdaptiveSpan } from '..';
 
 configure({ adapter: new Adapter() });
 
@@ -17,8 +16,8 @@ describe('AdaptiveSpan Component', () => {
     const boldSpan = shallow(<AdaptiveSpan text="Foobar" style="bold" />);
     expect(toJson(boldSpan)).toMatchSnapshot();
 
-    const italicSpan = shallow(<AdaptiveSpan text="Foobar" style="italic" />);
-    expect(toJson(italicSpan)).toMatchSnapshot();
+    const wrapper = shallow(<AdaptiveSpan text="Foobar" style="italic" />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should replace a tag accordingly', () => {
@@ -41,5 +40,4 @@ describe('AdaptiveSpan Component', () => {
       ]} />);
     expect(wrapper.html()).toEqual('<span title=\"foo is not bar, and bar is not foobar.\"><b>foo</b> is not <i>bar</i>, and <i>bar</i> is not foobar.</span>');
   });
-
 });
