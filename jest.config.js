@@ -13,7 +13,7 @@ module.exports = {
     'dist/',
     '<rootDir>/src/index.ts'
   ],
-  collectCoverageFrom: ['<rootDir>/src/**/*.{js,ts,tsx,jsx}', '!<rootDir>/src/**/*.stories.*'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{js,ts,tsx,jsx}', '!<rootDir>/src/**/*.stories.*', '!src/**/style.ts'],
   coverageThreshold: {
     global: {
       branches: 85,
