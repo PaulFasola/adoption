@@ -49,7 +49,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 		const dayCount = (date.getTime() - currentDate.getTime()) / (1000 * 3600 * 24);
 		value = dayCount;
 
-		if (dayCount <= 1) {
+		if (dayCount >= 0 && dayCount <= 1) {
 			const hoursCount = Math.abs(currentDate.getTime() - date.getTime()) / 36e5;
 			unit = 'hours';
 			value = hoursCount;
