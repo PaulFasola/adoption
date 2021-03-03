@@ -27,6 +27,10 @@
 ## Installation
 `npm i --save adoption`
 
+## Try it
+To see the components live, check [this storybook](https://paulfasola.github.io/adoption/).  
+If you want to see them in action, you'll find project examples in the [examples](./examples/) folder.
+
 ## Contributing
 TDB.
 
