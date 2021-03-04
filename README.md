@@ -48,5 +48,5 @@ Adoption is licensed under [MIT](https://github.com/PaulFasola/adoption/blob/mas
 
 ## Credits
 
-🖼 Logo font: `Anurati` by [Emmeran Richard](https://www.emmeranrichard.fr/)  
+🖼 Logo font: `Quantum` by [Sesohq](https://www.sesohq.com/)  
 🤟 All the contributors working on the dependencies used to build this project
