@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import { QRCode as QRSvg } from 'react-qr-svg';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
@@ -35,7 +35,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 		transactions: 'Transactions ({txAmount})'
 	});
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (props.strings) {
 			setStrings(s => { return { ...s, ...props.strings } });
 		}
@@ -134,7 +134,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 					</Item> : null}
 					<Item title={strings.status}>
 						{(props.waitAnimation && props.status === PaymentStatus.PENDING) && <Spinner />}
-						<AdaptiveSpan text={_getStatus()} style='bold' />
+						<AdaptiveSpan showTitle text={_getStatus()} style='bold' />
 					</Item>
 				</DetailedView>
 			</div>

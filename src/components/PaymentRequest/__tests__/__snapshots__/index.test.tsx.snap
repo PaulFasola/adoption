@@ -1,5 +1,245 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PaymentRequest Basic should not render any status if 1) payment status is not "completed" or "failed" and 2) showQRCode prop is false. 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div />
+    <styled.div>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Waiting for payment"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Basic should render a visual animation if status is "completed" or "failed" 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <AnimatedIcon
+        key="complete"
+        style={
+          Object {
+            "display": "flex",
+            "margin": "auto",
+          }
+        }
+        type="success"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Payment complete"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Basic should render a visual animation if status is "completed" or "failed" 2`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <AnimatedIcon
+        key="failed"
+        style={
+          Object {
+            "display": "flex",
+            "margin": "auto",
+          }
+        }
+        type="failure"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Payment failed"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Basic should render relative time correctly 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <Styled(QRCode)
+        bgColor="transparent"
+        fgColor="#000000"
+        level="L"
+        style={
+          Object {
+            "width": 100,
+          }
+        }
+        value="1BitcoinEaterAddressDontSendf59kuE"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Send before"
+      >
+        3/3/2021
+        <span>
+           (
+          in 2 minutes
+          )
+        </span>
+      </Item>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Waiting for payment"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
 exports[`PaymentRequest Detailed Should be fully strings customizable 1`] = `
 <styled.div>
   <styled.div>
@@ -135,6 +375,7 @@ exports[`PaymentRequest Detailed Should be fully strings customizable 1`] = `
         title="Current status:"
       >
         <AdaptiveSpan
+          showTitle={true}
           style="bold"
           text="Custom status message"
         />
@@ -167,7 +408,68 @@ exports[`PaymentRequest Detailed Should be fully strings customizable 1`] = `
 </styled.div>
 `;
 
-exports[`PaymentRequest Detailed should set txStatus to "completed" when the remaining balance is <=0  1`] = `
+exports[`PaymentRequest Detailed should be fully string customizable 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <Styled(QRCode)
+        bgColor="transparent"
+        fgColor="#000000"
+        level="L"
+        style={
+          Object {
+            "width": 100,
+          }
+        }
+        value="1BitcoinEaterAddressDontSendf59kuE"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Waiting for payment"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Detailed should set txStatus to "completed" when the remaining balance is <= 0 1`] = `
 <styled.div>
   <styled.div>
     <img
@@ -292,6 +594,7 @@ exports[`PaymentRequest Detailed should set txStatus to "completed" when the rem
         title="Current status:"
       >
         <AdaptiveSpan
+          showTitle={true}
           style="bold"
           text="Payment complete"
         />
