@@ -1,17 +1,25 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
-import { PaymentRequest } from 'adoption';
+import { Container } from '@material-ui/core';
+import { Header } from './components/header';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { routeMap } from './router-paths';
 
-export const App = hot(module)(() => (
-  <div>
-    <PaymentRequest
-      symbol='BTC'
-      decimalPlaces={8}
-      logos={{
-        coin: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
-      }}
-      address="1BitcoinEaterAddressDontSendf59kuE"
-      amount={{ toPay: 0.9 }}
-    />
-  </div>
-));
+import './style.scss';
+
+export const App = hot(module)(() => {
+  return (
+    <BrowserRouter>
+      <Header />
+      <Container>
+        <Switch>
+          {Object.entries(routeMap).map(([path, component], index) => (
+            <Route exact path={path} key={index.toString()}>
+              {component}
+            </Route>
+          ))}
+        </Switch>
+      </Container>
+    </BrowserRouter>
+  )
+});

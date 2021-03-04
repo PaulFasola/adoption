@@ -40,12 +40,8 @@ const useStyles = makeStyles({
 export const OrderHistory: React.FC = () => {
 	const classes = useStyles();
 
-	function createData(name, calories, fat, carbs, protein) {
-		return { name, calories, fat, carbs, protein };
-	}
-
 	const rows = [
-		createData('Frozen yoghurt', 159, 6.0, 24, 4.0)
+		{ item: 'Dog portrait #5', shippingTo: 'Earth', date: new Date() }
 	];
 
 	return (
@@ -68,12 +64,12 @@ export const OrderHistory: React.FC = () => {
 						</TableHead>
 						<TableBody>
 							{rows.map((row) => (
-								<StyledTableRow key={row.name}>
+								<StyledTableRow key={row.item}>
 									<StyledTableCell component="th" scope="row">
-										{row.name}
+										{row.item}
 									</StyledTableCell>
-									<StyledTableCell align="right">{row.fat}</StyledTableCell>
-									<StyledTableCell align="right">{row.carbs}</StyledTableCell>
+									<StyledTableCell align="right">{row.shippingTo}</StyledTableCell>
+									<StyledTableCell align="right">{row.date}</StyledTableCell>
 									<StyledTableCell align="right" className={classes.centeredContent}>
 										<TransactionStatus
 											symbol="ADOP"

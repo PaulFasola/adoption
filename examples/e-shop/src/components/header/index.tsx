@@ -1,6 +1,6 @@
 import React from "react"
 import { AppBar, Toolbar, IconButton, Typography, SwipeableDrawer, makeStyles, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
-import { Receipt, Storefront, Menu } from '@material-ui/icons';
+import { Receipt, Storefront, Menu, Favorite } from '@material-ui/icons';
 import { useHistory } from "react-router-dom";
 import { Path } from "../../router-paths";
 
@@ -42,7 +42,7 @@ export const Header: React.FC = () => {
 						<Menu />
 					</IconButton>
 					<Typography variant="h6" className={classes.title}>
-						Transactions
+						Order History
          			 </Typography>
 				</Toolbar>
 			</AppBar>
@@ -60,6 +60,10 @@ export const Header: React.FC = () => {
 					<ListItem button onClick={_navigateTo(Path.OrderHistory)}>
 						<ListItemIcon><Receipt /></ListItemIcon>
 						<ListItemText primary={"Order history"} />
+					</ListItem>
+					<ListItem button onClick={_navigateTo(Path.Donate)}>
+						<ListItemIcon><Favorite /></ListItemIcon>
+						<ListItemText primary={"Donate"} />
 					</ListItem>
 				</List>
 			</SwipeableDrawer>

@@ -1,14 +1,16 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Donate } from "./views/donate/ìndex";
 import { OrderHistory } from "./views/orderHistory";
 import { Shop } from "./views/shop";
 
 export enum Path {
 	Index = '/',
-	OrderHistory = '/orderhistory'
+	OrderHistory = '/orderhistory',
+	Donate = '/donate'
 }
 
 export const routeMap: Record<Path, React.ReactNode> = {
 	'/': <Shop />,
-	'/orderhistory': <OrderHistory />
+	'/orderhistory': <OrderHistory />,
+	'/donate': <Donate />
 }

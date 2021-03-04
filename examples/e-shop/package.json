@@ -29,8 +29,14 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@types/react-router-dom": "^5.1.7",
+    "node-sass": "^5.0.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
+    "react-router-dom": "^5.2.0",
+    "sass-loader": "^11.0.1",
     "styled-components": "^5.2.1"
   }
 }
