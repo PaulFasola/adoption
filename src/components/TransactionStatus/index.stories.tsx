@@ -137,12 +137,12 @@ export const Simulation: React.FC = () => {
   const [status, setStatus] = useState(TxStatus.PENDING);
   const [tx, setTx] = useState<Partial<ITransaction>>({})
 
-  useEffect(() => {
-    const timeoutId = timer.current;
-    return () => timeoutId && clearInterval(timeoutId);
-  }, [])
+  const _clearTimeout = () => timer.current && clearInterval(timer.current);;
+  useEffect(() => { return () => _clearTimeout() }, [])
 
   const runSimulation = (): void => {
+    _clearTimeout();
+
     // wait 5s before completing that transaction
     timer.current = setTimeout(() => {
       setStatus(TxStatus.COMPLETED);
@@ -200,7 +200,10 @@ export const Simulation: React.FC = () => {
       />
       <button style={{ marginTop: '10px' }} onClick={_handleReset}>Reset</button>
       <i style={{ display: 'block', fontSize: '12px', marginTop: '10px' }}>
-        In this example, <u>autoShowDetails</u> property is added. When the component will receive props, it will automatically expand the card. This is fully optional.
+        <p>
+          In this example, <u>autoShowDetails</u> property is added. <br />
+          When the component will receive props, it will automatically expand the card. This is fully optional.
+        </p>
       </i>
     </Spacer>
   )
