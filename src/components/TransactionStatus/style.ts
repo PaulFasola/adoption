@@ -8,6 +8,7 @@ export interface IStyleProps {
 	backgroundColor?: string;
 	clickable?: boolean;
 	showDetails?: boolean;
+	showSide?: boolean;
 }
 
 interface SP extends IStyleProps { };
@@ -19,6 +20,7 @@ export const Container = styled.div`
     max-height: 60px;
     text-align: left;
     box-shadow: 0 12px 28px rgb(0 0 0 / 10%);
+	background-color: #fff;
     border-radius: 3px;
     font-size: 12px;
     overflow: hidden;
@@ -33,19 +35,22 @@ export const IconWrapper = styled.div`
 	display: inline-block;
 	width: 25px;
 	float: right;
-	${(p: SP) => p.clickable && 'cursor: pointer;'}
+	${(p: SP) => p.clickable && `
+		cursor: pointer;
+	`}
 `;
 
 export const Row = styled.div`
 	display: grid;
-	grid-template-columns: 4fr 4fr 2fr;
-`;
+	grid-template-columns: 5fr 5fr;
 
-export const Content = styled.div`
-	padding: 0 10px 0 10px;
+	${(p: SP) => p.showSide && `
+		grid-template-columns: 4fr 4fr 2fr;
+	`}
 `;
 
 export const Amount = styled.div`
+	padding: 0 10px 0 10px;
 	display: inline-block;
 	margin-right: 5px;
 
@@ -54,7 +59,7 @@ export const Amount = styled.div`
 	}
 
 	h1{
-		margin-right: 5px;
+		margin: 10px 3px 15px 0;
 	}
 `;
 

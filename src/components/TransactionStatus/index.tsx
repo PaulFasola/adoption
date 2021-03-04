@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Amount, Arrow, Container, Content, Date, DetailedView, IconWrapper, Row, Side, Status, StatusBar, Trajectory, TxFees } from './style';
+import React, { useLayoutEffect, useState } from 'react';
+import { Amount, Arrow, Container, Date, DetailedView, IconWrapper, Row, Side, Status, StatusBar, Trajectory, TxFees } from './style';
 import { Icon, IconType } from '../common/Icon';
 import { IAdress, IProps } from './interfaces';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
@@ -12,10 +12,11 @@ const TransactionStatus: React.FC<IProps> = (props) => {
   const [colorMap, setColorMap] = useState<Record<TxStatus, string>>(defaultColorMap);
   const [isToggled, setIsToggled] = useState<boolean>(false);
 
-  const shouldRenderDetails = props.txFees || props.sender || props.receiver || props.customDetailComponent;
-  const shouldRenderTrajectory = props.sender || props.receiver;
+  const shouldRenderDetails = Boolean(props.txFees || props.sender || props.receiver || props.customDetailComponent);
+  const shouldRenderTrajectory = Boolean(props.sender || props.receiver);
+  const shouldRenderSide = Boolean(props.txURL || shouldRenderDetails);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (props.status) {
       setStatus(props.status);
     }
@@ -49,28 +50,26 @@ const TransactionStatus: React.FC<IProps> = (props) => {
   return (
     <Container showDetails={isToggled}>
       <StatusBar backgroundColor={colorMap[status]} animate={props.animated ? props.status : null} />
-      <Row>
-        <Content>
-          <Amount>
-            <AdaptiveSpan
-              text="<h1>{amount}</h1><p>{symbol}</p>"
-              mapping={[
-                { tag: '{amount}', value: props.amount, style: 'bold' },
-                { tag: '{symbol}', value: props.symbol },
-              ]} />
-          </Amount>
-        </Content>
-        <Status>
+      <Row showSide={shouldRenderSide}>
+        <Amount>
+          <AdaptiveSpan
+            text="<h1>{amount}</h1><p>{symbol}</p>"
+            mapping={[
+              { tag: '{amount}', value: props.amount, style: 'bold' },
+              { tag: '{symbol}', value: props.symbol },
+            ]} />
+        </Amount>
+        <Status title={`Status`}>
           {_getStatus()}
         </Status>
-        <Side>
+        {(shouldRenderSide) && <Side>
           {props.txURL && <IconWrapper>
             <Icon type={IconType.OutboundLink} style={{ width: 21 }} url={props.txURL} targetBlank />
           </IconWrapper>}
           {shouldRenderDetails && <IconWrapper clickable onClick={_handleToggleClick}>
             <Icon type={isToggled ? IconType.ArrowUp : IconType.ArrowDown} style={{ width: 15 }} />
           </IconWrapper>}
-        </Side>
+        </Side>}
       </Row>
       {shouldRenderDetails && <DetailedView>
         {shouldRenderTrajectory && <div>
@@ -105,4 +104,4 @@ TransactionStatus.defaultProps = {
   }
 }
 
-export { TransactionStatus };
+export { TransactionStatus, TxStatus };

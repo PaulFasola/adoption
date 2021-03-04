@@ -16,12 +16,10 @@ const Spacer = styled.div`
 export const Basic = (): React.ReactNode => {
   return (
     <TransactionStatus
+      status={TxStatus.COMPLETED}
       amount="0.1"
       symbol="BTC"
       txURL="https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1"
-      date={{
-        value: new Date(2009, 0, 9, 10, 42)
-      }}
     />
   )
 };
@@ -32,7 +30,6 @@ export const Statuses = (): React.ReactNode => (
       <TransactionStatus
         amount="0.1"
         symbol="BTC"
-        status={TxStatus.UNKNOWN}
         txURL="https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1"
       />
     </Spacer>
@@ -69,6 +66,9 @@ export const TransactionDetails = (): React.ReactNode => {
       amount="0.1"
       symbol="BTC"
       txFees="0.0001"
+      date={{
+        value: new Date()
+      }}
       sender={{
         hash: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
         url: "https://www.blockchain.com/btc/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"

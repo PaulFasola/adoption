@@ -8,28 +8,30 @@ exports[`TransactionStatus component should render a complex form 1`] = `
     animate="completed"
     backgroundColor="grey"
   />
-  <styled.div>
+  <styled.div
+    showSide={true}
+  >
     <styled.div>
-      <styled.div>
-        <AdaptiveSpan
-          mapping={
-            Array [
-              Object {
-                "style": "bold",
-                "tag": "{amount}",
-                "value": "0.1",
-              },
-              Object {
-                "tag": "{symbol}",
-                "value": "BTC",
-              },
-            ]
-          }
-          text="<h1>{amount}</h1><p>{symbol}</p>"
-        />
-      </styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": "0.1",
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="<h1>{amount}</h1><p>{symbol}</p>"
+      />
     </styled.div>
-    <styled.div>
+    <styled.div
+      title="Status"
+    >
       UNKNOWN
     </styled.div>
     <styled.div>
