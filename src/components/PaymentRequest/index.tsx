@@ -20,7 +20,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 	const remainingAmount = props.amount.toPay - (props.amount.received ?? 0);
 	const [strings, setStrings] = useState<IStrings>({
 		request: 'Please send {amount} {symbol} to address:',
-		status: 'Current status:',
+		status: 'Current status',
 		seller: 'Merchant',
 		txStatus: {
 			complete: 'Payment complete',
