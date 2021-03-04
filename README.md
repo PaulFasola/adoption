@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/PaulFasola/adoption/blob/master/adoption.png" alt="adoption"  height="150px" />
+    <img src="https://raw.githubusercontent.com/PaulFasola/adoption/master/adoption.png" alt="adoption-logo" height="150px" />
 </div>
 <div align="center">
 	<b>A dApp, blockchain and crypto agnostic React UI kit 🧰</B>
@@ -23,6 +23,9 @@
 </div>
 
 ---
+
+⚠️ Wet paint, you shall not use `adoption` on production for now.  
+🎨 Painter? Please consider joining the party!  
 
 ## Installation
 
