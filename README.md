@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="./adoption.png" alt="adoption"  height="150px" />
+    <img src="https://github.com/PaulFasola/adoption/blob/master/adoption.png" alt="adoption"  height="150px" />
 </div>
 <div align="center">
 	<b>A dApp, blockchain and crypto agnostic React UI kit 🧰</B>
