@@ -66,6 +66,10 @@ export default {
             return JSON.stringify(keep, null, 2);
           },
         },
+        {
+          src: 'README.md',
+          dest: 'dist'
+        },
       ],
     }),
   ],
