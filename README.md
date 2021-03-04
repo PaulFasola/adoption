@@ -25,7 +25,16 @@
 ---
 
 ## Installation
-`npm i --save adoption`
+
+### Package Manager
+This package can be installed via `yarn` or `npm`:  
+```sh
+$ yarn add adoption
+
+# or
+
+$ npm i --save adoption
+```
 
 ## Try it
 To see the components live, check [this storybook](https://paulfasola.github.io/adoption/).  
