@@ -1,4 +1,5 @@
-name: Documentation deployment
+# TODO: restrict trigger branch to master after the first release.
+name: Documentation
 on:
   push:
     paths: ["src/components/**"]
@@ -15,10 +16,10 @@ jobs:
           npm install
           npm run storybook:build
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4
+        uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: dev
+          BRANCH: gh-pages
           FOLDER: doc
           CLEAN: true
           TARGET_FOLDER: docs

@@ -1,0 +1,601 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaymentRequest Basic should not render any status if 1) payment status is not "completed" or "failed" and 2) showQRCode prop is false. 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div />
+    <styled.div>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Waiting for payment"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Basic should render a visual animation if status is "completed" or "failed" 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <AnimatedIcon
+        key="complete"
+        style={
+          Object {
+            "display": "flex",
+            "margin": "auto",
+          }
+        }
+        type="success"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Payment complete"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Basic should render a visual animation if status is "completed" or "failed" 2`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <AnimatedIcon
+        key="failed"
+        style={
+          Object {
+            "display": "flex",
+            "margin": "auto",
+          }
+        }
+        type="failure"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Payment failed"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Basic should render relative time correctly 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <Styled(QRCode)
+        bgColor="transparent"
+        fgColor="#000000"
+        level="L"
+        style={
+          Object {
+            "width": 100,
+          }
+        }
+        value="1BitcoinEaterAddressDontSendf59kuE"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Send before"
+      >
+        2/3/2009
+        <span>
+           (
+          in 2 minutes
+          )
+        </span>
+      </Item>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Waiting for payment"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Detailed Should be fully strings customizable 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+    <img
+      alt="Company logo"
+      src={
+        Object {
+          "process": [Function],
+        }
+      }
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <Styled(QRCode)
+        bgColor="transparent"
+        fgColor="#000000"
+        level="L"
+        style={
+          Object {
+            "width": 100,
+          }
+        }
+        value="1BitcoinEaterAddressDontSendf59kuE"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Merchant"
+      >
+        <span
+          title="Such Company LTD"
+        >
+          Such Company LTD
+        </span>
+      </Item>
+      <Item
+        title="Amount received"
+      >
+        0.200000
+         
+        BTC
+      </Item>
+      <Item
+        title="Amount remaining"
+      >
+        0.700000
+         
+        BTC
+      </Item>
+      <Item
+        title="Send before"
+      >
+        2/3/2009
+      </Item>
+      <Item
+        title="Transactions (2)"
+      >
+        <styled.ul>
+          <li
+            key="0"
+          >
+            <a
+              href="https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1"
+              rel="noreferrer"
+              target="_blank"
+              title="Transaction"
+            >
+              369...cf1
+            </a>
+            <i>
+              (
+              0.100000
+               
+              BTC
+              )
+            </i>
+          </li>
+          <li
+            key="1"
+          >
+            <a
+              href="https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647"
+              rel="noreferrer"
+              target="_blank"
+              title="Transaction"
+            >
+              519...647
+            </a>
+            <i>
+              (
+              0.100000
+               
+              BTC
+              )
+            </i>
+          </li>
+        </styled.ul>
+      </Item>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Custom status message"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div>
+    <styled.button
+      onClick={[Function]}
+    >
+      Cancel
+    </styled.button>
+    <styled.a
+      href="https://github.com/PaulFasola/adoption/blob/master/README.md"
+      target="blank"
+      title="Need help? Click here!"
+    >
+      <Icon
+        style={
+          Object {
+            "lineHeight": "15px",
+            "width": 13,
+          }
+        }
+        type="help-circle-o"
+      />
+      Need help? Click here!
+    </styled.a>
+  </div>
+</styled.div>
+`;
+
+exports[`PaymentRequest Detailed should be fully string customizable 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <Styled(QRCode)
+        bgColor="transparent"
+        fgColor="#000000"
+        level="L"
+        style={
+          Object {
+            "width": 100,
+          }
+        }
+        value="1BitcoinEaterAddressDontSendf59kuE"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Waiting for payment"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Detailed should set txStatus to "completed" when the remaining balance is <= 0 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+    <img
+      alt="Company logo"
+      src={
+        Object {
+          "process": [Function],
+        }
+      }
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <Styled(QRCode)
+        bgColor="transparent"
+        fgColor="#000000"
+        level="L"
+        style={
+          Object {
+            "width": 100,
+          }
+        }
+        value="1BitcoinEaterAddressDontSendf59kuE"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Merchant"
+      >
+        <span
+          title="Such Company LTD"
+        >
+          Such Company LTD
+        </span>
+      </Item>
+      <Item
+        title="Amount received"
+      >
+        0.900000
+         
+        BTC
+      </Item>
+      <Item
+        title="Amount remaining"
+      >
+        0.000000
+         
+        BTC
+      </Item>
+      <Item
+        title="Transactions (2)"
+      >
+        <styled.ul>
+          <li
+            key="0"
+          >
+            <a
+              href="https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1"
+              rel="noreferrer"
+              target="_blank"
+              title="Transaction"
+            >
+              369...cf1
+            </a>
+            <i>
+              (
+              0.100000
+               
+              BTC
+              )
+            </i>
+          </li>
+          <li
+            key="1"
+          >
+            <a
+              href="https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647"
+              rel="noreferrer"
+              target="_blank"
+              title="Transaction"
+            >
+              123
+            </a>
+            <i>
+              (
+              0.100000
+               
+              BTC
+              )
+            </i>
+          </li>
+        </styled.ul>
+      </Item>
+      <Item
+        title="Current status:"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Payment complete"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;

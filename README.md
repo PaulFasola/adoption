@@ -25,7 +25,20 @@
 ---
 
 ## Installation
-`npm i --save adoption`
+
+### Package Manager
+This package can be installed via `yarn` or `npm`:  
+```sh
+$ yarn add adoption
+
+# or
+
+$ npm i --save adoption
+```
+
+## Try it
+To see the components live, check [this storybook](https://paulfasola.github.io/adoption/).  
+If you want to see them in action, you'll find project examples in the [examples](./examples/) folder.
 
 ## Contributing
 TDB.
@@ -35,5 +48,5 @@ Adoption is licensed under [MIT](https://github.com/PaulFasola/adoption/blob/mas
 
 ## Credits
 
-🖼 Logo font: `Anurati` by [Emmeran Richard](https://www.emmeranrichard.fr/)  
+🖼 Logo font: `Quantum` by [Sesohq](https://www.sesohq.com/)  
 🤟 All the contributors working on the dependencies used to build this project

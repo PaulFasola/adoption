@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TransactionStatus component should render a complex form 1`] = `
+<styled.div
+  showDetails={false}
+>
+  <styled.div
+    animate="completed"
+    backgroundColor="grey"
+  />
+  <styled.div
+    showSide={true}
+  >
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": "0.1",
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="<h1>{amount}</h1><p>{symbol}</p>"
+      />
+    </styled.div>
+    <styled.div
+      title="Status"
+    >
+      UNKNOWN
+    </styled.div>
+    <styled.div>
+      <styled.div>
+        <Icon
+          style={
+            Object {
+              "width": 21,
+            }
+          }
+          targetBlank={true}
+          type="outbound-link"
+          url="https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1"
+        />
+      </styled.div>
+      <styled.div
+        clickable={true}
+        onClick={[Function]}
+      >
+        <Icon
+          style={
+            Object {
+              "width": 15,
+            }
+          }
+          type="arrow-down"
+        />
+      </styled.div>
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <div>
+      <styled.div>
+        <a
+          href="https://www.blockchain.com/btc/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+          rel="noreferrer"
+          target="_blank"
+        >
+          1A1zP1e...7DivfNa
+        </a>
+        <styled.div />
+        <a
+          href="https://www.blockchain.com/btc/address/1CounterpartyXXXXXXXXXXXXXXXUWLpVr"
+          rel="noreferrer"
+          target="_blank"
+        >
+          1Counte...XUWLpVr
+        </a>
+      </styled.div>
+      <styled.div>
+        0.005
+         
+        BTC
+         (fees)
+      </styled.div>
+    </div>
+    <div
+      style={
+        Object {
+          "marginTop": "10px",
+        }
+      }
+    />
+  </styled.div>
+  <styled.div>
+    <span>
+      1/9/2009
+    </span>
+  </styled.div>
+</styled.div>
+`;

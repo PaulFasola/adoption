@@ -7,6 +7,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import copy from 'rollup-plugin-copy';
 import ts from 'typescript';
 
+const extensions = [".js", ".jsx", ".ts", ".tsx"];
 export default {
   input: './src/index.ts',
   external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
@@ -23,7 +24,7 @@ export default {
     },
   ],
   plugins: [
-    resolve(),
+    resolve({ extensions }),
     commonjs(),
     postcss(),
     typescript({

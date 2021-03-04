@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon Should be clickable when url is defined 1`] = `
+<styled.a
+  href="https://brrr.money/"
+  title="https://brrr.money/"
+>
+  <styled.div>
+    <svg
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+      />
+      <polyline
+        points="15 3 21 3 21 9"
+      />
+      <line
+        x1="10"
+        x2="21"
+        y1="14"
+        y2="3"
+      />
+    </svg>
+  </styled.div>
+</styled.a>
+`;
+
+exports[`Icon Should be clickable when url is defined and the target should be _blank 1`] = `
+<styled.a
+  href="https://brrr.money/"
+  rel="noreferrer"
+  target="_blank"
+  title="https://brrr.money/"
+>
+  <styled.div>
+    <svg
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+      />
+      <polyline
+        points="15 3 21 3 21 9"
+      />
+      <line
+        x1="10"
+        x2="21"
+        y1="14"
+        y2="3"
+      />
+    </svg>
+  </styled.div>
+</styled.a>
+`;
