@@ -10,12 +10,13 @@ interface IMapping {
 }
 
 interface IProps {
-	style?: TextStyle;
 	text: string;
+	style?: TextStyle;
+	showTitle?: boolean;
 	mapping?: IMapping[]
 }
 
-export const AdaptiveSpan: React.FC<IProps> = ({ text, mapping, style }) => {
+export const AdaptiveSpan: React.FC<IProps> = ({ text, mapping, style, showTitle }) => {
 	const _toTag = (value: string | number, style: TextStyle) => style === 'bold' ? `<b>${value}</b>` : `<i>${value}</i>`;
 
 	let html = text;
@@ -39,7 +40,14 @@ export const AdaptiveSpan: React.FC<IProps> = ({ text, mapping, style }) => {
 		html = html.replace(new RegExp(map.tag, "g"), map.value.toString());
 	});
 
+	let props = {};
+	if (showTitle) {
+		props = { ...props, title: text }
+	}
+
 	return (
-		<span title={text} dangerouslySetInnerHTML={{ __html: dompurify.sanitize(html) }} />
+		<span {...props} dangerouslySetInnerHTML={{
+			__html: dompurify.sanitize(html)
+		}} />
 	);
 };

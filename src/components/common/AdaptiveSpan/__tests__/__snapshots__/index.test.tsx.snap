@@ -22,7 +22,7 @@ exports[`AdaptiveSpan Component should apply general styling correctly 2`] = `
 />
 `;
 
-exports[`AdaptiveSpan Component should renders 1`] = `
+exports[`AdaptiveSpan Component should have a title when showTitle is true 1`] = `
 <span
   dangerouslySetInnerHTML={
     Object {
@@ -30,5 +30,15 @@ exports[`AdaptiveSpan Component should renders 1`] = `
     }
   }
   title="Foobar"
+/>
+`;
+
+exports[`AdaptiveSpan Component should renders 1`] = `
+<span
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "Foobar",
+    }
+  }
 />
 `;
