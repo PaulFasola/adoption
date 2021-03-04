@@ -12,7 +12,7 @@
 	  	<img src="https://badgen.net/bundlephobia/minzip/adoption" alt="gzip size" />
 	</a>
 	<a href="https://reactjs.org/">
-		<img src="https://img.shields.io/badge/react-16.14-green.svg" alt="GitHub license" />
+		<img src="https://img.shields.io/badge/react-17-green.svg" alt="GitHub license" />
 	</a>
 	<a href="https://github.com/PaulFasola/adoption/actions/workflows/ci.yaml">
 		<img src="https://github.com/PaulFasola/adoption/actions/workflows/ci.yaml/badge.svg" alt="Github Actions - CI" />
