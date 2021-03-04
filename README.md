@@ -14,6 +14,9 @@
 	<a href="https://reactjs.org/">
 		<img src="https://img.shields.io/badge/react-17-green.svg" alt="GitHub license" />
 	</a>
+	<a href="https://codecov.io/gh/PaulFasola/adoption">
+		<img src="https://codecov.io/gh/PaulFasola/adoption/branch/master/graph/badge.svg?token=MFDO6ZTP4C"/>
+	</a>
 	<a href="https://github.com/PaulFasola/adoption/actions/workflows/ci.yaml">
 		<img src="https://github.com/PaulFasola/adoption/actions/workflows/ci.yaml/badge.svg" alt="Github Actions - CI" />
 	</a>

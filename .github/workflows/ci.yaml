@@ -24,6 +24,8 @@ jobs:
         run: yarn test
       - name: Build
         run: yarn build
+      - name: Send coverage report to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
 
   publish:
     if: ${{ github.ref == 'refs/heads/master' }}
