@@ -26,6 +26,7 @@ export const Header = styled.div`
 
 	img {
 		max-width: 150px;
+		max-height: 115px;
 
 		&:not(:first-of-type){
 			float: right;
