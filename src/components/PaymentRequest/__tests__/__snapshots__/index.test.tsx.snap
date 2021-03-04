@@ -218,7 +218,7 @@ exports[`PaymentRequest Basic should render relative time correctly 1`] = `
       <Item
         title="Send before"
       >
-        3/3/2021
+        2/3/2009
         <span>
            (
           in 2 minutes
@@ -321,11 +321,6 @@ exports[`PaymentRequest Detailed Should be fully strings customizable 1`] = `
         title="Send before"
       >
         2/3/2009
-        <span>
-           (
-          4,411 days ago
-          )
-        </span>
       </Item>
       <Item
         title="Transactions (2)"

@@ -6,6 +6,7 @@ import { ITransaction } from '../interfaces';
 import { configure, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { PaymentStatus } from '../enums/paymentStatus';
+import { advanceBy, advanceTo, clear } from 'jest-date-mock';
 
 configure({ adapter: new Adapter() });
 
@@ -24,12 +25,24 @@ describe(`PaymentRequest Basic`, () => {
   });
 
   it('should render relative time correctly', () => {
-    const in2mins = new Date();
-    in2mins.setMinutes(in2mins.getMinutes() + 2);
 
+    // Let's mock that date
+    advanceTo(new Date(2009, 1, 3, 0, 0, 0));
+
+    // Add 2 mins to the current timesta,p
+    advanceBy(2 * 60 * 1000);
+    const future = new Date();
+
+    // Go back into the past
+    advanceTo(new Date(2009, 1, 3, 0, 0, 0));
+
+    /**
+     * date   = 2009, 1, 3, 0, 0, 0
+     * future = 009, 1, 3, 0, 2, 0
+     */
     const wrapper = shallow(
       <PaymentRequest
-        deadline={{ datetime: in2mins, humanized: true }}
+        deadline={{ datetime: future, humanized: true }}
         symbol='BTC'
         decimalPlaces={8}
         logos={{
@@ -40,6 +53,7 @@ describe(`PaymentRequest Basic`, () => {
       />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
+    clear();
   });
 
   it('should render a visual animation if status is "completed" or "failed"', () => {
@@ -210,8 +224,7 @@ describe('PaymentRequest Detailed', () => {
       onCancel={() => alert('User wants to cancel, do something here!')}
       deadline={{
         dateLocale: 'en-US',
-        datetime: new Date(2009, 1, 3),
-        humanized: true
+        datetime: new Date(2009, 1, 3)
       }}
       customStatusText={'Custom status message'}
       strings={{
