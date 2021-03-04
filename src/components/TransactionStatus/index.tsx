@@ -48,7 +48,7 @@ const TransactionStatus: React.FC<IProps> = (props) => {
   }
 
   return (
-    <Container showDetails={isToggled}>
+    <Container showDetails={isToggled} hasDate={Boolean(props.date?.value)}>
       <StatusBar backgroundColor={colorMap[status]} animate={props.animated ? props.status : null} />
       <Row showSide={shouldRenderSide}>
         <Amount>
