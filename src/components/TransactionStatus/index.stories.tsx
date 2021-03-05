@@ -1,9 +1,11 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { ProgressPlugin } from 'webpack';
 import { TransactionStatus } from '../TransactionStatus';
 import { IAdress } from './interfaces';
 import { TxStatus } from './txStatus';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const txCompleted = require('../../assets/txstatus-completed.jpg')
 
 export default {
   title: 'TransactionStatus',
@@ -158,7 +160,7 @@ export const Simulation: React.FC = () => {
       .then(() => setStatus(TxStatus.COMPLETED))
 
       // let's say, tx infos need to be fetched before being able to render them
-      .then(() => _delay(3 * 1000))
+      .then(() => _delay(1.5 * 1000))
       .then(() => setTx({
         ...tx, ...{
           sender: {
@@ -171,7 +173,7 @@ export const Simulation: React.FC = () => {
           },
           txFees: "0.0001",
           customDetailComponent: (
-            <b>Hello, this is a custom component!</b>
+            <img src={txCompleted} alt="Custom component" style={{ width: '100%' }} />
           )
         }
       }));
@@ -203,6 +205,9 @@ export const Simulation: React.FC = () => {
         symbol="BTC"
         status={status}
         txURL={txURL}
+        date={{
+          value: new Date()
+        }}
         {...tx}
       />
       <button style={{ marginTop: '10px' }} onClick={_handleReset}>Reset</button>

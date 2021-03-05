@@ -32,7 +32,7 @@ export const Container = styled.div`
 	`}
 
 	${(p: SP) => p.showDetails && `
-		max-height: 200px;
+		max-height: 500px;
 	`}
 `;
 
@@ -164,9 +164,9 @@ export const StatusBar = styled.div`
 
 // # DetailedView start
 export const DetailedView = styled.div`
-	  padding: 20px;
+	  padding: 10px;
 	  min-height: 30px;
-	  margin-bottom: 10px;
+	  margin-bottom: 15px;
 `;
 
 export const Trajectory = styled.div`
@@ -194,6 +194,8 @@ export const TxFees = styled.div`
 `;
 
 export const CustomComponent = styled.div`
+	overflow: auto;
+	max-width: 100%;
 	margin-top: 10px;
 `;
 // # DetailedView end

@@ -8,8 +8,10 @@ import { configure, shallow } from 'enzyme';
 import { PaymentStatus } from '../enums/paymentStatus';
 import { advanceBy, advanceTo, clear } from 'jest-date-mock';
 
-configure({ adapter: new Adapter() });
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const companyAsset = require('../../assets/fictiveCompany.png');
 
+configure({ adapter: new Adapter() });
 
 const testRelativeDateTime = (unit: string, offset: number): void => {
   it(`should render relative time correctly (${unit})`, () => {
@@ -109,7 +111,7 @@ describe('PaymentRequest Detailed', () => {
         sellerName='Such Company LTD'
         logos={{
           coin: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg",
-          company: require('../../assets/fictiveCompany.png')
+          company: companyAsset
         }}
         helpUrl="http://foobar/"
         address="1BitcoinEaterAddressDontSendf59kuE"
@@ -136,7 +138,6 @@ describe('PaymentRequest Detailed', () => {
         }}
       />);
   });
-
 
   it('should be fully string customizable', () => {
     const wrapper = shallow(
@@ -177,7 +178,7 @@ describe('PaymentRequest Detailed', () => {
       sellerName='Such Company LTD'
       logos={{
         coin: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg",
-        company: require('../../assets/fictiveCompany.png')
+        company: companyAsset
       }}
       address="1BitcoinEaterAddressDontSendf59kuE"
       amount={{ toPay: 0.9, received: 0.9 }}
@@ -229,7 +230,7 @@ describe('PaymentRequest Detailed', () => {
       sellerName='Such Company LTD'
       logos={{
         coin: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg",
-        company: require('../../assets/fictiveCompany.png')
+        company: companyAsset
       }}
       address="1BitcoinEaterAddressDontSendf59kuE"
       amount={{ toPay: 0.9, received: 0.2 }}
