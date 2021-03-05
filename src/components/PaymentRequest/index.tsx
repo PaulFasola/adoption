@@ -15,30 +15,34 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 	const [strings, setStrings] = useState<IStrings>(defaultStrings);
 
 	useLayoutEffect(() => {
+		/* istanbul ignore next */
 		if (props.strings) {
 			setStrings(s => { return { ...s, ...props.strings } });
 		}
 	}, [props.strings]);
 
 	const _getFromDate = (date: Date): string => {
-		let unit: Intl.RelativeTimeFormatUnit = 'day';
-		let value = 0;
-
 		const currentDate = new Date();
 		const dayCount = (date.getTime() - currentDate.getTime()) / (1000 * 3600 * 24);
-		value = dayCount;
+
+		let unit: Intl.RelativeTimeFormatUnit = 'day';
+		let value = dayCount;
 
 		if (dayCount >= 0 && dayCount <= 1) {
 			const hoursCount = Math.abs(currentDate.getTime() - date.getTime()) / 36e5;
 			unit = 'hours';
 			value = hoursCount;
+
 			if (hoursCount <= 1) {
 				const minCount = Math.abs(currentDate.getTime() - date.getTime()) / 1000 / 60;
 				unit = 'minute';
 				value = Math.ceil(minCount);
 			}
 		}
-		return new Intl.RelativeTimeFormat(props.deadline?.dateLocale ?? 'en-US').format(Math.ceil(value), unit)
+
+		/* istanbul ignore next */
+		return new Intl.RelativeTimeFormat(props.deadline?.dateLocale ?? 'en-US')
+			.format(Math.ceil(value), unit)
 	}
 
 	const _getStatus = (): string => {
@@ -47,7 +51,8 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 		} else if (props.customStatusText) {
 			return props.customStatusText;
 		}
-		return props.status ? strings.txStatus[props.status] : '';
+
+		return strings.txStatus[props.status!];
 	}
 
 	const _renderVisual = (): React.ReactNode => {

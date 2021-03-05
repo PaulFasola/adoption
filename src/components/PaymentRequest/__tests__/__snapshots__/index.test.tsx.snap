@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PaymentRequest Basic should not render any status if 1) payment status is not "completed" or "failed" and 2) showQRCode prop is false. 1`] = `
+exports[`PaymentRequest Basic should not render any visual status if 1) payment status is not "completed" or "failed" and 2) showQRCode prop is false. 1`] = `
 <styled.div>
   <styled.div>
     <img
@@ -35,7 +35,7 @@ exports[`PaymentRequest Basic should not render any status if 1) payment status 
     <styled.div />
     <styled.div>
       <Item
-        title="Current status:"
+        title="Current status"
       >
         <AdaptiveSpan
           showTitle={true}
@@ -95,7 +95,7 @@ exports[`PaymentRequest Basic should render a visual animation if status is "com
     </styled.div>
     <styled.div>
       <Item
-        title="Current status:"
+        title="Current status"
       >
         <AdaptiveSpan
           showTitle={true}
@@ -155,7 +155,7 @@ exports[`PaymentRequest Basic should render a visual animation if status is "com
     </styled.div>
     <styled.div>
       <Item
-        title="Current status:"
+        title="Current status"
       >
         <AdaptiveSpan
           showTitle={true}
@@ -169,7 +169,149 @@ exports[`PaymentRequest Basic should render a visual animation if status is "com
 </styled.div>
 `;
 
-exports[`PaymentRequest Basic should render relative time correctly 1`] = `
+exports[`PaymentRequest Basic should render relative time correctly (days) 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <Styled(QRCode)
+        bgColor="transparent"
+        fgColor="#000000"
+        level="L"
+        style={
+          Object {
+            "width": 100,
+          }
+        }
+        value="1BitcoinEaterAddressDontSendf59kuE"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Send before"
+      >
+        2/5/2009
+        <span>
+           (
+          in 2 days
+          )
+        </span>
+      </Item>
+      <Item
+        title="Current status"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Waiting for payment"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Basic should render relative time correctly (hours) 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <Styled(QRCode)
+        bgColor="transparent"
+        fgColor="#000000"
+        level="L"
+        style={
+          Object {
+            "width": 100,
+          }
+        }
+        value="1BitcoinEaterAddressDontSendf59kuE"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Send before"
+      >
+        2/3/2009
+        <span>
+           (
+          in 2 hours
+          )
+        </span>
+      </Item>
+      <Item
+        title="Current status"
+      >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Waiting for payment"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Basic should render relative time correctly (minutes) 1`] = `
 <styled.div>
   <styled.div>
     <img
@@ -226,7 +368,7 @@ exports[`PaymentRequest Basic should render relative time correctly 1`] = `
         </span>
       </Item>
       <Item
-        title="Current status:"
+        title="Current status"
       >
         <AdaptiveSpan
           showTitle={true}
@@ -367,7 +509,7 @@ exports[`PaymentRequest Detailed Should be fully strings customizable 1`] = `
         </styled.ul>
       </Item>
       <Item
-        title="Current status:"
+        title="Current status"
       >
         <AdaptiveSpan
           showTitle={true}
@@ -450,8 +592,70 @@ exports[`PaymentRequest Detailed should be fully string customizable 1`] = `
     </styled.div>
     <styled.div>
       <Item
-        title="Current status:"
+        title="Current status"
       >
+        <AdaptiveSpan
+          showTitle={true}
+          style="bold"
+          text="Waiting for payment"
+        />
+      </Item>
+    </styled.div>
+  </div>
+  <div />
+</styled.div>
+`;
+
+exports[`PaymentRequest Detailed should render spining animation when status is "pending" and waitAnimation is true. 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="BTC logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+    />
+  </styled.div>
+  <div>
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": 0.9,
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="Please send {amount} {symbol} to address:"
+      />
+      <div
+        title="1BitcoinEaterAddressDontSendf59kuE"
+      >
+        1BitcoinEaterAddressDontSendf59kuE
+      </div>
+    </styled.div>
+    <styled.div>
+      <Styled(QRCode)
+        bgColor="transparent"
+        fgColor="#000000"
+        level="L"
+        style={
+          Object {
+            "width": 100,
+          }
+        }
+        value="1BitcoinEaterAddressDontSendf59kuE"
+      />
+    </styled.div>
+    <styled.div>
+      <Item
+        title="Current status"
+      >
+        <styled.div />
         <AdaptiveSpan
           showTitle={true}
           style="bold"
@@ -586,7 +790,7 @@ exports[`PaymentRequest Detailed should set txStatus to "completed" when the rem
         </styled.ul>
       </Item>
       <Item
-        title="Current status:"
+        title="Current status"
       >
         <AdaptiveSpan
           showTitle={true}
