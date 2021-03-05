@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { ProgressPlugin } from 'webpack';
 import { TransactionStatus } from '../TransactionStatus';
 import { IAdress } from './interfaces';
 import { TxStatus } from './txStatus';
@@ -133,41 +134,47 @@ export const Simulation: React.FC = () => {
 
   const timer = useRef<NodeJS.Timeout>();
 
-  const [isInit, setIsInit] = useState(false);
-  const [status, setStatus] = useState(TxStatus.PENDING);
+  const [isInit, setIsInit] = useState<boolean>(false);
+  const [status, setStatus] = useState<TxStatus>(TxStatus.PENDING);
+  const [txURL, setTxURL] = useState<string>();
+
   const [tx, setTx] = useState<Partial<ITransaction>>({})
 
   const _clearTimeout = () => timer.current && clearInterval(timer.current);;
   useEffect(() => { return () => _clearTimeout() }, [])
 
+  const _delay = (delay: number): Promise<void> => new Promise(function (resolve) {
+    setTimeout(resolve, delay);
+  });
+
   const runSimulation = (): void => {
     _clearTimeout();
 
-    // wait 5s before completing that transaction
-    timer.current = setTimeout(() => {
-      setStatus(TxStatus.COMPLETED);
+    _delay(3 * 1000)
+      .then(() => setTxURL('https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1'))
 
-      // let's say, tx infos need to be fetched before rendering them
-      timer.current = setTimeout(() => {
-        setTx({
-          ...tx, ...{
-            sender: {
-              hash: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
-              url: "https://www.blockchain.com/btc/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
-            },
-            receiver: {
-              hash: "1CounterpartyXXXXXXXXXXXXXXXUWLpVr",
-              url: "https://www.blockchain.com/btc/address/1CounterpartyXXXXXXXXXXXXXXXUWLpVr"
-            },
-            txFees: "0.0001",
-            customDetailComponent: (
-              <b>Hello, this is a custom component!</b>
-            )
-          }
-        })
-      }, 3 * 1000);
+      // wait 5s before completing that transaction
+      .then(() => _delay(5 * 1000))
+      .then(() => setStatus(TxStatus.COMPLETED))
 
-    }, 6 * 1000);
+      // let's say, tx infos need to be fetched before being able to render them
+      .then(() => _delay(3 * 1000))
+      .then(() => setTx({
+        ...tx, ...{
+          sender: {
+            hash: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+            url: "https://www.blockchain.com/btc/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+          },
+          receiver: {
+            hash: "1CounterpartyXXXXXXXXXXXXXXXUWLpVr",
+            url: "https://www.blockchain.com/btc/address/1CounterpartyXXXXXXXXXXXXXXXUWLpVr"
+          },
+          txFees: "0.0001",
+          customDetailComponent: (
+            <b>Hello, this is a custom component!</b>
+          )
+        }
+      }));
   }
 
   const _handleReset = (): void => {
@@ -195,7 +202,7 @@ export const Simulation: React.FC = () => {
         amount="0.1"
         symbol="BTC"
         status={status}
-        txURL="https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1"
+        txURL={txURL}
         {...tx}
       />
       <button style={{ marginTop: '10px' }} onClick={_handleReset}>Reset</button>

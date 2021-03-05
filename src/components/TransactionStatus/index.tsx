@@ -63,32 +63,37 @@ const TransactionStatus: React.FC<IProps> = (props) => {
         <Status title={`Status`}>
           {_getStatus()}
         </Status>
-        {(shouldRenderSide) && <Side>
-          {props.txURL && <IconWrapper>
-            <Icon type={IconType.OutboundLink} style={{ width: 21 }} url={props.txURL} targetBlank />
-          </IconWrapper>}
-          {shouldRenderDetails && <IconWrapper clickable onClick={_handleToggleClick}>
-            <Icon type={isToggled ? IconType.ArrowUp : IconType.ArrowDown} style={{ width: 15 }} />
-          </IconWrapper>}
-        </Side>}
+        {(shouldRenderSide) &&
+          <Side>
+            {props.txURL &&
+              <IconWrapper>
+                <Icon type={IconType.OutboundLink} style={{ width: 21 }} url={props.txURL} targetBlank />
+              </IconWrapper>}
+            {shouldRenderDetails &&
+              <IconWrapper clickable onClick={_handleToggleClick}>
+                <Icon type={isToggled ? IconType.ArrowUp : IconType.ArrowDown} style={{ width: 15 }} />
+              </IconWrapper>}
+          </Side>}
       </Row>
-      {shouldRenderDetails && <DetailedView>
-        {shouldRenderTrajectory && <div>
-          <Trajectory>
-            {_getTransaction(props.sender)}
-            {props.sender && props.receiver && <Arrow />}
-            {_getTransaction(props.receiver)}
-          </Trajectory>
-          <TxFees>{props.txFees} {props.symbol} (fees)</TxFees>
-        </div>
-        }
-        <CustomComponent>
-          {props.customDetailComponent}
-        </CustomComponent>
-      </DetailedView>}
-      {props.date && props.date.value && <Date>
-        <span>{new Intl.DateTimeFormat(props.date.locale ?? 'en-US', props.date.options).format(props.date.value)}</span>
-      </Date>}
+      {shouldRenderDetails &&
+        <DetailedView>
+          {shouldRenderTrajectory && <div>
+            <Trajectory>
+              {_getTransaction(props.sender)}
+              {props.sender && props.receiver && <Arrow />}
+              {_getTransaction(props.receiver)}
+            </Trajectory>
+            <TxFees>{props.txFees} {props.symbol} (fees)</TxFees>
+          </div>
+          }
+          <CustomComponent>
+            {props.customDetailComponent}
+          </CustomComponent>
+        </DetailedView>}
+      {props.date && props.date.value &&
+        <Date>
+          <span>{new Intl.DateTimeFormat(props.date.locale ?? 'en-US', props.date.options).format(props.date.value)}</span>
+        </Date>}
     </Container>
   );
 };
