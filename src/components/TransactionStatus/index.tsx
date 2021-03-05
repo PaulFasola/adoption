@@ -1,11 +1,11 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { Amount, Arrow, Container, Date, DetailedView, IconWrapper, Row, Side, Status, StatusBar, Trajectory, TxFees } from './style';
+import { Amount, Arrow, Container, CustomComponent, Date, DetailedView, IconWrapper, Row, Side, Status, StatusBar, Trajectory, TxFees } from './style';
+import { AdaptiveSpan } from '../common/AdaptiveSpan';
+import { defaultColorMap, defaultProps } from './defaultProps';
+import { shortenHash } from '../../utils/string';
 import { Icon, IconType } from '../common/Icon';
 import { IAdress, IProps } from './interfaces';
-import { AdaptiveSpan } from '../common/AdaptiveSpan';
-import { defaultColorMap } from './defaultProps';
 import { TxStatus } from './txStatus';
-import { shortenHash } from '../../utils/string';
 
 const TransactionStatus: React.FC<IProps> = (props) => {
   const [status, setStatus] = useState<TxStatus>(TxStatus.UNKNOWN);
@@ -81,9 +81,9 @@ const TransactionStatus: React.FC<IProps> = (props) => {
           <TxFees>{props.txFees} {props.symbol} (fees)</TxFees>
         </div>
         }
-        <div style={{ marginTop: '10px' }}>
+        <CustomComponent>
           {props.customDetailComponent}
-        </div>
+        </CustomComponent>
       </DetailedView>}
       {props.date?.value && <Date>
         <span>{new Intl.DateTimeFormat(props.date.locale ?? 'en-US', props.date.options).format(props.date.value)}</span>
@@ -92,16 +92,6 @@ const TransactionStatus: React.FC<IProps> = (props) => {
   );
 };
 
-TransactionStatus.defaultProps = {
-  date: {
-    locale: 'en-US',
-    options: {
-      day: 'numeric',
-      month: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric'
-    }
-  }
-}
+TransactionStatus.defaultProps = defaultProps;
 
 export { TransactionStatus, TxStatus };

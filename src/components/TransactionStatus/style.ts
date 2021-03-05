@@ -110,39 +110,6 @@ export const Side = styled.div`
 	  }
 `;
 
-// # DetailedView start
-export const DetailedView = styled.div`
-	  padding: 20px;
-	  min-height: 30px;
-	  margin-bottom: 10px;
-`;
-
-export const Trajectory = styled.div`
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	div {
-		display: inline-block;
-	}
-`;
-
-export const Arrow = styled.div`
-	color: rgba(0, 0, 0, 0.6);
-	transform: rotate( 45deg );
-	width: 0;
-	height: 0;
-	border: 5px solid transparent;
-	border-top: 5px solid;
-	border-right: 5px solid;
-	margin: 3px 15px 15px 10px;
-`;
-
-export const TxFees = styled.div`
-	  text-align: center;
-`;
-
-// # DetailedView end
-
 // # StatusBar start
 const _pendingAnim = (bgColor?: string) => css`
 	transition: width .3s linear;
@@ -194,3 +161,39 @@ export const StatusBar = styled.div`
 	${(p: IStyleProps) => _getAnimation(p.animate, p.backgroundColor)}
 `;
 // # StatusBar end
+
+// # DetailedView start
+export const DetailedView = styled.div`
+	  padding: 20px;
+	  min-height: 30px;
+	  margin-bottom: 10px;
+`;
+
+export const Trajectory = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	div {
+		display: inline-block;
+	}
+`;
+
+export const Arrow = styled.div`
+	color: rgba(0, 0, 0, 0.6);
+	transform: rotate( 45deg );
+	width: 0;
+	height: 0;
+	border: 5px solid transparent;
+	border-top: 5px solid;
+	border-right: 5px solid;
+	margin: 3px 15px 15px 10px;
+`;
+
+export const TxFees = styled.div`
+	  text-align: center;
+`;
+
+export const CustomComponent = styled.div`
+	margin-top: 10px;
+`;
+// # DetailedView end
