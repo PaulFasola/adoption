@@ -42,3 +42,14 @@ exports[`AdaptiveSpan Component should renders 1`] = `
   }
 />
 `;
+
+exports[`AdaptiveSpan Component should still render if a mapped value is forced to undefined 1`] = `
+<span
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<u>Foobar is foobar and void is </u>",
+    }
+  }
+  title="<u>Foobar is foobar and void is </u>"
+/>
+`;

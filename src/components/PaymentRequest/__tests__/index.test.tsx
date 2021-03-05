@@ -1,44 +1,34 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
+import toJson from 'enzyme-to-json';
 import { render } from '@testing-library/react';
 import { PaymentRequest } from '../';
 import { ITransaction } from '../interfaces';
 import { configure, shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import { PaymentStatus } from '../enums/paymentStatus';
 import { advanceBy, advanceTo, clear } from 'jest-date-mock';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const companyAsset = require('../../assets/fictiveCompany.png');
+
 configure({ adapter: new Adapter() });
 
-describe(`PaymentRequest Basic`, () => {
-  it('should render', () => {
-    shallow(
-      <PaymentRequest
-        symbol='BTC'
-        decimalPlaces={8}
-        logos={{
-          coin: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
-        }}
-        address="1BitcoinEaterAddressDontSendf59kuE"
-        amount={{ toPay: 0.9 }}
-      />);
-  });
-
-  it('should render relative time correctly', () => {
-
+const testRelativeDateTime = (unit: string, offset: number): void => {
+  it(`should render relative time correctly (${unit})`, () => {
     // Let's mock that date
-    advanceTo(new Date(2009, 1, 3, 0, 0, 0));
+    const mockedDate = new Date(2009, 1, 3, 0, 0, 0);
+    advanceTo(mockedDate);
 
-    // Add 2 mins to the current timesta,p
-    advanceBy(2 * 60 * 1000);
+    // Adds 2 hours to the current timestamp
+    advanceBy(offset);
     const future = new Date();
 
     // Go back into the past
-    advanceTo(new Date(2009, 1, 3, 0, 0, 0));
+    advanceTo(mockedDate);
 
     /**
      * date   = 2009, 1, 3, 0, 0, 0
-     * future = 009, 1, 3, 0, 2, 0
+     * future = 2009, 1, 3, 2, 0, 0
      */
     const wrapper = shallow(
       <PaymentRequest
@@ -55,6 +45,27 @@ describe(`PaymentRequest Basic`, () => {
     expect(toJson(wrapper)).toMatchSnapshot();
     clear();
   });
+}
+
+describe(`PaymentRequest Basic`, () => {
+
+  it('should render', () => {
+    shallow(
+      <PaymentRequest
+        symbol='BTC'
+        decimalPlaces={8}
+        logos={{
+          coin: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+        }}
+        address="1BitcoinEaterAddressDontSendf59kuE"
+        amount={{ toPay: 0.9 }}
+      />);
+  });
+
+  // "Should render relative time correctly {unit}"
+  testRelativeDateTime('minutes', 2 * 60 * 1000);
+  testRelativeDateTime('hours', 2 * 60 * 60 * 1000);
+  testRelativeDateTime('days', 2 * 24 * 60 * 60 * 1000);
 
   it('should render a visual animation if status is "completed" or "failed"', () => {
     [PaymentStatus.COMPLETE, PaymentStatus.FAILED].forEach(status => {
@@ -74,7 +85,7 @@ describe(`PaymentRequest Basic`, () => {
     })
   });
 
-  it('should not render any status if 1) payment status is not "completed" or "failed" and 2) showQRCode prop is false.', () => {
+  it('should not render any visual status if 1) payment status is not "completed" or "failed" and 2) showQRCode prop is false.', () => {
     const wrapper = shallow(
       <PaymentRequest
         showQRCode={false}
@@ -89,7 +100,7 @@ describe(`PaymentRequest Basic`, () => {
 
     expect(toJson(wrapper)).toMatchSnapshot();
   });
-})
+});
 
 describe('PaymentRequest Detailed', () => {
   it('should render', () => {
@@ -100,7 +111,7 @@ describe('PaymentRequest Detailed', () => {
         sellerName='Such Company LTD'
         logos={{
           coin: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg",
-          company: require('../../assets/fictiveCompany.png')
+          company: companyAsset
         }}
         helpUrl="http://foobar/"
         address="1BitcoinEaterAddressDontSendf59kuE"
@@ -127,7 +138,6 @@ describe('PaymentRequest Detailed', () => {
         }}
       />);
   });
-
 
   it('should be fully string customizable', () => {
     const wrapper = shallow(
@@ -168,7 +178,7 @@ describe('PaymentRequest Detailed', () => {
       sellerName='Such Company LTD'
       logos={{
         coin: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg",
-        company: require('../../assets/fictiveCompany.png')
+        company: companyAsset
       }}
       address="1BitcoinEaterAddressDontSendf59kuE"
       amount={{ toPay: 0.9, received: 0.9 }}
@@ -197,6 +207,22 @@ describe('PaymentRequest Detailed', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
+  it('should render spining animation when status is "pending" and waitAnimation is true.', () => {
+    const wrapper = shallow(<PaymentRequest
+      waitAnimation
+      status={PaymentStatus.PENDING}
+      symbol='BTC'
+      decimalPlaces={8}
+      logos={{
+        coin: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+      }}
+      address="1BitcoinEaterAddressDontSendf59kuE"
+      amount={{ toPay: 0.9 }}
+    />);
+
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
   it('Should be fully strings customizable', () => {
     const wrapper = shallow(<PaymentRequest
       symbol='BTC'
@@ -204,7 +230,7 @@ describe('PaymentRequest Detailed', () => {
       sellerName='Such Company LTD'
       logos={{
         coin: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg",
-        company: require('../../assets/fictiveCompany.png')
+        company: companyAsset
       }}
       address="1BitcoinEaterAddressDontSendf59kuE"
       amount={{ toPay: 0.9, received: 0.2 }}

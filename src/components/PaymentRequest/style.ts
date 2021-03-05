@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { QRCode as QRSvg } from 'react-qr-svg';
 
 export const Container = styled.div`
 	color: #000000;
 	background-color: #ffffff;
 	width: 360px;
 	max-height: 600px;
-	padding: 50px;
+	padding: 40px;
 	text-align: left;
 	box-shadow: 0 12px 28px rgba(0,0,0,0.1);
 	border-radius: 3px;
@@ -26,6 +27,7 @@ export const Header = styled.div`
 
 	img {
 		max-width: 150px;
+		max-height: 115px;
 
 		&:not(:first-of-type){
 			float: right;
@@ -57,6 +59,11 @@ export const Spinner = styled.div`
   	@-webkit-keyframes spin {
 		to { -webkit-transform: rotate(360deg); }
   	}
+`;
+
+export const QRCode = styled(QRSvg)`
+	display: block;
+	margin: auto;
 `;
 
 export const DetailedView = styled.div`

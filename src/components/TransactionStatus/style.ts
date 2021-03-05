@@ -7,6 +7,7 @@ export interface IStyleProps {
 	animate?: TxStatus | null;
 	backgroundColor?: string;
 	clickable?: boolean;
+	hasDate?: boolean;
 	showDetails?: boolean;
 	showSide?: boolean;
 }
@@ -17,7 +18,7 @@ export const Container = styled.div`
 	position: relative;
 	width: 100%;
 	max-width: 375px;
-    max-height: 60px;
+    max-height: 50px;
     text-align: left;
     box-shadow: 0 12px 28px rgb(0 0 0 / 10%);
 	background-color: #fff;
@@ -26,8 +27,12 @@ export const Container = styled.div`
     overflow: hidden;
 	transition: max-height .4s;
 
+	${(p: SP) => p.hasDate && `
+    	max-height: 60px;
+	`}
+
 	${(p: SP) => p.showDetails && `
-		max-height: 200px;
+		max-height: 500px;
 	`}
 `;
 
@@ -105,39 +110,6 @@ export const Side = styled.div`
 	  }
 `;
 
-// # DetailedView start
-export const DetailedView = styled.div`
-	  padding: 20px;
-	  min-height: 30px;
-	  margin-bottom: 10px;
-`;
-
-export const Trajectory = styled.div`
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	div {
-		display: inline-block;
-	}
-`;
-
-export const Arrow = styled.div`
-	color: rgba(0, 0, 0, 0.6);
-	transform: rotate( 45deg );
-	width: 0;
-	height: 0;
-	border: 5px solid transparent;
-	border-top: 5px solid;
-	border-right: 5px solid;
-	margin: 3px 15px 15px 15px;
-`;
-
-export const TxFees = styled.div`
-	  text-align: center;
-`;
-
-// # DetailedView end
-
 // # StatusBar start
 const _pendingAnim = (bgColor?: string) => css`
 	transition: width .3s linear;
@@ -189,3 +161,41 @@ export const StatusBar = styled.div`
 	${(p: IStyleProps) => _getAnimation(p.animate, p.backgroundColor)}
 `;
 // # StatusBar end
+
+// # DetailedView start
+export const DetailedView = styled.div`
+	  padding: 10px;
+	  min-height: 30px;
+	  margin-bottom: 15px;
+`;
+
+export const Trajectory = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	div {
+		display: inline-block;
+	}
+`;
+
+export const Arrow = styled.div`
+	color: rgba(0, 0, 0, 0.6);
+	transform: rotate( 45deg );
+	width: 0;
+	height: 0;
+	border: 5px solid transparent;
+	border-top: 5px solid;
+	border-right: 5px solid;
+	margin: 3px 15px 15px 10px;
+`;
+
+export const TxFees = styled.div`
+	  text-align: center;
+`;
+
+export const CustomComponent = styled.div`
+	overflow: auto;
+	max-width: 100%;
+	margin-top: 10px;
+`;
+// # DetailedView end

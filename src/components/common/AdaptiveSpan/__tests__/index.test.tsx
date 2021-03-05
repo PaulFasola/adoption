@@ -26,6 +26,20 @@ describe('AdaptiveSpan Component', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
+  it('should still render if a mapped value is forced to undefined', () => {
+    const wrapper = shallow(
+      <AdaptiveSpan
+        showTitle
+        text="<u>Foobar is {foobar} and void is {void}</u>"
+        mapping={[
+          { tag: '{foobar}', value: 'foobar' },
+          { tag: '{void}', value: undefined! }
+        ]}
+      />);
+
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
   it('should apply general styling correctly', () => {
     const boldSpan = shallow(
       <AdaptiveSpan

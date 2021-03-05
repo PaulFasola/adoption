@@ -2,6 +2,7 @@
 
 exports[`TransactionStatus component should render a complex form 1`] = `
 <styled.div
+  hasDate={true}
   showDetails={false}
 >
   <styled.div
@@ -88,17 +89,99 @@ exports[`TransactionStatus component should render a complex form 1`] = `
          (fees)
       </styled.div>
     </div>
-    <div
-      style={
-        Object {
-          "marginTop": "10px",
-        }
-      }
-    />
+    <styled.div />
   </styled.div>
   <styled.div>
     <span>
       1/9/2009
+    </span>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`TransactionStatus component should render a date in the specified locale 1`] = `
+<styled.div
+  hasDate={true}
+  showDetails={false}
+>
+  <styled.div
+    animate={null}
+    backgroundColor="grey"
+  />
+  <styled.div
+    showSide={false}
+  >
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": "0.0001",
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="<h1>{amount}</h1><p>{symbol}</p>"
+      />
+    </styled.div>
+    <styled.div
+      title="Status"
+    >
+      UNKNOWN
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <span>
+      03/02/2009
+    </span>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`TransactionStatus component should render the tx date, when provided 1`] = `
+<styled.div
+  hasDate={true}
+  showDetails={false}
+>
+  <styled.div
+    animate={null}
+    backgroundColor="grey"
+  />
+  <styled.div
+    showSide={false}
+  >
+    <styled.div>
+      <AdaptiveSpan
+        mapping={
+          Array [
+            Object {
+              "style": "bold",
+              "tag": "{amount}",
+              "value": "0.0001",
+            },
+            Object {
+              "tag": "{symbol}",
+              "value": "BTC",
+            },
+          ]
+        }
+        text="<h1>{amount}</h1><p>{symbol}</p>"
+      />
+    </styled.div>
+    <styled.div
+      title="Status"
+    >
+      UNKNOWN
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <span>
+      2/3/2009
     </span>
   </styled.div>
 </styled.div>
