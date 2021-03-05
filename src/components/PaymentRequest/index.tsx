@@ -1,39 +1,18 @@
 import React, { Fragment, useLayoutEffect, useState } from 'react';
-import styled from 'styled-components';
-import { QRCode as QRSvg } from 'react-qr-svg';
+import { CancelButton, Container, DetailedView, Header, HelpLink, Request, Spinner, TransactionList, Visual, QRCode } from './style';
+import { AnimatedIcon, IconType as AnimatedIconType } from '../common/AnimatedIcon';
+import { defaultStrings, defaultProps } from './defaultProps';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
-import { IProps, IStrings } from './interfaces';
-import { Item } from './item';
-import { Icon, IconType } from '../common/Icon';
+import { PaymentStatus } from './enums/paymentStatus';
 import { padDigits } from '../../utils/arithmetic';
 import { shortenHash } from '../../utils/string';
-import { PaymentStatus } from './enums/paymentStatus';
-import { CancelButton, Container, DetailedView, Header, HelpLink, Request, Spinner, TransactionList, Visual } from './style';
-import { AnimatedIcon, IconType as AnimatedIconType } from '../common/AnimatedIcon';
-
-const QRCode = styled(QRSvg)`
-	display: block;
-	margin: auto;
-`;
+import { IProps, IStrings } from './interfaces';
+import { Icon, IconType } from '../common/Icon';
+import { Item } from './item';
 
 const PaymentRequest: React.FC<IProps> = (props) => {
 	const remainingAmount = props.amount.toPay - (props.amount.received ?? 0);
-	const [strings, setStrings] = useState<IStrings>({
-		request: 'Please send {amount} {symbol} to address:',
-		status: 'Current status',
-		seller: 'Merchant',
-		txStatus: {
-			complete: 'Payment complete',
-			failed: 'Payment failed',
-			pending: 'Waiting for payment'
-		},
-		cancel: 'Cancel',
-		help: 'Need help? Click here!',
-		deadline: 'Send before',
-		receivedAmount: 'Amount received',
-		remainingAmount: 'Amount remaining',
-		transactions: 'Transactions ({txAmount})'
-	});
+	const [strings, setStrings] = useState<IStrings>(defaultStrings);
 
 	useLayoutEffect(() => {
 		if (props.strings) {
@@ -148,10 +127,6 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 	);
 };
 
-PaymentRequest.defaultProps = {
-	symbol: 'BTC',
-	status: PaymentStatus.PENDING,
-	showQRCode: true
-}
+PaymentRequest.defaultProps = defaultProps;
 
 export { PaymentRequest };

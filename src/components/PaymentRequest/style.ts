@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { QRCode as QRSvg } from 'react-qr-svg';
 
 export const Container = styled.div`
 	color: #000000;
@@ -58,6 +59,11 @@ export const Spinner = styled.div`
   	@-webkit-keyframes spin {
 		to { -webkit-transform: rotate(360deg); }
   	}
+`;
+
+export const QRCode = styled(QRSvg)`
+	display: block;
+	margin: auto;
 `;
 
 export const DetailedView = styled.div`
