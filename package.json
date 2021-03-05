@@ -111,6 +111,11 @@
   "jest": {
     "setupFiles": [
       "jest-date-mock"
+    ],
+    "collectCoverage": true,
+    "coverageReporters": [
+      "html",
+      "lcov"
     ]
   },
   "release": {
