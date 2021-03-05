@@ -1,14 +1,14 @@
-/dist/
-/doc/
 node_modules
+
+/dist
+/doc
+/coverage
+
 .cache
 .env*
-
-/coverage
 
 npm-debug.log
 yarn-error.log
 
 # Storybook
 .out
-/coverage
