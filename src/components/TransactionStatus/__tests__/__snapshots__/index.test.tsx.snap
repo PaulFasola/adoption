@@ -137,7 +137,7 @@ exports[`TransactionStatus component should render a date in the specified local
   </styled.div>
   <styled.div>
     <span>
-      2009-2-3
+      03/02/2009
     </span>
   </styled.div>
 </styled.div>
