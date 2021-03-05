@@ -16,6 +16,7 @@ const TransactionStatus: React.FC<IProps> = (props) => {
   const shouldRenderTrajectory = Boolean(props.sender || props.receiver);
   const shouldRenderSide = Boolean(props.txURL || shouldRenderDetails);
 
+  /* istanbul ignore next */
   useLayoutEffect(() => {
     if (props.status) {
       setStatus(props.status);
@@ -85,7 +86,7 @@ const TransactionStatus: React.FC<IProps> = (props) => {
           {props.customDetailComponent}
         </CustomComponent>
       </DetailedView>}
-      {props.date?.value && <Date>
+      {props.date && props.date.value && <Date>
         <span>{new Intl.DateTimeFormat(props.date.locale ?? 'en-US', props.date.options).format(props.date.value)}</span>
       </Date>}
     </Container>

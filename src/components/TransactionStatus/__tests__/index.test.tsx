@@ -1,6 +1,7 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
+import { advanceTo, clear } from 'jest-date-mock';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { configure, shallow } from 'enzyme';
@@ -15,10 +16,21 @@ describe('TransactionStatus component', () => {
     shallow(<TransactionStatus amount="0.0001" symbol="BTC" status={TxStatus.PENDING} />)
   });
 
+  it('should render the tx date, when provided', () => {
+    advanceTo(new Date(2009, 1, 3, 0, 0, 0));
+    const wrapper = shallow(<TransactionStatus amount="0.0001" symbol="BTC" status={TxStatus.PENDING} date={{ value: new Date() }} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
+    clear();
+  });
+
+  it('should render a date in the specified locale', () => {
+    advanceTo(new Date(2009, 1, 3, 0, 0, 0));
+    const wrapper = shallow(<TransactionStatus amount="0.0001" symbol="BTC" status={TxStatus.PENDING} date={{ value: new Date(), locale: 'fr-FR' }} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
+    clear();
+  });
+
   const ComplexTx = (<TransactionStatus
-    date={{
-      value: new Date(2009, 0, 9, 10, 42)
-    }}
     animated
     autoShowDetails
     amount="0.1"
@@ -34,6 +46,9 @@ describe('TransactionStatus component', () => {
       hash: "1CounterpartyXXXXXXXXXXXXXXXUWLpVr",
       url: "https://www.blockchain.com/btc/address/1CounterpartyXXXXXXXXXXXXXXXUWLpVr"
     }}
+    date={{
+      value: new Date(2009, 0, 9, 10, 42)
+    }}
   />);
 
   it('should render a complex form', () => {
@@ -45,4 +60,5 @@ describe('TransactionStatus component', () => {
     const { container } = render(ComplexTx);
     expect(await axe(container)).toHaveNoViolations();
   });
+
 });
