@@ -1,4 +1,16 @@
-const { addDecorator } = require('@storybook/react');
-const { withPropsTable } = require('storybook-addon-react-docgen');
+import { themes } from '@storybook/theming';
+import { addDecorator } from '@storybook/react';
+import { withPropsTable } from 'storybook-addon-react-docgen';
 
 addDecorator(withPropsTable);
+
+export const parameters = {
+  darkMode: {
+    darkClass: 'lights-out',
+    lightClass: 'lights-on',
+    current: 'light',
+    stylePreview: false,
+    dark: { ...themes.dark, appBg: '#121212', appContentBg: '#121212' },
+    light: { ...themes.normal },
+  },
+};

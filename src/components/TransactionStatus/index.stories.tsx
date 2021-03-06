@@ -8,8 +8,7 @@ import { TxStatus } from './txStatus';
 const txCompleted = require('../../assets/txstatus-completed.jpg');
 
 export default {
-  title: 'TransactionStatus',
-  component: TransactionStatus,
+  title: 'Components/TransactionStatus',
 };
 
 const Spacer = styled.div`

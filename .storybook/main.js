@@ -7,7 +7,7 @@ module.exports = {
       name: '@storybook/addon-essentials',
       options: {
         actions: false,
-        controls: false
+        controls: false,
       },
     },
     {
@@ -15,11 +15,12 @@ module.exports = {
       options: {
         sourceLoaderOptions: {
           parser: 'typescript',
-        }
-      }
+        },
+      },
     },
     '@storybook/addon-storysource',
-    'storybook-addon-react-docgen'
+    'storybook-addon-react-docgen',
+    'storybook-dark-mode',
   ],
   webpackFinal: async (config, { configType }) => {
     return config;
