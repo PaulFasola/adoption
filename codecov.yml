@@ -1,2 +1,5 @@
+default:
+  target: 90%
+  threshold: 5%
 fixes:
-  - "/home/runner/work/paulfasola/adoption/::"
+  - '/home/runner/work/paulfasola/adoption/::'

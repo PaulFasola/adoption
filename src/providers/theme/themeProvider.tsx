@@ -18,7 +18,8 @@ export const defaultTheme = {
 
 export const ThemeContext = React.createContext<IThemeContext>({
   currentTheme: defaultTheme,
-  switchTo: () => { },
+  /* istanbul ignore next */
+  switchTo: () => {},
 });
 
 export const ThemeProvider: React.FC<IProps> = ({ customThemes, children }) => {
@@ -36,8 +37,9 @@ export const ThemeProvider: React.FC<IProps> = ({ customThemes, children }) => {
           palette: requestedTheme,
         };
       } else {
-        console.warn(`[WARN] Adoption Theme - requested theme "${themeName}" was not found. Defaulting to "${theme.name
-          }" preset.\n
+        console.warn(`[WARN] Adoption Theme - requested theme "${themeName}" was not found. Defaulting to "${
+          theme.name
+        }" preset.\n
 Add your theme to 'customThemes' property on <ThemeProvider>.
 Available themes: ${Object.keys(availableThemes).join(', ')}`);
       }
