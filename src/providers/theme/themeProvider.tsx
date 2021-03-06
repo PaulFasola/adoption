@@ -1,18 +1,20 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { ThemeProvider as SCThemeProvider } from 'styled-components';
 import { defaultThemes, ThemeLabel } from './defaultThemes';
-import { ITheme } from './ITheme';
 import { IViableTheme, IThemeContext } from './IThemeContext';
+import { mergeDeep } from '../../utils/mergeDeep';
+import { ITheme } from './ITheme';
 
 const LOCAL_STORAGE_KEY = 'adoption-theme';
 
-const defaultTheme = {
-  name: 'light',
-  palette: defaultThemes['light'],
-};
-
 interface IProps {
-  customThemes?: Record<string, ITheme>;
+  customThemes?: Record<string, Partial<ITheme>>;
 }
+
+export const defaultTheme = {
+  name: 'light',
+  palette: defaultThemes.light,
+};
 
 export const ThemeContext = React.createContext<IThemeContext>({
   currentTheme: defaultTheme,
@@ -20,11 +22,26 @@ export const ThemeContext = React.createContext<IThemeContext>({
 });
 
 export const ThemeProvider: React.FC<IProps> = ({ customThemes, children }) => {
+  const [availableThemes, setAvailableThemes] = useState<Record<string, ITheme>>(defaultThemes);
   const [currentTheme, setCurrentTheme] = useState<IViableTheme>(defaultTheme);
+
+  useEffect(() => {
+    if (!customThemes || Object.keys(customThemes).length === 0) return;
+
+    const filledCustomThemes: Record<string, ITheme> = {};
+
+    Object.keys(customThemes).forEach((key) => {
+      const viableTheme = (mergeDeep(defaultTheme.palette, customThemes[key]) as unknown) as ITheme;
+      filledCustomThemes[key] = viableTheme;
+    });
+
+    setAvailableThemes((prevProps) => {
+      return { ...prevProps, ...filledCustomThemes };
+    });
+  }, [customThemes]);
 
   const setViableThemeOrDefault = useCallback(
     (themeName: string): [string, ITheme] => {
-      const availableThemes = { ...defaultThemes, ...customThemes };
       const requestedTheme = availableThemes[themeName] as ITheme;
       let theme = defaultTheme;
 
@@ -45,11 +62,11 @@ Available themes: ${Object.keys(availableThemes).join(', ')}`);
 
       return [theme.name, theme.palette];
     },
-    [customThemes]
+    [availableThemes]
   );
 
   useEffect(() => {
-    const theme = localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'white';
+    const theme = localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'light';
     setViableThemeOrDefault(theme);
   }, [setViableThemeOrDefault]);
 
@@ -59,6 +76,8 @@ Available themes: ${Object.keys(availableThemes).join(', ')}`);
   };
 
   return (
-    <ThemeContext.Provider value={{ currentTheme, switchTo }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ currentTheme, switchTo }}>
+      <SCThemeProvider theme={currentTheme.palette}>{children}</SCThemeProvider>
+    </ThemeContext.Provider>
   );
 };
