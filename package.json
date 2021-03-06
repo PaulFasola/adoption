@@ -31,7 +31,7 @@
     "lint:script": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "storybook:start": "start-storybook -p 9001 -s ./src/assets -c .storybook",
     "storybook:build": "build-storybook -o doc",
-    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --coverage --silent --colors --maxWorkers=1",
+    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --coverage --colors --maxWorkers=1",
     "test:watch": "npm run test --watch",
     "publish": "npx semantic-release --no-ci",
     "semantic-release": "semantic-release"
