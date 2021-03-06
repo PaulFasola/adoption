@@ -1,6 +1,6 @@
 import React from 'react';
 import toJson from "enzyme-to-json";
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { configure, shallow } from 'enzyme';
 import { AdaptiveSpan } from '..';
 
@@ -21,6 +21,20 @@ describe('AdaptiveSpan Component', () => {
       <AdaptiveSpan
         showTitle
         text="Foobar"
+      />);
+
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('should still render if a mapped value is forced to undefined', () => {
+    const wrapper = shallow(
+      <AdaptiveSpan
+        showTitle
+        text="<u>Foobar is {foobar} and void is {void}</u>"
+        mapping={[
+          { tag: '{foobar}', value: 'foobar' },
+          { tag: '{void}', value: undefined! }
+        ]}
       />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
