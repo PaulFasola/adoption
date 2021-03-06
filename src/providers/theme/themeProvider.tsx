@@ -18,27 +18,12 @@ export const defaultTheme = {
 
 export const ThemeContext = React.createContext<IThemeContext>({
   currentTheme: defaultTheme,
-  switchTo: () => {},
+  switchTo: () => { },
 });
 
 export const ThemeProvider: React.FC<IProps> = ({ customThemes, children }) => {
   const [availableThemes, setAvailableThemes] = useState<Record<string, ITheme>>(defaultThemes);
   const [currentTheme, setCurrentTheme] = useState<IViableTheme>(defaultTheme);
-
-  useEffect(() => {
-    if (!customThemes || Object.keys(customThemes).length === 0) return;
-
-    const filledCustomThemes: Record<string, ITheme> = {};
-
-    Object.keys(customThemes).forEach((key) => {
-      const viableTheme = (mergeDeep(defaultTheme.palette, customThemes[key]) as unknown) as ITheme;
-      filledCustomThemes[key] = viableTheme;
-    });
-
-    setAvailableThemes((prevProps) => {
-      return { ...prevProps, ...filledCustomThemes };
-    });
-  }, [customThemes]);
 
   const setViableThemeOrDefault = useCallback(
     (themeName: string): [string, ITheme] => {
@@ -51,9 +36,8 @@ export const ThemeProvider: React.FC<IProps> = ({ customThemes, children }) => {
           palette: requestedTheme,
         };
       } else {
-        console.warn(`[WARN] Adoption Theme - requested theme "${themeName}" was not found. Defaulting to "${
-          theme.name
-        }" preset.\n
+        console.warn(`[WARN] Adoption Theme - requested theme "${themeName}" was not found. Defaulting to "${theme.name
+          }" preset.\n
 Add your theme to 'customThemes' property on <ThemeProvider>.
 Available themes: ${Object.keys(availableThemes).join(', ')}`);
       }
@@ -68,7 +52,22 @@ Available themes: ${Object.keys(availableThemes).join(', ')}`);
   useEffect(() => {
     const theme = localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'light';
     setViableThemeOrDefault(theme);
-  }, [setViableThemeOrDefault]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!customThemes || Object.keys(customThemes).length === 0) return;
+    const filledCustomThemes: Record<string, ITheme> = {};
+
+    Object.keys(customThemes).forEach((key) => {
+      const viableTheme = (mergeDeep(defaultTheme.palette, customThemes[key]) as unknown) as ITheme;
+      filledCustomThemes[key] = viableTheme;
+    });
+
+    setAvailableThemes((prevProps) => {
+      return { ...prevProps, ...filledCustomThemes };
+    });
+  }, [customThemes]);
 
   const switchTo = (nextTheme: ThemeLabel | string) => {
     const [name] = setViableThemeOrDefault(nextTheme);

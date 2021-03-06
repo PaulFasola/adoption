@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { render } from '@testing-library/react';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import { configure, shallow } from 'enzyme';
+import { configure, mount, shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import { ThemeContext, ThemeProvider } from '../themeProvider';
 import { TransactionStatus, TxStatus } from '../../../components/TransactionStatus';
 import { ITheme } from '../ITheme';
@@ -57,11 +57,12 @@ describe('ThemeProvider component', () => {
   });
 
   it('should render custom themes when requested', async () => {
-    const appTheme: Record<string, Partial<ITheme>> = {
-      myTheme: {
-        primary: {
-          backgroundColor: 'blue',
-        },
+    const CUST_THEME_NAME = 'wow';
+
+    const appTheme: Record<string, Partial<ITheme>> = {};
+    appTheme[CUST_THEME_NAME] = {
+      primary: {
+        backgroundColor: 'blue',
       },
     };
 
@@ -70,24 +71,24 @@ describe('ThemeProvider component', () => {
 
       return (
         <>
-          {currentTheme.name}
-          <button data-testid='switch-theme' onClick={() => switchTo('shouldFail')}>
-            switch
-          </button>
+          <button onClick={() => switchTo(CUST_THEME_NAME)}></button>
+          <p data-testid='theme-name'>{currentTheme.name}</p>
           <TransactionStatus amount='0.0001' symbol='BTC' status={TxStatus.PENDING} />
         </>
       );
     };
 
-    const component = render(
+    const component = mount(
       <ThemeProvider customThemes={appTheme}>
         <MyComponent />
       </ThemeProvider>
     );
-    const button = await component.findByTestId('switch-theme');
-    button.click();
 
-    expect(component).toMatchSnapshot();
+    const button = component.find('button');
+    button.simulate('click');
+
+    const themeName = component.find('[data-testid="theme-name"]');
+    expect(themeName.text()).toEqual(CUST_THEME_NAME);
   });
 
   it('should not have any accessibility issues', async () => {
