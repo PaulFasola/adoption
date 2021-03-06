@@ -1,5 +1,18 @@
 # Adoption Changelog
 
+## [1.1.0](https://github.com/PaulFasola/react-multiwallet-connector/compare/v1.0.2...v1.1.0) (2021-03-06)
+
+
+### Features
+
+* **themablecomponents:** initial implementation ([23a7866](https://github.com/PaulFasola/react-multiwallet-connector/commit/23a78664e1649718ac7e7531439492ffcad70b5d))
+* **themeprovider:** initial implementation ([b7e647e](https://github.com/PaulFasola/react-multiwallet-connector/commit/b7e647eccca2b27ca534c38955c4f0639126aec4))
+
+
+### Reverts
+
+* **jest:** remove --silent parameter ([00745b8](https://github.com/PaulFasola/react-multiwallet-connector/commit/00745b89277f75dd8ff6807126d509c822729dad))
+
 ### [1.0.2](https://github.com/PaulFasola/react-multiwallet-connector/compare/v1.0.1...v1.0.2) (2021-03-04)
 
 
