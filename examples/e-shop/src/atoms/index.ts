@@ -3,6 +3,7 @@ import { IHeaderProps } from 'components/header/IHeaderProps';
 import { atom } from 'recoil';
 import { IOrder } from 'views/orderHistory/IOrder';
 import { recoilPersist } from 'recoil-persist';
+import { defaultOrders } from '../defaultData';
 
 const { persistAtom } = recoilPersist();
 
@@ -26,6 +27,6 @@ export const basketState = atom<IArticle[]>({
 
 export const orderHistoryState = atom<IOrder[]>({
   key: 'orderHistoryState',
-  default: [],
+  default: defaultOrders,
   effects_UNSTABLE: [persistAtom],
 });
