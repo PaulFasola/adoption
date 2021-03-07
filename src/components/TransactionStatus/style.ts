@@ -73,12 +73,13 @@ export const Amount = styled.div`
   display: inline-block;
   margin-right: 5px;
 
-  h1,
+  span.amount,
   p {
     display: inline-block;
   }
 
-  h1 {
+  span.amount {
+    font-size: 18px;
     margin: 10px 3px 15px 0;
   }
 `;
@@ -100,8 +101,9 @@ export const Date = styled.div`
 export const Status = styled.div`
   width: 60%;
   align-self: center;
+  line-height: 1.8em;
   font-size: 14px;
-  margin-top: 5px;
+  margin: 2px 0 2px 0;
   color: ${(p) => _(p.theme, 'primary', 'color')};
 `;
 

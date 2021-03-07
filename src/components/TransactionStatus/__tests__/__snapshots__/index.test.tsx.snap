@@ -27,13 +27,15 @@ exports[`TransactionStatus component should render a complex form 1`] = `
             },
           ]
         }
-        text="<h1>{amount}</h1><p>{symbol}</p>"
+        text="<span class=\\"amount\\">{amount}</span><p>{symbol}</p>"
       />
     </styled.div>
     <styled.div
       title="Status"
     >
-      UNKNOWN
+      <span>
+        UNKNOWN
+      </span>
     </styled.div>
     <styled.div>
       <styled.div>
@@ -70,6 +72,7 @@ exports[`TransactionStatus component should render a complex form 1`] = `
           href="https://www.blockchain.com/btc/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
           rel="noreferrer"
           target="_blank"
+          title="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
         >
           1A1zP1e...7DivfNa
         </a>
@@ -78,6 +81,7 @@ exports[`TransactionStatus component should render a complex form 1`] = `
           href="https://www.blockchain.com/btc/address/1CounterpartyXXXXXXXXXXXXXXXUWLpVr"
           rel="noreferrer"
           target="_blank"
+          title="1CounterpartyXXXXXXXXXXXXXXXUWLpVr"
         >
           1Counte...XUWLpVr
         </a>
@@ -126,13 +130,15 @@ exports[`TransactionStatus component should render a date in the specified local
             },
           ]
         }
-        text="<h1>{amount}</h1><p>{symbol}</p>"
+        text="<span class=\\"amount\\">{amount}</span><p>{symbol}</p>"
       />
     </styled.div>
     <styled.div
       title="Status"
     >
-      UNKNOWN
+      <span>
+        UNKNOWN
+      </span>
     </styled.div>
   </styled.div>
   <styled.div>
@@ -170,13 +176,15 @@ exports[`TransactionStatus component should render the tx date, when provided 1`
             },
           ]
         }
-        text="<h1>{amount}</h1><p>{symbol}</p>"
+        text="<span class=\\"amount\\">{amount}</span><p>{symbol}</p>"
       />
     </styled.div>
     <styled.div
       title="Status"
     >
-      UNKNOWN
+      <span>
+        UNKNOWN
+      </span>
     </styled.div>
   </styled.div>
   <styled.div>

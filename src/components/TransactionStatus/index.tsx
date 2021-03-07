@@ -18,7 +18,7 @@ import { defaultColorMap, defaultProps } from './defaultProps';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
 import { shortenHash } from '../../utils/string';
 import { Icon, IconType } from '../common/Icon';
-import { IAdress, IProps } from './interfaces';
+import { IAddress, IProps } from './interfaces';
 import { TxStatus } from './txStatus';
 
 const TransactionStatus: React.FC<IProps> = (props) => {
@@ -30,7 +30,7 @@ const TransactionStatus: React.FC<IProps> = (props) => {
     props.txFees || props.sender || props.receiver || props.customDetailComponent
   );
   const shouldRenderTrajectory = Boolean(props.sender || props.receiver);
-  const shouldRenderSide = Boolean(props.txURL || shouldRenderDetails);
+  const shouldRenderSide = Boolean(props.txURL || shouldRenderDetails) && shouldRenderTrajectory;
 
   /* istanbul ignore next */
   useLayoutEffect(() => {
@@ -54,11 +54,11 @@ const TransactionStatus: React.FC<IProps> = (props) => {
     return output;
   };
 
-  const _getTransaction = (tx?: IAdress): React.ReactNode => {
+  const _getTransaction = (tx?: IAddress): React.ReactNode => {
     if (!tx || !tx.hash) return null;
 
     return (
-      <a href={tx.url} rel='noreferrer' target='_blank'>
+      <a href={tx.url} rel='noreferrer' target='_blank' title={tx.hash}>
         {shortenHash(tx.hash, 7)}
       </a>
     );
@@ -73,14 +73,16 @@ const TransactionStatus: React.FC<IProps> = (props) => {
       <Row showSide={shouldRenderSide}>
         <Amount>
           <AdaptiveSpan
-            text='<h1>{amount}</h1><p>{symbol}</p>'
+            text='<span class="amount">{amount}</span><p>{symbol}</p>'
             mapping={[
               { tag: '{amount}', value: props.amount, style: 'bold' },
               { tag: '{symbol}', value: props.symbol },
             ]}
           />
         </Amount>
-        <Status title={`Status`}>{_getStatus()}</Status>
+        <Status title={`Status`}>
+          <span>{_getStatus()}</span>
+        </Status>
         {shouldRenderSide && (
           <Side>
             {props.txURL && (
