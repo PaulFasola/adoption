@@ -65,7 +65,7 @@ export const IconWrapper = styled.div`
 
 export const Row = styled.div`
   display: grid;
-  grid-template-columns: 5fr 5fr;
+  grid-template-columns: 4fr 6fr;
 
   ${(p: SP) =>
     p.showSide &&
