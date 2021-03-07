@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { TransactionStatus } from '../TransactionStatus';
-import { IAdress } from './interfaces';
+import { IAddress } from './interfaces';
 import { TxStatus } from './txStatus';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -127,8 +127,8 @@ export const Animated = (): React.ReactNode => (
 
 export const Simulation: React.FC = () => {
   interface ITransaction {
-    sender: IAdress;
-    receiver: IAdress;
+    sender: IAddress;
+    receiver: IAddress;
   }
 
   const timer = useRef<NodeJS.Timeout>();
