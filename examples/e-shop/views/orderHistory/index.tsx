@@ -13,7 +13,7 @@ import Table from '@material-ui/core/Table';
 import Paper from '@material-ui/core/Paper';
 
 import { orderHistoryState, headerState, basketState } from '../../atoms';
-import { constants } from '../../../constants';
+import { constants } from '../../constants';
 import { IArticle } from '../../components/articleCard/IArticle';
 import { Basket } from '../../components/basket';
 import { IOrder } from './IOrder';
@@ -119,7 +119,6 @@ export const OrderHistory: React.FC = () => {
                   </StyledTableCell>
                   <StyledTableCell className={classes.txCell}>
                     <TransactionStatus
-                      noShadow
                       animated={row.status === 'pending'}
                       symbol={constants.coin}
                       amount={row.cost.toString()}

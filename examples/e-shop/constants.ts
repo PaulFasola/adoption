@@ -1,6 +1,6 @@
 // Logos
-import coinLogo from './src/assets/woofLogo.jpg';
-import companyLogo from './src/assets/companyLogo.png';
+import coinLogo from './assets/woofLogo.jpg';
+import companyLogo from './assets/companyLogo.png';
 
 export const constants = {
   coin: 'WOOF',

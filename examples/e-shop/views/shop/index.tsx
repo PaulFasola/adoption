@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { CircularProgress, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { useRecoilState } from 'recoil';
 
 import { basketState, headerState } from '../../atoms';
-import { constants } from '../../../constants';
+import { constants } from '../../constants';
 
 import { ArticleCard } from '../../components/articleCard';
 import { IArticle } from '../../components/articleCard/IArticle';

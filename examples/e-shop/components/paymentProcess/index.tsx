@@ -7,7 +7,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import { IOrder } from '../../views/orderHistory/IOrder';
 import { IArticle } from '../../components/articleCard/IArticle';
 import { basketState, modalState, orderHistoryState } from '../../atoms';
-import { constants } from '../../../constants';
+import { constants } from '../../constants';
 
 const PAYMENT_ADDRESS = '1EaterAddressDontSendf59kuE';
 
