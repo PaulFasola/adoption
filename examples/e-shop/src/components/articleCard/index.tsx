@@ -1,4 +1,5 @@
 import React from 'react';
+import { Skeleton } from '@material-ui/lab';
 import { useRecoilState } from 'recoil';
 import {
   Typography,
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const ArticleCard: React.FC<IArticle> = ({ label, price, image }) => {
+export const ArticleCard: React.FC<IArticle> = ({ loading, label, price, image }) => {
   const [basket, setBasket] = useRecoilState<IArticle[]>(basketState);
   const classes = useStyles();
 
@@ -43,6 +44,26 @@ export const ArticleCard: React.FC<IArticle> = ({ label, price, image }) => {
       },
     ]);
   };
+
+  if (loading) {
+    return (
+      <Card className={classes.root}>
+        <CardActionArea disabled>
+          <CardMedia className={classes.media}>
+            <Skeleton variant='rect' width={300} height={300} />
+          </CardMedia>
+          <CardContent>
+            <Typography gutterBottom variant='h5' component='h2'>
+              <Skeleton variant='text' width={150} height={45} />
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions className={classes.actionButtons}>
+          <Skeleton variant='text' width={180} height={45} />
+        </CardActions>
+      </Card>
+    );
+  }
 
   return (
     <Card className={classes.root}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Grid } from '@material-ui/core';
+import { CircularProgress, Grid } from '@material-ui/core';
 import { useRecoilState } from 'recoil';
 
 import { basketState, headerState } from '../../atoms';
@@ -14,11 +14,16 @@ import 'regenerator-runtime/runtime';
 
 const LOCALSTORAGE_ARTICLES = 'doggos';
 
+interface IDogPortraits {
+  loading: boolean;
+  portraits: IArticle[];
+}
+
 export const Shop: React.FC = () => {
   const [_, setHeader] = useRecoilState(headerState);
   const [basket] = useRecoilState<IArticle[]>(basketState);
 
-  const [dogPortaits, setDogPortraits] = useState<{ loading: boolean; portraits: IArticle[] }>({
+  const [dogPortaits, setDogPortraits] = useState<IDogPortraits>({
     loading: true,
     portraits: [],
   });
@@ -78,7 +83,7 @@ export const Shop: React.FC = () => {
         portraits = await fetchRemote();
       }
 
-      setDogPortraits({ loading: false, portraits });
+      setTimeout(() => setDogPortraits({ loading: false, portraits }), 2000);
     };
 
     fetchData();
@@ -87,20 +92,16 @@ export const Shop: React.FC = () => {
 
   const { loading, portraits } = dogPortaits;
 
-  if (loading) {
-    return <div>Loading our stock...</div>;
-  }
-
-  if (portraits.length === 0) {
+  if (!loading && portraits.length === 0) {
     return <h2>Snap, no more dog portait to sell :(</h2>;
   }
 
   return (
     <>
       <Grid container direction='row' justify='center' alignItems='center' spacing={2}>
-        {portraits.map((data, i) => (
+        {(loading ? Array.from(new Array(30)) : portraits).map((data, i) => (
           <Grid key={i} container item xl={3} xs={5}>
-            <ArticleCard {...data} />
+            <ArticleCard {...data} loading={loading} />
           </Grid>
         ))}
       </Grid>
