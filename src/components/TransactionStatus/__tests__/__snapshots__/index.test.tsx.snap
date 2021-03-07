@@ -33,7 +33,9 @@ exports[`TransactionStatus component should render a complex form 1`] = `
     <styled.div
       title="Status"
     >
-      UNKNOWN
+      <span>
+        UNKNOWN
+      </span>
     </styled.div>
     <styled.div>
       <styled.div>
@@ -132,7 +134,9 @@ exports[`TransactionStatus component should render a date in the specified local
     <styled.div
       title="Status"
     >
-      UNKNOWN
+      <span>
+        UNKNOWN
+      </span>
     </styled.div>
   </styled.div>
   <styled.div>
@@ -176,7 +180,9 @@ exports[`TransactionStatus component should render the tx date, when provided 1`
     <styled.div
       title="Status"
     >
-      UNKNOWN
+      <span>
+        UNKNOWN
+      </span>
     </styled.div>
   </styled.div>
   <styled.div>

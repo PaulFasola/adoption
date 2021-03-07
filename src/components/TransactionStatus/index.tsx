@@ -73,14 +73,16 @@ const TransactionStatus: React.FC<IProps> = (props) => {
       <Row showSide={shouldRenderSide}>
         <Amount>
           <AdaptiveSpan
-            text='<h1>{amount}</h1><p>{symbol}</p>'
+            text='<span class="amount">{amount}</span><p>{symbol}</p>'
             mapping={[
               { tag: '{amount}', value: props.amount, style: 'bold' },
               { tag: '{symbol}', value: props.symbol },
             ]}
           />
         </Amount>
-        <Status title={`Status`}>{_getStatus()}</Status>
+        <Status title={`Status`}>
+          <span>{_getStatus()}</span>
+        </Status>
         {shouldRenderSide && (
           <Side>
             {props.txURL && (
