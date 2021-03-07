@@ -80,7 +80,9 @@ const TransactionStatus: React.FC<IProps> = (props) => {
             ]}
           />
         </Amount>
-        <Status title={`Status`}>{_getStatus()}</Status>
+        <Status title={`Status`}>
+          <span>{_getStatus()}</span>
+        </Status>
         {shouldRenderSide && (
           <Side>
             {props.txURL && (
