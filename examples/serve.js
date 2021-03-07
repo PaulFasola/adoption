@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const servor = require('servor');
+const open = require('open');
 
 const root = `demos/${process.env.DEMO_ROOT}`;
 
@@ -14,8 +15,11 @@ if (!root) {
     module: false,
     static: false,
     reload: false,
+    browse: true,
     inject: '',
     credentials: null,
     port: 8080,
   });
+
+  open('http://localhost:8080');
 })();
