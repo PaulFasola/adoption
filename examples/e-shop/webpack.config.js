@@ -9,20 +9,28 @@ module.exports = {
     rules: [
       {
         test: [/\.jsx?$/, /\.tsx?$/],
-        use: ["babel-loader"],
+        use: ['babel-loader'],
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
       {
         test: /\.(scss|css)$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
-      }
-    ]
+      },
+    ],
   },
   resolve: {
     extensions: ['*', '.ts', '.tsx', '.js'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
-      'react': path.resolve('./node_modules/react')
+      react: path.resolve('./node_modules/react'),
     },
   },
   output: {
@@ -31,6 +39,8 @@ module.exports = {
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
+    publicPath: '/',
+    historyApiFallback: true,
     contentBase: path.resolve(__dirname, './public'),
     hot: true,
   },
