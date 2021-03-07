@@ -39,11 +39,6 @@ export const Header: React.FC = () => {
   const [header] = useRecoilState(headerState);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
 
-  const toggleDrawer = (isOpen: boolean) => {
-    console.log({ isOpen });
-    setIsDrawerOpen(isOpen);
-  };
-
   const _navigateTo = (localPath: string) => (): void => {
     history.push(localPath);
     setIsDrawerOpen(false);
@@ -58,7 +53,7 @@ export const Header: React.FC = () => {
             className={classes.menuButton}
             color='inherit'
             aria-label='menu'
-            onClick={() => toggleDrawer(true)}
+            onClick={() => setIsDrawerOpen(true)}
           >
             <Menu />
           </IconButton>
@@ -71,8 +66,8 @@ export const Header: React.FC = () => {
       <SwipeableDrawer
         anchor='left'
         open={isDrawerOpen}
-        onClose={() => toggleDrawer(false)}
-        onOpen={() => toggleDrawer(true)}
+        onClose={() => setIsDrawerOpen(false)}
+        onOpen={() => setIsDrawerOpen(true)}
       >
         <List className={classes.list}>
           <ListItem button onClick={_navigateTo(Path.Index)}>
