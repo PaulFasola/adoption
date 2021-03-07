@@ -13,10 +13,10 @@
     "components",
     "toolkit"
   ],
-  "repository": "https://github.com/PaulFasola/react-multiwallet-connector",
-  "homepage": "https://github.com/PaulFasola/react-multiwallet-connector#readme",
+  "repository": "https://github.com/PaulFasola/adoption",
+  "homepage": "https://github.com/PaulFasola/adoption#readme",
   "bugs": {
-    "url": "https://github.com/PaulFasola/react-multiwallet-connector/issues"
+    "url": "https://github.com/PaulFasola/adoption/issues"
   },
   "scripts": {
     "postinstall": "husky install",
