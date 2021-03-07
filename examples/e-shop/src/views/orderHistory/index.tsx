@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, withStyles, makeStyles } from '@material-ui/core';
 import { TransactionStatus } from 'adoption';
 import { useRecoilState } from 'recoil';
-import Table from '@material-ui/core/Table';
+
 import TableContainer from '@material-ui/core/TableContainer';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import { PetsRounded } from '@material-ui/icons';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { PetsRounded } from '@material-ui/icons';
+import Table from '@material-ui/core/Table';
 import Paper from '@material-ui/core/Paper';
+
+import { orderHistoryState, headerState, basketState } from '../../atoms';
+import { constants } from '../../../constants';
+import { IArticle } from '../../components/articleCard/IArticle';
+import { Basket } from '../../components/basket';
 import { IOrder } from './IOrder';
-import { orderHistoryState } from '../../atoms';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -36,19 +41,46 @@ const useStyles = makeStyles({
     minWidth: 700,
   },
   txCell: {
-    display: 'flex',
-    justifyContent: 'center',
-    minWidth: '350px',
+    minWidth: '400px',
+  },
+  container: {
+    marginTop: '20px',
   },
 });
 
 export const OrderHistory: React.FC = () => {
   const [orderHistory] = useRecoilState<IOrder[]>(orderHistoryState);
+  const [sortedOrders, setSortedOrders] = useState<IOrder[]>([]);
+  const [_, setHeader] = useRecoilState(headerState);
+  const [basket] = useRecoilState<IArticle[]>(basketState);
+
   const classes = useStyles();
+
+  useEffect(() => {
+    setHeader({
+      title: 'Da great doggo portraits shop',
+      sideComponent: <Basket />,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [basket]);
+
+  useEffect(() => {
+    setSortedOrders(
+      [...orderHistory].sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      })
+    );
+  }, [orderHistory]);
 
   return (
     <>
-      <Grid container direction='row' justify='center' alignItems='center'>
+      <Grid
+        className={classes.container}
+        container
+        direction='row'
+        justify='center'
+        alignItems='center'
+      >
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label='customized table'>
             <TableHead>
@@ -61,14 +93,14 @@ export const OrderHistory: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {orderHistory.map((row, i) => (
+              {sortedOrders.map((row, i) => (
                 <StyledTableRow key={i}>
                   <StyledTableCell component='th' scope='row'>
                     <ul>
                       {row.articles.map((name, i) => (
                         <li key={i}>
                           <PetsRounded fontSize={'small'} />
-                          {name}
+                          &nbsp;{name}
                         </li>
                       ))}
                     </ul>
@@ -78,7 +110,7 @@ export const OrderHistory: React.FC = () => {
                   <StyledTableCell>
                     {row.status === 'pending' && (
                       <p>
-                        Send your payment at:
+                        Send your payment to:
                         <br />
                         {row.paymentAddress}
                       </p>
@@ -87,13 +119,14 @@ export const OrderHistory: React.FC = () => {
                   </StyledTableCell>
                   <StyledTableCell className={classes.txCell}>
                     <TransactionStatus
-                      animated
-                      symbol='WOOF'
+                      animated={row.status === 'pending'}
+                      symbol={constants.coin}
                       amount={row.cost.toString()}
                       status={row.status}
-                      date={{
-                        value: new Date(row.date),
-                      }}
+                      txFees={row.txFees}
+                      txURL={row.txURL}
+                      receiver={row.receiver}
+                      sender={row.sender}
                     />
                   </StyledTableCell>
                 </StyledTableRow>
