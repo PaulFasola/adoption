@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { IArticle } from './IArticle';
 import { basketState } from '../../atoms';
+import { constants } from '../../../constants';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,7 +56,7 @@ export const ArticleCard: React.FC<IArticle> = ({ label, price, image }) => {
       </CardActionArea>
       <CardActions className={classes.actionButtons}>
         <Button size='small' color='primary' onClick={_handleBasketAdd}>
-          Add to basket ({price} WOOF)
+          Add to basket ({price} {constants.coin})
         </Button>
       </CardActions>
     </Card>

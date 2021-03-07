@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Grid } from '@material-ui/core';
 import { useRecoilState } from 'recoil';
+
 import { basketState, headerState } from '../../atoms';
+import { constants } from '../../../constants';
+
 import { ArticleCard } from '../../components/articleCard';
 import { IArticle } from '../../components/articleCard/IArticle';
 import { Basket } from '../../components/basket';
@@ -13,8 +16,8 @@ const LOCALSTORAGE_ARTICLES = 'doggos';
 
 export const Shop: React.FC = () => {
   const [_, setHeader] = useRecoilState(headerState);
-
   const [basket] = useRecoilState<IArticle[]>(basketState);
+
   const [dogPortaits, setDogPortraits] = useState<{ loading: boolean; portraits: IArticle[] }>({
     loading: true,
     portraits: [],
@@ -31,7 +34,7 @@ export const Shop: React.FC = () => {
   useEffect(() => {
     const fetchRemote = async (): Promise<IArticle[]> => {
       try {
-        const result = await axios('https://dog.ceo/api/breeds/image/random/30');
+        const result = await axios(constants.dataEndpoint);
 
         if (Array.isArray(result.data.message)) {
           const portraits: IArticle[] = [];
