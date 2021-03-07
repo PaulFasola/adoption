@@ -11,10 +11,10 @@ export const defaultOrders: IOrder[] = [
     txFees: '0.1',
     txURL: '#urlToTransactionHere',
     sender: {
-      hash: 'yourWoofAddresss',
+      hash: 'yourAddress',
     },
     receiver: {
-      hash: 'dagratedoggoWoofAddress',
+      hash: '1EaterAddressDontSendf59kuE',
     },
   },
   {
@@ -26,10 +26,10 @@ export const defaultOrders: IOrder[] = [
     txFees: '0.01',
     txURL: '#urlToTransactionHere',
     sender: {
-      hash: 'yourWoofAddresss',
+      hash: 'yourAddress',
     },
     receiver: {
-      hash: 'dagratedoggoWoofAddress',
+      hash: '1EaterAddressDontSendf59kuE',
     },
   },
   {
@@ -41,10 +41,10 @@ export const defaultOrders: IOrder[] = [
     txURL: '#urlToTransactionHere',
     comment: 'Deadline reached.',
     sender: {
-      hash: 'yourWoofAddresss',
+      hash: 'yourAddress',
     },
     receiver: {
-      hash: 'dagratedoggoWoofAddress',
+      hash: '1EaterAddressDontSendf59kuE',
     },
     txFees: '0.001',
   },
@@ -56,10 +56,10 @@ export const defaultOrders: IOrder[] = [
     txURL: '#urlToTransactionHere',
     txFees: '0.0001',
     sender: {
-      hash: 'yourWoofAddresss',
+      hash: 'yourAddress',
     },
     receiver: {
-      hash: 'dagratedoggoWoofAddress',
+      hash: '1EaterAddressDontSendf59kuE',
     },
   },
   {
@@ -70,10 +70,10 @@ export const defaultOrders: IOrder[] = [
     txURL: '#urlToTransactionHere',
     txFees: '0.00001',
     sender: {
-      hash: 'dagratedoggoWoofAddress',
+      hash: '1EaterAddressDontSendf59kuE',
     },
     receiver: {
-      hash: 'yourWoofAddresss',
+      hash: 'yourAddress',
     },
   },
   {
@@ -85,10 +85,10 @@ export const defaultOrders: IOrder[] = [
     txFees: '0.00001',
     cost: 12,
     sender: {
-      hash: 'yourWoofAddresss',
+      hash: 'yourAddress',
     },
     receiver: {
-      hash: 'dagratedoggoWoofAddress',
+      hash: '1EaterAddressDontSendf59kuE',
     },
   },
 ];

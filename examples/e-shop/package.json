@@ -1,8 +1,8 @@
 {
-  "name": "adoption-demo",
-  "version": "1.1.1",
+  "name": "adoption-e-shop-demo",
+  "version": "1.0",
   "private": true,
-  "description": "",
+  "description": "A e-shop simulation featuring adoption's components and features.",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development --hot --progress --color --port 3000 --open"
