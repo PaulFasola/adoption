@@ -119,6 +119,7 @@ export const OrderHistory: React.FC = () => {
                   </StyledTableCell>
                   <StyledTableCell className={classes.txCell}>
                     <TransactionStatus
+                      noShadow
                       animated={row.status === 'pending'}
                       symbol={constants.coin}
                       amount={row.cost.toString()}

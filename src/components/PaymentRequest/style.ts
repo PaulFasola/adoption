@@ -2,6 +2,12 @@ import styled from 'styled-components';
 import { QRCode as QRSvg } from 'react-qr-svg';
 import _ from '../../providers/theme/styleFetcher';
 
+export interface IStyleProps {
+  noShadow?: boolean;
+}
+
+interface SP extends IStyleProps {}
+
 export const Container = styled.div`
   color: ${(p) => _(p.theme, 'primary', 'color')};
   background-color: ${(p) => _(p.theme, 'primary', 'backgroundColor')};
@@ -12,6 +18,12 @@ export const Container = styled.div`
   box-shadow: ${(p) => _(p.theme, 'primary', 'boxShadow')};
   border-radius: 3px;
   font-size: 12px;
+
+  ${(p: SP) =>
+    p.noShadow &&
+    `
+    box-shadow: none;
+  `}
 
   @media only screen and (max-width: 480px) {
     padding: 0 0 25px 0;
