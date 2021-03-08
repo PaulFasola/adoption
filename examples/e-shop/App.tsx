@@ -7,7 +7,7 @@ import { hot } from 'react-hot-loader';
 import { Container } from '@material-ui/core';
 import { PaymentProcess } from './components/paymentProcess';
 import { Header } from './components/header';
-import { constants } from '../constants';
+import { constants } from './constants';
 import { routeMap } from './router-paths';
 import { modalState } from './atoms';
 

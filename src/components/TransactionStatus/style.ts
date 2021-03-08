@@ -11,6 +11,7 @@ export interface IStyleProps {
   hasDate?: boolean;
   showDetails?: boolean;
   showSide?: boolean;
+  noShadow?: boolean;
 }
 
 interface SP extends IStyleProps {}
@@ -21,12 +22,18 @@ export const Container = styled.div`
   max-width: 375px;
   max-height: 50px;
   text-align: left;
-  box-shadow: ${(p) => _(p.theme, 'primary', 'boxShadow')};
   background-color: ${(p) => _(p.theme, 'primary', 'backgroundColor')};
   border-radius: 3px;
   font-size: 12px;
   overflow: hidden;
   transition: max-height 0.4s;
+  box-shadow: ${(p) => _(p.theme, 'primary', 'boxShadow')};
+
+  ${(p: SP) =>
+    p.noShadow &&
+    `
+    box-shadow: none;
+  `}
 
   ${(p: SP) =>
     p.hasDate &&
@@ -58,7 +65,7 @@ export const IconWrapper = styled.div`
 
 export const Row = styled.div`
   display: grid;
-  grid-template-columns: 5fr 5fr;
+  grid-template-columns: 4fr 6fr;
 
   ${(p: SP) =>
     p.showSide &&

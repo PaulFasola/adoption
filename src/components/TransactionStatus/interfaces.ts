@@ -5,6 +5,7 @@ export interface IProps {
   symbol: string;
   status?: TxStatus;
   animated?: boolean;
+  noShadow?: boolean;
   date?: {
     value?: Date;
     locale?: string;
