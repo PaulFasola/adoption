@@ -1,15 +1,15 @@
 import styled from 'styled-components';
+import _ from '../../../providers/theme/styleFetcher';
 
 export interface IStyleProps {
+  disabled?: boolean;
   floating?: boolean;
   rounded?: boolean;
 }
 
 interface SP extends IStyleProps {}
 
-export const Outline = styled.div`
-  position: relative;
-`;
+export const Outline = styled.div``;
 
 export const Input = styled.input`
   background: transparent;
@@ -19,7 +19,7 @@ export const Input = styled.input`
   box-shadow: none;
 
   ${(props: SP) =>
-    !props.rounded &&
+    props.rounded &&
     `
 		border-radius: 15px;
 	`}
@@ -27,6 +27,7 @@ export const Input = styled.input`
   &:focus {
     outline: none;
     box-shadow: inset 0 -0.25em 0.5em lighten(#000, 50%);
+    border-width: 2px;
   }
 
   &:-moz-ui-invalid {
@@ -36,22 +37,18 @@ export const Input = styled.input`
 
 export const Label = styled.label`
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 25px;
+  left: 25px;
   padding: 0 2px;
   line-height: 20px;
   font-size: 14px;
   letter-spacing: 0.125em;
-  color: #000;
-  background: #fff;
+  color: ${(p) => _(p.theme, 'primary', 'color')};
+  background: ${(p) => _(p.theme, 'primary', 'backgroundColor')};
   pointer-events: none;
   transition: transform 120ms;
   transform-origin: left center;
   transform: translateY(0) scale(1);
 
-  ${(props: SP) =>
-    props.floating &&
-    `
-		transform:translateY(-19px) scale(0.9);
-	`}
+  ${(props: SP) => props.floating && 'transform: translateY(-19px) scale(0.9);'}
 `;

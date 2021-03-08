@@ -1,26 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { IProps, InputProps } from './interfaces';
+import { defaultInputProps } from './defaultProps';
 import { Outline, Label, Input as StyledInput } from './style';
-
-interface IInputElementProps {
-  maxLength?: number;
-  minLength?: number;
-  max?: number;
-  min?: number;
-  value?: string;
-  label?: string;
-  style?: React.CSSProperties;
-}
-
-interface IProps extends IInputElementProps {
-  type: 'text' | 'number';
-  style?: React.CSSProperties;
-}
 
 const Input: React.FC<IProps> = (props) => {
   const [isFloating, setIsFloating] = useState<boolean>(false);
+  const [inputProps, setInputProps] = useState<InputProps>({ ...defaultInputProps, ...props });
+
+  useEffect(() => {
+    setInputProps((prevProps) => ({ ...prevProps, id: Math.random().toString(36).substring(7) }));
+
+    if (props.label && typeof props.placeholder === 'string') {
+      setInputProps((prevProps) => ({ ...prevProps, placeholder: undefined }));
+    }
+  }, [props.label, props.placeholder]);
+
+  useEffect(() => {
+    setInputProps((prevProps) => ({ ...prevProps, value: props.value }));
+  }, [props.value]);
+
+  useEffect(() => {
+    let pattern: string | undefined;
+
+    if (props.type === 'decimal') {
+      pattern = '^[0-9]*[.,]?[0-9]*$';
+    }
+
+    if (props.pattern) {
+      pattern = props.pattern;
+    }
+
+    setInputProps((prevProps) => ({ ...prevProps, pattern }));
+  }, [props.type, props.pattern]);
 
   const _handleBlur = (): void => {
-    setIsFloating(false);
+    if (!inputProps.value || inputProps.value.length === 0) {
+      setIsFloating(false);
+    }
+  };
+
+  const _handleChange = (e: React.ChangeEvent<HTMLInputElement>): void | boolean => {
+    const value = e.target.value;
+
+    if (inputProps.pattern && !value.match(inputProps.pattern)) {
+      e.preventDefault();
+      return;
+    }
+
+    setInputProps({ ...inputProps, value });
+
+    if (typeof props.onChange === 'function') {
+      props.onChange(value);
+    }
   };
 
   return (
@@ -30,7 +61,13 @@ const Input: React.FC<IProps> = (props) => {
           {props.label}
         </Label>
       )}
-      <StyledInput {...props} id='test' onFocus={() => setIsFloating(true)} onBlur={_handleBlur} />
+      <StyledInput
+        onFocus={() => setIsFloating(true)}
+        onBlur={_handleBlur}
+        onChange={_handleChange}
+        {...inputProps}
+        value={inputProps.value ?? ''}
+      />
     </Outline>
   );
 };
