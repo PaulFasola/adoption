@@ -9,7 +9,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
 
   return (
     <Container noShadow={props.noShadow}>
-      <Input type='text' label={'test'} maxLength={20} />
+      <Input type='text' label={'Wow'} maxLength={20} />
     </Container>
   );
 };
