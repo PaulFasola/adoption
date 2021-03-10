@@ -4,6 +4,7 @@ export interface ITheme {
     color: string;
     rule: string;
     boxShadow: string;
+    borderColor: string;
   }>;
   disabled: Partial<{
     color: string;
@@ -11,4 +12,4 @@ export interface ITheme {
 }
 
 export type PaletteCategory = 'primary' | 'secondary' | 'disabled';
-export type StyleProp = 'backgroundColor' | 'color' | 'boxShadow' | 'rule';
+export type StyleProp = 'backgroundColor' | 'color' | 'boxShadow' | 'rule' | 'borderColor';
