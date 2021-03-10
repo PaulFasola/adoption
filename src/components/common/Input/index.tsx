@@ -44,13 +44,13 @@ const Input: React.FC<IProps> = (props) => {
 
     if (inputProps.pattern && !value.match(inputProps.pattern)) {
       e.preventDefault();
-      return;
+      return false;
     }
 
     setInputProps({ ...inputProps, value });
 
-    if (typeof props.onChange === 'function') {
-      props.onChange(value);
+    if (typeof props.onValueChange === 'function') {
+      props.onValueChange(value);
     }
   };
 
