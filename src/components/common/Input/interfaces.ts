@@ -13,7 +13,7 @@ export interface InputProps {
   autoFill?: 'on' | 'off';
   style?: React.CSSProperties;
 
-  onChange?: (value: string) => void;
+  onValueChange?: (value: string) => void;
 }
 
 export interface IProps extends InputProps {
