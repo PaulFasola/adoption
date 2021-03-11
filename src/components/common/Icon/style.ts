@@ -1,7 +1,10 @@
 import styled from 'styled-components';
+import { ITheme } from '../../../providers/theme/ITheme';
 import _ from '../../../providers/theme/styleFetcher';
 
 export interface IStyleProps {
+  theme: ITheme;
+  disabled?: boolean;
   animate?: boolean;
   onClick?: () => void;
 }
@@ -14,6 +17,7 @@ export const Link = styled.a`
 `;
 
 export const IconContainer = styled.div`
+  min-width: 0.5em;
   margin: 5px 3px 3px 3px;
   display: inline-block;
   vertical-align: middle;
@@ -28,20 +32,11 @@ export const IconContainer = styled.div`
 
   svg .fillable {
     fill: ${(p) => _(p.theme, 'primary', 'color')};
-  }
-`;
 
-export const ArrowSwap = styled.svg`
-  height: 100%;
-  ${(p: SP) =>
-    p.animate &&
-    `
-    transition: transform  ease-in-out 2s infinite;
-    path:first-of-type {
-      transform: translateY(-55px);
-    }
-    path:nth-child(2){
-      transform: translate3d(0, -50%, 0);
-    }
-  `}
+    ${(p: SP) =>
+      p.disabled &&
+      `
+      fill: ${_(p.theme, 'disabled', 'color')}
+    `}
+  }
 `;
