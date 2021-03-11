@@ -4,7 +4,7 @@
 
 This is a KISS, non prodable example, so don't be surprised if the IU collapses depending on your actions ;)
 
-You can find a live version at: [adoption-example-eshop.vercel.app](adoption-example-eshop.vercel.app)
+You can find a live version at: [https://adoption-example-eshop.vercel.app](https://adoption-example-eshop.vercel.app)
 
 ## Installation
 
