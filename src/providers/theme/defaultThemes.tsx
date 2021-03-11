@@ -2,6 +2,13 @@ import { ITheme } from './ITheme';
 
 export type ThemeLabel = 'light' | 'dark';
 
+export const messages = {
+  success: '#007e33',
+  warning: '#ff8800',
+  info: '#bde5f8',
+  error: '#ff4444',
+};
+
 export const defaultThemes: Record<ThemeLabel | string, ITheme> = {
   dark: {
     primary: {
@@ -14,6 +21,7 @@ export const defaultThemes: Record<ThemeLabel | string, ITheme> = {
     disabled: {
       color: '#dddddd',
     },
+    ...{ messages },
   },
   light: {
     primary: {
@@ -26,5 +34,6 @@ export const defaultThemes: Record<ThemeLabel | string, ITheme> = {
     disabled: {
       color: '#dddddd',
     },
+    ...{ messages },
   },
 };

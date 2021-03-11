@@ -1,3 +1,5 @@
+import { messages as msgs } from './defaultThemes';
+
 export interface ITheme {
   primary: Partial<{
     backgroundColor: string;
@@ -9,7 +11,20 @@ export interface ITheme {
   disabled: Partial<{
     color: string;
   }>;
+  messages: {
+    success: string;
+    info: string;
+    warning: string;
+    error: string;
+  };
 }
 
-export type PaletteCategory = 'primary' | 'secondary' | 'disabled';
-export type StyleProp = 'backgroundColor' | 'color' | 'boxShadow' | 'rule' | 'borderColor';
+export type PaletteCategory = 'primary' | 'messages' | 'disabled';
+
+export type StyleProp =
+  | 'backgroundColor'
+  | 'color'
+  | 'boxShadow'
+  | 'rule'
+  | 'borderColor'
+  | keyof typeof msgs;
