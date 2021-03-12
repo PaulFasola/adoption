@@ -1,30 +1,32 @@
 import styled from 'styled-components';
 import _ from '../../providers/theme/styleFetcher';
+import { ITheme } from '../../providers/theme/ITheme';
+import { scrollbar } from '../common/style';
 
 export interface IStyleProps {
+  theme: ITheme;
   open?: boolean;
-  src?: string;
 }
 
 interface SP extends IStyleProps {}
 
 export const Button = styled.button`
-  min-width: 6rem;
+  display: flex;
   position: relative;
   align-items: center;
-  height: 2.5em;
   border-radius: 16px;
   border: 1px solid red;
   outline: none;
   border: none;
+  margin: 0 3px 0 3px;
   transition: width 0.3s ease;
 
   div:nth-child(1) {
-    margin: 0px 0.25rem 0px 0.75rem;
-  }
-
-  div:nth-child(2) {
-    margin: 0px 0.25rem 0px 0.35rem;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 0.2rem 0 0.2rem;
   }
 
   &:not(:disabled) {
@@ -36,12 +38,10 @@ export const Button = styled.button`
   }
 `;
 
-export const IconWrapper = styled.div`
+export const ProtocolIcon = styled.img`
   height: 20px;
   width: 20px;
   vertical-align: middle;
-  background-image: url('${(p: SP) => p.src}');
-  background-repeat: no-repeat;
 `;
 
 export const Symbol = styled.div`
@@ -51,22 +51,26 @@ export const Symbol = styled.div`
 `;
 
 export const DropDownList = styled.ul`
+  position: absolute;
+  background-color: ${({ theme }: SP) => _(theme, 'primary', 'backgroundColor')};
+  color: ${({ theme }: SP) => _(theme, 'primary', 'color')};
+  z-index: 1;
   margin: 0;
+  padding: 0;
   max-height: 0px;
+  min-width: 10rem;
   max-width: 13rem;
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  padding: 0;
+  right: 0;
   width: auto;
   list-style: none;
-  transition: all 0.3s ease;
+  transition: max-height 0.2s ease;
 
-  ${(p: SP) =>
-    p.open &&
-    `
-    max-height: 8rem;
-  `};
+  ${scrollbar}
+
+  ${({ open }: SP) => open && 'max-height: 8rem;'};
 
   li {
     display: flex;
@@ -77,11 +81,11 @@ export const DropDownList = styled.ul`
     padding: 5px;
 
     :hover {
-      background-color: ${(p) => _(p.theme, 'disabled', 'color')};
+      background-color: ${({ theme }) => _(theme, 'disabled', 'color')};
 
-      div:nth-of-type(3) {
-        border-color: ${(p) => _(p.theme, 'messages', 'success')};
-        color: ${(p) => _(p.theme, 'messages', 'success')};
+      div:nth-of-type(2) {
+        border-color: ${({ theme }) => _(theme, 'primary', 'color')};
+        color: ${({ theme }) => _(theme, 'primary', 'color')};
       }
     }
 
@@ -89,17 +93,17 @@ export const DropDownList = styled.ul`
       margin-right: 5px;
     }
 
-    div:nth-of-type(2) {
+    div:nth-of-type(1) {
       display: inline-block;
       vertical-align: middle;
-      width: 100%;
+      margin-right: 0.5rem;
     }
 
-    div:nth-of-type(3) {
+    div:nth-of-type(2) {
       font-size: 0.7em;
-      border: 1px solid ${(p) => _(p.theme, 'disabled', 'color')};
-      color: ${(p) => _(p.theme, 'disabled', 'color')};
       padding: 1px;
+      border: 1px solid ${({ theme }) => _(theme, 'disabled', 'color')};
+      color: ${({ theme }) => _(theme, 'disabled', 'color')};
     }
   }
 `;
