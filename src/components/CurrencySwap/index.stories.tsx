@@ -1,4 +1,5 @@
 import React from 'react';
+import { activeProtocols } from '../ProtocolSelector/__tests__/mocks';
 import { CurrencySwap } from '.';
 
 export default {
@@ -6,5 +7,11 @@ export default {
 };
 
 export const Basic = (): React.ReactNode => {
-  return <CurrencySwap />;
+  return (
+    <CurrencySwap
+      protocols={{
+        input: activeProtocols,
+      }}
+    />
+  );
 };

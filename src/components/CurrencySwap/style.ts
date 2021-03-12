@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import _ from '../../providers/theme/styleFetcher';
+import { ITheme } from '../../providers/theme/ITheme';
 import { Input } from '../common/Input';
 
 export interface IStyleProps {
+  theme: ITheme;
   noShadow?: boolean;
 }
 
@@ -11,7 +13,6 @@ interface SP extends IStyleProps {}
 export const Container = styled.div`
   position: relative;
   padding: 15px;
-  overflow: hidden;
   min-height: 190px;
   max-height: 800px;
   min-width: 250px;
@@ -29,9 +30,15 @@ export const Container = styled.div`
 export const InputWrapper = styled.div`
   border: 1px solid ${(p) => _(p.theme, 'primary', 'borderColor')};
   background-clip: padding-box;
+
   span:first-of-type {
     display: inline-block;
-    margin: 5px;
+    margin: 5px 5px 0 5px;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
   }
 `;
 
