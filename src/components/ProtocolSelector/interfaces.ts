@@ -3,6 +3,7 @@ export interface IProtocol {
   name: string;
   decimals: number;
   symbol: string;
+  value: number;
 }
 
 export interface IProps {

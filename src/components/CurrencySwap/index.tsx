@@ -31,8 +31,15 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     return 'Insufficient Balance';
   };
 
-  const _handleValueSwap = (): void => {
-    throw new Error('Not implemented (yet).');
+  const _handleValueChange = (end: 'input' | 'output') => (newValue: string): void => {
+    const value = Number(newValue);
+
+    if (!activeProtocols || !activeProtocols[end] || isNaN(value)) {
+      return;
+    }
+
+    const updatedProto: IProtocol = { ...(activeProtocols[end] as IProtocol), value };
+    setActiveProtocols({ ...activeProtocols, ...{ [end]: updatedProto } });
   };
 
   return (
@@ -42,7 +49,13 @@ const CurrencySwap: React.FC<IProps> = (props) => {
           <span>From</span>
         </div>
         <div>
-          <SwapInput type='decimal' maxLength={20} placeholder='0.00' />
+          <SwapInput
+            type='decimal'
+            maxLength={20}
+            placeholder='0.00'
+            value={activeProtocols?.input?.value}
+            onValueChange={_handleValueChange('input')}
+          />
           <div>
             <ProtocolSelector
               current={activeProtocols?.input}
@@ -55,12 +68,24 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         </div>
       </InputWrapper>
       <SwapButton>
-        <Icon type={IconType.ArrowDown} style={{ width: '18px' }} onClick={_handleValueSwap} />
+        <Icon
+          type={IconType.ArrowDown}
+          style={{ width: '18px' }}
+          onClick={() =>
+            setActiveProtocols({ input: activeProtocols?.output, output: activeProtocols?.input })
+          }
+        />
       </SwapButton>
       <InputWrapper>
         <span>To</span>
         <div>
-          <SwapInput type='decimal' maxLength={20} placeholder='0.00' />
+          <SwapInput
+            type='decimal'
+            maxLength={20}
+            placeholder='0.00'
+            value={activeProtocols?.output?.value}
+            onValueChange={_handleValueChange('output')}
+          />
           <ProtocolSelector
             current={activeProtocols?.output}
             list={protocols.output}
