@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { QRCode as QRSvg } from 'react-qr-svg';
 import _ from '../../providers/theme/styleFetcher';
+import { scrollbar } from '../common/style';
 
 export interface IStyleProps {
   noShadow?: boolean;
@@ -117,20 +118,7 @@ export const TransactionList = styled.ul`
     }
   }
 
-  &::-webkit-scrollbar-track {
-    background-color: ${(p) => _(p.theme, 'primary', 'backgroundColor')};
-    border: 1px solid #dedede;
-  }
-
-  &::-webkit-scrollbar {
-    width: 9px;
-    background-color: #dedede;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${(p) => _(p.theme, 'primary', 'color')};
-    border: 1px solid #dedede;
-  }
+  ${scrollbar}
 `;
 
 export const Visual = styled.div``;
