@@ -4,6 +4,7 @@ export interface IProtocol {
   decimals: number;
   symbol: string;
   value: number;
+  balance?: number;
 }
 
 export interface IProps {

@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { Container, SwapButton, SwapInput, InputWrapper, SubmitButton } from './style';
+import { Container, SwapButton, SwapInput, InputWrapper, SubmitButton, Overview } from './style';
 import { Icon, IconType } from '../common/Icon';
 import { IProps, IProtocolPipe } from './interfaces';
 import { ProtocolSelector } from '../ProtocolSelector';
@@ -42,11 +42,28 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     setActiveProtocols({ ...activeProtocols, ...{ [end]: updatedProto } });
   };
 
+  const _getPriceEquiv = (): React.ReactNode => {
+    if (!activeProtocols?.input || !activeProtocols?.output) {
+      return;
+    }
+
+    return (
+      <Overview>
+        1 {activeProtocols.input.symbol} = x {activeProtocols.output.symbol}
+      </Overview>
+    );
+  };
+
   return (
     <Container noShadow={props.noShadow}>
       <InputWrapper>
         <div>
           <span>From</span>
+          {activeProtocols?.input && (
+            <Overview>
+              Balance: {activeProtocols.input.value ?? 0} {activeProtocols.input.symbol}
+            </Overview>
+          )}
         </div>
         <div>
           <SwapInput
@@ -78,6 +95,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       </SwapButton>
       <InputWrapper>
         <span>To</span>
+        {_getPriceEquiv()}
         <div>
           <SwapInput
             type='decimal'

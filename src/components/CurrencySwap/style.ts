@@ -28,6 +28,7 @@ export const Container = styled.div`
 `;
 
 export const InputWrapper = styled.div`
+  position: relative;
   border: 1px solid ${(p) => _(p.theme, 'primary', 'borderColor')};
   background-clip: padding-box;
 
@@ -81,4 +82,13 @@ export const SubmitButton = styled.button`
   &:hover:not(:disabled) {
     opacity: 0.8;
   }
+`;
+
+export const Overview = styled.span`
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  color: ${(p) => _(p.theme, 'primary', 'color')};
 `;
