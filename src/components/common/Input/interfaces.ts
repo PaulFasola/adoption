@@ -7,7 +7,7 @@ export interface InputProps {
   max?: number;
   min?: number;
   placeholder?: string;
-  value?: string;
+  value?: string | number;
   label?: string;
   autoComplete?: 'on' | 'off';
   autoFill?: 'on' | 'off';

@@ -34,7 +34,7 @@ const Input: React.FC<IProps> = (props) => {
   }, [props.type, props.pattern]);
 
   const _handleBlur = (): void => {
-    if (!inputProps.value || inputProps.value.length === 0) {
+    if (!inputProps.value || inputProps.value.toString().length === 0) {
       setIsFloating(false);
     }
   };
