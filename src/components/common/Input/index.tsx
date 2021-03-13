@@ -54,6 +54,23 @@ const Input: React.FC<IProps> = (props) => {
     }
   };
 
+  const _getValue = (): string | number => {
+    if (props.type === 'decimal' || props.type === 'number') {
+      if (!inputProps.value || isNaN(Number(inputProps.value))) {
+        return 0;
+      }
+
+      if (props.type === 'decimal' && typeof props.maximumFractionDigits === 'number') {
+        return inputProps.value.toLocaleString(undefined, {
+          maximumFractionDigits: props.maximumFractionDigits,
+        });
+      }
+      return inputProps.value;
+    }
+
+    return inputProps.value ?? '';
+  };
+
   delete inputProps.onValueChange;
 
   return (
@@ -68,7 +85,7 @@ const Input: React.FC<IProps> = (props) => {
         onBlur={_handleBlur}
         onChange={_handleChange}
         {...inputProps}
-        value={inputProps.value ?? ''}
+        value={_getValue()}
       />
     </Outline>
   );

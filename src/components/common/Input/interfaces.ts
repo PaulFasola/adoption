@@ -18,5 +18,6 @@ export interface InputProps {
 
 export interface IProps extends InputProps {
   type: 'text' | 'number' | 'decimal';
+  maximumFractionDigits?: number;
   style?: React.CSSProperties;
 }
