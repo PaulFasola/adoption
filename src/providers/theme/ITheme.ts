@@ -1,30 +1,41 @@
-import { messages as msgs } from './defaultThemes';
+export type PaletteCategory = 'primary' | 'messages' | 'defaultButton' | 'disabled';
 
-export interface ITheme {
-  primary: Partial<{
-    backgroundColor: string;
-    color: string;
-    rule: string;
-    boxShadow: string;
-    borderColor: string;
-  }>;
-  disabled: Partial<{
-    color: string;
-  }>;
-  messages: {
-    success: string;
-    info: string;
-    warning: string;
-    error: string;
-  };
+interface IPalette {
+  backgroundColor: string;
+  color: string;
+  rule: string;
+  boxShadow: string;
+  borderColor: string;
+  hoverBgColor: string;
+  hoverColor: string;
 }
 
-export type PaletteCategory = 'primary' | 'messages' | 'disabled';
+interface IDisabledPalette {
+  color: string;
+}
+
+interface IMessagePalette {
+  success: string;
+  info: string;
+  warning: string;
+  error: string;
+}
+
+interface IButtonPalette {
+  color: string;
+  backgroundColor: string;
+  hoverBackgroundColor: string;
+}
 
 export type StyleProp =
-  | 'backgroundColor'
-  | 'color'
-  | 'boxShadow'
-  | 'rule'
-  | 'borderColor'
-  | keyof typeof msgs;
+  | keyof IPalette
+  | keyof IMessagePalette
+  | keyof IDisabledPalette
+  | keyof IButtonPalette;
+
+export interface ITheme {
+  primary: Partial<IPalette>;
+  disabled: Partial<IDisabledPalette>;
+  messages: Partial<IMessagePalette>;
+  defaultButton: Partial<IButtonPalette>;
+}
