@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import { PaymentStatus } from '../../components/PaymentRequest/enums/paymentStatus';
 import { TransactionStatus, TxStatus } from '../../components/TransactionStatus';
 import { PaymentRequest } from '../../components/PaymentRequest';
-import { ThemeContext, ThemeProvider } from './themeProvider';
+import { ThemeContext } from './themeProvider';
 import { ITheme } from './ITheme';
+import { ThemeWrapper } from './themeWrapper';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const companyAsset = require('../../assets/fictiveCompany.png');
@@ -65,35 +66,11 @@ const LabRat = (): React.ReactElement => {
   );
 };
 
-export const Presets: React.FC = () => {
-  const MyPaymentRequest: React.FC = () => {
-    const { currentTheme, switchTo } = useContext(ThemeContext);
-
-    return (
-      <>
-        <div style={{ marginBottom: '20px' }}>
-          <p>
-            Theme is <b>{currentTheme.name}</b>
-            <br />
-            <small>
-              It&apos;s saved into your browser&apos;s localStorage, so this theme will persist if
-              you refresh the page.
-            </small>
-          </p>
-          <button onClick={() => switchTo('dark')}>Go dark</button>
-          <button onClick={() => switchTo('light')}>Go light</button>
-        </div>
-        <LabRat />
-      </>
-    );
-  };
-
-  return (
-    <ThemeProvider>
-      <MyPaymentRequest />
-    </ThemeProvider>
-  );
-};
+export const Presets: React.FC = () => (
+  <ThemeWrapper>
+    <LabRat />
+  </ThemeWrapper>
+);
 
 export const CustomThemes: React.FC = () => {
   const customThemes: Record<string, Partial<ITheme>> = {
@@ -111,51 +88,25 @@ export const CustomThemes: React.FC = () => {
     },
   };
 
-  const MyPaymentRequest: React.FC = () => {
-    const { currentTheme, switchTo } = useContext(ThemeContext);
-    const availableThemes = [...Object.keys(customThemes), ...['light', 'dark']];
-
+  const FailButton: React.FC = () => {
+    const { switchTo } = useContext(ThemeContext);
     return (
-      <>
-        <div style={{ marginBottom: '20px' }}>
-          <p>
-            Theme is <b>{currentTheme.name}</b>.<br />
-            <ul>
-              <li>
-                You can fully (or even partially) create your themes and enable them simply by
-                proving these ones to the <i>&lt;ThemeProvider /&gt;.</i>
-              </li>
-              <li>
-                The chosen theme is saved into your browser&apos;s localStorage, so this theme will
-                persist if you refresh the page.
-              </li>
-              <li>
-                Also, you can trigger page&apos;s dark mode on Storybook, check the button above ☝️
-              </li>
-            </ul>
-          </p>
-          {availableThemes.map((key, i) => (
-            <button key={i.toString()} onClick={() => switchTo(key)}>
-              Go {key}
-            </button>
-          ))}
-          <button
-            onClick={() => {
-              switchTo('fail');
-              alert('Check your console, a warning is waiting for you ;)');
-            }}
-          >
-            Go fail (will.. fail).
-          </button>
-        </div>
-        <LabRat />
-      </>
+      <button
+        style={{ marginBottom: '1.5rem' }}
+        onClick={() => {
+          switchTo('thatDoesNotExist');
+          alert('Check your console, a warning is waiting for you ;)');
+        }}
+      >
+        Go thatDoesNotExist (will fail).
+      </button>
     );
   };
 
   return (
-    <ThemeProvider customThemes={customThemes}>
-      <MyPaymentRequest />
-    </ThemeProvider>
+    <ThemeWrapper customThemes={customThemes}>
+      <FailButton />
+      <LabRat />
+    </ThemeWrapper>
   );
 };
