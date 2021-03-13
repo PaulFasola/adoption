@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { Container, SwapButton, SwapInput, InputWrapper, SubmitButton, Overview } from './style';
-import { Icon, IconType } from '../common/Icon';
 import { IProps, IProtocolPipe } from './interfaces';
+import { Icon, IconType } from '../common/Icon';
 import { ProtocolSelector } from '../ProtocolSelector';
 import { IProtocol } from '../ProtocolSelector/interfaces';
 
@@ -104,13 +104,15 @@ const CurrencySwap: React.FC<IProps> = (props) => {
             value={activeProtocols?.output?.value}
             onValueChange={_handleValueChange('output')}
           />
-          <ProtocolSelector
-            current={activeProtocols?.output}
-            list={protocols.output}
-            onChange={(proto) =>
-              setActiveProtocols({ ...activeProtocols, output: proto ?? undefined })
-            }
-          />
+          <div>
+            <ProtocolSelector
+              current={activeProtocols?.output}
+              list={protocols.output}
+              onChange={(proto) =>
+                setActiveProtocols({ ...activeProtocols, output: proto ?? undefined })
+              }
+            />
+          </div>
         </div>
       </InputWrapper>
       <SubmitButton disabled={props.locked} onClick={props?.onSubmit}>

@@ -17,7 +17,7 @@ export const Container = styled.div`
   max-height: 800px;
   min-width: 250px;
   max-width: 350px;
-  backgroundcolor: ${(p) => _(p.theme, 'primary', 'backgroundColor')};
+  background-color: ${(p) => _(p.theme, 'primary', 'backgroundColor')};
   box-shadow: ${(p) => _(p.theme, 'primary', 'boxShadow')};
 
   ${(p: SP) =>
@@ -35,11 +35,17 @@ export const InputWrapper = styled.div`
   span:first-of-type {
     display: inline-block;
     margin: 5px 5px 0 5px;
+    color: ${(p) => _(p.theme, 'primary', 'color')};
   }
 
   & > div {
     display: flex;
     align-items: center;
+
+    /* ProtocolSelector wrapper */
+    div {
+      margin-right: 0.2em;
+    }
   }
 `;
 
@@ -59,6 +65,7 @@ export const SwapButton = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
+  color: ${(p) => _(p.theme, 'primary', 'color')};
 
   > div {
     display: block;
@@ -73,6 +80,7 @@ export const SubmitButton = styled.button`
   font-size: 1.2em;
   background-color: transparent;
   border: 1px solid ${(p) => _(p.theme, 'primary', 'borderColor')};
+  color: ${(p) => _(p.theme, 'primary', 'color')};
   width: 100%;
   margin: 1rem auto 0 auto;
   padding: 15px;
@@ -80,6 +88,7 @@ export const SubmitButton = styled.button`
   cursor: pointer;
 
   &:hover:not(:disabled) {
+    color: ${(p) => _(p.theme, 'primary', 'color')};
     opacity: 0.8;
   }
 `;
