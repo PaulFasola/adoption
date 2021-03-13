@@ -13,6 +13,7 @@ export interface IProps {
   url?: string;
   style?: React.CSSProperties;
   targetBlank?: boolean;
+  defaultTheme?: boolean;
   disabled?: boolean;
 
   onClick?: () => void;

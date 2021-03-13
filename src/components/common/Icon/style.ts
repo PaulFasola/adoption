@@ -5,14 +5,15 @@ import _ from '../../../providers/theme/styleFetcher';
 export interface IStyleProps {
   theme: ITheme;
   disabled?: boolean;
-  animate?: boolean;
+  defaultTheme?: boolean;
+
   onClick?: () => void;
 }
 
 interface SP extends IStyleProps {}
 
 export const Link = styled.a`
-  color: rgba(0, 0, 0, 0.8);
+  color: ${({ theme, defaultTheme }: SP) => _(!defaultTheme ? theme : null, 'primary', 'color')};
   text-decoration: none;
 `;
 
@@ -22,8 +23,8 @@ export const IconContainer = styled.div`
   display: inline-block;
   vertical-align: middle;
 
-  ${(p: SP) =>
-    typeof p.onClick !== 'undefined' &&
+  ${({ onClick }: SP) =>
+    typeof onClick !== 'undefined' &&
     `
     :hover {
       opacity: 0.6;
@@ -31,12 +32,12 @@ export const IconContainer = styled.div`
   `}
 
   svg .fillable {
-    fill: ${(p) => _(p.theme, 'primary', 'color')};
+    fill: ${({ theme, defaultTheme }: SP) => _(!defaultTheme ? theme : null, 'primary', 'color')};
 
-    ${(p: SP) =>
-      p.disabled &&
+    ${({ theme, disabled }: SP) =>
+      disabled &&
       `
-      fill: ${_(p.theme, 'disabled', 'color')}
-    `}
+        fill: ${_(theme, 'disabled', 'color')}
+      `}
   }
 `;
