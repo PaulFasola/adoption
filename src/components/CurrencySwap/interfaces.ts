@@ -9,6 +9,12 @@ export interface IProps {
   locked?: boolean;
   noShadow?: boolean;
   protocols: Partial<IProtocolPipe>;
+  maxFractionDigits?: number;
 
   onSubmit?: () => void;
+}
+
+export interface ISwapValues {
+  input: number;
+  output: number;
 }
