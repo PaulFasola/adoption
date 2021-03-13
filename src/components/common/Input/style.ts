@@ -15,9 +15,9 @@ export const Outline = styled.div`
 
 export const Input = styled.input`
   background: transparent;
+  color: ${({ theme }) => _(theme, 'primary', 'color')};
   outline: none;
   padding: 10px;
-  border: 1px solid #000;
   box-shadow: none;
 
   ${(props: SP) =>
@@ -26,7 +26,7 @@ export const Input = styled.input`
 		border-radius: 15px;
 	`}
 
-  &:focus {
+  &: focus {
     outline: none;
     box-shadow: inset 0 -0.25em 0.5em lighten(#000, 50%);
     border-width: 2px;
