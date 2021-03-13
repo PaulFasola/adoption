@@ -4,7 +4,7 @@ import { IProps, IProtocol } from './interfaces';
 import { Icon, IconType } from '../common/Icon';
 
 export const ProtocolSelector: React.FC<IProps> = (props) => {
-  const dropdownRef = useRef<HTMLUListElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const [protocol, setProtocol] = useState<IProtocol>();
   const [dropdownIsOpen, setDropdownIsOpen] = useState<boolean>(false);
@@ -49,7 +49,12 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
           <ProtocolIcon src={protocol.logoURI} title={fullLabel} />
           <Symbol>{protocol.symbol}</Symbol>
           {props.list.length > 0 && (
-            <Icon type={IconType.ArrowDown} style={{ width: '0.8em' }} disabled={props.disabled} />
+            <Icon
+              defaultTheme
+              type={IconType.ArrowDown}
+              style={{ width: '0.8em' }}
+              disabled={props.disabled}
+            />
           )}
         </Button>
       );
@@ -58,7 +63,12 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
     return (
       <Button disabled={props.disabled} onClick={() => setDropdownIsOpen(!dropdownIsOpen)}>
         <div>Select a coin</div>
-        <Icon type={IconType.ArrowDown} style={{ width: '0.6em' }} disabled={props.disabled} />
+        <Icon
+          defaultTheme
+          type={IconType.ArrowDown}
+          style={{ width: '0.6em' }}
+          disabled={props.disabled}
+        />
       </Button>
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps

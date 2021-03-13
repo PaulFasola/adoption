@@ -12,6 +12,8 @@ interface SP extends IStyleProps {}
 
 export const Button = styled.button`
   display: flex;
+  color: ${({ theme }) => _(theme, 'defaultButton', 'color')};
+  background-color: ${({ theme }) => _(theme, 'defaultButton', 'backgroundColor')};
   position: relative;
   align-items: center;
   border-radius: 16px;
@@ -32,7 +34,7 @@ export const Button = styled.button`
     cursor: pointer;
 
     &:hover {
-      background-color: #e7e7e7;
+      background-color: ${({ theme }) => _(theme, 'defaultButton', 'hoverBackgroundColor')};
     }
   }
 
@@ -59,8 +61,8 @@ export const Symbol = styled.div`
 export const DropDownList = styled.div`
   position: absolute;
   height: 6.5rem;
-  background-color: ${({ theme }: SP) => _(theme, 'primary', 'backgroundColor')};
-  color: ${({ theme }: SP) => _(theme, 'primary', 'color')};
+  background-color: ${({ theme }) => _(theme, 'primary', 'backgroundColor')};
+  color: ${({ theme }) => _(theme, 'primary', 'color')};
   z-index: 1;
   margin: 0 0 0 10px;
   max-width: 12rem;
@@ -86,8 +88,9 @@ export const DropDownList = styled.div`
     font-size: 0.9em;
     padding: 0.17rem 1.5rem 0.25rem 0;
 
-    :hover {
-      background-color: ${({ theme }) => _(theme, 'disabled', 'color')};
+    &:hover {
+      background-color: ${({ theme }) => _(theme, 'primary', 'hoverBgColor')};
+      color: ${({ theme }) => _(theme, 'primary', 'hoverColor')};
 
       div:nth-of-type(2) {
         border-color: ${({ theme }) => _(theme, 'primary', 'color')};
