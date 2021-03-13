@@ -5,8 +5,6 @@ import { ThemeWrapper } from '../../providers/theme/themeWrapper';
 import { IProtocol } from './interfaces';
 import { activeProtocols } from './__tests__/mocks';
 
-console.log(activeProtocols);
-
 export default {
   title: 'Components/ProtocolSelector',
 };

@@ -3,7 +3,18 @@ export interface IProtocol {
   name: string;
   decimals: number;
   symbol: string;
-  value: number;
+  /**
+   * The value entered by the user in the swap input.
+   */
+  value?: number;
+  /**
+   * The price, used to calculate the the amount ration between two protocols.
+   * It can be USD/BTC/... or whaterver. Just ensure to use the same "currency" for every protocols.
+   */
+  price: number;
+  /**
+   * The amount that the user currently has.
+   */
   balance?: number;
 }
 
@@ -15,3 +26,4 @@ export interface IProps {
 
   onChange?: (newProtocol: IProtocol | null) => void;
 }
+o;
