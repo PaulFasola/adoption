@@ -54,6 +54,8 @@ const Input: React.FC<IProps> = (props) => {
     }
   };
 
+  delete inputProps.onValueChange;
+
   return (
     <Outline>
       {typeof props.label === 'string' && (
