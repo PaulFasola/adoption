@@ -9,5 +9,5 @@ export default {
 };
 
 export const Basic = (): React.ReactNode => {
-  return <ProtocolSelector list={activeProtocols} current={activeProtocols[2]} />;
+  return <ProtocolSelector list={activeProtocols} />;
 };
