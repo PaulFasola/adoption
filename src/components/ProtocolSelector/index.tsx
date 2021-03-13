@@ -69,11 +69,11 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
       {button}
       <DropDownList open={dropdownIsOpen} ref={dropdownRef}>
         {props.list.map((protocol, i) => (
-          <li key={i} onClick={_handleProtocolPick(protocol)}>
+          <div key={i} onClick={_handleProtocolPick(protocol)}>
             <ProtocolIcon src={protocol.logoURI} title={fullLabel} />
             <div>{protocol.name}</div>
             <div>{protocol.symbol}</div>
-          </li>
+          </div>
         ))}
       </DropDownList>
     </>
