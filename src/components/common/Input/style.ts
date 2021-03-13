@@ -9,7 +9,9 @@ export interface IStyleProps {
 
 interface SP extends IStyleProps {}
 
-export const Outline = styled.div``;
+export const Outline = styled.div`
+  width: 100%;
+`;
 
 export const Input = styled.input`
   background: transparent;

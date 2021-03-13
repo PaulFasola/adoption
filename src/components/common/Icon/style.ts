@@ -18,7 +18,7 @@ export const Link = styled.a`
 
 export const IconContainer = styled.div`
   min-width: 0.5em;
-  margin: 5px 3px 3px 3px;
+  margin: 3px;
   display: inline-block;
   vertical-align: middle;
 
