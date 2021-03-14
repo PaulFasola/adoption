@@ -12,6 +12,10 @@ export interface IProtocol {
    * The amount that the user currently has.
    */
   balance?: number;
+  /**
+   * Defines if the protocol will be selectable from the user.
+   */
+  hidden: boolean;
 }
 
 export interface IProps {
@@ -22,4 +26,3 @@ export interface IProps {
 
   onChange?: (newProtocol: IProtocol | null) => void;
 }
-o;
