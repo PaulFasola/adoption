@@ -115,7 +115,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
           </div>
         </div>
       </InputWrapper>
-      <SwapButton>
+      <SwapButton aria-label='Swap values'>
         <Icon
           type={IconType.ArrowDown}
           style={{ width: '18px' }}
@@ -148,7 +148,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
           </div>
         </div>
       </InputWrapper>
-      <SubmitButton disabled={props.locked} onClick={props?.onSubmit}>
+      <SubmitButton aria-label='Submit' disabled={props.locked} onClick={props?.onSubmit}>
         {getButtonValue()}
       </SubmitButton>
     </Container>
