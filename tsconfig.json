@@ -20,5 +20,5 @@
     "target": "ES5"
   },
   "exclude": ["node_modules"],
-  "include": ["./src", "theme.d.ts"]
+  "include": ["./src", "theme.d.ts", "jest-setup.ts"]
 }

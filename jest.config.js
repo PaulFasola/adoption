@@ -10,12 +10,14 @@ module.exports = {
     '\\.(css|less)$': '<rootDir/src/utils/assetsTransformer.js',
   },
   coveragePathIgnorePatterns: ['/node_modules/', 'dist/', '<rootDir>/src/index.ts'],
+  testPathIgnorePatterns: ['mocks.ts'],
   modulePathIgnorePatterns: ['<rootDir>/dist'],
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{js,ts,tsx,jsx}',
     '!<rootDir>/src/**/*.stories.*',
     '!src/**/style.ts',
   ],
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
   coverageThreshold: {
     global: {
       branches: 85,
