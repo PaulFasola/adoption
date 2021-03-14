@@ -15,7 +15,7 @@ export interface IProtocol {
   /**
    * Defines if the protocol will be selectable from the user.
    */
-  hidden: boolean;
+  hidden?: boolean;
 }
 
 export interface IProps {
