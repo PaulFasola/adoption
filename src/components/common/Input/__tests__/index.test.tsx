@@ -1,7 +1,7 @@
 import React from 'react';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { render } from '@testing-library/react';
-import { toHaveNoViolations } from 'jest-axe';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { configure, mount } from 'enzyme';
 import { Input } from '..';
 import { act } from 'react-dom/test-utils';
@@ -151,5 +151,12 @@ describe('Input component', () => {
     input.simulate('change', { target: { value: 'foobar' } });
 
     expect(mockFn).not.toHaveBeenCalled();
+  });
+
+  it('should not have any accessibility issues', async () => {
+    const { container } = render(
+      <Input aria-label='test' type='text' label='Test' placeholder='placeholder' />
+    );
+    expect(await axe(container)).toHaveNoViolations();
   });
 });
