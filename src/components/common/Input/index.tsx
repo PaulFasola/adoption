@@ -57,7 +57,7 @@ const Input: React.FC<IProps> = (props) => {
   const _getValue = (): string | number => {
     if (props.type === 'decimal' || props.type === 'number') {
       if (!inputProps.value || isNaN(Number(inputProps.value))) {
-        return 0;
+        return '';
       }
 
       if (props.type === 'decimal' && typeof props.maximumFractionDigits === 'number') {
@@ -76,7 +76,7 @@ const Input: React.FC<IProps> = (props) => {
   return (
     <Outline>
       {typeof props.label === 'string' && (
-        <Label htmlFor='test' floating={isFloating}>
+        <Label htmlFor={props.id} floating={isFloating}>
           {props.label}
         </Label>
       )}
