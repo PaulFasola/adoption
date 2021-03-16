@@ -6,7 +6,6 @@ export const excludeCommonSymbol = (
   array: Readonly<IProtocol[]>
 ): IProtocol[] => {
   const idx = array.findIndex((x) => x.symbol === activeProtocol.symbol);
-
   const output = [...array];
 
   if (idx > -1) {

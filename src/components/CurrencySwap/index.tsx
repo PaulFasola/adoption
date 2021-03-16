@@ -1,9 +1,10 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { Container, SwapButton, SwapInput, InputWrapper, SubmitButton, Overview } from './style';
-import { IProps, IProtocolArrayPipe, IProtocolPipe, ISwapValues } from './interfaces';
+import { IProps, IProtocolArrayPipe, IProtocolPipe, ProtocolEnd, ISwapValues } from './interfaces';
 import { Icon, IconType } from '../common/Icon';
 import { ProtocolSelector } from '../ProtocolSelector';
 import { IProtocol } from '../ProtocolSelector/interfaces';
+import { usePrevious } from 'react-delta';
 import { preventCommonSymbol } from './utils';
 
 const DEFAULT_MAX_FRACTION_DIGITS = 5;
@@ -12,6 +13,8 @@ const CurrencySwap: React.FC<IProps> = (props) => {
   const [swapValues, setSwapValues] = useState<ISwapValues>({});
   const [protocols, setProtocols] = useState<IProtocolArrayPipe>({ input: [], output: [] });
   const [activeProtocols, setActiveProtocols] = useState<IProtocolPipe>();
+
+  const dataRef = usePrevious(activeProtocols);
 
   /* istanbul ignore next */
   useLayoutEffect(() => {
@@ -24,35 +27,53 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     });
   }, [props.protocols]);
 
+  const reflectProtocolsAndPrices = useCallback(
+    (end: ProtocolEnd, value: number, prevent?: boolean): void => {
+      if (!activeProtocols || !activeProtocols[end]) return;
+
+      const currentProto = activeProtocols[end] as IProtocol;
+      const oppositeEnd = end === 'input' ? 'output' : 'input';
+      const oppositeProto = activeProtocols[oppositeEnd] as IProtocol | undefined;
+      const oppositeValue = oppositeProto
+        ? (value * currentProto.price) / oppositeProto.price
+        : null;
+
+      setSwapValues((prevProps) => ({
+        ...prevProps,
+        [end]: value,
+        [oppositeEnd]: oppositeValue,
+      }));
+    },
+    [activeProtocols]
+  );
+
   useEffect(() => {
-    setProtocols((prevState) => ({
-      ...prevState,
-      ...preventCommonSymbol(prevState, activeProtocols),
-    }));
-  }, [activeProtocols]);
+    setProtocols((prevState) => {
+      return {
+        ...prevState,
+        ...preventCommonSymbol(prevState, activeProtocols),
+      };
+    });
+
+    const end: ProtocolEnd = dataRef?.input !== activeProtocols?.input ? 'output' : 'input';
+    reflectProtocolsAndPrices(end, swapValues[end] ?? 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeProtocols, reflectProtocolsAndPrices]);
 
   const getButtonValue = (): string => {
     return props.locked ? 'Unlock Wallet' : 'Insufficient Balance';
   };
 
-  const handleValueChange = (end: 'input' | 'output') => (newValue: string): void => {
+  const handleValueChange = (end: ProtocolEnd) => (newValue: string): void => {
     const value = Number(newValue);
     setSwapValues({ input: undefined, output: undefined });
 
-    if (!activeProtocols || !activeProtocols[end] || isNaN(value)) {
-      return;
-    }
+    if (isNaN(value)) return;
+    reflectProtocolsAndPrices(end, value);
+  };
 
-    const oppositeEnd = end === 'input' ? 'output' : 'input';
-    const endProto = activeProtocols[end] as IProtocol;
-    const oppositeEndProto = activeProtocols[oppositeEnd] as IProtocol;
-
-    setSwapValues({
-      input: value,
-      output: (value * endProto.price) / oppositeEndProto.price,
-    });
-
-    setActiveProtocols({ ...activeProtocols, ...endProto, ...oppositeEndProto });
+  const handleProtocolChange = (end: ProtocolEnd) => (newProto: IProtocol) => {
+    setActiveProtocols({ ...activeProtocols, ...{ [end]: newProto } });
   };
 
   const getPriceEquiv = (): React.ReactNode => {
@@ -71,6 +92,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         {(input.price / output.price).toLocaleString(undefined, {
           maximumFractionDigits: getMaxFractionDigits(output.decimals),
         })}
+        &nbsp;
         {output.symbol}
       </Overview>
     );
@@ -108,9 +130,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
             <ProtocolSelector
               current={activeProtocols?.input}
               list={protocols.input.filter((x) => !x.hidden)}
-              onChange={(proto) =>
-                setActiveProtocols({ ...activeProtocols, input: proto ?? undefined })
-              }
+              onChange={handleProtocolChange('input')}
             />
           </div>
         </div>
@@ -141,9 +161,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
             <ProtocolSelector
               current={activeProtocols?.output}
               list={protocols.output.filter((x) => !x.hidden)}
-              onChange={(proto) =>
-                setActiveProtocols({ ...activeProtocols, output: proto ?? undefined })
-              }
+              onChange={handleProtocolChange('output')}
             />
           </div>
         </div>

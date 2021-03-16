@@ -24,5 +24,5 @@ export interface IProps {
   list: IProtocol[];
   allowCustom?: boolean;
 
-  onChange?: (newProtocol: IProtocol | null) => void;
+  onChange?: (newProtocol: IProtocol) => void;
 }

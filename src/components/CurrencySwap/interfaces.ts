@@ -1,5 +1,7 @@
 import { IProtocol } from '../ProtocolSelector/interfaces';
 
+export type ProtocolEnd = 'input' | 'output';
+
 export interface IProtocolArrayPipe {
   input: IProtocol[];
   output: IProtocol[];
