@@ -51,7 +51,7 @@ export const InputWrapper = styled.div`
 
 export const SwapInput = styled(Input)`
   border: none;
-  width: 100%;
+  width: calc(100% - 10px);
   font-size: 1.2em;
 `;
 
@@ -80,7 +80,7 @@ export const SubmitButton = styled.button`
   font-size: 1.2em;
   background-color: ${(p) => _(p.theme, 'defaultButton', 'backgroundColor')};
   border: 0;
-  color: ${(p) => _(p.theme, 'primary', 'color')};
+  color: ${(p) => _(p.theme, 'secondary', 'color')};
   width: 100%;
   margin: 1rem auto 0 auto;
   padding: 15px;
@@ -93,7 +93,6 @@ export const SubmitButton = styled.button`
   }
 
   &:hover:not(:disabled) {
-    color: ${(p) => _(p.theme, 'primary', 'color')};
     background-color: ${(p) => _(p.theme, 'defaultButton', 'hoverBgColor')};
   }
 `;
