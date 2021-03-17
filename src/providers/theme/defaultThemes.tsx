@@ -24,7 +24,7 @@ export const defaultThemes: Record<ThemeLabel | string, ITheme> = {
     },
     defaultButton: {
       backgroundColor: '#efefef',
-      hoverBackgroundColor: '#e7e7e7',
+      hoverBgColor: '#e7e7e7',
       color: '#000000',
     },
   },
@@ -49,7 +49,7 @@ export const defaultThemes: Record<ThemeLabel | string, ITheme> = {
     },
     defaultButton: {
       backgroundColor: '#efefef',
-      hoverBackgroundColor: '#e7e7e7',
+      hoverBgColor: '#e7e7e7',
       color: '#000000',
     },
   },

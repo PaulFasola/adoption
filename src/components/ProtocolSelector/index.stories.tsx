@@ -35,7 +35,7 @@ export const Themed = (): React.ReactNode => {
       defaultButton: {
         backgroundColor: 'pink',
         color: 'yellow',
-        hoverBackgroundColor: 'red',
+        hoverBgColor: 'red',
       },
     },
   };

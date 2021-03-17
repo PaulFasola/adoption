@@ -34,7 +34,7 @@ export const Button = styled.button`
     cursor: pointer;
 
     &:hover {
-      background-color: ${({ theme }) => _(theme, 'defaultButton', 'hoverBackgroundColor')};
+      background-color: ${({ theme }) => _(theme, 'defaultButton', 'hoverBgColor')};
     }
   }
 

@@ -78,8 +78,8 @@ export const SwapButton = styled.button`
 export const SubmitButton = styled.button`
   position: relative;
   font-size: 1.2em;
-  background-color: transparent;
-  border: 1px solid ${(p) => _(p.theme, 'primary', 'borderColor')};
+  background-color: ${(p) => _(p.theme, 'defaultButton', 'backgroundColor')};
+  border: 0;
   color: ${(p) => _(p.theme, 'primary', 'color')};
   width: 100%;
   margin: 1rem auto 0 auto;
@@ -87,9 +87,14 @@ export const SubmitButton = styled.button`
   outline: none;
   cursor: pointer;
 
+  &:disabled {
+    color: ${(p) => _(p.theme, 'disabled', 'color')};
+    background-color: ${(p) => _(p.theme, 'disabled', 'backgroundColor')};
+  }
+
   &:hover:not(:disabled) {
     color: ${(p) => _(p.theme, 'primary', 'color')};
-    opacity: 0.8;
+    background-color: ${(p) => _(p.theme, 'defaultButton', 'hoverBgColor')};
   }
 `;
 

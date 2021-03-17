@@ -24,7 +24,7 @@ interface IMessagePalette {
 interface IButtonPalette {
   color: string;
   backgroundColor: string;
-  hoverBackgroundColor: string;
+  hoverBgColor: string;
 }
 
 export type StyleProp =
