@@ -7,6 +7,7 @@ export const activeProtocols = [
   { name: 'Cardano', symbol: 'ADA', decimals: 6, price: 1.106 },
   { name: 'ChainLink', symbol: 'LINK', decimals: 6, price: 29.76 },
 ].map<IProtocol>((coin) => ({
+  balance: Math.floor(Math.random() * 15) + 1,
   ...coin,
   logoURI: `https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/${coin.symbol.toLowerCase()}.svg`,
 }));
