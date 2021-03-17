@@ -91,6 +91,7 @@ describe('ProtocolSelector component', () => {
 
   it('should not have any accessibility issues', async () => {
     const { container } = render(<ProtocolSelector list={activeProtocols} />);
+
     expect(await axe(container)).toHaveNoViolations();
   });
 });

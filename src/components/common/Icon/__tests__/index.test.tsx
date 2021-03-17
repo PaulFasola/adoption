@@ -1,8 +1,8 @@
 import React from 'react';
-import toJson from "enzyme-to-json";
+import toJson from 'enzyme-to-json';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { configure, shallow } from 'enzyme';
-import { Icon, IconType } from "..";
+import { Icon, IconType } from '..';
 
 configure({ adapter: new Adapter() });
 
@@ -12,12 +12,16 @@ describe(`Icon`, () => {
   });
 
   it('Should be clickable when url is defined', () => {
-    const wrapper = shallow(<Icon type={IconType.OutboundLink} url="https://brrr.money/" />);
+    const wrapper = shallow(<Icon type={IconType.OutboundLink} url='https://brrr.money/' />);
+
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('Should be clickable when url is defined and the target should be _blank', () => {
-    const wrapper = shallow(<Icon type={IconType.OutboundLink} url="https://brrr.money/" targetBlank />);
+    const wrapper = shallow(
+      <Icon type={IconType.OutboundLink} url='https://brrr.money/' targetBlank />
+    );
+
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
