@@ -73,6 +73,14 @@ const Input: React.FC<IProps> = (props) => {
 
   delete inputProps.onValueChange;
 
+  if (
+    props.maxLength &&
+    typeof props.value === 'number' &&
+    props.value.toString().length > props.maxLength
+  ) {
+    inputProps.title = props.value?.toString();
+  }
+
   return (
     <Outline>
       {typeof props.label === 'string' && (
