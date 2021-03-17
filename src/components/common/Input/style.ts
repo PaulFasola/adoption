@@ -19,6 +19,7 @@ export const Input = styled.input`
   outline: none;
   padding: 10px;
   box-shadow: none;
+  text-overflow: ellipsis;
 
   ${(props: SP) =>
     props.rounded &&
