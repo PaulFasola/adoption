@@ -7,12 +7,13 @@ import { IProtocol } from '../ProtocolSelector/interfaces';
 import { usePrevious } from 'react-delta';
 import { preventCommonSymbol } from './utils';
 
-const DEFAULT_MAX_FRACTION_DIGITS = 5;
+const DEFAULT_MAX_FRACTION_DIGITS = 8;
 
 const CurrencySwap: React.FC<IProps> = (props) => {
-  const [swapValues, setSwapValues] = useState<ISwapValues>({});
   const [protocols, setProtocols] = useState<IProtocolArrayPipe>({ input: [], output: [] });
   const [activeProtocols, setActiveProtocols] = useState<IProtocolPipe>();
+  const [swapValues, setSwapValues] = useState<ISwapValues>({});
+  const [canSwap, setCanSwap] = useState<boolean>(false);
 
   const dataRef = usePrevious(activeProtocols);
 
@@ -27,16 +28,34 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     });
   }, [props.protocols]);
 
+  const getMaxFractionDigits = useCallback(
+    (decimals?: number): number => {
+      const decimalsOrDefault = decimals ?? DEFAULT_MAX_FRACTION_DIGITS;
+
+      if (!props.maxFractionDigits || props.maxFractionDigits >= decimalsOrDefault) {
+        return decimalsOrDefault;
+      }
+
+      return props.maxFractionDigits;
+    },
+    [props.maxFractionDigits]
+  );
+
   const reflectProtocolsAndPrices = useCallback(
-    (end: ProtocolEnd, value: number, prevent?: boolean): void => {
+    (end: ProtocolEnd, value: number): void => {
       if (!activeProtocols || !activeProtocols[end]) return;
 
       const currentProto = activeProtocols[end] as IProtocol;
       const oppositeEnd = end === 'input' ? 'output' : 'input';
       const oppositeProto = activeProtocols[oppositeEnd] as IProtocol | undefined;
-      const oppositeValue = oppositeProto
-        ? (value * currentProto.price) / oppositeProto.price
-        : null;
+      let oppositeValue = oppositeProto ? (value * currentProto.price) / oppositeProto.price : null;
+
+      if (oppositeValue) {
+        const toStr = oppositeValue.toLocaleString(undefined, {
+          maximumFractionDigits: getMaxFractionDigits(activeProtocols[end]?.decimals),
+        });
+        oppositeValue = parseFloat(toStr.replace(/[^\d\.\-]/g, ''));
+      }
 
       setSwapValues((prevProps) => ({
         ...prevProps,
@@ -44,7 +63,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         [oppositeEnd]: oppositeValue,
       }));
     },
-    [activeProtocols]
+    [activeProtocols, getMaxFractionDigits]
   );
 
   useEffect(() => {
@@ -60,9 +79,29 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeProtocols, reflectProtocolsAndPrices]);
 
-  const getButtonValue = (): string => {
-    return props.locked ? 'Unlock Wallet' : 'Insufficient Balance';
-  };
+  /**
+   * Determines if swapping is possible
+   */
+  useEffect((): void => {
+    if (
+      !activeProtocols ||
+      !activeProtocols.input ||
+      !activeProtocols.output ||
+      !swapValues.input
+    ) {
+      return setCanSwap(false);
+    }
+
+    if (
+      (activeProtocols.input.balance ?? -1) <= 0 ||
+      (swapValues.input ?? -1) <= 0 ||
+      swapValues.input > activeProtocols.input.balance
+    ) {
+      return setCanSwap(false);
+    }
+
+    setCanSwap(props.locked ?? true);
+  }, [props.locked, activeProtocols, swapValues]);
 
   const handleValueChange = (end: ProtocolEnd) => (newValue: string): void => {
     const value = Number(newValue);
@@ -74,6 +113,21 @@ const CurrencySwap: React.FC<IProps> = (props) => {
 
   const handleProtocolChange = (end: ProtocolEnd) => (newProto: IProtocol) => {
     setActiveProtocols({ ...activeProtocols, ...{ [end]: newProto } });
+  };
+
+  const handleSubmit = () => {
+    if (!swapValues || !activeProtocols) {
+      return;
+    }
+
+    if (typeof props.onSubmit === 'function') {
+      props.onSubmit();
+    }
+
+    setSwapValues({
+      input: 0,
+      output: 0,
+    });
   };
 
   const getPriceEquiv = (): React.ReactNode => {
@@ -98,14 +152,22 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     );
   };
 
-  const getMaxFractionDigits = (decimals?: number): number => {
-    const decimalsOrDefault = decimals ?? DEFAULT_MAX_FRACTION_DIGITS;
-
-    if (!props.maxFractionDigits || props.maxFractionDigits >= decimalsOrDefault) {
-      return decimalsOrDefault;
+  const getButtonValue = (): string => {
+    if (props.locked) {
+      return 'Unlock Wallet';
     }
 
-    return props.maxFractionDigits;
+    if (
+      swapValues.input &&
+      activeProtocols?.input &&
+      typeof activeProtocols.input.balance === 'number'
+    ) {
+      if (activeProtocols.input.balance < swapValues.input) {
+        return 'Insufficient balance';
+      }
+    }
+
+    return 'Swap!';
   };
 
   return (
@@ -120,8 +182,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         <div>
           <SwapInput
             type='decimal'
-            maxLength={20}
-            maximumFractionDigits={getMaxFractionDigits(activeProtocols?.input?.decimals)}
+            maxLength={19}
             placeholder='0.00'
             value={swapValues?.input}
             onValueChange={handleValueChange('input')}
@@ -151,9 +212,8 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         <div>
           <SwapInput
             type='decimal'
-            maxLength={20}
+            maxLength={19}
             placeholder='0.00'
-            maximumFractionDigits={getMaxFractionDigits(activeProtocols?.output?.decimals)}
             value={swapValues?.output}
             onValueChange={handleValueChange('output')}
           />
@@ -166,7 +226,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
           </div>
         </div>
       </InputWrapper>
-      <SubmitButton aria-label='Submit' disabled={props.locked} onClick={props?.onSubmit}>
+      <SubmitButton aria-label='Submit' disabled={!canSwap} onClick={handleSubmit}>
         {getButtonValue()}
       </SubmitButton>
     </Container>
