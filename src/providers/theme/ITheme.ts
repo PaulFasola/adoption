@@ -1,4 +1,4 @@
-export type PaletteCategory = 'primary' | 'messages' | 'defaultButton' | 'disabled';
+export type PaletteCategory = 'primary' | 'secondary' | 'messages' | 'defaultButton' | 'disabled';
 
 interface IPalette {
   backgroundColor: string;
@@ -35,6 +35,7 @@ export type StyleProp =
 
 export interface ITheme {
   primary: Partial<IPalette>;
+  secondary: Partial<IPalette>;
   disabled: Partial<IDisabledPalette>;
   messages: Partial<IMessagePalette>;
   defaultButton: Partial<IButtonPalette>;

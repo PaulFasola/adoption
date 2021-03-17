@@ -13,6 +13,9 @@ export const defaultThemes: Record<ThemeLabel | string, ITheme> = {
       hoverColor: '#ffffff',
       hoverBgColor: '#2c2f36',
     },
+    secondary: {
+      color: '#000000',
+    },
     disabled: {
       color: '#dddddd',
     },
@@ -37,6 +40,9 @@ export const defaultThemes: Record<ThemeLabel | string, ITheme> = {
       borderColor: 'rgba(0, 0, 0, 0.1)',
       hoverColor: '#000000',
       hoverBgColor: '#e7e7e7',
+    },
+    secondary: {
+      color: '#000000',
     },
     disabled: {
       color: '#dddddd',
