@@ -1,8 +1,9 @@
 import React from 'react';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import toJson from 'enzyme-to-json';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import { configure, mount } from 'enzyme';
+import { configure, mount, shallow } from 'enzyme';
 import { Input } from '..';
 import { act } from 'react-dom/test-utils';
 
@@ -28,19 +29,10 @@ describe('Input component', () => {
   });
 
   it('should only accept numbers/decimals when type is decimal', () => {
-    let testValue: string | number = 42;
+    const testValue: string | number = 1337.42;
     const wrapper = mount(<Input aria-label='decimal-test' type='decimal' value={testValue} />);
 
-    const inputValue = wrapper.find('input').prop('value');
-    expect(inputValue).toEqual(testValue);
-
-    testValue = 42.42;
-    wrapper.setProps({ value: testValue });
-    expect(inputValue).toEqual('42.42');
-
-    testValue = 'shouldNotRender';
-    wrapper.setProps({ value: testValue });
-    expect(inputValue).toEqual(42);
+    expect(wrapper.find('input').prop('value')).toEqual(testValue);
   });
 
   it('should only accept numbers when type is number', () => {
@@ -136,6 +128,20 @@ describe('Input component', () => {
     expect(mockFn).toHaveBeenCalled();
   });
 
+  it("should display a title when the input value's length > maxlength", () => {
+    const wrapper = shallow(<Input aria-label='test' type='text' maxLength={2} value='foobar' />);
+
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it("should append the value to a pre-defined title when input's value length > maxlength", () => {
+    const wrapper = shallow(
+      <Input aria-label='test' type='text' maxLength={2} title='My name is foo' value='foo bar' />
+    );
+
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
   it('should not trigger onValueChanged when input value is not matching provided pattern', () => {
     const mockFn = jest.fn();
     const wrapper = mount(
@@ -157,6 +163,7 @@ describe('Input component', () => {
     const { container } = render(
       <Input aria-label='test' type='text' label='Test' placeholder='placeholder' />
     );
+
     expect(await axe(container)).toHaveNoViolations();
   });
 });
