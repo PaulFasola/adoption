@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencySwap component should submit if requirements are met 1`] = `"{\\"amounts\\":{\\"input\\":4,\\"output\\":111.46642302},\\"protocols\\":{\\"input\\":{\\"balance\\":5,\\"name\\":\\"Bitcoin\\",\\"symbol\\":\\"BTC\\",\\"decimals\\":8,\\"price\\":61000,\\"logoURI\\":\\"https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/btc.svg\\",\\"hidden\\":true},\\"output\\":{\\"balance\\":10,\\"name\\":\\"Ethereum\\",\\"symbol\\":\\"ETH\\",\\"decimals\\":18,\\"price\\":2189,\\"logoURI\\":\\"https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/eth.svg\\",\\"hidden\\":true}}}"`;
