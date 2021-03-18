@@ -51,7 +51,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       let oppositeValue = oppositeProto ? (value * currentProto.price) / oppositeProto.price : null;
 
       if (oppositeValue) {
-        const toStr = oppositeValue.toLocaleString(undefined, {
+        const toStr = oppositeValue.toLocaleString('en-US', {
           maximumFractionDigits: getMaxFractionDigits(activeProtocols[end]?.decimals),
         });
         oppositeValue = parseFloat(toStr.replace(/[^\d\.\-]/g, ''));
@@ -143,7 +143,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     return (
       <Overview>
         1 {input.symbol} =&nbsp;
-        {(input.price / output.price).toLocaleString(undefined, {
+        {(input.price / output.price).toLocaleString('en-US', {
           maximumFractionDigits: getMaxFractionDigits(output.decimals),
         })}
         &nbsp;
@@ -167,7 +167,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       }
     }
 
-    return 'Swap!';
+    return 'Swap';
   };
 
   return (
