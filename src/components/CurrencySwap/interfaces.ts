@@ -12,13 +12,18 @@ export interface IProtocolPipe {
   output?: IProtocol;
 }
 
+export interface ISwapSubmission {
+  amounts: ISwapValues;
+  protocols: IProtocolPipe;
+}
+
 export interface IProps {
   locked?: boolean;
   noShadow?: boolean;
   protocols: Partial<IProtocolArrayPipe>;
   maxFractionDigits?: number;
 
-  onSubmit?: () => void;
+  onSubmit?: (submission: ISwapSubmission) => void;
 }
 
 export interface ISwapValues {

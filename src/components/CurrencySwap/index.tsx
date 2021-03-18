@@ -121,7 +121,10 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     }
 
     if (typeof props.onSubmit === 'function') {
-      props.onSubmit();
+      props.onSubmit({
+        amounts: swapValues,
+        protocols: activeProtocols,
+      });
     }
 
     setSwapValues({
