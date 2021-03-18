@@ -65,6 +65,7 @@ const Input: React.FC<IProps> = (props) => {
           maximumFractionDigits: props.maximumFractionDigits,
         });
       }
+
       return inputProps.value;
     }
 
@@ -74,11 +75,11 @@ const Input: React.FC<IProps> = (props) => {
   delete inputProps.onValueChange;
 
   if (
-    props.maxLength &&
-    typeof props.value === 'number' &&
+    typeof props.maxLength === 'number' &&
+    props.value &&
     props.value.toString().length > props.maxLength
   ) {
-    inputProps.title = props.value?.toString();
+    inputProps.title = `${props.title ? `${props.title} - ` : ''}${props.value.toString()}`;
   }
 
   return (
