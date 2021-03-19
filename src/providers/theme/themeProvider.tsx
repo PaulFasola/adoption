@@ -16,6 +16,7 @@ export const defaultTheme = {
   palette: defaultThemes.light,
 };
 
+/* istanbul ignore next */
 export const ThemeContext = React.createContext<IThemeContext>({
   currentTheme: defaultTheme,
   switchTo: () => {},
