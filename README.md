@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://raw.githubusercontent.com/PaulFasola/adoption/master/adoption.png" alt="adoption-logo" height="150px" />
+    <img src="https://raw.githubusercontent.com/PaulFasola/adoption/master/adoption.svg" height="175px" width="100%" alt="adoption-logo" />
 </div>
 <div align="center">
 	<b>A dApp, blockchain and crypto agnostic React UI kit 🧰</B>
