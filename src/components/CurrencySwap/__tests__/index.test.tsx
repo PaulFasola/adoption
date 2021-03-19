@@ -5,8 +5,9 @@ import { axe, toHaveNoViolations } from 'jest-axe';
 import { activeProtocols } from '../../ProtocolSelector/__tests__/mocks';
 import { configure, mount, ReactWrapper, shallow } from 'enzyme';
 import { CurrencySwap } from '..';
-import { Overview } from '../style';
+import { Overview, SwapButton } from '../style';
 import { ISwapSubmission, ProtocolEnd } from '../interfaces';
+import { IProtocol } from '../../ProtocolSelector/interfaces';
 
 const SUBMIT_BUTTON_SELECTOR = 'button[aria-label="Submit"]';
 
@@ -21,7 +22,12 @@ const selectProtocol = (
   if (protoPos < 0) throw "Protocol DOM poisiton can't be < 0.";
 
   const selectPos = select === 'input' ? 0 : 1;
-  const button = wrapper.find('button').at(selectPos).simulate('click');
+  const button = wrapper
+    .find('button')
+    .not('[aria-label="Swap values"]')
+    .at(selectPos)
+    .simulate('click');
+
   wrapper
     .find('div[data-test="dropdown"]')
     .at(selectPos)
@@ -107,8 +113,9 @@ describe('CurrencySwap component', () => {
     expect(wrapper.find(SUBMIT_BUTTON_SELECTOR).getDOMNode()).toBeDisabled();
   });
 
-  it('balance should render when an input protocol is selected', () => {
-    activeProtocols[0].balance = 42;
+  it('should render balance when an input protocol is selected', () => {
+    const testValue = 42;
+    activeProtocols[0].balance = testValue;
 
     const wrapper = mount(
       <CurrencySwap
@@ -121,7 +128,24 @@ describe('CurrencySwap component', () => {
 
     selectProtocol(wrapper, 'input', 0);
 
-    expect(wrapper.find(Overview).text()).toEqual('Balance: 42');
+    expect(wrapper.find(Overview).text()).toEqual(`Balance: ${testValue}`);
+  });
+
+  it('should render balance: 0, if balance is invalid', () => {
+    activeProtocols[0].balance = -55;
+
+    const wrapper = mount(
+      <CurrencySwap
+        maxFractionDigits={10}
+        protocols={{
+          input: activeProtocols,
+        }}
+      />
+    );
+
+    selectProtocol(wrapper, 'input', 0);
+
+    expect(wrapper.find(Overview).text()).toEqual(`Balance: 0`);
   });
 
   it('should render price equiv when an input protocol AND an output protocol are selected', () => {
@@ -143,6 +167,31 @@ describe('CurrencySwap component', () => {
     expect(wrapper.find(Overview).length).toEqual(2);
 
     expect(wrapper.find(Overview).at(1).text().replace(/\s/g, '')).toEqual('1BTC=27.8666057561ETH');
+  });
+
+  it('should still render price equiv when no decimals are set', () => {
+    const activeProtos = JSON.parse(JSON.stringify(activeProtocols)) as IProtocol[];
+    activeProtos[0].decimals = undefined;
+    activeProtos[1].decimals = undefined;
+
+    const wrapper = mount(
+      <CurrencySwap
+        maxFractionDigits={10}
+        protocols={{
+          input: activeProtos,
+        }}
+      />
+    );
+
+    expect(wrapper.find(Overview).length).toEqual(0);
+
+    selectProtocol(wrapper, 'input', 0);
+    expect(wrapper.find(Overview).length).toEqual(1);
+
+    selectProtocol(wrapper, 'output', 0);
+    expect(wrapper.find(Overview).length).toEqual(2);
+
+    expect(wrapper.find(Overview).at(1).text().replace(/\s/g, '')).toEqual('1BTC=27.86660576ETH');
   });
 
   it('should not be possible to select the same protocol as input and output', () => {
@@ -178,9 +227,10 @@ describe('CurrencySwap component', () => {
     );
 
     selectProtocol(wrapper, 'input', 0);
-    const input = setInputValue(wrapper, 'input', inputInitialVal);
+    selectProtocol(wrapper, 'output', 0);
 
-    wrapper.find('button[aria-label="Swap values"]').at(0).simulate('click');
+    const input = setInputValue(wrapper, 'input', inputInitialVal);
+    wrapper.find(SwapButton).simulate('click');
     expect(input.prop('value')).not.toEqual(inputInitialVal);
   });
 
@@ -265,6 +315,44 @@ describe('CurrencySwap component', () => {
 
     expect(wrapper.find(SUBMIT_BUTTON_SELECTOR).getDOMNode()).toBeDisabled();
     expect(wrapper.find(SUBMIT_BUTTON_SELECTOR).text()).toEqual('Insufficient balance');
+  });
+
+  it('should not be possible to swap if locked prop is true', () => {
+    const wrapper = mount(
+      <CurrencySwap
+        protocols={{
+          input: activeProtocols,
+        }}
+        locked={true}
+      />
+    );
+
+    selectProtocol(wrapper, 'input', 0);
+    selectProtocol(wrapper, 'output', 0);
+
+    // sets amount to 1, that is the minimum generated balance in activeProtocols mock
+    setInputValue(wrapper, 'input', 1);
+
+    expect(wrapper.find(SUBMIT_BUTTON_SELECTOR).text()).toEqual('Unlock Wallet');
+    expect(wrapper.find(SUBMIT_BUTTON_SELECTOR).getDOMNode()).toBeDisabled();
+  });
+
+  it('should not render incoherent prive equivalence when input price is < 0', () => {
+    activeProtocols[0].price = -1;
+
+    const wrapper = mount(
+      <CurrencySwap
+        protocols={{
+          input: activeProtocols,
+        }}
+        locked={true}
+      />
+    );
+
+    selectProtocol(wrapper, 'input', 0);
+    selectProtocol(wrapper, 'output', 0);
+
+    expect(wrapper.find(Overview).at(2)).toEqual({});
   });
 
   /**

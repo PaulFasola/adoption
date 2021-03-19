@@ -1,7 +1,7 @@
 export interface IProtocol {
   logoURI: string;
   name: string;
-  decimals: number;
+  decimals?: number;
   symbol: string;
   /**
    * The price, used to calculate the the amount ration between two protocols.

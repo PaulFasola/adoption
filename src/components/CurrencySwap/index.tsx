@@ -51,6 +51,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       let oppositeValue = oppositeProto ? (value * currentProto.price) / oppositeProto.price : null;
 
       if (oppositeValue) {
+        /* istanbul ignore next */
         const toStr = oppositeValue.toLocaleString('en-US', {
           maximumFractionDigits: getMaxFractionDigits(activeProtocols[end]?.decimals),
         });
@@ -93,14 +94,14 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     }
 
     if (
-      (activeProtocols.input.balance ?? -1) <= 0 ||
+      activeProtocols.input.balance <= 0 ||
       (swapValues.input ?? -1) <= 0 ||
       swapValues.input > activeProtocols.input.balance
     ) {
       return setCanSwap(false);
     }
 
-    setCanSwap(props.locked ?? true);
+    return setCanSwap(!props.locked);
   }, [props.locked, activeProtocols, swapValues]);
 
   const handleValueChange = (end: ProtocolEnd) => (newValue: string): void => {
@@ -116,9 +117,8 @@ const CurrencySwap: React.FC<IProps> = (props) => {
   };
 
   const handleSubmit = () => {
-    if (!swapValues || !activeProtocols) {
-      return;
-    }
+    /** istanbul ignore next */
+    if (!swapValues || !activeProtocols) return;
 
     if (typeof props.onSubmit === 'function') {
       props.onSubmit({
@@ -161,8 +161,9 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     }
 
     if (
+      activeProtocols &&
       swapValues.input &&
-      activeProtocols?.input &&
+      activeProtocols.input &&
       typeof activeProtocols.input.balance === 'number'
     ) {
       if (activeProtocols.input.balance < swapValues.input) {
@@ -179,7 +180,9 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         <div>
           <span>From</span>
           {activeProtocols?.input && (
-            <Overview>Balance: {activeProtocols.input.balance ?? 0}</Overview>
+            <Overview>
+              Balance: {activeProtocols.input.balance > 0 ? activeProtocols.input.balance : 0}
+            </Overview>
           )}
         </div>
         <div>
@@ -187,7 +190,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
             type='decimal'
             maxLength={19}
             placeholder='0.00'
-            value={swapValues?.input}
+            value={swapValues.input}
             onValueChange={handleValueChange('input')}
           />
           <div>
@@ -199,15 +202,15 @@ const CurrencySwap: React.FC<IProps> = (props) => {
           </div>
         </div>
       </InputWrapper>
-      <SwapButton aria-label='Swap values'>
-        <Icon
-          type={IconType.ArrowDown}
-          style={{ width: '18px' }}
-          onClick={() => {
-            setSwapValues({ input: swapValues.output, output: swapValues.input });
-            setActiveProtocols({ input: activeProtocols?.output, output: activeProtocols?.input });
-          }}
-        />
+      <SwapButton
+        aria-label='Swap values'
+        onClick={() => {
+          setSwapValues({ input: swapValues.output, output: swapValues.input });
+          /* istanbul ignore next */
+          setActiveProtocols({ input: activeProtocols?.output, output: activeProtocols?.input });
+        }}
+      >
+        <Icon type={IconType.ArrowDown} style={{ width: '18px' }} />
       </SwapButton>
       <InputWrapper>
         <span>To</span>
@@ -217,7 +220,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
             type='decimal'
             maxLength={19}
             placeholder='0.00'
-            value={swapValues?.output}
+            value={swapValues.output}
             onValueChange={handleValueChange('output')}
           />
           <div>

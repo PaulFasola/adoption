@@ -8,6 +8,7 @@ export const excludeCommonSymbol = (
   const idx = array.findIndex((x) => x.symbol === activeProtocol.symbol);
   const output = [...array];
 
+  /* istanbul ignore next */
   if (idx > -1) {
     output[idx].hidden = true;
   }
