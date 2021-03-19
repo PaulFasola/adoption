@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component should append the value to a pre-defined title when input's value length > maxlength 1`] = `
+<styled.div>
+  <styled.input
+    aria-label="test"
+    autoComplete="off"
+    autoFill="off"
+    maxLength={2}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    title="My name is foo - foo bar"
+    type="text"
+    value="foo bar"
+  />
+</styled.div>
+`;
+
+exports[`Input component should display a title when the input value's length > maxlength 1`] = `
+<styled.div>
+  <styled.input
+    aria-label="test"
+    autoComplete="off"
+    autoFill="off"
+    maxLength={2}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    title="foobar"
+    type="text"
+    value="foobar"
+  />
+</styled.div>
+`;

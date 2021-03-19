@@ -1,17 +1,43 @@
 import styled from 'styled-components';
+import { ITheme } from '../../../providers/theme/ITheme';
 import _ from '../../../providers/theme/styleFetcher';
 
+export interface IStyleProps {
+  theme: ITheme;
+  disabled?: boolean;
+  defaultTheme?: boolean;
+
+  onClick?: () => void;
+}
+
+interface SP extends IStyleProps {}
+
 export const Link = styled.a`
-  color: rgba(0, 0, 0, 0.8);
+  color: ${({ theme, defaultTheme }: SP) => _(!defaultTheme ? theme : null, 'primary', 'color')};
   text-decoration: none;
 `;
 
 export const IconContainer = styled.div`
-  margin: 5px 3px 3px 3px;
+  min-width: 0.5em;
+  margin: 3px;
   display: inline-block;
   vertical-align: middle;
 
+  ${({ onClick }: SP) =>
+    typeof onClick !== 'undefined' &&
+    `
+    :hover {
+      opacity: 0.6;
+    }
+  `}
+
   svg .fillable {
-    fill: ${(p) => _(p.theme, 'primary', 'color')};
+    fill: ${({ theme, defaultTheme }: SP) => _(!defaultTheme ? theme : null, 'primary', 'color')};
+
+    ${({ theme, disabled }: SP) =>
+      disabled &&
+      `
+        fill: ${_(theme, 'disabled', 'color')}
+      `}
   }
 `;

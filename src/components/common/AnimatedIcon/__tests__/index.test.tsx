@@ -13,6 +13,7 @@ describe(`AnimatedIcon`, () => {
 
   it('Should be styleable', () => {
     const wrapper = shallow(<AnimatedIcon type={IconType.Sucess} />);
+
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
