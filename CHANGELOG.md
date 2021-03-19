@@ -1,5 +1,16 @@
 # Adoption Changelog
 
+## [1.2.0](https://github.com/PaulFasola/adoption/compare/v1.1.0...v1.2.0) (2021-03-19)
+
+
+### Features
+
+* **currencyswap:** initial implementation ([c904cc7](https://github.com/PaulFasola/adoption/commit/c904cc70eaabc0c53351b4f8233446bede9885a2))
+* **input:** initial implementation ([91a4e98](https://github.com/PaulFasola/adoption/commit/91a4e98cec2c37bc6a31f1ce5c1463068029b0c8))
+* **input:** initial implementation, with floating label feature ([4c78cf3](https://github.com/PaulFasola/adoption/commit/4c78cf357afc49373e658579022023a68d949cea))
+* **protocolselector:** initial implementation ([fe78505](https://github.com/PaulFasola/adoption/commit/fe7850580dfd9b37bd56a4240721487a1a11eb4c))
+* **themeprovider:** added new colors to the palettes ([fa9c953](https://github.com/PaulFasola/adoption/commit/fa9c9536e92f4956d75014d93d8b69357c6c0bf0))
+
 ## [1.1.0](https://github.com/PaulFasola/react-multiwallet-connector/compare/v1.0.2...v1.1.0) (2021-03-06)
 
 
