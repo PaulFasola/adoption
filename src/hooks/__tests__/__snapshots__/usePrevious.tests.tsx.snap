@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`usePrevious hooks should work 1`] = `
+<TestComponent>
+  <div>
+    Previous State: 
+    Current State: 
+    0
+    <button
+      onClick={[Function]}
+    >
+      Increment
+    </button>
+  </div>
+</TestComponent>
+`;
+
+exports[`usePrevious hooks should work 2`] = `
+<TestComponent>
+  <div>
+    Previous State: 
+    1
+    Current State: 
+    2
+    <button
+      onClick={[Function]}
+    >
+      Increment
+    </button>
+  </div>
+</TestComponent>
+`;
