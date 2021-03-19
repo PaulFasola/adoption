@@ -90,6 +90,7 @@ export const SubmitButton = styled.button`
   &:disabled {
     color: ${(p) => _(p.theme, 'disabled', 'color')};
     background-color: ${(p) => _(p.theme, 'disabled', 'backgroundColor')};
+    cursor: auto;
   }
 
   &:hover:not(:disabled) {
