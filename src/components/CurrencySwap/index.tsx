@@ -4,8 +4,8 @@ import { IProps, IProtocolArrayPipe, IProtocolPipe, ProtocolEnd, ISwapValues } f
 import { Icon, IconType } from '../common/Icon';
 import { ProtocolSelector } from '../ProtocolSelector';
 import { IProtocol } from '../ProtocolSelector/interfaces';
-import { usePrevious } from 'react-delta';
 import { preventCommonSymbol } from './utils';
+import { usePrevious } from '../../hooks/usePrevious';
 
 const DEFAULT_MAX_FRACTION_DIGITS = 8;
 
