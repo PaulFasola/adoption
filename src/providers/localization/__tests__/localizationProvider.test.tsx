@@ -59,9 +59,13 @@ describe('LocalizationProvider component', () => {
   it('should render custom locales when requested', async () => {
     const CUST_LOCALE_NAME = 'fr-FR';
 
-    const appLocales: Record<string, Partial<ILocalizedStrings>> = {};
-    appLocales[CUST_LOCALE_NAME] = {
-      helloWorld: 'Bonjour monde!',
+    const appLocales: Record<string, Partial<ILocalizedStrings>> = {
+      [CUST_LOCALE_NAME]: {
+        paymentRequest: {
+          // Anything here, this is not part of the scope
+          cancel: 'Annuler',
+        },
+      },
     };
 
     const MyComponent = (): React.ReactElement => {
