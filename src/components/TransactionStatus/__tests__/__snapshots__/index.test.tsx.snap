@@ -90,7 +90,8 @@ exports[`TransactionStatus component should render a complex form 1`] = `
         0.005
          
         BTC
-         (fees)
+         
+        (fees)
       </styled.div>
     </div>
     <styled.div />
