@@ -59,22 +59,7 @@ const LabRat = (): React.ReactElement => {
   );
 };
 
-export const Presets: React.FC = () => (
-  <LocalizationWrapper>
-    <LabRat />
-  </LocalizationWrapper>
-);
-
 export const CustomLocales: React.FC = () => {
-  const customLocales: Record<string, Partial<ILocalizedStrings>> = {
-    'fr-FR': {
-      helloWorld: 'Bonjour monde!',
-    },
-    doge: {
-      helloWorld: 'wow, hey there',
-    },
-  };
-
   const FailButton: React.FC = () => {
     const { switchTo } = useContext(LocalizationContext);
     return (
@@ -90,6 +75,53 @@ export const CustomLocales: React.FC = () => {
     );
   };
 
+  const customLocales: Record<string, Partial<ILocalizedStrings>> = {
+    'fr-FR': {
+      transactionStatus: {
+        statuses: {
+          completed: 'Terminé',
+          failed: 'Echec',
+          pending: 'En attente',
+          unknown: 'Iconnu',
+        },
+      },
+      paymentRequest: {
+        request: "Merci d'envoyer {amount} à l'adresse suivante:",
+        seller: 'Marchand',
+        receivedAmount: 'Montant reçu',
+        deadline: 'Envoyer avant',
+        remainingAmount: 'Montant restant',
+        status: 'État',
+        help: "Besoin d'aide? Cliquez ici!",
+        txStatus: {
+          complete: 'Payment terminé',
+          failed: 'Échec du paiement',
+          pending: 'En attente du paiement',
+        },
+      },
+    },
+    'do-GE': {
+      transactionStatus: {
+        statuses: {
+          completed: 'WOW, Done',
+          failed: 'very failing',
+          pending: 'so pending',
+          unknown: '?????',
+        },
+      },
+      paymentRequest: {
+        request: 'Pls send much {symbol} ({amount} {symbol}) to:',
+        help: 'Such help? Click here!',
+        receivedAmount: 'Received (wow thanks)',
+        remainingAmount: 'Remaining (pls)',
+        txStatus: {
+          complete: 'Very paid',
+          failed: 'Not paid :(',
+          pending: 'Waiting...',
+        },
+      },
+    },
+  };
   return (
     <LocalizationWrapper customLocales={customLocales}>
       <FailButton />
