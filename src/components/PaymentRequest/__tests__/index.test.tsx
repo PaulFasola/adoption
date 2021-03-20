@@ -4,9 +4,11 @@ import toJson from 'enzyme-to-json';
 import { render } from '@testing-library/react';
 import { PaymentRequest } from '../';
 import { ITransaction } from '../interfaces';
-import { configure, shallow } from 'enzyme';
+import { configure, mount, shallow } from 'enzyme';
 import { PaymentStatus } from '../enums/paymentStatus';
 import { advanceBy, advanceTo, clear } from 'jest-date-mock';
+import { LocalizationProvider } from '../../../providers/localization/localizationProvider';
+import { ILocalizedStrings } from '../../../providers/localization/ILocalizedStrings';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const companyAsset = require('../../assets/fictiveCompany.png');
@@ -138,44 +140,8 @@ describe('PaymentRequest Detailed', () => {
           datetime: new Date(),
           humanized: true,
         }}
-        strings={{
-          help: 'FooBar',
-        }}
       />
     );
-  });
-
-  it('should be fully string customizable', () => {
-    const wrapper = shallow(
-      <PaymentRequest
-        symbol='BTC'
-        decimalPlaces={8}
-        logos={{
-          coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-        }}
-        address='1BitcoinEaterAddressDontSendf59kuE'
-        amount={{ toPay: 0.9 }}
-        strings={{
-          cancel: 'Very cancelling',
-          seller: 'Seller',
-          deadline: 'Deadline',
-          // txStatus is overriden by customStatusText props in this example.
-          txStatus: {
-            complete: 'Done o/',
-            failed: 'Failed :(',
-            pending: 'is pending...',
-          },
-          request: 'Pay {amount} {symbol} to get your item',
-          help: 'Wow, help here',
-          status: 'Transaction',
-          receivedAmount: 'Received:',
-          remainingAmount: 'Remaining:',
-          transactions: '{txAmount} transactions',
-        }}
-      />
-    );
-
-    expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should set txStatus to "completed" when the remaining balance is <= 0', () => {
@@ -209,9 +175,6 @@ describe('PaymentRequest Detailed', () => {
           datetime: new Date(),
           humanized: true,
         }}
-        strings={{
-          help: 'FooBar',
-        }}
       />
     );
 
@@ -236,40 +199,10 @@ describe('PaymentRequest Detailed', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('Should be fully strings customizable', () => {
-    const wrapper = shallow(
-      <PaymentRequest
-        symbol='BTC'
-        decimalPlaces={8}
-        sellerName='Such Company LTD'
-        logos={{
-          coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-          company: companyAsset,
-        }}
-        address='1BitcoinEaterAddressDontSendf59kuE'
-        amount={{ toPay: 0.9, received: 0.2 }}
-        transactions={[
-          {
-            txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-            txUrl:
-              'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-            amount: 0.1,
-          },
-          {
-            txHash: '519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-            txUrl:
-              'https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-            amount: 0.1,
-          },
-        ]}
-        helpUrl='https://github.com/PaulFasola/adoption/blob/master/README.md'
-        onCancel={() => alert('User wants to cancel, do something here!')}
-        deadline={{
-          dateLocale: 'en-US',
-          datetime: new Date(2009, 1, 3),
-        }}
-        customStatusText={'Custom status message'}
-        strings={{
+  it('Should be fully string customizable', () => {
+    const locales: Record<string, Partial<ILocalizedStrings>> = {
+      'en-US': {
+        paymentRequest: {
           cancel: 'Very cancelling',
           seller: 'Seller',
           deadline: 'Deadline',
@@ -285,8 +218,42 @@ describe('PaymentRequest Detailed', () => {
           receivedAmount: 'Received:',
           remainingAmount: 'Remaining:',
           transactions: '{txAmount} transactions',
-        }}
-      />
+        },
+      },
+    };
+
+    const wrapper = mount(
+      <LocalizationProvider customLocales={locales}>
+        <PaymentRequest
+          showQRCode={false}
+          symbol='BTC'
+          decimalPlaces={8}
+          sellerName='Such Company LTD'
+          logos={{
+            coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
+            company: companyAsset,
+          }}
+          address='1BitcoinEaterAddressDontSendf59kuE'
+          amount={{ toPay: 0.9, received: 0.2 }}
+          transactions={[
+            {
+              txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
+              txUrl:
+                'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
+              amount: 0.1,
+            },
+            {
+              txHash: '519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
+              txUrl:
+                'https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
+              amount: 0.1,
+            },
+          ]}
+          helpUrl='https://github.com/PaulFasola/adoption/blob/master/README.md'
+          onCancel={() => alert('User wants to cancel, do something here!')}
+          customStatusText={'Custom status message'}
+        />
+      </LocalizationProvider>
     );
 
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -314,9 +281,6 @@ const PaymentRequestComponent = (
       )
     }
     address='1BitcoinEaterAddressDontSendf59kuE'
-    strings={{
-      help: 'Halp!',
-    }}
     amount={{ toPay: 0.9 }}
   />
 );

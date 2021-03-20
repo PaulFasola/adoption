@@ -1,4 +1,5 @@
 process.env.NODE_ICU_DATA = 'node_modules/full-icu';
+process.env.TZ = 'UTC'; // will not work on Windows https://github.com/nodejs/node/issues/4230
 
 module.exports = {
   preset: 'ts-jest/presets/js-with-ts',

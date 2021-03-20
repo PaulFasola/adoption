@@ -1,4 +1,5 @@
-import React, { Fragment, useLayoutEffect, useState } from 'react';
+import React, { Fragment } from 'react';
+import { useLocale } from '../../hooks/useLocale';
 import {
   CancelButton,
   Container,
@@ -12,27 +13,23 @@ import {
   QRCode,
 } from './style';
 import { AnimatedIcon, IconType as AnimatedIconType } from '../common/AnimatedIcon';
-import { defaultStrings, defaultProps } from './defaultProps';
+import { defaultProps } from './defaultProps';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
 import { PaymentStatus } from './enums/paymentStatus';
 import { padDigits } from '../../utils/arithmetic';
 import { shortenHash } from '../../utils/string';
-import { IProps, IStrings } from './interfaces';
+import { IProps } from './interfaces';
 import { Icon, IconType } from '../common/Icon';
+import { IStrings } from './strings';
 import { Item } from './item';
+import { useTheme } from '../../hooks/useTheme';
 
 const PaymentRequest: React.FC<IProps> = (props) => {
-  const remainingAmount = props.amount.toPay - (props.amount.received ?? 0);
-  const [strings, setStrings] = useState<IStrings>(defaultStrings);
+  const theme = useTheme();
+  const locale = useLocale();
+  const strs = locale.strings.paymentRequest as IStrings;
 
-  useLayoutEffect(() => {
-    /* istanbul ignore next */
-    if (props.strings) {
-      setStrings((s) => {
-        return { ...s, ...props.strings };
-      });
-    }
-  }, [props.strings]);
+  const remainingAmount = props.amount.toPay - (props.amount.received ?? 0);
 
   const _getFromDate = (date: Date): string => {
     const currentDate = new Date();
@@ -54,7 +51,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
     }
 
     /* istanbul ignore next */
-    return new Intl.RelativeTimeFormat(props.deadline?.dateLocale ?? 'en-US').format(
+    return new Intl.RelativeTimeFormat(props.deadline?.dateLocale ?? locale.locale).format(
       Math.ceil(value),
       unit
     );
@@ -62,12 +59,12 @@ const PaymentRequest: React.FC<IProps> = (props) => {
 
   const _getStatus = (): string => {
     if (remainingAmount <= 0) {
-      return strings.txStatus.complete;
+      return strs.txStatus.complete;
     } else if (props.customStatusText) {
       return props.customStatusText;
     }
 
-    return strings.txStatus[props.status!];
+    return strs.txStatus[props.status!];
   };
 
   const _renderVisual = (): React.ReactNode => {
@@ -87,7 +84,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
       return (
         <QRCode
           bgColor='transparent'
-          fgColor='#000000'
+          fgColor={theme.primary.color}
           level='L'
           style={{ width: 100 }}
           value={props.address}
@@ -106,7 +103,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
       <div>
         <Request>
           <AdaptiveSpan
-            text={strings.request}
+            text={strs.request}
             mapping={[
               { tag: '{amount}', value: props.amount.toPay, style: 'bold' },
               { tag: '{symbol}', value: props.symbol },
@@ -117,23 +114,23 @@ const PaymentRequest: React.FC<IProps> = (props) => {
         <Visual>{_renderVisual()}</Visual>
         <DetailedView>
           {props.sellerName ? (
-            <Item title={strings.seller}>
+            <Item title={strs.seller}>
               <span title={props.sellerName}>{props.sellerName}</span>
             </Item>
           ) : null}
           {typeof props.amount.received === 'number' ? (
             <Fragment>
-              <Item title={strings.receivedAmount}>
+              <Item title={strs.receivedAmount}>
                 {padDigits(props.amount.received, props.decimalPlaces)} {props.symbol}
               </Item>
-              <Item title={strings.remainingAmount}>
+              <Item title={strs.remainingAmount}>
                 {padDigits(remainingAmount, props.decimalPlaces)} {props.symbol}
               </Item>
             </Fragment>
           ) : null}
           {props.deadline && remainingAmount > 0 ? (
-            <Item title={strings.deadline}>
-              {new Intl.DateTimeFormat(props.deadline.dateLocale ?? 'en-US').format(
+            <Item title={strs.deadline}>
+              {new Intl.DateTimeFormat(props.deadline.dateLocale ?? locale.locale).format(
                 props.deadline.datetime
               )}
               {props.deadline.humanized && (
@@ -143,10 +140,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
           ) : null}
           {props.transactions?.length ? (
             <Item
-              title={strings.transactions.replace(
-                '{txAmount}',
-                props.transactions.length.toString()
-              )}
+              title={strs.transactions.replace('{txAmount}', props.transactions.length.toString())}
             >
               <TransactionList>
                 {props.transactions.map((transaction, index) => (
@@ -167,18 +161,18 @@ const PaymentRequest: React.FC<IProps> = (props) => {
               </TransactionList>
             </Item>
           ) : null}
-          <Item title={strings.status}>
+          <Item title={strs.status}>
             {props.waitAnimation && props.status === PaymentStatus.PENDING && <Spinner />}
             <AdaptiveSpan showTitle text={_getStatus()} style='bold' />
           </Item>
         </DetailedView>
       </div>
       <div>
-        {props.onCancel && <CancelButton onClick={props.onCancel}>{strings.cancel}</CancelButton>}
+        {props.onCancel && <CancelButton onClick={props.onCancel}>{strs.cancel}</CancelButton>}
         {props.helpUrl && (
-          <HelpLink href={props.helpUrl} title={strings.help} target='blank'>
+          <HelpLink href={props.helpUrl} title={strs.help} target='blank'>
             <Icon type={IconType.HelpCircleO} style={{ width: 13, lineHeight: '15px' }} />
-            {strings.help}
+            {strs.help}
           </HelpLink>
         )}
       </div>

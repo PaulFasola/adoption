@@ -2,9 +2,12 @@ import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 're
 import { Button, ProtocolIcon, Symbol, DropDownList } from './style';
 import { IProps, IProtocol } from './interfaces';
 import { Icon, IconType } from '../common/Icon';
+import { useLocale } from '../../hooks/useLocale';
+import { IStrings } from './strings';
 
 export const ProtocolSelector: React.FC<IProps> = (props) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const strs = useLocale().strings.protocolSelector as IStrings;
 
   const [protocol, setProtocol] = useState<IProtocol>();
   const [dropdownIsOpen, setDropdownIsOpen] = useState<boolean>(false);
@@ -62,7 +65,7 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
 
     return (
       <Button disabled={props.disabled} onClick={() => setDropdownIsOpen(!dropdownIsOpen)}>
-        <div>Select a coin</div>
+        <div>{strs.selectProtocol}</div>
         <Icon
           defaultTheme
           type={IconType.ArrowDown}

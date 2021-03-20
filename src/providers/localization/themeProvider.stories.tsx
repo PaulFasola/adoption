@@ -2,15 +2,15 @@ import React, { useContext } from 'react';
 import { PaymentStatus } from '../../components/PaymentRequest/enums/paymentStatus';
 import { TransactionStatus, TxStatus } from '../../components/TransactionStatus';
 import { PaymentRequest } from '../../components/PaymentRequest';
-import { ThemeContext } from './themeProvider';
-import { ITheme } from './ITheme';
-import { ThemeWrapper } from './themeWrapper';
+import { LocalizationContext } from './localizationProvider';
+import { ILocalizedStrings } from './ILocalizedStrings';
+import { LocalizationWrapper } from './localizationWrapper';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const companyAsset = require('../../assets/fictiveCompany.png');
 
 export default {
-  title: 'ThemeProvider',
+  title: 'LocalizationProvider',
 };
 
 const LabRat = (): React.ReactElement => {
@@ -59,30 +59,9 @@ const LabRat = (): React.ReactElement => {
   );
 };
 
-export const Presets: React.FC = () => (
-  <ThemeWrapper>
-    <LabRat />
-  </ThemeWrapper>
-);
-
-export const CustomThemes: React.FC = () => {
-  const customThemes: Record<string, Partial<ITheme>> = {
-    wow: {
-      primary: {
-        backgroundColor: 'pink',
-        color: 'yellow',
-      },
-    },
-    veryOrganic: {
-      primary: {
-        backgroundColor: 'lightgreen',
-        color: 'darkgreen',
-      },
-    },
-  };
-
+export const CustomLocales: React.FC = () => {
   const FailButton: React.FC = () => {
-    const { switchTo } = useContext(ThemeContext);
+    const { switchTo } = useContext(LocalizationContext);
     return (
       <button
         style={{ marginBottom: '1.5rem' }}
@@ -96,10 +75,57 @@ export const CustomThemes: React.FC = () => {
     );
   };
 
+  const customLocales: Record<string, Partial<ILocalizedStrings>> = {
+    'fr-FR': {
+      transactionStatus: {
+        statuses: {
+          completed: 'Terminé',
+          failed: 'Echec',
+          pending: 'En attente',
+          unknown: 'Iconnu',
+        },
+      },
+      paymentRequest: {
+        request: "Merci d'envoyer {amount} {symbol} à l'adresse suivante:",
+        seller: 'Marchand',
+        receivedAmount: 'Montant reçu',
+        deadline: 'Envoyer avant',
+        remainingAmount: 'Montant restant',
+        status: 'État',
+        help: "Besoin d'aide? Cliquez ici!",
+        txStatus: {
+          complete: 'Payment terminé',
+          failed: 'Échec du paiement',
+          pending: 'En attente du paiement',
+        },
+      },
+    },
+    'do-GE': {
+      transactionStatus: {
+        statuses: {
+          completed: 'WOW, Done',
+          failed: 'very failing',
+          pending: 'so pending',
+          unknown: '?????',
+        },
+      },
+      paymentRequest: {
+        request: 'Pls send much {symbol} ({amount} {symbol}) to:',
+        help: 'Such help? Click here!',
+        receivedAmount: 'Received (wow thanks)',
+        remainingAmount: 'Remaining (pls)',
+        txStatus: {
+          complete: 'Very paid',
+          failed: 'Not paid :(',
+          pending: 'Waiting...',
+        },
+      },
+    },
+  };
   return (
-    <ThemeWrapper customThemes={customThemes}>
+    <LocalizationWrapper customLocales={customLocales}>
       <FailButton />
       <LabRat />
-    </ThemeWrapper>
+    </LocalizationWrapper>
   );
 };
