@@ -1,4 +1,9 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
+import { ILocalizedStrings } from '../../providers/localization/ILocalizedStrings';
+import {
+  LocalizationContext,
+  LocalizationProvider,
+} from '../../providers/localization/localizationProvider';
 import { PaymentRequest } from '../PaymentRequest';
 import { PaymentStatus } from './enums/paymentStatus';
 import { ITransaction } from './interfaces';
@@ -189,42 +194,58 @@ export const WithActions = (): React.ReactNode => {
 };
 
 export const CustomStrings = (): React.ReactNode => {
+  const TEST_LOCALE = 'en-US';
+
   const dueDate = new Date();
   dueDate.setTime(dueDate.setMinutes(dueDate.getMinutes() + 15));
-  return (
-    <PaymentRequest
-      symbol='BTC'
-      decimalPlaces={8}
-      sellerName='Such Company LTD'
-      logos={{
-        coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-        company: companyAsset,
-      }}
-      address='1BitcoinEaterAddressDontSendf59kuE'
-      amount={{ toPay: 0.9, received: 0.2 }}
-      transactions={[
-        {
-          txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-          txUrl:
-            'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-          amount: 0.1,
-        },
-        {
-          txHash: '519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-          txUrl:
-            'https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-          amount: 0.1,
-        },
-      ]}
-      helpUrl='https://github.com/PaulFasola/adoption/blob/master/README.md'
-      onCancel={() => alert('User wants to cancel, do something here!')}
-      deadline={{
-        dateLocale: 'en-US',
-        datetime: dueDate,
-        humanized: true,
-      }}
-      customStatusText={'Custom status message'}
-      strings={{
+
+  const Component: React.FC = () => {
+    const { switchTo } = useContext(LocalizationContext);
+
+    useEffect(() => {
+      switchTo(TEST_LOCALE);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    return (
+      <PaymentRequest
+        symbol='BTC'
+        decimalPlaces={8}
+        sellerName='Such Company LTD'
+        logos={{
+          coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
+          company: companyAsset,
+        }}
+        address='1BitcoinEaterAddressDontSendf59kuE'
+        amount={{ toPay: 0.9, received: 0.2 }}
+        transactions={[
+          {
+            txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
+            txUrl:
+              'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
+            amount: 0.1,
+          },
+          {
+            txHash: '519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
+            txUrl:
+              'https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
+            amount: 0.1,
+          },
+        ]}
+        helpUrl='https://github.com/PaulFasola/adoption/blob/master/README.md'
+        onCancel={() => alert('User wants to cancel, do something here!')}
+        deadline={{
+          dateLocale: 'en-US',
+          datetime: dueDate,
+          humanized: true,
+        }}
+        customStatusText={'Custom status message'}
+      />
+    );
+  };
+
+  const locales: Record<string, Partial<ILocalizedStrings>> = {
+    [TEST_LOCALE]: {
+      paymentRequest: {
         cancel: 'Very cancelling',
         seller: 'Seller',
         deadline: 'Deadline',
@@ -240,8 +261,14 @@ export const CustomStrings = (): React.ReactNode => {
         receivedAmount: 'Received:',
         remainingAmount: 'Remaining:',
         transactions: '{txAmount} transactions',
-      }}
-    />
+      },
+    },
+  };
+
+  return (
+    <LocalizationProvider customLocales={locales}>
+      <Component />
+    </LocalizationProvider>
   );
 };
 
@@ -292,13 +319,6 @@ export const Simulation: React.FC = () => {
           humanized: true,
         }}
         status={status}
-        strings={{
-          txStatus: {
-            failed: 'Payment failed :(',
-            pending: 'Waiting for payment',
-            complete: 'Paid! Redirecting...',
-          },
-        }}
       />
     </Fragment>
   );

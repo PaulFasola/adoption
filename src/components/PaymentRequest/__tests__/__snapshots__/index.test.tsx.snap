@@ -383,227 +383,473 @@ exports[`PaymentRequest Basic should render relative time correctly (minutes) 1`
 `;
 
 exports[`PaymentRequest Detailed Should be fully strings customizable 1`] = `
-<styled.div>
-  <styled.div>
-    <img
-      alt="BTC logo"
-      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
-    />
-    <img
-      alt="Company logo"
-      src={
-        Object {
-          "process": [Function],
-        }
+<LocalizationProvider
+  customLocales={
+    Object {
+      "en-US": Object {
+        "paymentRequest": Object {
+          "cancel": "Very cancelling",
+          "deadline": "Deadline",
+          "help": "Wow, help here",
+          "receivedAmount": "Received:",
+          "remainingAmount": "Remaining:",
+          "request": "Pay {amount} {symbol} to get your item",
+          "seller": "Seller",
+          "status": "Transaction",
+          "transactions": "{txAmount} transactions",
+          "txStatus": Object {
+            "complete": "Done o/",
+            "failed": "Failed :(",
+            "pending": "is pending...",
+          },
+        },
+      },
+    }
+  }
+>
+  <PaymentRequest
+    address="1BitcoinEaterAddressDontSendf59kuE"
+    amount={
+      Object {
+        "received": 0.2,
+        "toPay": 0.9,
       }
-    />
-  </styled.div>
-  <div>
+    }
+    customStatusText="Custom status message"
+    deadline={
+      Object {
+        "dateLocale": "en-US",
+        "datetime": 2009-02-03T05:00:00.000Z,
+      }
+    }
+    decimalPlaces={8}
+    helpUrl="https://github.com/PaulFasola/adoption/blob/master/README.md"
+    logos={
+      Object {
+        "coin": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg",
+        "company": Object {
+          "process": [Function],
+        },
+      }
+    }
+    onCancel={[Function]}
+    sellerName="Such Company LTD"
+    showQRCode={false}
+    status="pending"
+    symbol="BTC"
+    transactions={
+      Array [
+        Object {
+          "amount": 0.1,
+          "txHash": "369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1",
+          "txUrl": "https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1",
+        },
+        Object {
+          "amount": 0.1,
+          "txHash": "519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647",
+          "txUrl": "https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647",
+        },
+      ]
+    }
+  >
     <styled.div>
-      <AdaptiveSpan
-        mapping={
-          Array [
-            Object {
-              "style": "bold",
-              "tag": "{amount}",
-              "value": 0.9,
-            },
-            Object {
-              "tag": "{symbol}",
-              "value": "BTC",
-            },
-          ]
-        }
-        text="Please send {amount} {symbol} to address:"
-      />
       <div
-        title="1BitcoinEaterAddressDontSendf59kuE"
+        className="sc-bdfBwQ ichwOn"
       >
-        1BitcoinEaterAddressDontSendf59kuE
-      </div>
-    </styled.div>
-    <styled.div>
-      <Styled(QRCode)
-        bgColor="transparent"
-        fgColor="#000000"
-        level="L"
-        style={
-          Object {
-            "width": 100,
-          }
-        }
-        value="1BitcoinEaterAddressDontSendf59kuE"
-      />
-    </styled.div>
-    <styled.div>
-      <Item
-        title="Merchant"
-      >
-        <span
-          title="Such Company LTD"
-        >
-          Such Company LTD
-        </span>
-      </Item>
-      <Item
-        title="Amount received"
-      >
-        0.200000
-         
-        BTC
-      </Item>
-      <Item
-        title="Amount remaining"
-      >
-        0.700000
-         
-        BTC
-      </Item>
-      <Item
-        title="Send before"
-      >
-        2/3/2009
-      </Item>
-      <Item
-        title="Transactions (2)"
-      >
-        <styled.ul>
-          <li
-            key="0"
+        <styled.div>
+          <div
+            className="sc-gsTCUz XndKV"
+          >
+            <img
+              alt="BTC logo"
+              src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
+            />
+            <img
+              alt="Company logo"
+              src={
+                Object {
+                  "process": [Function],
+                }
+              }
+            />
+          </div>
+        </styled.div>
+        <div>
+          <styled.div>
+            <div
+              className="sc-jSgupP dhyjTA"
+            >
+              <AdaptiveSpan
+                mapping={
+                  Array [
+                    Object {
+                      "style": "bold",
+                      "tag": "{amount}",
+                      "value": "<b>0.9</b>",
+                    },
+                    Object {
+                      "tag": "{symbol}",
+                      "value": "BTC",
+                    },
+                  ]
+                }
+                text="Pay {amount} {symbol} to get your item"
+              >
+                <span
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "Pay <b>0.9</b> BTC to get your item",
+                    }
+                  }
+                />
+              </AdaptiveSpan>
+              <div
+                title="1BitcoinEaterAddressDontSendf59kuE"
+              >
+                1BitcoinEaterAddressDontSendf59kuE
+              </div>
+            </div>
+          </styled.div>
+          <styled.div>
+            <div
+              className="sc-iBPRYJ"
+            />
+          </styled.div>
+          <styled.div>
+            <div
+              className="sc-eCssSg dpZfNp"
+            >
+              <Item
+                title="Seller"
+              >
+                <styled.div>
+                  <div
+                    className="sc-hBEYos fzyoQj"
+                  >
+                    <styled.div
+                      title="Seller"
+                    >
+                      <div
+                        className="sc-fodVxV efTeyn"
+                        title="Seller"
+                      >
+                        Seller
+                        :
+                      </div>
+                    </styled.div>
+                    <styled.div>
+                      <div
+                        className="sc-fFubgz bdWfKF"
+                      >
+                        <span
+                          title="Such Company LTD"
+                        >
+                          Such Company LTD
+                        </span>
+                      </div>
+                    </styled.div>
+                  </div>
+                </styled.div>
+              </Item>
+              <Item
+                title="Received:"
+              >
+                <styled.div>
+                  <div
+                    className="sc-hBEYos fzyoQj"
+                  >
+                    <styled.div
+                      title="Received:"
+                    >
+                      <div
+                        className="sc-fodVxV efTeyn"
+                        title="Received:"
+                      >
+                        Received:
+                        :
+                      </div>
+                    </styled.div>
+                    <styled.div>
+                      <div
+                        className="sc-fFubgz bdWfKF"
+                      >
+                        0.200000
+                         
+                        BTC
+                      </div>
+                    </styled.div>
+                  </div>
+                </styled.div>
+              </Item>
+              <Item
+                title="Remaining:"
+              >
+                <styled.div>
+                  <div
+                    className="sc-hBEYos fzyoQj"
+                  >
+                    <styled.div
+                      title="Remaining:"
+                    >
+                      <div
+                        className="sc-fodVxV efTeyn"
+                        title="Remaining:"
+                      >
+                        Remaining:
+                        :
+                      </div>
+                    </styled.div>
+                    <styled.div>
+                      <div
+                        className="sc-fFubgz bdWfKF"
+                      >
+                        0.700000
+                         
+                        BTC
+                      </div>
+                    </styled.div>
+                  </div>
+                </styled.div>
+              </Item>
+              <Item
+                title="Deadline"
+              >
+                <styled.div>
+                  <div
+                    className="sc-hBEYos fzyoQj"
+                  >
+                    <styled.div
+                      title="Deadline"
+                    >
+                      <div
+                        className="sc-fodVxV efTeyn"
+                        title="Deadline"
+                      >
+                        Deadline
+                        :
+                      </div>
+                    </styled.div>
+                    <styled.div>
+                      <div
+                        className="sc-fFubgz bdWfKF"
+                      >
+                        2/3/2009
+                      </div>
+                    </styled.div>
+                  </div>
+                </styled.div>
+              </Item>
+              <Item
+                title="2 transactions"
+              >
+                <styled.div>
+                  <div
+                    className="sc-hBEYos fzyoQj"
+                  >
+                    <styled.div
+                      title="2 transactions"
+                    >
+                      <div
+                        className="sc-fodVxV efTeyn"
+                        title="2 transactions"
+                      >
+                        2 transactions
+                        :
+                      </div>
+                    </styled.div>
+                    <styled.div>
+                      <div
+                        className="sc-fFubgz bdWfKF"
+                      >
+                        <styled.ul>
+                          <ul
+                            className="sc-gKsewC feZlKP"
+                          >
+                            <li
+                              key="0"
+                            >
+                              <a
+                                href="https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1"
+                                rel="noreferrer"
+                                target="_blank"
+                                title="Transaction"
+                              >
+                                369...cf1
+                              </a>
+                              <i>
+                                (
+                                0.100000
+                                 
+                                BTC
+                                )
+                              </i>
+                            </li>
+                            <li
+                              key="1"
+                            >
+                              <a
+                                href="https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647"
+                                rel="noreferrer"
+                                target="_blank"
+                                title="Transaction"
+                              >
+                                519...647
+                              </a>
+                              <i>
+                                (
+                                0.100000
+                                 
+                                BTC
+                                )
+                              </i>
+                            </li>
+                          </ul>
+                        </styled.ul>
+                      </div>
+                    </styled.div>
+                  </div>
+                </styled.div>
+              </Item>
+              <Item
+                title="Transaction"
+              >
+                <styled.div>
+                  <div
+                    className="sc-hBEYos fzyoQj"
+                  >
+                    <styled.div
+                      title="Transaction"
+                    >
+                      <div
+                        className="sc-fodVxV efTeyn"
+                        title="Transaction"
+                      >
+                        Transaction
+                        :
+                      </div>
+                    </styled.div>
+                    <styled.div>
+                      <div
+                        className="sc-fFubgz bdWfKF"
+                      >
+                        <AdaptiveSpan
+                          showTitle={true}
+                          style="bold"
+                          text="Custom status message"
+                        >
+                          <span
+                            dangerouslySetInnerHTML={
+                              Object {
+                                "__html": "<b>Custom status message</b>",
+                              }
+                            }
+                            title="Custom status message"
+                          />
+                        </AdaptiveSpan>
+                      </div>
+                    </styled.div>
+                  </div>
+                </styled.div>
+              </Item>
+            </div>
+          </styled.div>
+        </div>
+        <div>
+          <styled.button
+            onClick={[Function]}
+          >
+            <button
+              className="sc-fubCfw jeCznr"
+              onClick={[Function]}
+            >
+              Very cancelling
+            </button>
+          </styled.button>
+          <styled.a
+            href="https://github.com/PaulFasola/adoption/blob/master/README.md"
+            target="blank"
+            title="Wow, help here"
           >
             <a
-              href="https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1"
-              rel="noreferrer"
-              target="_blank"
-              title="Transaction"
+              className="sc-pFZIQ bpWgOa"
+              href="https://github.com/PaulFasola/adoption/blob/master/README.md"
+              target="blank"
+              title="Wow, help here"
             >
-              369...cf1
+              <Icon
+                style={
+                  Object {
+                    "lineHeight": "15px",
+                    "width": 13,
+                  }
+                }
+                type="help-circle-o"
+              >
+                <styled.div
+                  style={
+                    Object {
+                      "lineHeight": "15px",
+                      "width": 13,
+                    }
+                  }
+                  type="help-circle-o"
+                >
+                  <div
+                    className="sc-kstrdz jdwizQ"
+                    style={
+                      Object {
+                        "lineHeight": "15px",
+                        "width": 13,
+                      }
+                    }
+                    type="help-circle-o"
+                  >
+                    <_helpCircle>
+                      <svg
+                        viewBox="0 0 20 20"
+                      >
+                        <g
+                          fill="none"
+                          fillRule="evenodd"
+                          stroke="none"
+                          strokeWidth="1"
+                        >
+                          <g
+                            transform="translate(-782.000000, -288.000000)"
+                          >
+                            <g
+                              transform="translate(100.000000, 100.000000)"
+                            >
+                              <g
+                                transform="translate(680.000000, 186.000000)"
+                              >
+                                <g>
+                                  <polygon
+                                    id="Path"
+                                    points="0 0 24 0 24 24 0 24"
+                                  />
+                                  <path
+                                    className="fillable"
+                                    d="M11,18 L13,18 L13,16 L11,16 L11,18 Z M12,2 C6.48,2 2,6.48 2,12 C2,17.52 6.48,22 12,22 C17.52,22 22,17.52 22,12 C22,6.48 17.52,2 12,2 Z M12,20 C7.59,20 4,16.41 4,12 C4,7.59 7.59,4 12,4 C16.41,4 20,7.59 20,12 C20,16.41 16.41,20 12,20 Z M12,6 C9.79,6 8,7.79 8,10 L10,10 C10,8.9 10.9,8 12,8 C13.1,8 14,8.9 14,10 C14,12 11,11.75 11,15 L13,15 C13,12.75 16,12.5 16,10 C16,7.79 14.21,6 12,6 Z"
+                                  />
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </svg>
+                    </_helpCircle>
+                  </div>
+                </styled.div>
+              </Icon>
+              Wow, help here
             </a>
-            <i>
-              (
-              0.100000
-               
-              BTC
-              )
-            </i>
-          </li>
-          <li
-            key="1"
-          >
-            <a
-              href="https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647"
-              rel="noreferrer"
-              target="_blank"
-              title="Transaction"
-            >
-              519...647
-            </a>
-            <i>
-              (
-              0.100000
-               
-              BTC
-              )
-            </i>
-          </li>
-        </styled.ul>
-      </Item>
-      <Item
-        title="Current status"
-      >
-        <AdaptiveSpan
-          showTitle={true}
-          style="bold"
-          text="Custom status message"
-        />
-      </Item>
-    </styled.div>
-  </div>
-  <div>
-    <styled.button
-      onClick={[Function]}
-    >
-      Cancel
-    </styled.button>
-    <styled.a
-      href="https://github.com/PaulFasola/adoption/blob/master/README.md"
-      target="blank"
-      title="Need help? Click here!"
-    >
-      <Icon
-        style={
-          Object {
-            "lineHeight": "15px",
-            "width": 13,
-          }
-        }
-        type="help-circle-o"
-      />
-      Need help? Click here!
-    </styled.a>
-  </div>
-</styled.div>
-`;
-
-exports[`PaymentRequest Detailed should be fully string customizable 1`] = `
-<styled.div>
-  <styled.div>
-    <img
-      alt="BTC logo"
-      src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg"
-    />
-  </styled.div>
-  <div>
-    <styled.div>
-      <AdaptiveSpan
-        mapping={
-          Array [
-            Object {
-              "style": "bold",
-              "tag": "{amount}",
-              "value": 0.9,
-            },
-            Object {
-              "tag": "{symbol}",
-              "value": "BTC",
-            },
-          ]
-        }
-        text="Please send {amount} {symbol} to address:"
-      />
-      <div
-        title="1BitcoinEaterAddressDontSendf59kuE"
-      >
-        1BitcoinEaterAddressDontSendf59kuE
+          </styled.a>
+        </div>
       </div>
     </styled.div>
-    <styled.div>
-      <Styled(QRCode)
-        bgColor="transparent"
-        fgColor="#000000"
-        level="L"
-        style={
-          Object {
-            "width": 100,
-          }
-        }
-        value="1BitcoinEaterAddressDontSendf59kuE"
-      />
-    </styled.div>
-    <styled.div>
-      <Item
-        title="Current status"
-      >
-        <AdaptiveSpan
-          showTitle={true}
-          style="bold"
-          text="Waiting for payment"
-        />
-      </Item>
-    </styled.div>
-  </div>
-  <div />
-</styled.div>
+  </PaymentRequest>
+</LocalizationProvider>
 `;
 
 exports[`PaymentRequest Detailed should render spining animation when status is "pending" and waitAnimation is true. 1`] = `
