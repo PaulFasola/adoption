@@ -1,4 +1,4 @@
-export interface ILocales {
+export interface IStrings {
   request: string;
   cancel: string;
   seller: string;
@@ -15,7 +15,7 @@ export interface ILocales {
   transactions: string;
 }
 
-export const defaultStrings: ILocales = {
+export const defaultStrings: IStrings = {
   request: 'Please send {amount} {symbol} to address:',
   status: 'Current status',
   seller: 'Merchant',
