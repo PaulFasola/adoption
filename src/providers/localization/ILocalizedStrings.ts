@@ -1,3 +1,5 @@
 import { ILocales as IPRLocales } from '../../components/PaymentRequest/strings';
 
-export interface ILocalizedStrings extends IPRLocales {}
+export interface ILocalizedStrings {
+  paymentRequest: Partial<IPRLocales>;
+}

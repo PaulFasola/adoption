@@ -6,6 +6,8 @@ export const defaultLocale = 'en-US';
 export const defaultLocalization: IViableLocale = {
   locale: defaultLocale,
   strings: {
-    ...defaultPRStrings,
+    paymentRequest: {
+      ...defaultPRStrings,
+    },
   },
 };

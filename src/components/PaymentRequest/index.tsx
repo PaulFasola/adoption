@@ -1,4 +1,6 @@
 import React, { Fragment, useLayoutEffect, useState } from 'react';
+import { useLocale } from '../../hooks/useLocale';
+
 import {
   CancelButton,
   Container,
@@ -12,7 +14,7 @@ import {
   QRCode,
 } from './style';
 import { AnimatedIcon, IconType as AnimatedIconType } from '../common/AnimatedIcon';
-import { defaultStrings, defaultProps } from './defaultProps';
+import { defaultProps } from './defaultProps';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
 import { PaymentStatus } from './enums/paymentStatus';
 import { padDigits } from '../../utils/arithmetic';
@@ -20,10 +22,13 @@ import { shortenHash } from '../../utils/string';
 import { IProps, IStrings } from './interfaces';
 import { Icon, IconType } from '../common/Icon';
 import { Item } from './item';
-
 const PaymentRequest: React.FC<IProps> = (props) => {
+  const {
+    strings: { paymentRequest },
+  } = useLocale();
+
   const remainingAmount = props.amount.toPay - (props.amount.received ?? 0);
-  const [strings, setStrings] = useState<IStrings>(defaultStrings);
+  const [strings, setStrings] = useState<IStrings>(paymentRequest as IStrings);
 
   useLayoutEffect(() => {
     /* istanbul ignore next */
