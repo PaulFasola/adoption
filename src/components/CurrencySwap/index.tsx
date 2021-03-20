@@ -6,10 +6,15 @@ import { ProtocolSelector } from '../ProtocolSelector';
 import { IProtocol } from '../ProtocolSelector/interfaces';
 import { preventCommonSymbol } from './utils';
 import { usePrevious } from '../../hooks/usePrevious';
+import { defaultLocale } from '../../providers/localization/defaultLocalization';
+import { useLocale } from '../../hooks/useLocale';
+import { IStrings } from './strings';
 
 const DEFAULT_MAX_FRACTION_DIGITS = 8;
 
 const CurrencySwap: React.FC<IProps> = (props) => {
+  const strs = useLocale().strings.currencySwap as IStrings;
+
   const [protocols, setProtocols] = useState<IProtocolArrayPipe>({ input: [], output: [] });
   const [activeProtocols, setActiveProtocols] = useState<IProtocolPipe>();
   const [swapValues, setSwapValues] = useState<ISwapValues>({});
@@ -52,7 +57,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
 
       if (oppositeValue) {
         /* istanbul ignore next */
-        const toStr = oppositeValue.toLocaleString('en-US', {
+        const toStr = oppositeValue.toLocaleString(defaultLocale, {
           maximumFractionDigits: getMaxFractionDigits(activeProtocols[end]?.decimals),
         });
         oppositeValue = parseFloat(toStr.replace(/[^\d\.\-]/g, ''));
@@ -146,7 +151,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     return (
       <Overview>
         1 {input.symbol} =&nbsp;
-        {(input.price / output.price).toLocaleString('en-US', {
+        {(input.price / output.price).toLocaleString(defaultLocale, {
           maximumFractionDigits: getMaxFractionDigits(output.decimals),
         })}
         &nbsp;
@@ -156,8 +161,10 @@ const CurrencySwap: React.FC<IProps> = (props) => {
   };
 
   const getButtonValue = (): string => {
+    const { insufficientBalance, unlockWallet, proceed } = strs.submitButton;
+
     if (props.locked) {
-      return 'Unlock Wallet';
+      return unlockWallet;
     }
 
     if (
@@ -167,21 +174,21 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       typeof activeProtocols.input.balance === 'number'
     ) {
       if (activeProtocols.input.balance < swapValues.input) {
-        return 'Insufficient balance';
+        return insufficientBalance;
       }
     }
 
-    return 'Swap';
+    return proceed;
   };
 
   return (
     <Container noShadow={props.noShadow}>
       <InputWrapper>
         <div>
-          <span>From</span>
+          <span>{strs.from}</span>
           {activeProtocols?.input && (
             <Overview>
-              Balance: {activeProtocols.input.balance > 0 ? activeProtocols.input.balance : 0}
+              {strs.balance} {activeProtocols.input.balance > 0 ? activeProtocols.input.balance : 0}
             </Overview>
           )}
         </div>
@@ -203,7 +210,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         </div>
       </InputWrapper>
       <SwapButton
-        aria-label='Swap values'
+        aria-label={strs.swapBtnLabel}
         onClick={() => {
           setSwapValues({ input: swapValues.output, output: swapValues.input });
           /* istanbul ignore next */
@@ -213,7 +220,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         <Icon type={IconType.ArrowDown} style={{ width: '18px' }} />
       </SwapButton>
       <InputWrapper>
-        <span>To</span>
+        <span>{strs.from}</span>
         {getPriceEquiv()}
         <div>
           <SwapInput
