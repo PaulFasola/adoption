@@ -418,7 +418,6 @@ exports[`PaymentRequest Detailed Should be fully strings customizable 1`] = `
     customStatusText="Custom status message"
     deadline={
       Object {
-        "dateLocale": "en-US",
         "datetime": 2009-02-03T05:00:00.000Z,
       }
     }

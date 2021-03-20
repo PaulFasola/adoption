@@ -86,6 +86,7 @@ describe(`PaymentRequest Basic`, () => {
       );
 
       expect(toJson(wrapper)).toMatchSnapshot();
+      clear();
     });
   });
 
@@ -252,7 +253,6 @@ describe('PaymentRequest Detailed', () => {
           helpUrl='https://github.com/PaulFasola/adoption/blob/master/README.md'
           onCancel={() => alert('User wants to cancel, do something here!')}
           deadline={{
-            dateLocale: 'en-US',
             datetime: new Date(2009, 1, 3),
           }}
           customStatusText={'Custom status message'}
