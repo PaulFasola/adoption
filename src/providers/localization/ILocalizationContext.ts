@@ -5,7 +5,7 @@ export type LocaleType = typeof defaultLocale | string;
 
 export interface IViableLocale {
   locale: LocaleType;
-  strings: ILocalizedStrings;
+  strings: Partial<ILocalizedStrings>;
 }
 
 export interface ILocalizationContext {

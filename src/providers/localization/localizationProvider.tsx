@@ -17,7 +17,9 @@ export const LocalizationContext = React.createContext<ILocalizationContext>({
 });
 
 export const LocalizationProvider: React.FC<IProps> = ({ customLocales, children }) => {
-  const [availableLocales, setAvailableLocales] = useState<Record<string, ILocalizedStrings>>({
+  const [availableLocales, setAvailableLocales] = useState<
+    Record<string, Partial<ILocalizedStrings>>
+  >({
     [defaultLocale]: defaultLocalization.strings,
   });
 
@@ -36,9 +38,10 @@ export const LocalizationProvider: React.FC<IProps> = ({ customLocales, children
           strings: requestedStrings,
         };
       } else {
-        console.warn(`[WARN] Adoption Localization - requested locale "${locale}" was not found. Defaulting to "${locale}" preset.\n
+        console.warn(`[WARN] Adoption Localization - requested locale "${locale}" was not found. Defaulting to "${defaultLocale}" preset.\n
 Add your locale to 'customLocales' property on <LocalizationProvider>.
 Available locales: ${Object.keys(availableLocales).join(', ')}`);
+        locale = defaultLocale;
       }
 
       setCurrentLocalization(viableLocalization);
@@ -51,8 +54,7 @@ Available locales: ${Object.keys(availableLocales).join(', ')}`);
   useEffect(() => {
     const locale = localStorage.getItem(LOCAL_STORAGE_KEY) ?? defaultLocalization.locale;
     setViableLocaleOrDefault(locale);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setViableLocaleOrDefault]);
 
   useEffect(() => {
     if (!customLocales || Object.keys(customLocales).length === 0) return;
