@@ -30,7 +30,7 @@ export const LocalizationProvider: React.FC<IProps> = ({ customLocales, children
   );
 
   const setViableLocaleOrDefault = useCallback(
-    (locale: LocaleType): [string, ILocalizedStrings] => {
+    (locale: LocaleType, warn = true): [string, ILocalizedStrings] => {
       const requestedStrings = availableLocales[locale] as ILocalizedStrings;
       let viableLocalization = defaultLocalization;
 
@@ -40,7 +40,8 @@ export const LocalizationProvider: React.FC<IProps> = ({ customLocales, children
           strings: requestedStrings,
         };
       } else {
-        console.warn(`[WARN] Adoption Localization - requested locale "${locale}" was not found. Defaulting to "${defaultLocale}" preset.\n
+        warn &&
+          console.warn(`[WARN] Adoption Localization - requested locale "${locale}" was not found. Defaulting to "${defaultLocale}" preset.\n
 Add your locale to 'customLocales' property on <LocalizationProvider>.
 Available locales: ${Object.keys(availableLocales).join(', ')}`);
         locale = defaultLocale;
@@ -75,8 +76,18 @@ Available locales: ${Object.keys(availableLocales).join(', ')}`);
 
   useEffect(() => {
     if (!loaded) return;
-    const locale = localStorage.getItem(LOCAL_STORAGE_KEY) ?? defaultLocalization.locale;
-    setViableLocaleOrDefault(locale);
+
+    let warn = true;
+    let locale = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+    if (!locale) {
+      /* istanbul ignore next */
+      locale = navigator.language || navigator['userLanguage'];
+      warn = false;
+    }
+
+    /* istanbul ignore next */
+    setViableLocaleOrDefault(locale ?? defaultLocale, warn);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loaded]);
 
