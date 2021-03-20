@@ -1,5 +1,13 @@
 # Adoption Changelog
 
+## [1.3.0](https://github.com/PaulFasola/adoption/compare/v1.2.0...v1.3.0) (2021-03-20)
+
+
+### Features
+
+* **localizationprovider:** added localizationWrapper ([2b7fe38](https://github.com/PaulFasola/adoption/commit/2b7fe388cb8e70831308f33189be0698f009b87c))
+* **localizationprovider:** initial implementation ([beecaa5](https://github.com/PaulFasola/adoption/commit/beecaa5cddcaf868556784012e3bafa384e7ae03))
+
 ## [1.2.0](https://github.com/PaulFasola/adoption/compare/v1.1.0...v1.2.0) (2021-03-19)
 
 
