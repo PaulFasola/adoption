@@ -22,8 +22,10 @@ import { IProps } from './interfaces';
 import { Icon, IconType } from '../common/Icon';
 import { IStrings } from './strings';
 import { Item } from './item';
+import { useTheme } from '../../hooks/useTheme';
 
 const PaymentRequest: React.FC<IProps> = (props) => {
+  const theme = useTheme();
   const locale = useLocale();
   const strs = locale.strings.paymentRequest as IStrings;
 
@@ -82,7 +84,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
       return (
         <QRCode
           bgColor='transparent'
-          fgColor='#000000'
+          fgColor={theme.primary.color}
           level='L'
           style={{ width: 100 }}
           value={props.address}
