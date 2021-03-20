@@ -13,7 +13,6 @@ import {
   QRCode,
 } from './style';
 import { AnimatedIcon, IconType as AnimatedIconType } from '../common/AnimatedIcon';
-import { defaultLocale } from '../../providers/localization/defaultLocalization';
 import { defaultProps } from './defaultProps';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
 import { PaymentStatus } from './enums/paymentStatus';
@@ -25,7 +24,9 @@ import { IStrings } from './strings';
 import { Item } from './item';
 
 const PaymentRequest: React.FC<IProps> = (props) => {
-  const strs = useLocale().strings.paymentRequest as IStrings;
+  const locale = useLocale();
+  const strs = locale.strings.paymentRequest as IStrings;
+
   const remainingAmount = props.amount.toPay - (props.amount.received ?? 0);
 
   const _getFromDate = (date: Date): string => {
@@ -48,7 +49,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
     }
 
     /* istanbul ignore next */
-    return new Intl.RelativeTimeFormat(props.deadline?.dateLocale ?? defaultLocale).format(
+    return new Intl.RelativeTimeFormat(props.deadline?.dateLocale ?? locale.locale).format(
       Math.ceil(value),
       unit
     );
@@ -127,7 +128,7 @@ const PaymentRequest: React.FC<IProps> = (props) => {
           ) : null}
           {props.deadline && remainingAmount > 0 ? (
             <Item title={strs.deadline}>
-              {new Intl.DateTimeFormat(props.deadline.dateLocale ?? defaultLocale).format(
+              {new Intl.DateTimeFormat(props.deadline.dateLocale ?? locale.locale).format(
                 props.deadline.datetime
               )}
               {props.deadline.humanized && (

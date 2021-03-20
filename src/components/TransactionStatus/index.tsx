@@ -14,7 +14,6 @@ import {
   Trajectory,
   TxFees,
 } from './style';
-import { defaultLocale } from '../../providers/localization/defaultLocalization';
 import { defaultColorMap, defaultProps } from './defaultProps';
 import { AdaptiveSpan } from '../common/AdaptiveSpan';
 import { shortenHash } from '../../utils/string';
@@ -25,7 +24,8 @@ import { TxStatus } from './txStatus';
 import { IStrings } from './strings';
 
 const TransactionStatus: React.FC<IProps> = (props) => {
-  const strs = useLocale().strings.transactionStatus as IStrings;
+  const locale = useLocale();
+  const strs = locale.strings.transactionStatus as IStrings;
 
   const [status, setStatus] = useState<TxStatus>(TxStatus.UNKNOWN);
   const [colorMap, setColorMap] = useState<Record<TxStatus, string>>(defaultColorMap);
@@ -137,7 +137,7 @@ const TransactionStatus: React.FC<IProps> = (props) => {
       {props.date && props.date.value && (
         <Date>
           <span>
-            {new Intl.DateTimeFormat(props.date.locale ?? defaultLocale, props.date.options).format(
+            {new Intl.DateTimeFormat(props.date.locale ?? locale.locale, props.date.options).format(
               props.date.value
             )}
           </span>

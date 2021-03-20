@@ -86,7 +86,7 @@ export const CustomLocales: React.FC = () => {
         },
       },
       paymentRequest: {
-        request: "Merci d'envoyer {amount} à l'adresse suivante:",
+        request: "Merci d'envoyer {amount} {symbol} à l'adresse suivante:",
         seller: 'Marchand',
         receivedAmount: 'Montant reçu',
         deadline: 'Envoyer avant',

@@ -6,14 +6,14 @@ import { ProtocolSelector } from '../ProtocolSelector';
 import { IProtocol } from '../ProtocolSelector/interfaces';
 import { preventCommonSymbol } from './utils';
 import { usePrevious } from '../../hooks/usePrevious';
-import { defaultLocale } from '../../providers/localization/defaultLocalization';
 import { useLocale } from '../../hooks/useLocale';
 import { IStrings } from './strings';
 
 const DEFAULT_MAX_FRACTION_DIGITS = 8;
 
 const CurrencySwap: React.FC<IProps> = (props) => {
-  const strs = useLocale().strings.currencySwap as IStrings;
+  const locale = useLocale();
+  const strs = locale.strings.currencySwap as IStrings;
 
   const [protocols, setProtocols] = useState<IProtocolArrayPipe>({ input: [], output: [] });
   const [activeProtocols, setActiveProtocols] = useState<IProtocolPipe>();
@@ -57,7 +57,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
 
       if (oppositeValue) {
         /* istanbul ignore next */
-        const toStr = oppositeValue.toLocaleString(defaultLocale, {
+        const toStr = oppositeValue.toLocaleString(locale.locale, {
           maximumFractionDigits: getMaxFractionDigits(activeProtocols[end]?.decimals),
         });
         oppositeValue = parseFloat(toStr.replace(/[^\d\.\-]/g, ''));
@@ -69,7 +69,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         [oppositeEnd]: oppositeValue,
       }));
     },
-    [activeProtocols, getMaxFractionDigits]
+    [activeProtocols, getMaxFractionDigits, locale.locale]
   );
 
   useEffect(() => {
@@ -151,7 +151,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     return (
       <Overview>
         1 {input.symbol} =&nbsp;
-        {(input.price / output.price).toLocaleString(defaultLocale, {
+        {(input.price / output.price).toLocaleString(locale.locale, {
           maximumFractionDigits: getMaxFractionDigits(output.decimals),
         })}
         &nbsp;
