@@ -54,13 +54,6 @@ const LabRat = (): React.ReactElement => {
           humanized: true,
         }}
         status={PaymentStatus.COMPLETE}
-        strings={{
-          txStatus: {
-            failed: 'Payment failed :(',
-            pending: 'Waiting for payment',
-            complete: 'Paid! Redirecting...',
-          },
-        }}
       />
     </>
   );

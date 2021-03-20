@@ -86,7 +86,6 @@ describe(`PaymentRequest Basic`, () => {
       );
 
       expect(toJson(wrapper)).toMatchSnapshot();
-      clear();
     });
   });
 
@@ -200,7 +199,7 @@ describe('PaymentRequest Detailed', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('Should be fully strings customizable', () => {
+  it('Should be fully string customizable', () => {
     const locales: Record<string, Partial<ILocalizedStrings>> = {
       'en-US': {
         paymentRequest: {
@@ -252,9 +251,6 @@ describe('PaymentRequest Detailed', () => {
           ]}
           helpUrl='https://github.com/PaulFasola/adoption/blob/master/README.md'
           onCancel={() => alert('User wants to cancel, do something here!')}
-          deadline={{
-            datetime: new Date(2009, 1, 3),
-          }}
           customStatusText={'Custom status message'}
         />
       </LocalizationProvider>

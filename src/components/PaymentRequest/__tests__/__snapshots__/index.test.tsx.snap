@@ -382,7 +382,7 @@ exports[`PaymentRequest Basic should render relative time correctly (minutes) 1`
 </styled.div>
 `;
 
-exports[`PaymentRequest Detailed Should be fully strings customizable 1`] = `
+exports[`PaymentRequest Detailed Should be fully string customizable 1`] = `
 <LocalizationProvider
   customLocales={
     Object {
@@ -416,11 +416,6 @@ exports[`PaymentRequest Detailed Should be fully strings customizable 1`] = `
       }
     }
     customStatusText="Custom status message"
-    deadline={
-      Object {
-        "datetime": 2009-02-03T05:00:00.000Z,
-      }
-    }
     decimalPlaces={8}
     helpUrl="https://github.com/PaulFasola/adoption/blob/master/README.md"
     logos={
@@ -605,34 +600,6 @@ exports[`PaymentRequest Detailed Should be fully strings customizable 1`] = `
                         0.700000
                          
                         BTC
-                      </div>
-                    </styled.div>
-                  </div>
-                </styled.div>
-              </Item>
-              <Item
-                title="Deadline"
-              >
-                <styled.div>
-                  <div
-                    className="sc-hBEYos fzyoQj"
-                  >
-                    <styled.div
-                      title="Deadline"
-                    >
-                      <div
-                        className="sc-fodVxV efTeyn"
-                        title="Deadline"
-                      >
-                        Deadline
-                        :
-                      </div>
-                    </styled.div>
-                    <styled.div>
-                      <div
-                        className="sc-fFubgz bdWfKF"
-                      >
-                        2/3/2009
                       </div>
                     </styled.div>
                   </div>
