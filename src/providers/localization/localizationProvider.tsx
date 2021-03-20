@@ -17,6 +17,8 @@ export const LocalizationContext = React.createContext<ILocalizationContext>({
 });
 
 export const LocalizationProvider: React.FC<IProps> = ({ customLocales, children }) => {
+  const [loaded, setLoaded] = useState(false);
+
   const [availableLocales, setAvailableLocales] = useState<
     Record<string, Partial<ILocalizedStrings>>
   >({
@@ -52,14 +54,11 @@ Available locales: ${Object.keys(availableLocales).join(', ')}`);
   );
 
   useEffect(() => {
-    const locale = localStorage.getItem(LOCAL_STORAGE_KEY) ?? defaultLocalization.locale;
-    setViableLocaleOrDefault(locale);
-  }, [setViableLocaleOrDefault]);
+    if (!customLocales || Object.keys(customLocales).length === 0) {
+      return setLoaded(true);
+    }
 
-  useEffect(() => {
-    if (!customLocales || Object.keys(customLocales).length === 0) return;
     const filledCustomLocales: Record<string, ILocalizedStrings> = {};
-
     Object.keys(customLocales).forEach((key) => {
       const viableLocale = (mergeDeep(
         defaultLocalization.strings,
@@ -71,7 +70,15 @@ Available locales: ${Object.keys(availableLocales).join(', ')}`);
     setAvailableLocales((prevState) => {
       return { ...prevState, ...filledCustomLocales };
     });
+    setLoaded(true);
   }, [customLocales]);
+
+  useEffect(() => {
+    if (!loaded) return;
+    const locale = localStorage.getItem(LOCAL_STORAGE_KEY) ?? defaultLocalization.locale;
+    setViableLocaleOrDefault(locale);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded]);
 
   const switchTo = (nextLocale: LocaleType) => {
     const [name] = setViableLocaleOrDefault(nextLocale);
