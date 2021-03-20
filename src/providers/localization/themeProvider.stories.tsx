@@ -53,7 +53,7 @@ const LabRat = (): React.ReactElement => {
           datetime: new Date(),
           humanized: true,
         }}
-        status={PaymentStatus.COMPLETE}
+        status={PaymentStatus.PENDING}
       />
     </>
   );
