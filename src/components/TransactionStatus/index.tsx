@@ -54,8 +54,9 @@ const TransactionStatus: React.FC<IProps> = (props) => {
   const _handleToggleClick = (): void => setIsToggled(!isToggled);
 
   const _getStatus = (): string => {
-    let output = status.toUpperCase() + status.slice(1);
-    if (!props.uncapitalizeStatus) output = status.toUpperCase();
+    const statusStr = strs.statuses[status];
+    let output = statusStr.toUpperCase() + statusStr.slice(1);
+    if (!props.uncapitalizeStatus) output = statusStr.toUpperCase();
 
     return output;
   };
