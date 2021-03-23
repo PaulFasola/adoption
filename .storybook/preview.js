@@ -2,6 +2,8 @@ import { themes } from '@storybook/theming';
 import { addDecorator } from '@storybook/react';
 import { withPropsTable } from 'storybook-addon-react-docgen';
 
+import '@storybook/addon-console';
+
 addDecorator(withPropsTable);
 
 export const parameters = {

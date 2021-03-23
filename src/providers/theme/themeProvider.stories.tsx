@@ -88,7 +88,9 @@ export const CustomThemes: React.FC = () => {
         style={{ marginBottom: '1.5rem' }}
         onClick={() => {
           switchTo('thatDoesNotExist');
-          alert('Check your console, a warning is waiting for you ;)');
+          setTimeout(() => {
+            alert('Check the console below, a warning is waiting for you ;)');
+          }, 200);
         }}
       >
         Go thatDoesNotExist (will fail).
