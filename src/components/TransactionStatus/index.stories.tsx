@@ -1,32 +1,54 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { Meta, Story } from '@storybook/react';
 import { TransactionStatus } from '../TransactionStatus';
-import { IAddress } from './interfaces';
+import { IAddress, IProps } from './interfaces';
 import { TxStatus } from './txStatus';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const txCompleted = require('../../assets/txstatus-completed.jpg');
 
-export default {
-  title: 'Components/TransactionStatus',
-};
-
 const Spacer = styled.div`
   margin: 10px 0 10px 0;
 `;
 
-export const Basic = (): React.ReactNode => {
-  return (
-    <TransactionStatus
-      status={TxStatus.COMPLETED}
-      amount='0.1'
-      symbol='BTC'
-      txURL='https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1'
-    />
-  );
+export default {
+  title: 'Components/TransactionStatus',
+} as Meta;
+
+const argTypes = {
+  status: {
+    control: {
+      type: 'select',
+      options: Object.keys(TxStatus),
+    },
+  },
 };
 
-export const Statuses = (): React.ReactNode => (
+const convertControlsProps = (args: IProps): IProps => {
+  if (args.status && TxStatus[args.status]) {
+    args.status = TxStatus[args.status];
+  }
+
+  return args;
+};
+
+const Basic: Story<IProps> = (args) => {
+  args = convertControlsProps(args);
+
+  return <TransactionStatus {...args} />;
+};
+Basic.argTypes = argTypes;
+Basic.args = {
+  status: TxStatus.COMPLETED,
+  amount: '0.1',
+  symbol: 'BTC',
+  animated: false,
+  noShadow: false,
+  uncapitalizeStatus: false,
+};
+
+const Statuses: Story<IProps> = () => (
   <Fragment>
     <Spacer>
       <TransactionStatus
@@ -61,12 +83,15 @@ export const Statuses = (): React.ReactNode => (
     </Spacer>
   </Fragment>
 );
+Statuses.parameters = {
+  controls: { hideNoControlsWarning: true },
+};
 
-export const TransactionDetails = (): React.ReactNode => {
+const TransactionDetails: Story<IProps> = (args) => {
+  args = convertControlsProps(args);
+
   return (
     <TransactionStatus
-      amount='0.1'
-      symbol='BTC'
       txFees='0.0001'
       date={{
         value: new Date(),
@@ -80,11 +105,30 @@ export const TransactionDetails = (): React.ReactNode => {
       }}
       customDetailComponent={<b>Hello, this is a custom component!</b>}
       txURL='https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1'
+      {...args}
     />
   );
 };
+TransactionDetails.argTypes = argTypes;
+TransactionDetails.args = {
+  ...Basic.args,
+  txFees: '0.0001',
+  date: {
+    value: new Date(),
+  },
+  sender: {
+    hash: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+    url: 'https://www.blockchain.com/btc/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+  },
+  receiver: {
+    hash: '1CounterpartyXXXXXXXXXXXXXXXUWLpVr',
+  },
+  customDetailComponent: <b>Hello, this is a custom component!</b>,
+  txURL:
+    'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
+};
 
-export const Animated = (): React.ReactNode => (
+const Animated: Story<IProps> = () => (
   <Fragment>
     <Spacer>
       <TransactionStatus
@@ -124,8 +168,11 @@ export const Animated = (): React.ReactNode => (
     </Spacer>
   </Fragment>
 );
+Animated.parameters = {
+  controls: { hideNoControlsWarning: true },
+};
 
-export const Simulation: React.FC = () => {
+const Simulation: Story<IProps> = () => {
   interface ITransaction {
     sender: IAddress;
     receiver: IAddress;
@@ -225,3 +272,8 @@ export const Simulation: React.FC = () => {
     </Spacer>
   );
 };
+Simulation.parameters = {
+  controls: { hideNoControlsWarning: true },
+};
+
+export { Basic, Statuses, TransactionDetails, Animated, Simulation };
