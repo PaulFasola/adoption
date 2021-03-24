@@ -17,7 +17,7 @@ export const LocalizationContext = React.createContext<ILocalizationContext>({
 });
 
 export const LocalizationProvider: React.FC<IProps> = ({ customLocales, children }) => {
-  const [loaded, setLoaded] = useState(false);
+  const [localesLoaded, setLocalesLoaded] = useState(false);
 
   const [availableLocales, setAvailableLocales] = useState<
     Record<string, Partial<ILocalizedStrings>>
@@ -56,7 +56,7 @@ Available locales: ${Object.keys(availableLocales).join(', ')}`);
 
   useEffect(() => {
     if (!customLocales || Object.keys(customLocales).length === 0) {
-      return setLoaded(true);
+      return setLocalesLoaded(true);
     }
 
     const filledCustomLocales: Record<string, ILocalizedStrings> = {};
@@ -71,11 +71,11 @@ Available locales: ${Object.keys(availableLocales).join(', ')}`);
     setAvailableLocales((prevState) => {
       return { ...prevState, ...filledCustomLocales };
     });
-    setLoaded(true);
+    setLocalesLoaded(true);
   }, [customLocales]);
 
   useEffect(() => {
-    if (!loaded) return;
+    if (!localesLoaded) return;
 
     let warn = true;
     let locale = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -89,7 +89,7 @@ Available locales: ${Object.keys(availableLocales).join(', ')}`);
     /* istanbul ignore next */
     setViableLocaleOrDefault(locale ?? defaultLocale, warn);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loaded]);
+  }, [localesLoaded]);
 
   const switchTo = (nextLocale: LocaleType) => {
     const [name] = setViableLocaleOrDefault(nextLocale);
