@@ -7,6 +7,9 @@ import '@storybook/addon-console';
 addDecorator(withPropsTable);
 
 export const parameters = {
+  actions: {
+    argTypesRegex: '^on.*',
+  },
   darkMode: {
     darkClass: 'lights-out',
     lightClass: 'lights-on',
