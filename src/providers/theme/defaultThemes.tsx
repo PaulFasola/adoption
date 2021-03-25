@@ -35,7 +35,7 @@ export const defaultThemes: Record<ThemeLabel | string, ITheme> = {
     primary: {
       backgroundColor: '#ffffff',
       color: '#000000',
-      rule: 'rgba(0, 0, 0, 0.2)',
+      rule: 'rgba(0, 0, 0, .55)',
       boxShadow: '0 12px 28px rgba(0, 0, 0, 0.1)',
       borderColor: 'rgba(0, 0, 0, 0.1)',
       hoverColor: '#000000',
