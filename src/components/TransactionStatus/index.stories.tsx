@@ -5,8 +5,7 @@ import { TransactionStatus } from '../TransactionStatus';
 import { IAddress, IProps } from './interfaces';
 import { TxStatus } from './txStatus';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const txCompleted = require('../../assets/txstatus-completed.jpg');
+import txCompletedImg from '../../assets/txstatus-completed.jpg';
 
 const Spacer = styled.div`
   margin: 10px 0 10px 0;
@@ -223,7 +222,7 @@ export const Simulation: Story<IProps> = () => {
             },
             txFees: '0.0001',
             customDetailComponent: (
-              <img src={txCompleted} alt='Custom component' style={{ width: '100%' }} />
+              <img src={txCompletedImg} alt='Custom component' style={{ width: '100%' }} />
             ),
           },
         })
