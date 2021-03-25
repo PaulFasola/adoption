@@ -30,7 +30,8 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.current]);
 
-  const _handleProtocolPick = (protocol: IProtocol) => (): void => {
+  const handleProtocolPick = (protocol: IProtocol) => (): void => {
+    console.log(protocol);
     if (typeof props.onChange === 'function') {
       props.onChange(protocol);
     }
@@ -80,9 +81,14 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
   return (
     <>
       {button}
-      <DropDownList data-test='dropdown' open={dropdownIsOpen} ref={dropdownRef}>
+      <DropDownList data-test='dropdown' open={dropdownIsOpen} tabIndex={0} ref={dropdownRef}>
         {props.list.map((protocol, i) => (
-          <div key={i} onClick={_handleProtocolPick(protocol)}>
+          <div
+            key={i}
+            onClick={handleProtocolPick(protocol)}
+            onKeyPress={(e) => e.key === 'Enter' && handleProtocolPick(protocol)()}
+            tabIndex={0}
+          >
             <ProtocolIcon src={protocol.logoURI} title={fullLabel} />
             <div>{protocol.name}</div>
             <div>{protocol.symbol}</div>
