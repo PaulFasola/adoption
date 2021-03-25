@@ -15,12 +15,12 @@ const args = {
   list: activeProtocols,
 };
 
-const Basic: Story<IProps> = (args) => {
+export const Basic: Story<IProps> = (args) => {
   return <ProtocolSelector onChange={action('onChange')} {...args} />;
 };
 Basic.args = args;
 
-const Themed: Story<IProps> = (args) => {
+export const Themed: Story<IProps> = (args) => {
   const customThemes: Record<string, Partial<ITheme>> = {
     ugly: {
       primary: {
@@ -42,5 +42,3 @@ const Themed: Story<IProps> = (args) => {
   );
 };
 Themed.args = args;
-
-export { Basic, Themed };

@@ -33,7 +33,7 @@ const convertControlsProps = (args: IProps): IProps => {
   return args;
 };
 
-const Basic: Story<IProps> = (args) => {
+export const Basic: Story<IProps> = (args) => {
   args = convertControlsProps(args);
 
   return <TransactionStatus {...args} />;
@@ -48,7 +48,7 @@ Basic.args = {
   uncapitalizeStatus: false,
 };
 
-const Statuses: Story<IProps> = () => (
+export const Statuses: Story<IProps> = () => (
   <Fragment>
     <Spacer>
       <TransactionStatus
@@ -87,7 +87,7 @@ Statuses.parameters = {
   controls: { hideNoControlsWarning: true },
 };
 
-const TransactionDetails: Story<IProps> = (args) => {
+export const TransactionDetails: Story<IProps> = (args) => {
   args = convertControlsProps(args);
 
   return (
@@ -128,7 +128,7 @@ TransactionDetails.args = {
     'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
 };
 
-const Animated: Story<IProps> = () => (
+export const Animated: Story<IProps> = () => (
   <Fragment>
     <Spacer>
       <TransactionStatus
@@ -172,7 +172,7 @@ Animated.parameters = {
   controls: { hideNoControlsWarning: true },
 };
 
-const Simulation: Story<IProps> = () => {
+export const Simulation: Story<IProps> = () => {
   interface ITransaction {
     sender: IAddress;
     receiver: IAddress;
@@ -275,5 +275,3 @@ const Simulation: Story<IProps> = () => {
 Simulation.parameters = {
   controls: { hideNoControlsWarning: true },
 };
-
-export { Basic, Statuses, TransactionDetails, Animated, Simulation };

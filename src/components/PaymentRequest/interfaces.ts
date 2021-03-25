@@ -14,7 +14,6 @@ export interface IProps {
   decimalPlaces: number;
   waitAnimation?: boolean;
   sellerName?: string;
-  onCancel?: () => void;
   helpUrl?: string;
   showQRCode?: boolean;
   noShadow?: boolean;
@@ -26,6 +25,8 @@ export interface IProps {
     datetime: Date;
     humanized?: boolean;
   };
+
+  onCancel?: () => void;
 }
 
 export interface ITransaction {
