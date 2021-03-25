@@ -13,10 +13,28 @@ export default {
   title: 'Components/PaymentRequest',
 } as Meta;
 
+const argTypes = {
+  status: {
+    control: {
+      type: 'select',
+      options: Object.keys(PaymentStatus),
+    },
+  },
+};
+
+const controlsToProps = (args: IProps) => {
+  if (args.status && PaymentStatus[args.status]) {
+    args.status = PaymentStatus[args.status];
+  }
+
+  return args;
+};
+
 const dueDate = new Date();
 dueDate.setTime(dueDate.setMinutes(dueDate.getMinutes() + 15));
 
-export const Basic: Story<IProps> = (args) => <PaymentRequest {...args} />;
+export const Basic: Story<IProps> = (args) => <PaymentRequest {...controlsToProps(args)} />;
+Basic.argTypes = argTypes;
 Basic.args = {
   symbol: 'BTC',
   decimalPlaces: 8,
@@ -31,8 +49,9 @@ Basic.args = {
 };
 
 export const Detailed: Story<IProps> = (args) => (
-  <PaymentRequest status={PaymentStatus.PENDING} {...args} />
+  <PaymentRequest status={PaymentStatus.PENDING} {...controlsToProps(args)} />
 );
+Detailed.argTypes = argTypes;
 Detailed.args = {
   ...Basic.args,
   showQRCode: true,
@@ -50,13 +69,17 @@ Detailed.args = {
   },
 };
 
-export const AnimatedStatus: Story<IProps> = (args) => <PaymentRequest waitAnimation {...args} />;
+export const AnimatedStatus: Story<IProps> = (args) => (
+  <PaymentRequest waitAnimation {...controlsToProps(args)} />
+);
+AnimatedStatus.argTypes = argTypes;
 AnimatedStatus.args = {
   ...Detailed.args,
   waitAnimation: true,
 };
 
-export const Transacted: Story<IProps> = (args) => <PaymentRequest {...args} />;
+export const Transacted: Story<IProps> = (args) => <PaymentRequest {...controlsToProps(args)} />;
+Transacted.argTypes = argTypes;
 Transacted.args = {
   ...Detailed.args,
   amount: {
@@ -76,7 +99,8 @@ const txs = new Array<ITransaction>(30).fill(
   20
 );
 
-export const Completed: Story<IProps> = (args) => <PaymentRequest {...args} />;
+export const Completed: Story<IProps> = (args) => <PaymentRequest {...controlsToProps(args)} />;
+Completed.argTypes = argTypes;
 Completed.args = {
   ...Detailed.args,
   status: PaymentStatus.COMPLETE,
@@ -87,7 +111,8 @@ Completed.args = {
   },
 };
 
-export const WithActions: Story<IProps> = (args) => <PaymentRequest {...args} />;
+export const WithActions: Story<IProps> = (args) => <PaymentRequest {...controlsToProps(args)} />;
+WithActions.argTypes = argTypes;
 WithActions.args = {
   ...Detailed.args,
   transactions: [
@@ -136,10 +161,11 @@ export const CustomStrings: Story<IProps> = (args) => {
 
   return (
     <LocalizationProvider customLocales={locales}>
-      <PaymentRequest {...args} />
+      <PaymentRequest {...controlsToProps(args)} />
     </LocalizationProvider>
   );
 };
+CustomStrings.argTypes = argTypes;
 CustomStrings.args = {
   ...WithActions.args,
   customStatusText: 'Custom status message',
@@ -148,9 +174,7 @@ CustomStrings.args = {
 export const Simulation: Story<IProps> = () => {
   const [status, setStatus] = useState<PaymentStatus>();
 
-  const handleClick = (status: PaymentStatus) => (): void => {
-    setStatus(status);
-  };
+  const handleClick = (status: PaymentStatus) => (): void => setStatus(status);
 
   return (
     <Fragment>
