@@ -24,7 +24,7 @@ const argTypes = {
   },
 };
 
-const convertControlsProps = (args: IProps): IProps => {
+const controlsToProps = (args: IProps): IProps => {
   if (args.status && TxStatus[args.status]) {
     args.status = TxStatus[args.status];
   }
@@ -32,11 +32,7 @@ const convertControlsProps = (args: IProps): IProps => {
   return args;
 };
 
-export const Basic: Story<IProps> = (args) => {
-  args = convertControlsProps(args);
-
-  return <TransactionStatus {...args} />;
-};
+export const Basic: Story<IProps> = (args) => <TransactionStatus {...controlsToProps(args)} />;
 Basic.argTypes = argTypes;
 Basic.args = {
   status: TxStatus.COMPLETED,
@@ -86,28 +82,24 @@ Statuses.parameters = {
   controls: { hideNoControlsWarning: true },
 };
 
-export const TransactionDetails: Story<IProps> = (args) => {
-  args = convertControlsProps(args);
-
-  return (
-    <TransactionStatus
-      txFees='0.0001'
-      date={{
-        value: new Date(),
-      }}
-      sender={{
-        hash: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
-        url: 'https://www.blockchain.com/btc/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
-      }}
-      receiver={{
-        hash: '1CounterpartyXXXXXXXXXXXXXXXUWLpVr',
-      }}
-      customDetailComponent={<b>Hello, this is a custom component!</b>}
-      txURL='https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1'
-      {...args}
-    />
-  );
-};
+export const TransactionDetails: Story<IProps> = (args) => (
+  <TransactionStatus
+    txFees='0.0001'
+    date={{
+      value: new Date(),
+    }}
+    sender={{
+      hash: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+      url: 'https://www.blockchain.com/btc/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+    }}
+    receiver={{
+      hash: '1CounterpartyXXXXXXXXXXXXXXXUWLpVr',
+    }}
+    customDetailComponent={<b>Hello, this is a custom component!</b>}
+    txURL='https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1'
+    {...controlsToProps(args)}
+  />
+);
 TransactionDetails.argTypes = argTypes;
 TransactionDetails.args = {
   ...Basic.args,
