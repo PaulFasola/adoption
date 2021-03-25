@@ -1,123 +1,72 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { ILocalizedStrings } from '../../providers/localization/ILocalizedStrings';
-import {
-  LocalizationContext,
-  LocalizationProvider,
-} from '../../providers/localization/localizationProvider';
+import { LocalizationProvider } from '../../providers/localization/localizationProvider';
 import { PaymentRequest } from '../PaymentRequest';
 import { PaymentStatus } from './enums/paymentStatus';
-import { ITransaction } from './interfaces';
+import { IProps, ITransaction } from './interfaces';
+import { Meta, Story } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const companyAsset = require('../../assets/fictiveCompany.png');
 
 export default {
   title: 'Components/PaymentRequest',
+} as Meta;
+
+const dueDate = new Date();
+dueDate.setTime(dueDate.setMinutes(dueDate.getMinutes() + 15));
+
+export const Basic: Story<IProps> = (args) => <PaymentRequest {...args} />;
+Basic.args = {
+  symbol: 'BTC',
+  decimalPlaces: 8,
+  logos: {
+    coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
+  },
+  address: '1BitcoinEaterAddressDontSendf59kuE',
+  amount: {
+    toPay: 0.9,
+  },
+  noShadow: false,
 };
 
-export const Basic = (): React.ReactNode => {
-  return (
-    <PaymentRequest
-      symbol='BTC'
-      decimalPlaces={8}
-      logos={{
-        coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-      }}
-      address='1BitcoinEaterAddressDontSendf59kuE'
-      amount={{ toPay: 0.9 }}
-    />
-  );
+export const Detailed: Story<IProps> = (args) => (
+  <PaymentRequest status={PaymentStatus.PENDING} {...args} />
+);
+Detailed.args = {
+  ...Basic.args,
+  showQRCode: true,
+  status: PaymentStatus.PENDING,
+  sellerName: 'Such Company LTD',
+  logos: {
+    coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
+    company: companyAsset,
+  },
+  amount: { toPay: 0.9, received: 0 },
+  deadline: {
+    dateLocale: 'en-US',
+    datetime: dueDate,
+    humanized: true,
+  },
 };
 
-export const Detailed = (): React.ReactNode => {
-  const dueDate = new Date();
-  dueDate.setTime(dueDate.setMinutes(dueDate.getMinutes() + 15));
-  return (
-    <PaymentRequest
-      status={PaymentStatus.PENDING}
-      symbol='BTC'
-      decimalPlaces={8}
-      sellerName='Such Company LTD'
-      logos={{
-        coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-        company: companyAsset,
-      }}
-      address='1BitcoinEaterAddressDontSendf59kuE'
-      amount={{ toPay: 0.9, received: 0 }}
-      deadline={{
-        dateLocale: 'en-US',
-        datetime: dueDate,
-        humanized: true,
-      }}
-    />
-  );
+export const AnimatedStatus: Story<IProps> = (args) => <PaymentRequest waitAnimation {...args} />;
+AnimatedStatus.args = {
+  ...Detailed.args,
+  waitAnimation: true,
 };
 
-export const AnimatedStatus = (): React.ReactNode => {
-  const dueDate = new Date();
-  dueDate.setTime(dueDate.setMinutes(dueDate.getMinutes() + 15));
-  return (
-    <PaymentRequest
-      waitAnimation
-      status={PaymentStatus.PENDING}
-      symbol='BTC'
-      decimalPlaces={8}
-      sellerName='Such Company LTD'
-      logos={{
-        coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-        company: companyAsset,
-      }}
-      address='1BitcoinEaterAddressDontSendf59kuE'
-      amount={{ toPay: 0.9, received: 0 }}
-      deadline={{
-        dateLocale: 'en-US',
-        datetime: dueDate,
-        humanized: true,
-      }}
-    />
-  );
+export const Transacted: Story<IProps> = (args) => <PaymentRequest {...args} />;
+Transacted.args = {
+  ...Detailed.args,
+  amount: {
+    toPay: 0.9,
+    received: 0.2,
+  },
 };
 
-export const Transacted = (): React.ReactNode => {
-  const dueDate = new Date();
-  dueDate.setTime(dueDate.setMinutes(dueDate.getMinutes() + 15));
-  return (
-    <PaymentRequest
-      status={PaymentStatus.PENDING}
-      symbol='BTC'
-      decimalPlaces={8}
-      sellerName='Such Company LTD'
-      logos={{
-        coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-        company: companyAsset,
-      }}
-      address='1BitcoinEaterAddressDontSendf59kuE'
-      amount={{ toPay: 0.9, received: 0.2 }}
-      transactions={[
-        {
-          txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-          txUrl:
-            'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-          amount: 0.1,
-        },
-        {
-          txHash: '519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-          txUrl:
-            'https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-          amount: 0.1,
-        },
-      ]}
-      deadline={{
-        dateLocale: 'en-US',
-        datetime: dueDate,
-        humanized: true,
-      }}
-    />
-  );
-};
-
-const txs = new Array<ITransaction>(30);
-txs.fill(
+const txs = new Array<ITransaction>(30).fill(
   {
     txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
     txUrl:
@@ -128,123 +77,44 @@ txs.fill(
   20
 );
 
-export const Completed = (): React.ReactNode => {
-  const dueDate = new Date();
-  dueDate.setTime(dueDate.setMinutes(dueDate.getMinutes() + 15));
-  return (
-    <PaymentRequest
-      status={PaymentStatus.COMPLETE}
-      symbol='BTC'
-      decimalPlaces={8}
-      sellerName='Such Company LTD'
-      logos={{
-        coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-        company: companyAsset,
-      }}
-      address='1BitcoinEaterAddressDontSendf59kuE'
-      amount={{ toPay: 0.2, received: 0.2 }}
-      transactions={txs}
-      deadline={{
-        dateLocale: 'en-US',
-        datetime: dueDate,
-        humanized: true,
-      }}
-    />
-  );
+export const Completed: Story<IProps> = (args) => <PaymentRequest {...args} />;
+Completed.args = {
+  ...Detailed.args,
+  status: PaymentStatus.COMPLETE,
+  transactions: txs,
+  amount: {
+    toPay: 0.2,
+    received: 0.2,
+  },
 };
 
-export const WithActions = (): React.ReactNode => {
-  const dueDate = new Date();
-  dueDate.setTime(dueDate.setMinutes(dueDate.getMinutes() + 15));
-  return (
-    <PaymentRequest
-      symbol='BTC'
-      decimalPlaces={8}
-      sellerName='Such Company LTD'
-      logos={{
-        coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-        company: companyAsset,
-      }}
-      address='1BitcoinEaterAddressDontSendf59kuE'
-      amount={{ toPay: 0.9, received: 0.2 }}
-      transactions={[
-        {
-          txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-          txUrl:
-            'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-          amount: 0.1,
-        },
-        {
-          txHash: '519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-          txUrl:
-            'https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-          amount: 0.1,
-        },
-      ]}
-      helpUrl='https://github.com/PaulFasola/adoption/blob/master/README.md'
-      onCancel={() => alert('User wants to cancel, do something here!')}
-      customStatusText={'Waiting for payment'}
-      deadline={{
-        dateLocale: 'en-US',
-        datetime: dueDate,
-        humanized: true,
-      }}
-    />
-  );
+export const WithActions: Story<IProps> = (args) => <PaymentRequest {...args} />;
+WithActions.args = {
+  ...Detailed.args,
+  transactions: [
+    {
+      txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
+      txUrl:
+        'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
+      amount: 0.1,
+    },
+    {
+      txHash: '519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
+      txUrl:
+        'https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
+      amount: 0.1,
+    },
+  ],
+  helpUrl: 'https://github.com/PaulFasola/adoption/blob/master/README.md',
+  onCancel: () => {
+    action('onCancel');
+    alert('User wants to cancel, do something here!');
+  },
 };
 
-export const CustomStrings = (): React.ReactNode => {
-  const TEST_LOCALE = 'en-US';
-
-  const dueDate = new Date();
-  dueDate.setTime(dueDate.setMinutes(dueDate.getMinutes() + 15));
-
-  const Component: React.FC = () => {
-    const { switchTo } = useContext(LocalizationContext);
-
-    useEffect(() => {
-      switchTo(TEST_LOCALE);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    return (
-      <PaymentRequest
-        symbol='BTC'
-        decimalPlaces={8}
-        sellerName='Such Company LTD'
-        logos={{
-          coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-          company: companyAsset,
-        }}
-        address='1BitcoinEaterAddressDontSendf59kuE'
-        amount={{ toPay: 0.9, received: 0.2 }}
-        transactions={[
-          {
-            txHash: '369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-            txUrl:
-              'https://www.blockchain.com/btc/tx/369d241af595fc253479abe394e2f21fda05820a0416942f63266dd793035cf1',
-            amount: 0.1,
-          },
-          {
-            txHash: '519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-            txUrl:
-              'https://www.blockchain.com/btc/tx/519f6c9581ce27e0a59f5f8e427b672087e1f2eb1aead0d66288de62ed3e9647',
-            amount: 0.1,
-          },
-        ]}
-        helpUrl='https://github.com/PaulFasola/adoption/blob/master/README.md'
-        onCancel={() => alert('User wants to cancel, do something here!')}
-        deadline={{
-          dateLocale: 'en-US',
-          datetime: dueDate,
-          humanized: true,
-        }}
-        customStatusText={'Custom status message'}
-      />
-    );
-  };
-
+export const CustomStrings: Story<IProps> = (args) => {
   const locales: Record<string, Partial<ILocalizedStrings>> = {
-    [TEST_LOCALE]: {
+    ['en-US']: {
       paymentRequest: {
         cancel: 'Very cancelling',
         seller: 'Seller',
@@ -267,26 +137,27 @@ export const CustomStrings = (): React.ReactNode => {
 
   return (
     <LocalizationProvider customLocales={locales}>
-      <Component />
+      <PaymentRequest {...args} />
     </LocalizationProvider>
   );
 };
+CustomStrings.args = {
+  ...WithActions.args,
+  customStatusText: 'Custom status message',
+};
 
-export const Simulation: React.FC = () => {
+export const Simulation: Story<IProps> = () => {
   const [status, setStatus] = useState<PaymentStatus>();
 
-  const dueDate = new Date();
-  dueDate.setTime(dueDate.setMinutes(dueDate.getMinutes() + 15));
-
-  const _triggerStatus = (status: PaymentStatus) => (): void => {
+  const handleClick = (status: PaymentStatus) => (): void => {
     setStatus(status);
   };
 
   return (
     <Fragment>
       <div style={{ marginBottom: '20px' }}>
-        <button onClick={_triggerStatus(PaymentStatus.COMPLETE)}>Trigger success</button>
-        <button onClick={_triggerStatus(PaymentStatus.FAILED)}>Trigger failure</button>
+        <button onClick={handleClick(PaymentStatus.COMPLETE)}>Trigger success</button>
+        <button onClick={handleClick(PaymentStatus.FAILED)}>Trigger failure</button>
       </div>
       <PaymentRequest
         symbol='BTC'
@@ -322,4 +193,7 @@ export const Simulation: React.FC = () => {
       />
     </Fragment>
   );
+};
+Simulation.parameters = {
+  controls: { hideNoControlsWarning: true },
 };
