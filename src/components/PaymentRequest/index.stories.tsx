@@ -7,8 +7,7 @@ import { IProps, ITransaction } from './interfaces';
 import { Meta, Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const companyAsset = require('../../assets/fictiveCompany.png');
+import companyLogo from '../../assets/fictiveCompany.png';
 
 export default {
   title: 'Components/PaymentRequest',
@@ -41,7 +40,7 @@ Detailed.args = {
   sellerName: 'Such Company LTD',
   logos: {
     coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-    company: companyAsset,
+    company: companyLogo,
   },
   amount: { toPay: 0.9, received: 0 },
   deadline: {
@@ -165,7 +164,7 @@ export const Simulation: Story<IProps> = () => {
         sellerName='Such Company LTD'
         logos={{
           coin: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg',
-          company: companyAsset,
+          company: companyLogo,
         }}
         address='1BitcoinEaterAddressDontSendf59kuE'
         amount={{ toPay: 0.9, received: 0.2 }}
