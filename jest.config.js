@@ -12,7 +12,7 @@ module.exports = {
       '<rootDir>/src/utils/assetsTransformer.js',
     '\\.(css|less)$': '<rootDir/src/utils/assetsTransformer.js',
   },
-  coveragePathIgnorePatterns: ['/node_modules/', 'dist/', '<rootDir>/src/index.ts'],
+  coveragePathIgnorePatterns: ['/node_modules/', 'dist/', '<rootDir>/src/index.ts', '.*\\.d\\.ts'],
   testPathIgnorePatterns: ['mocks.ts'],
   modulePathIgnorePatterns: ['<rootDir>/dist'],
   collectCoverageFrom: [

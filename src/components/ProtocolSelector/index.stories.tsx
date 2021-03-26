@@ -1,31 +1,26 @@
-import React, { useState } from 'react';
-import { ProtocolSelector } from '.';
+import React from 'react';
+import { action } from '@storybook/addon-actions';
+import { Story } from '@storybook/react';
 import { ITheme } from '../../providers/theme/ITheme';
 import { ThemeWrapper } from '../../providers/theme/themeWrapper';
-import { IProtocol } from './interfaces';
 import { activeProtocols } from './__tests__/mocks';
+import { IProps } from './interfaces';
+import { ProtocolSelector } from '.';
 
 export default {
   title: 'Components/ProtocolSelector',
 };
 
-export const Basic = (): React.ReactNode => {
-  const [activeProtocol, setActiveProtocol] = useState<IProtocol | null>(null);
-
-  const handleChange = (proto: IProtocol | null) => setActiveProtocol(proto);
-
-  return (
-    <>
-      <ProtocolSelector list={activeProtocols} onChange={handleChange} />
-      <div style={{ marginTop: '10px' }}>
-        <p>Selected protocol:</p>
-        <pre>{JSON.stringify(activeProtocol, null, '\t')}</pre>
-      </div>
-    </>
-  );
+const args = {
+  list: activeProtocols,
 };
 
-export const Themed = (): React.ReactNode => {
+export const Basic: Story<IProps> = (args) => {
+  return <ProtocolSelector onChange={action('onChange')} {...args} />;
+};
+Basic.args = args;
+
+export const Themed: Story<IProps> = (args) => {
   const customThemes: Record<string, Partial<ITheme>> = {
     ugly: {
       primary: {
@@ -42,7 +37,8 @@ export const Themed = (): React.ReactNode => {
 
   return (
     <ThemeWrapper customThemes={customThemes}>
-      <ProtocolSelector list={activeProtocols} />
+      <ProtocolSelector {...args} />
     </ThemeWrapper>
   );
 };
+Themed.args = args;
