@@ -65,7 +65,14 @@ export const SwapButton = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
-  color: ${(p) => _(p.theme, 'primary', 'color')};
+
+  &:hover path {
+    fill: ${(p) => _(p.theme, 'disabled', 'color')}!important;
+  }
+
+  path {
+    fill: ${(p) => _(p.theme, 'primary', 'color')}!important;
+  }
 
   > div {
     display: block;
