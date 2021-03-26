@@ -4,13 +4,6 @@ module.exports = {
   stories: ['../src/**/*.stories.tsx'],
   addons: [
     {
-      name: '@storybook/addon-essentials',
-      options: {
-        actions: false,
-        controls: false,
-      },
-    },
-    {
       name: '@storybook/addon-docs/preset',
       options: {
         sourceLoaderOptions: {
@@ -19,10 +12,9 @@ module.exports = {
       },
     },
     '@storybook/addon-storysource',
-    'storybook-addon-react-docgen',
     'storybook-dark-mode',
+    'storybook-addon-react-docgen',
+    '@storybook/addon-a11y',
+    '@storybook/addon-essentials',
   ],
-  webpackFinal: async (config, { configType }) => {
-    return config;
-  },
 };
