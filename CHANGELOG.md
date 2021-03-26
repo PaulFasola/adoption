@@ -1,5 +1,12 @@
 # Adoption Changelog
 
+### [1.3.1](https://github.com/PaulFasola/adoption/compare/v1.3.0...v1.3.1) (2021-03-24)
+
+
+### Bug Fixes
+
+* **themeprovider:** wait for custom themes to load before applying user pref ([385703a](https://github.com/PaulFasola/adoption/commit/385703ad9656f2990b4998ba2f2efd6f009e1629))
+
 ## [1.3.0](https://github.com/PaulFasola/adoption/compare/v1.2.0...v1.3.0) (2021-03-20)
 
 

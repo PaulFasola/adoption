@@ -23,6 +23,7 @@ export const ThemeContext = React.createContext<IThemeContext>({
 });
 
 export const ThemeProvider: React.FC<IProps> = ({ customThemes, children }) => {
+  const [themesLoaded, setThemesLoaded] = useState(false);
   const [availableThemes, setAvailableThemes] = useState<Record<string, ITheme>>(defaultThemes);
   const [currentTheme, setCurrentTheme] = useState<IViableTheme>(defaultTheme);
 
@@ -52,13 +53,9 @@ Available themes: ${Object.keys(availableThemes).join(', ')}`);
   );
 
   useEffect(() => {
-    const theme = localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'light';
-    setViableThemeOrDefault(theme);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (!customThemes || Object.keys(customThemes).length === 0) return;
+    if (!customThemes || Object.keys(customThemes).length === 0) {
+      return setThemesLoaded(true);
+    }
     const filledCustomThemes: Record<string, ITheme> = {};
 
     Object.keys(customThemes).forEach((key) => {
@@ -69,7 +66,17 @@ Available themes: ${Object.keys(availableThemes).join(', ')}`);
     setAvailableThemes((prevState) => {
       return { ...prevState, ...filledCustomThemes };
     });
+
+    setThemesLoaded(true);
   }, [customThemes]);
+
+  useEffect(() => {
+    if (!themesLoaded) return;
+
+    const theme = localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'light';
+    setViableThemeOrDefault(theme);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [themesLoaded]);
 
   const switchTo = (nextTheme: ThemeLabel | string) => {
     const [name] = setViableThemeOrDefault(nextTheme);
