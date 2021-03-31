@@ -8,6 +8,8 @@ import { configure, shallow } from 'enzyme';
 import { TxStatus } from '../txStatus';
 import { TransactionStatus } from '..';
 
+import 'jest-styled-components';
+
 expect.extend(toHaveNoViolations);
 configure({ adapter: new Adapter() });
 

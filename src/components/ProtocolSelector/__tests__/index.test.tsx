@@ -7,6 +7,8 @@ import { configure, shallow } from 'enzyme';
 import { ProtocolSelector } from '..';
 import { activeProtocols } from './mocks';
 
+import 'jest-styled-components';
+
 expect.extend(toHaveNoViolations);
 configure({ adapter: new Adapter() });
 

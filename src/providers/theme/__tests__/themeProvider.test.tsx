@@ -7,6 +7,8 @@ import { ThemeContext, ThemeProvider } from '../themeProvider';
 import { TransactionStatus, TxStatus } from '../../../components/TransactionStatus';
 import { ITheme } from '../ITheme';
 
+import 'jest-styled-components';
+
 expect.extend(toHaveNoViolations);
 configure({ adapter: new Adapter() });
 
