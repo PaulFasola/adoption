@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { IconContainer, Link } from './style';
 
 export enum IconType {
@@ -6,12 +6,14 @@ export enum IconType {
   HelpCircleO = 'help-circle-o',
   ArrowUp = 'arrow-up',
   ArrowDown = 'arrow-down',
+  Settings = 'settings',
 }
 
 export interface IProps {
   type: IconType;
   url?: string;
   style?: React.CSSProperties;
+  className?: string;
   targetBlank?: boolean;
   defaultTheme?: boolean;
   disabled?: boolean;
@@ -19,12 +21,8 @@ export interface IProps {
   onClick?: () => void;
 }
 
-interface IconProps {
-  animate?: boolean;
-}
-
 export const Icon: React.FC<IProps> = (props) => {
-  const _outboundLink: React.FC = () => (
+  const _outboundLink: ReactNode = (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
@@ -40,7 +38,7 @@ export const Icon: React.FC<IProps> = (props) => {
     </svg>
   );
 
-  const _arrowUp: React.FC<IconProps> = () => (
+  const _arrowUp: ReactNode = (
     <svg
       version='1.1'
       xmlns='http://www.w3.org/2000/svg'
@@ -58,7 +56,7 @@ export const Icon: React.FC<IProps> = (props) => {
     </svg>
   );
 
-  const _arrowDown: React.FC<IconProps> = () => (
+  const _arrowDown: ReactNode = (
     <svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 330 330'>
       <path
         className='fillable'
@@ -69,7 +67,7 @@ export const Icon: React.FC<IProps> = (props) => {
     </svg>
   );
 
-  const _helpCircle: React.FC<IconProps> = () => (
+  const _helpCircle: ReactNode = (
     <svg viewBox='0 0 20 20'>
       <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
         <g transform='translate(-782.000000, -288.000000)'>
@@ -89,11 +87,26 @@ export const Icon: React.FC<IProps> = (props) => {
     </svg>
   );
 
-  const icons: Record<IconType, React.FC<IconProps>> = {
+  const _settings: ReactNode = (
+    <svg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M61.894,66.056H16.185c-1.104,0-2-0.896-2-2s0.896-2,2-2h45.709c1.104,0,2,0.896,2,2S62.998,66.056,61.894,66.056z' />
+      <path d='M111.907,66.056H87.655c-1.104,0-2-0.896-2-2s0.896-2,2-2h24.252c1.104,0,2,0.896,2,2S113.012,66.056,111.907,66.056z' />
+      <path d='M48.503,96.609H16.185c-1.104,0-2-0.896-2-2s0.896-2,2-2h32.318c1.104,0,2,0.896,2,2S49.607,96.609,48.503,96.609z' />
+      <path d='M111.907,96.609H74.774c-1.104,0-2-0.896-2-2s0.896-2,2-2h37.133c1.104,0,2,0.896,2,2S113.012,96.609,111.907,96.609z' />
+      <path d='M35.013,35.502H16.185c-1.104,0-2-0.896-2-2s0.896-2,2-2h18.828c1.104,0,2,0.896,2,2S36.117,35.502,35.013,35.502z' />
+      <path d='M111.907,35.502H60.776c-1.104,0-2-0.896-2-2s0.896-2,2-2h51.131c1.104,0,2,0.896,2,2S113.012,35.502,111.907,35.502z' />
+      <path d='M42.616,43.104c-5.295,0-9.604-4.309-9.604-9.604c0-5.295,4.309-9.603,9.604-9.603s9.604,4.308,9.604,9.603  C52.22,38.796,47.911,43.104,42.616,43.104z M42.616,27.897c-3.09,0-5.604,2.514-5.604,5.603c0,3.09,2.514,5.604,5.604,5.604  S48.22,36.59,48.22,33.5C48.22,30.411,45.706,27.897,42.616,27.897z' />
+      <path d='M56.106,104.215c-5.295,0-9.604-4.309-9.604-9.605c0-5.295,4.309-9.604,9.604-9.604c5.297,0,9.605,4.309,9.605,9.604  C65.712,99.906,61.403,104.215,56.106,104.215z M56.106,89.006c-3.09,0-5.604,2.514-5.604,5.604c0,3.092,2.514,5.605,5.604,5.605  c3.091,0,5.605-2.514,5.605-5.605C61.712,91.52,59.197,89.006,56.106,89.006z' />
+      <path d='M69.501,73.661c-5.298,0-9.607-4.31-9.607-9.605c0-5.295,4.31-9.604,9.607-9.604c5.294,0,9.602,4.308,9.602,9.604  C79.103,69.352,74.795,73.661,69.501,73.661z M69.501,58.452c-3.092,0-5.607,2.514-5.607,5.604c0,3.091,2.516,5.605,5.607,5.605  c3.089,0,5.602-2.515,5.602-5.605C75.103,60.966,72.59,58.452,69.501,58.452z' />
+    </svg>
+  );
+
+  const icons: Record<IconType, ReactNode> = {
     'help-circle-o': _helpCircle,
     'outbound-link': _outboundLink,
     'arrow-up': _arrowUp,
     'arrow-down': _arrowDown,
+    settings: _settings,
   };
 
   const _getSpecProps = (): Record<string, unknown> => {
@@ -106,21 +119,19 @@ export const Icon: React.FC<IProps> = (props) => {
     return specProps;
   };
 
-  const SelectedIcon = icons[props.type];
-
-  if (props.url) {
+  if (props.url || typeof props.onClick === 'function') {
     return (
-      <Link href={props.url} title={props.url} {..._getSpecProps()}>
-        <IconContainer style={props.style}>
-          <SelectedIcon />
-        </IconContainer>
+      <Link
+        onClick={props.onClick}
+        href={props.url}
+        title={props.url}
+        {..._getSpecProps()}
+        className={props.className}
+      >
+        <IconContainer style={props.style}>{icons[props.type]}</IconContainer>
       </Link>
     );
   }
 
-  return (
-    <IconContainer {...props}>
-      <SelectedIcon />
-    </IconContainer>
-  );
+  return <IconContainer {...props}>{icons[props.type]}</IconContainer>;
 };
