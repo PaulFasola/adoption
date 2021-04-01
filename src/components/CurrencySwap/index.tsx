@@ -1,5 +1,13 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { Container, SwapButton, SwapInput, InputWrapper, SubmitButton, Overview } from './style';
+import {
+  Container,
+  SwapButton,
+  SwapInput,
+  InputWrapper,
+  SubmitButton,
+  Overview,
+  SettingsButton,
+} from './style';
 import { IProps, IProtocolArrayPipe, IProtocolPipe, ProtocolEnd, ISwapValues } from './interfaces';
 import { Icon, IconType } from '../common/Icon';
 import { ProtocolSelector } from '../ProtocolSelector';
@@ -138,6 +146,10 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     });
   };
 
+  const handleSettingsClick = () => {
+    throw new Error('NotImplemented');
+  };
+
   const getPriceEquiv = (): React.ReactNode => {
     if (!activeProtocols?.input || !activeProtocols?.output) {
       return;
@@ -210,14 +222,14 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         </div>
       </InputWrapper>
       <SwapButton
-        aria-label={strs.swapBtnLabel}
+        aria-label={strs.buttonLabels.swap}
         onClick={() => {
           setSwapValues({ input: swapValues.output, output: swapValues.input });
           /* istanbul ignore next */
           setActiveProtocols({ input: activeProtocols?.output, output: activeProtocols?.input });
         }}
       >
-        <Icon type={IconType.ArrowDown} style={{ width: '18px' }} />
+        <Icon type={IconType.ArrowDown} />
       </SwapButton>
       <InputWrapper>
         <span>{strs.from}</span>
@@ -240,7 +252,12 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         </div>
       </InputWrapper>
       <SubmitButton aria-label='Submit' disabled={!canSwap} onClick={handleSubmit}>
-        {getButtonValue()}
+        <div>{getButtonValue()}</div>
+        <SettingsButton
+          aria-label={strs.buttonLabels.settings}
+          type={IconType.Settings}
+          onClick={handleSettingsClick}
+        />
       </SubmitButton>
     </Container>
   );

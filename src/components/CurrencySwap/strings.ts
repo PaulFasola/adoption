@@ -2,7 +2,10 @@ export interface IStrings {
   from: string;
   to: string;
   balance: string;
-  swapBtnLabel: string;
+  buttonLabels: {
+    settings: string;
+    swap: string;
+  };
   submitButton: {
     unlockWallet: string;
     proceed: string;
@@ -14,7 +17,10 @@ export const defaultStrings: IStrings = {
   from: 'From',
   to: 'To',
   balance: 'Balance:',
-  swapBtnLabel: 'Swap values',
+  buttonLabels: {
+    swap: 'Swap values',
+    settings: 'Settings',
+  },
   submitButton: {
     unlockWallet: 'Unlock Wallet',
     insufficientBalance: 'Insufficient balance',
