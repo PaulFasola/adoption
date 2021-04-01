@@ -10,6 +10,8 @@ import { advanceBy, advanceTo, clear } from 'jest-date-mock';
 import { LocalizationProvider } from '../../../providers/localization/localizationProvider';
 import { ILocalizedStrings } from '../../../providers/localization/ILocalizedStrings';
 
+import 'jest-styled-components';
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const companyAsset = require('../../assets/fictiveCompany.png');
 
