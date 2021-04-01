@@ -7,6 +7,8 @@ import { LocalizationContext, LocalizationProvider } from '../localizationProvid
 import { TransactionStatus, TxStatus } from '../../../components/TransactionStatus';
 import { ILocalizedStrings } from '../ILocalizedStrings';
 
+import 'jest-styled-components';
+
 expect.extend(toHaveNoViolations);
 configure({ adapter: new Adapter() });
 

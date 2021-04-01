@@ -9,6 +9,8 @@ import { Overview, SwapButton } from '../style';
 import { ISwapSubmission, ProtocolEnd } from '../interfaces';
 import { IProtocol } from '../../ProtocolSelector/interfaces';
 
+import 'jest-styled-components';
+
 const SUBMIT_BUTTON_SELECTOR = 'button[aria-label="Submit"]';
 
 expect.extend(toHaveNoViolations);
