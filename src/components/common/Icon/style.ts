@@ -15,6 +15,7 @@ interface SP extends IStyleProps {}
 export const Link = styled.a`
   color: ${({ theme, defaultTheme }: SP) => _(!defaultTheme ? theme : null, 'primary', 'color')};
   text-decoration: none;
+  cursor: pointer; /* feedback needed for onClick events, as href attribute will most likely not be defined */
 `;
 
 export const IconContainer = styled.div`
