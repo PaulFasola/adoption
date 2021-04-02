@@ -5,6 +5,7 @@ import _ from '../../../providers/theme/styleFetcher';
 export interface IStyleProps {
   theme: ITheme;
   disabled?: boolean;
+  hidden?: boolean;
   defaultTheme?: boolean;
 
   onClick?: () => void;
@@ -19,6 +20,7 @@ export const Link = styled.a`
 `;
 
 export const IconContainer = styled.div`
+  ${({ hidden }: SP) => hidden && `visibility: hidden`};
   min-width: 0.5em;
   margin: 3px;
   display: inline-block;
@@ -35,10 +37,6 @@ export const IconContainer = styled.div`
   svg .fillable {
     fill: ${({ theme, defaultTheme }: SP) => _(!defaultTheme ? theme : null, 'primary', 'color')};
 
-    ${({ theme, disabled }: SP) =>
-      disabled &&
-      `
-        fill: ${_(theme, 'disabled', 'color')}
-      `}
+    ${({ theme, disabled }: SP) => disabled && `fill: ${_(theme, 'disabled', 'color')}`};
   }
 `;

@@ -18,6 +18,7 @@ export interface IProps {
   targetBlank?: boolean;
   defaultTheme?: boolean;
   disabled?: boolean;
+  hidden?: boolean;
 
   onClick?: () => void;
 }
@@ -141,7 +142,7 @@ export const Icon: React.FC<IProps> = (props) => {
         {..._getSpecProps()}
         className={props.className}
       >
-        <IconContainer style={props.style}>{icons[props.type]}</IconContainer>
+        <IconContainer {...props}>{icons[props.type]}</IconContainer>
       </Link>
     );
   }
