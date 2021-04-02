@@ -33,7 +33,8 @@ export const Button = styled.button`
   &:not(:disabled) {
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: ${({ theme }) => _(theme, 'defaultButton', 'hoverBgColor')};
     }
   }

@@ -7,6 +7,8 @@ import { configure, mount, shallow } from 'enzyme';
 import { Input } from '..';
 import { act } from 'react-dom/test-utils';
 
+import 'jest-styled-components';
+
 expect.extend(toHaveNoViolations);
 configure({ adapter: new Adapter() });
 

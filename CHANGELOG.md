@@ -1,5 +1,13 @@
 # Adoption Changelog
 
+### [1.3.2](https://github.com/PaulFasola/adoption/compare/v1.3.1...v1.3.2) (2021-03-26)
+
+
+### Bug Fixes
+
+* **protocolselector:** WCAG2AA - Elements with scrollable content must be keyboard accessible ([3bed194](https://github.com/PaulFasola/adoption/commit/3bed194ffda98477e4f8b1cbc89415e84bd67a7b))
+* **theme:** WCAG2AA conformance - date has insufficient color contrast ([aa47ec1](https://github.com/PaulFasola/adoption/commit/aa47ec176bac3dc3927425a48dd5201f9d4f60a8))
+
 ### [1.3.1](https://github.com/PaulFasola/adoption/compare/v1.3.0...v1.3.1) (2021-03-24)
 
 

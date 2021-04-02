@@ -5,6 +5,8 @@ import toJson from 'enzyme-to-json';
 import { usePrevious } from '../usePrevious';
 import { toHaveNoViolations } from 'jest-axe';
 
+import 'jest-styled-components';
+
 expect.extend(toHaveNoViolations);
 configure({ adapter: new Adapter() });
 
