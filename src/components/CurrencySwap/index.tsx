@@ -117,10 +117,6 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     reflectProtocolsAndPrices(end, value);
   };
 
-  const handleProtocolChange = (end: ProtocolEnd) => (newProto: IProtocol) => {
-    setActiveProtocols({ ...activeProtocols, ...{ [end]: newProto } });
-  };
-
   const handleSubmit = () => {
     /** istanbul ignore next */
     if (!swapValues || !activeProtocols) return;
@@ -132,10 +128,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       });
     }
 
-    setSwapValues({
-      input: 0,
-      output: 0,
-    });
+    setSwapValues({ input: 0, output: 0 });
   };
 
   const getPriceEquiv = (): React.ReactNode => {
@@ -159,6 +152,27 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       </Overview>
     );
   };
+
+  const getSwapInput = (end: ProtocolEnd): React.ReactNode => (
+    <div>
+      <SwapInput
+        type='decimal'
+        maxLength={19}
+        placeholder='0.00'
+        value={swapValues[end]}
+        onValueChange={handleValueChange(end)}
+      />
+      <div>
+        <ProtocolSelector
+          current={activeProtocols ? activeProtocols[end] : undefined}
+          list={protocols[end].filter((x) => !x.hidden)}
+          onChange={(newProto) =>
+            setActiveProtocols({ ...activeProtocols, ...{ [end]: newProto } })
+          }
+        />
+      </div>
+    </div>
+  );
 
   const getButtonValue = (): string => {
     const { insufficientBalance, unlockWallet, proceed } = strs.submitButton;
@@ -192,22 +206,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
             </Overview>
           )}
         </div>
-        <div>
-          <SwapInput
-            type='decimal'
-            maxLength={19}
-            placeholder='0.00'
-            value={swapValues.input}
-            onValueChange={handleValueChange('input')}
-          />
-          <div>
-            <ProtocolSelector
-              current={activeProtocols?.input}
-              list={protocols.input.filter((x) => !x.hidden)}
-              onChange={handleProtocolChange('input')}
-            />
-          </div>
-        </div>
+        {getSwapInput('input')}
       </InputWrapper>
       <SwapButton
         aria-label={strs.swapBtnLabel}
@@ -222,22 +221,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       <InputWrapper>
         <span>{strs.from}</span>
         {getPriceEquiv()}
-        <div>
-          <SwapInput
-            type='decimal'
-            maxLength={19}
-            placeholder='0.00'
-            value={swapValues.output}
-            onValueChange={handleValueChange('output')}
-          />
-          <div>
-            <ProtocolSelector
-              current={activeProtocols?.output}
-              list={protocols.output.filter((x) => !x.hidden)}
-              onChange={handleProtocolChange('output')}
-            />
-          </div>
-        </div>
+        {getSwapInput('output')}
       </InputWrapper>
       <SubmitButton aria-label='Submit' disabled={!canSwap} onClick={handleSubmit}>
         {getButtonValue()}
