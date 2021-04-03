@@ -7,6 +7,7 @@ import { Icon } from '../common/Icon';
 export interface IStyleProps {
   theme: ITheme;
   noShadow?: boolean;
+  settingsVisible?: boolean;
 }
 
 interface SP extends IStyleProps {}
@@ -106,6 +107,7 @@ export const SubmitButton = styled.button`
   div {
     display: inline-block;
     flex-grow: 1;
+    padding-left: 30px;
   }
 
   &:disabled {
@@ -114,7 +116,7 @@ export const SubmitButton = styled.button`
     cursor: auto;
   }
 
-  &:hover:not(:disabled) {
+  &:hover {
     background-color: ${(p) => _(p.theme, 'defaultButton', 'hoverBgColor')};
   }
 `;
@@ -125,9 +127,11 @@ export const SettingsButton = styled(Icon)`
 
   > div {
     background-color: white;
-    padding: 5px 10px 5px 10px;
+    padding: 0 5px 0 5px;
     border-radius: 30px;
+
     svg {
+      width: 18px;
       margin-top: 5px;
     }
   }
@@ -139,7 +143,17 @@ export const SettingsButton = styled(Icon)`
     }
   }
 
-  svg {
-    width: 18px;
-  }
+  ${(p: SP) =>
+    p.settingsVisible &&
+    `
+    z-index: 1;
+
+    > div {
+      border: 1px solid ${_(p.theme, 'disabled', 'color')};
+
+      svg {
+        width: 16px;
+      }
+    }
+  `}
 `;
