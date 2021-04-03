@@ -8,7 +8,6 @@ export interface IStyleProps {
 interface SP extends IStyleProps {}
 
 export const Container = styled.div`
-  z-index: -1;
   opacity: 0;
   top: 0;
   left: 0;
@@ -18,11 +17,12 @@ export const Container = styled.div`
   background-color: ${(p) => _(p.theme, 'primary', 'backgroundColor')};
   transition: opacity 0.25s;
   overflow: hidden;
+  pointer-events: none;
 
   ${(p: SP) =>
     p.visible &&
     `
-    z-index: 0;
+    pointer-events: all;
 		opacity: 1;
 	`};
 `;
