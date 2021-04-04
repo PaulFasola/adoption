@@ -32,10 +32,10 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
 
   // TODO: use a proper e2e to test accessibility
   /* istanbul ignore next */
-  const handleKeypress = (e: React.KeyboardEvent) => (protocol: IProtocol) => {
-    if (e.key !== 'Enter') return;
-
-    handleProtocolPick(protocol)();
+  const handleKeypress = (protocol: IProtocol) => (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleProtocolPick(protocol)();
+    }
   };
 
   const handleProtocolPick = (protocol: IProtocol) => (): void => {
@@ -93,7 +93,7 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
           <div
             key={i}
             onClick={handleProtocolPick(protocol)}
-            onKeyPress={handleKeypress}
+            onKeyPress={handleKeypress(protocol)}
             tabIndex={0}
           >
             <ProtocolIcon src={protocol.logoURI} title={fullLabel} />

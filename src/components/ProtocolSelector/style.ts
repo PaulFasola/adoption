@@ -89,7 +89,9 @@ export const DropDownList = styled.div`
     font-size: 0.9em;
     padding: 0.17rem 1.5rem 0.25rem 0;
 
-    &:hover {
+    &:hover,
+    &:focus {
+      outline: none;
       background-color: ${({ theme }) => _(theme, 'primary', 'hoverBgColor')};
       color: ${({ theme }) => _(theme, 'primary', 'hoverColor')};
 
