@@ -210,7 +210,13 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       </InputWrapper>
       <SwapButton
         aria-label={strs.swapBtnLabel}
-        onClick={() => {
+        onClick={(e) => {
+          // unfocus when the user clicks on the button since this last will keep the focus
+          // that event shouldn't be trigerred while using keyboard navigation for accessibility reasons
+          if (e.screenX > 0 && e.screenY) {
+            e.currentTarget.blur();
+          }
+
           setSwapValues({ input: swapValues.output, output: swapValues.input });
           /* istanbul ignore next */
           setActiveProtocols({ input: activeProtocols?.output, output: activeProtocols?.input });

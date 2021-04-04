@@ -66,7 +66,9 @@ export const SwapButton = styled.button`
   background: transparent;
   cursor: pointer;
 
-  &:hover path {
+  &:hover path,
+  &:focus path {
+    transition: fill 0.15s ease-in;
     fill: ${(p) => _(p.theme, 'disabled', 'color')}!important;
   }
 
@@ -100,8 +102,11 @@ export const SubmitButton = styled.button`
     cursor: auto;
   }
 
-  &:hover:not(:disabled) {
-    background-color: ${(p) => _(p.theme, 'defaultButton', 'hoverBgColor')};
+  &:hover,
+  &:focus {
+    &:not(:disabled) {
+      background-color: ${(p) => _(p.theme, 'defaultButton', 'hoverBgColor')};
+    }
   }
 `;
 
