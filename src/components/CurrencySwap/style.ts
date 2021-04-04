@@ -116,7 +116,7 @@ export const SubmitButton = styled.button`
     cursor: auto;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: ${(p) => _(p.theme, 'defaultButton', 'hoverBgColor')};
   }
 `;
@@ -137,6 +137,8 @@ export const SettingsButton = styled(Icon)`
   }
 
   &:hover {
+    opacity: 1;
+
     svg {
       transition: transform 0.1s;
       transform: scale(1.1);

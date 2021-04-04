@@ -16,6 +16,8 @@ import { preventCommonSymbol } from './utils';
 import { usePrevious } from '../../hooks/usePrevious';
 import { useLocale } from '../../hooks/useLocale';
 import { IStrings } from './strings';
+import { Settings } from './settings';
+import { ISettingsProps } from './settings/interfaces';
 
 const DEFAULT_MAX_FRACTION_DIGITS = 8;
 
@@ -27,6 +29,9 @@ const CurrencySwap: React.FC<IProps> = (props) => {
   const [activeProtocols, setActiveProtocols] = useState<IProtocolPipe>();
   const [swapValues, setSwapValues] = useState<ISwapValues>({});
   const [canSwap, setCanSwap] = useState<boolean>(false);
+  const [settingsPanel, setSettingsPanel] = useState<Omit<ISettingsProps, 'settings'>>({
+    renderable: false,
+  });
 
   const dataRef = usePrevious(activeProtocols);
 
@@ -40,6 +45,28 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       output: output ?? inputList,
     });
   }, [props.protocols]);
+
+  useEffect(() => {
+    const isRenderable = (): boolean => {
+      if (!props.settings) return false;
+
+      let show = false;
+      Object.values(props.settings).every((setting): boolean => {
+        if (setting && Boolean(setting['visible'])) {
+          show = true;
+          return false;
+        }
+        return true;
+      });
+
+      return show;
+    };
+
+    setSettingsPanel((prevState) => ({
+      ...prevState,
+      renderable: isRenderable(),
+    }));
+  }, [props.settings]);
 
   const getMaxFractionDigits = useCallback(
     (decimals?: number): number => {
@@ -140,14 +167,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       });
     }
 
-    setSwapValues({
-      input: 0,
-      output: 0,
-    });
-  };
-
-  const handleSettingsClick = () => {
-    throw new Error('NotImplemented');
+    setSwapValues({ input: 0, output: 0 });
   };
 
   const getPriceEquiv = (): React.ReactNode => {
@@ -254,11 +274,18 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       <SubmitButton aria-label='Submit' disabled={!canSwap} onClick={handleSubmit}>
         <div>{getButtonValue()}</div>
         <SettingsButton
+          hidden={!settingsPanel.renderable}
           aria-label={strs.buttonLabels.settings}
-          type={IconType.Settings}
-          onClick={handleSettingsClick}
+          type={settingsPanel.visible ? IconType.Times : IconType.Settings}
+          settingsVisible={settingsPanel.visible}
+          onClick={() =>
+            setSettingsPanel((prevState) => ({ ...prevState, visible: !settingsPanel.visible }))
+          }
         />
       </SubmitButton>
+      {settingsPanel.renderable && props.settings && (
+        <Settings settings={props.settings} visible={settingsPanel.visible} />
+      )}
     </Container>
   );
 };
