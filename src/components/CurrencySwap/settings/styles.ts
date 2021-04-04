@@ -30,3 +30,7 @@ export const Container = styled.div`
 export const Content = styled.div`
   padding: 25px;
 `;
+
+export const Field = styled.div``;
+
+export const Label = styled.label``;
