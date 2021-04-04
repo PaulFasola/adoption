@@ -17,6 +17,14 @@ export const Basic: Story<IProps> = (args) => (
         onSubmit={action('onSubmit', {
           clearOnStoryChange: true,
         })}
+        settings={{
+          slippageTolerance: {
+            visible: true,
+            label: 'Slippage tolerance',
+            type: 'radio',
+            value: ['0.1%', '0.5%', '1%', '2%'],
+          },
+        }}
         {...args}
       />
     </div>
@@ -25,6 +33,7 @@ export const Basic: Story<IProps> = (args) => (
     </p>
   </>
 );
+
 Basic.args = {
   protocols: {
     input: activeProtocols,
@@ -39,4 +48,5 @@ export const Themed: Story<IProps> = (args) => (
     <Basic {...args} />
   </ThemeWrapper>
 );
+
 Themed.args = Basic.args;
