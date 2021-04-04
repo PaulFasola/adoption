@@ -7,8 +7,7 @@ import { ITheme } from './ITheme';
 import { ThemeWrapper } from './themeWrapper';
 import { Meta, Story } from '@storybook/react';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const companyAsset = require('../../assets/fictiveCompany.png');
+import companyAsset from '../../assets/fictiveCompany.png';
 
 export default {
   title: 'ThemeProvider',

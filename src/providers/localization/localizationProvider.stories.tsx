@@ -7,8 +7,7 @@ import { ILocalizedStrings } from './ILocalizedStrings';
 import { LocalizationWrapper } from './localizationWrapper';
 import { Meta, Story } from '@storybook/react';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const companyAsset = require('../../assets/fictiveCompany.png');
+import companyAsset from '../../assets/fictiveCompany.png';
 
 export default {
   title: 'LocalizationProvider',
