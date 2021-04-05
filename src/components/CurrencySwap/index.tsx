@@ -117,6 +117,8 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     reflectProtocolsAndPrices(end, value);
   };
 
+  // TODO: use a proper e2e to test accessibility
+  /* istanbul ignore next */
   const handleKeyboardSubmission = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && canSwap) {
       handleSubmit();
@@ -217,9 +219,11 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       <SwapButton
         aria-label={strs.swapBtnLabel}
         onClick={(e) => {
-          // unfocus when the user clicks on the button since this last will keep the focus
-          // that event shouldn't be trigerred while using keyboard navigation for accessibility reasons
+          // TODO: use a proper e2e to test accessibility
+          /* istanbul ignore next */
           if (e.screenX > 0 && e.screenY) {
+            // unfocus when the user clicks on the button since this last will keep the focus
+            // that event shouldn't be trigerred while using keyboard navigation for accessibility reasons
             e.currentTarget.blur();
           }
 
