@@ -1,5 +1,16 @@
 # Adoption Changelog
 
+### [1.3.3](https://github.com/PaulFasola/adoption/compare/v1.3.2...v1.3.3) (2021-04-05)
+
+
+### Bug Fixes
+
+* **currencyswap:** [a11y] swap button focus color feedback ([2c11e7a](https://github.com/PaulFasola/adoption/commit/2c11e7a9811b8cbaa3fe5e72a5c27614becf14c8))
+* **currencyswap:** added missing hover color for swapbutton ([ea08902](https://github.com/PaulFasola/adoption/commit/ea0890248927f3f59be15ed917c4f312b1ce1647))
+* **paymentrequest:** [a11y] cancel button focus color feedback ([7a70a56](https://github.com/PaulFasola/adoption/commit/7a70a56114f377708c8e9b29e0086ee39bccf735))
+* **paymentrequest:** [a11y] pressing the Enter key in an input will now trigger the swap, if possible ([bbe07f8](https://github.com/PaulFasola/adoption/commit/bbe07f879e1a2eb9f89e49a2f2b1bb471af07f4c))
+* **protocolselector:** [a11y] fix keyboard protocol selection ([2cd91b8](https://github.com/PaulFasola/adoption/commit/2cd91b857e4b93d952f820980800c73cb5f49fa9))
+
 ### [1.3.2](https://github.com/PaulFasola/adoption/compare/v1.3.1...v1.3.2) (2021-03-26)
 
 
