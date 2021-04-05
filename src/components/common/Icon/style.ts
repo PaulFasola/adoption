@@ -5,7 +5,7 @@ import _ from '../../../providers/theme/styleFetcher';
 export interface IStyleProps {
   theme: ITheme;
   disabled?: boolean;
-  defaultTheme?: boolean;
+  overrideTheme?: ITheme;
 
   onClick?: () => void;
 }
@@ -13,7 +13,7 @@ export interface IStyleProps {
 interface SP extends IStyleProps {}
 
 export const Link = styled.a`
-  color: ${({ theme, defaultTheme }: SP) => _(!defaultTheme ? theme : null, 'primary', 'color')};
+  color: ${({ theme, overrideTheme }: SP) => _(overrideTheme ?? theme, 'primary', 'color')};
   text-decoration: none;
 `;
 
@@ -26,13 +26,13 @@ export const IconContainer = styled.div`
   ${({ onClick }: SP) =>
     typeof onClick !== 'undefined' &&
     `
-    :hover {
+    :hover, &:focus {
       opacity: 0.6;
     }
   `}
 
   svg .fillable {
-    fill: ${({ theme, defaultTheme }: SP) => _(!defaultTheme ? theme : null, 'primary', 'color')};
+    fill: ${({ theme, overrideTheme }: SP) => _(overrideTheme ?? theme, 'primary', 'color')};
 
     ${({ theme, disabled }: SP) =>
       disabled &&
