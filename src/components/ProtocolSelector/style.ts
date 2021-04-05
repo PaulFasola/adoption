@@ -119,7 +119,7 @@ export const DropDownList = styled.div`
       border: 1px solid ${({ theme }) => _(theme, 'disabled', 'color')};
       color: ${({ theme }) => _(theme, 'disabled', 'color')};
       position: absolute;
-      right: 0.5rem;
+      right: 0.6rem;
     }
   }
 `;
