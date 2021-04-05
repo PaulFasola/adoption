@@ -41,11 +41,7 @@ export const InputWrapper = styled.div`
   & > div {
     display: flex;
     align-items: center;
-
-    /* ProtocolSelector wrapper */
-    div {
-      margin-right: 0.2em;
-    }
+    margin-right: 0.2em;
   }
 `;
 
