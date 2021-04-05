@@ -12,8 +12,7 @@ import { ILocalizedStrings } from '../../../providers/localization/ILocalizedStr
 
 import 'jest-styled-components';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const companyAsset = require('../../assets/fictiveCompany.png');
+import companyAsset from '../../assets/fictiveCompany.png';
 
 configure({ adapter: new Adapter() });
 

@@ -41,11 +41,7 @@ export const InputWrapper = styled.div`
   & > div {
     display: flex;
     align-items: center;
-
-    /* ProtocolSelector wrapper */
-    div {
-      margin-right: 0.2em;
-    }
+    margin-right: 0.2em;
   }
 `;
 
@@ -65,7 +61,16 @@ export const SwapButton = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
-  color: ${(p) => _(p.theme, 'primary', 'color')};
+
+  &:hover path,
+  &:focus path {
+    transition: fill 0.15s ease-in;
+    fill: ${(p) => _(p.theme, 'disabled', 'color')}!important;
+  }
+
+  path {
+    fill: ${(p) => _(p.theme, 'primary', 'color')}!important;
+  }
 
   > div {
     display: block;
@@ -93,8 +98,11 @@ export const SubmitButton = styled.button`
     cursor: auto;
   }
 
-  &:hover:not(:disabled) {
-    background-color: ${(p) => _(p.theme, 'defaultButton', 'hoverBgColor')};
+  &:hover,
+  &:focus {
+    &:not(:disabled) {
+      background-color: ${(p) => _(p.theme, 'defaultButton', 'hoverBgColor')};
+    }
   }
 `;
 

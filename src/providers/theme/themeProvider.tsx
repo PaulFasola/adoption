@@ -11,15 +11,28 @@ interface IProps {
   customThemes?: Record<string, Partial<ITheme>>;
 }
 
-export const defaultTheme = {
-  name: 'light',
-  palette: defaultThemes.light,
-};
+const getDefaultTheme = (): IViableTheme => {
+  /* TODO: handle user theme pref + priorities (selected theme > user pref > default theme)
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')) {
+        return {
+          name: 'dark',
+          palette: defaultThemes.dark,
+        }
+    }
+  */
+
+  return {
+    name: 'light',
+    palette: defaultThemes.light,
+  };
+}
+
+export const defaultTheme = getDefaultTheme();
 
 /* istanbul ignore next */
 export const ThemeContext = React.createContext<IThemeContext>({
   currentTheme: defaultTheme,
-  switchTo: () => {},
+  switchTo: () => { },
 });
 
 export const ThemeProvider: React.FC<IProps> = ({ customThemes, children }) => {
@@ -38,9 +51,8 @@ export const ThemeProvider: React.FC<IProps> = ({ customThemes, children }) => {
           palette: requestedTheme,
         };
       } else {
-        console.warn(`[WARN] Adoption Theme - requested theme "${themeName}" was not found. Defaulting to "${
-          theme.name
-        }" preset.\n
+        console.warn(`[WARN] Adoption Theme - requested theme "${themeName}" was not found. Defaulting to "${theme.name
+          }" preset.\n
 Add your theme to 'customThemes' property on <ThemeProvider>.
 Available themes: ${Object.keys(availableThemes).join(', ')}`);
       }

@@ -4,6 +4,7 @@ import { IProps, IProtocol } from './interfaces';
 import { Icon, IconType } from '../common/Icon';
 import { useLocale } from '../../hooks/useLocale';
 import { IStrings } from './strings';
+import { defaultThemes } from '../../providers/theme/defaultThemes';
 
 export const ProtocolSelector: React.FC<IProps> = (props) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -32,10 +33,10 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
 
   // TODO: use a proper e2e to test accessibility
   /* istanbul ignore next */
-  const handleKeypress = (e: React.KeyboardEvent) => (protocol: IProtocol) => {
-    if (e.key !== 'Enter') return;
-
-    handleProtocolPick(protocol)();
+  const handleKeypress = (protocol: IProtocol) => (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleProtocolPick(protocol)();
+    }
   };
 
   const handleProtocolPick = (protocol: IProtocol) => (): void => {
@@ -61,7 +62,7 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
           <Symbol>{protocol.symbol}</Symbol>
           {props.list.length > 0 && (
             <Icon
-              defaultTheme
+              overrideTheme={defaultThemes.light}
               type={IconType.ArrowDown}
               style={{ width: '0.8em' }}
               disabled={props.disabled}
@@ -75,7 +76,7 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
       <Button disabled={props.disabled} onClick={() => setDropdownIsOpen(!dropdownIsOpen)}>
         <div>{strs.selectProtocol}</div>
         <Icon
-          defaultTheme
+          overrideTheme={defaultThemes.light}
           type={IconType.ArrowDown}
           style={{ width: '0.6em' }}
           disabled={props.disabled}
@@ -93,7 +94,7 @@ export const ProtocolSelector: React.FC<IProps> = (props) => {
           <div
             key={i}
             onClick={handleProtocolPick(protocol)}
-            onKeyPress={handleKeypress}
+            onKeyPress={handleKeypress(protocol)}
             tabIndex={0}
           >
             <ProtocolIcon src={protocol.logoURI} title={fullLabel} />

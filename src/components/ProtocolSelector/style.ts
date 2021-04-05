@@ -89,7 +89,9 @@ export const DropDownList = styled.div`
     font-size: 0.9em;
     padding: 0.17rem 1.5rem 0.25rem 0;
 
-    &:hover {
+    &:hover,
+    &:focus {
+      outline: none;
       background-color: ${({ theme }) => _(theme, 'primary', 'hoverBgColor')};
       color: ${({ theme }) => _(theme, 'primary', 'hoverColor')};
 
@@ -117,7 +119,7 @@ export const DropDownList = styled.div`
       border: 1px solid ${({ theme }) => _(theme, 'disabled', 'color')};
       color: ${({ theme }) => _(theme, 'disabled', 'color')};
       position: absolute;
-      right: 0.5rem;
+      right: 0.6rem;
     }
   }
 `;

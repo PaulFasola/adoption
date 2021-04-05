@@ -136,7 +136,8 @@ export const CancelButton = styled.button`
   color: ${(p) => _(p.theme, 'primary', 'color')};
   text-align: center;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: ${(p) => _(p.theme, 'primary', 'backgroundColor')};
     background-color: #f7931a;
   }
