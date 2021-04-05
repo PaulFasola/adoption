@@ -47,7 +47,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
   );
 
   const reflectProtocolsAndPrices = useCallback(
-    (end: ProtocolEnd, value: number): void => {
+    (end: ProtocolEnd, value: number) => {
       if (!activeProtocols || !activeProtocols[end]) return;
 
       const currentProto = activeProtocols[end] as IProtocol;
@@ -109,12 +109,18 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     return setCanSwap(!props.locked);
   }, [props.locked, activeProtocols, swapValues]);
 
-  const handleValueChange = (end: ProtocolEnd) => (newValue: string): void => {
+  const handleValueChange = (end: ProtocolEnd) => (newValue: string) => {
     const value = Number(newValue);
     setSwapValues({ input: undefined, output: undefined });
 
     if (isNaN(value)) return;
     reflectProtocolsAndPrices(end, value);
+  };
+
+  const handleKeyboardSubmission = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && canSwap) {
+      handleSubmit();
+    }
   };
 
   const handleSubmit = () => {
@@ -197,7 +203,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
 
   return (
     <Container noShadow={props.noShadow}>
-      <InputWrapper>
+      <InputWrapper onKeyPress={handleKeyboardSubmission}>
         <div>
           <span>{strs.from}</span>
           {activeProtocols?.input && (
@@ -224,7 +230,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       >
         <Icon type={IconType.ArrowDown} style={{ width: '18px' }} />
       </SwapButton>
-      <InputWrapper>
+      <InputWrapper onKeyPress={handleKeyboardSubmission}>
         <span>{strs.from}</span>
         {getPriceEquiv()}
         {getSwapInput('output')}
