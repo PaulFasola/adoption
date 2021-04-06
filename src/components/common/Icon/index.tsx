@@ -12,6 +12,7 @@ export enum IconType {
 
 export interface IProps {
   type: IconType;
+  title?: string;
   url?: string;
   style?: React.CSSProperties;
   className?: string;
