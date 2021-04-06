@@ -22,6 +22,7 @@ export const Basic: Story<IProps> = (args) => (
             visible: true,
             label: 'Slippage tolerance',
             type: 'radio',
+            hint: 'The tolerated difference between the executed price and the expected price.',
             value: ['0.1%', '0.5%', '1%', '2%'],
           },
         }}

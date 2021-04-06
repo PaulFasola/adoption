@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { Icon, IconType } from '../../common/Icon';
 import { buildField } from './fields/fieldBuilder';
 import { ISetting, ISettingsProps } from './interfaces';
 import { Container, Content, Field, Label } from './styles';
@@ -13,7 +14,7 @@ export const Settings: React.FC<ISettingsProps> = (props) => {
       <Field key={index}>
         <Label>
           {data['label']}
-          {data.hint}
+          {data.hint && <Icon type={IconType.HelpCircleO} title={data.hint} />}
         </Label>
         {buildField({ name, ...data, onChange: handleValueChange })}
       </Field>

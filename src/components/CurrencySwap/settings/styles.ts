@@ -33,4 +33,20 @@ export const Content = styled.div`
 
 export const Field = styled.div``;
 
-export const Label = styled.label``;
+export const Label = styled.label`
+  div[type='help-circle-o'] {
+    width: 13px;
+    margin-left: 5px;
+
+    path {
+      transition: fill 0.2s;
+    }
+
+    &:hover,
+    &:focus {
+      path {
+        fill: ${(p) => _(p.theme, 'disabled', 'color')};
+      }
+    }
+  }
+`;
