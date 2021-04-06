@@ -1,13 +1,16 @@
 import React, { ChangeEvent, Fragment } from 'react';
-import { Container, Switch, Label, Input } from './style';
+import { IProps as IInputProps } from '../Input/interfaces';
+import { Container, Slider, Label, CustomValue } from './style';
 
 interface IProps {
   name: string;
   values: string[];
+  customValue?: IInputProps;
+
   onChange?: (value: string) => void;
 }
 
-export const MultiSwitch: React.FC<IProps> = ({ name, values, onChange }) => {
+export const MultiSwitch: React.FC<IProps> = ({ name, values, customValue, onChange }) => {
   const handleChange = (e: ChangeEvent): void => {
     const target = e.target as HTMLInputElement;
     onChange && onChange(target.value);
@@ -17,13 +20,14 @@ export const MultiSwitch: React.FC<IProps> = ({ name, values, onChange }) => {
     <Container>
       {values.map((value, i) => (
         <Fragment key={i}>
-          <Input type='radio' value={value} id={`item-${i}`} name={name} onChange={handleChange} />
+          <input type='radio' value={value} id={`item-${i}`} name={name} onChange={handleChange} />
           <Label htmlFor={`item-${i}`}>
             <span>{value}</span>
           </Label>
         </Fragment>
       ))}
-      <Switch />
+      {customValue && <CustomValue {...customValue} />}
+      <Slider />
     </Container>
   );
 };
