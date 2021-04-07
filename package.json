@@ -110,7 +110,7 @@
     "storybook-dark-mode": "1.0.8-canary.146.3242.0",
     "ts-jest": "26.5.4",
     "ts-loader": "8.1.0",
-    "typescript": "4.2.3",
+    "typescript": "4.2.4",
     "webpack": "4.46.0"
   },
   "dependencies": {
