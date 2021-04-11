@@ -1,3 +1,4 @@
+import { IProps as IInputProps } from '../../common/Input/interfaces';
 import { IProps } from '../interfaces';
 
 export interface ISettingsProps extends Pick<IProps, 'settings'> {
@@ -17,5 +18,6 @@ export interface ISetting {
   type: SettingType;
   label: string;
   hint?: string;
+  customInput?: IInputProps;
   value?: any;
 }

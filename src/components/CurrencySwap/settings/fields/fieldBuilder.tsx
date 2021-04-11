@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { BooleanField } from './booleanField';
 import { RadioField } from './radioField';
 import { TextField } from './textField';
+import { IProps as IInputProps } from '../../../common/Input/interfaces';
 
 export interface IProps {
   name: string;
@@ -13,7 +14,7 @@ export interface IProps {
   onChange: (name: string, value: any) => void;
 }
 
-export const buildField = (props: IProps): ReactNode => {
+export const buildField = (props: IProps, customInput?: IInputProps): ReactNode => {
   switch (props.type) {
     case 'string':
       return <TextField {...props} />;
@@ -22,7 +23,7 @@ export const buildField = (props: IProps): ReactNode => {
     case 'boolean':
       return <BooleanField {...props} />;
     case 'radio':
-      return <RadioField {...props} />;
+      return <RadioField {...props} customInput={customInput} />;
     default:
       return null;
   }

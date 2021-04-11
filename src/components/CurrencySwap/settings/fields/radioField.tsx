@@ -1,8 +1,18 @@
 import React from 'react';
+import { IProps as IInputProps } from '../../../common/Input/interfaces';
 import { MultiSwitch } from '../../../common/MultiSwitch';
 import { IProps } from './fieldBuilder';
 
-export const RadioField: React.FC<IProps> = ({ name, value, onChange }) => {
+interface ILocalProps {
+  customInput?: IInputProps;
+}
+
+export const RadioField: React.FC<IProps & ILocalProps> = ({
+  name,
+  value,
+  customInput,
+  onChange,
+}) => {
   if (!Array.isArray(value)) {
     console.warn(`[WARN] Adoption CurrencySwap settings - `);
     return null;
@@ -13,6 +23,7 @@ export const RadioField: React.FC<IProps> = ({ name, value, onChange }) => {
       name={`radio-${name}`}
       onChange={(value) => onChange(name, value)}
       values={value}
+      customValue={customInput}
     />
   );
 };

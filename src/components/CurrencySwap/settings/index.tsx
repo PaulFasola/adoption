@@ -16,7 +16,7 @@ export const Settings: React.FC<ISettingsProps> = (props) => {
           {data['label']}
           {data.hint && <Icon type={IconType.HelpCircleO} title={data.hint} />}
         </Label>
-        {buildField({ name, ...data, onChange: handleValueChange })}
+        {buildField({ name, ...data, onChange: handleValueChange }, data.customInput)}
       </Field>
     );
   };
