@@ -31,7 +31,9 @@ export const Content = styled.div`
   padding: 25px;
 `;
 
-export const Field = styled.div``;
+export const Field = styled.div`
+  color: ${(p) => _(p.theme, 'primary', 'color')};
+`;
 
 export const Label = styled.label`
   div[type='help-circle-o'] {
