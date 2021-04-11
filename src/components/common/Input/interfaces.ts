@@ -1,4 +1,4 @@
-export interface InputProps {
+export interface IInputProps {
   id?: string;
   pattern?: string;
   className?: string;
@@ -15,9 +15,11 @@ export interface InputProps {
   style?: React.CSSProperties;
 
   onValueChange?: (value: string) => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }
 
-export interface IProps extends InputProps {
+export interface IProps extends IInputProps {
   type: 'text' | 'number' | 'decimal';
   maximumFractionDigits?: number;
   style?: React.CSSProperties;
