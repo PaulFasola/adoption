@@ -24,6 +24,10 @@ export const Basic: Story<IProps> = (args) => (
             type: 'radio',
             hint: 'The tolerated difference between the executed price and the expected price.',
             value: ['0.1%', '0.5%', '1%', '2%'],
+            customInput: {
+              type: 'decimal',
+              placeholder: '0.00',
+            },
           },
         }}
         {...args}
