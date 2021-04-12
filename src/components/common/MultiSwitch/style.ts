@@ -6,27 +6,37 @@ import { Input } from '../Input';
 interface IStyleProps {
   theme: ITheme;
   hasCustomValue?: boolean;
+  isCustomFieldFocused?: boolean;
 }
 
 interface SP extends IStyleProps {}
 
-const getFieldWidth = (hasCustomValue?: boolean) => (hasCustomValue ? 65 : 82);
+const getFieldWidth = (hasCustomValue?: boolean) => {
+  // TODO: handle size for 3 & 4 radios
+  return hasCustomValue ? 65 : 82;
+};
 
 export const Slider = styled.span`
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
-  width: ${({ hasCustomValue }: SP) => getFieldWidth(hasCustomValue)}px;
   background-color: ${(p) => _(p.theme, 'disabled', 'color')};
 `;
 
-const getInputsTransition = (hasCustomValue?: boolean): string => {
+const getInputTransitions = (hasCustomValue?: boolean): string => {
   const fieldWidth = getFieldWidth(hasCustomValue);
-  let test = '';
+  let style = '';
+
+  style += `
+    div ~ ${Slider} {
+      transition: left .2s ease-in-out;
+      left: ${fieldWidth * 5 - fieldWidth + 1}px;
+    }
+  `;
 
   for (let i = 1; i < 5; i++) {
-    test += `
+    style += `
       input[type='radio']:nth-of-type(${i}):checked ~ ${Slider} {
         transition: left .2s ease-in-out;
         left: ${fieldWidth * i - fieldWidth}px;
@@ -34,18 +44,64 @@ const getInputsTransition = (hasCustomValue?: boolean): string => {
     `;
   }
 
-  return test;
+  return style;
 };
 
+export const Label = styled.label`
+  z-index: 1;
+  position: relative;
+  vertical-align: middle;
+  height: 100%;
+  float: left;
+  cursor: pointer;
+  text-align: center;
+  color: ${(p) => _(p.theme, 'primary', 'color')};
+  transition: all 500ms ease-in-out;
+
+  &:focus {
+    outline: none;
+  }
+
+  span {
+    vertical-align: middle;
+    user-select: none;
+  }
+`;
+
+export const CustomValue = styled(Input)`
+  position: relative;
+  z-index: 1;
+  width: 30%;
+  outline: none;
+  border: none;
+  margin-right: 15px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  &:placeholder-shown {
+    color: ${(p) => _(p.theme, 'disabled', 'color')};
+  }
+
+  &:focus {
+    color: ${(p) => _(p.theme, 'primary', 'color')};
+  }
+
+  ::selection {
+    color: ${(p) => _(p.theme, 'primary', 'backgroundColor')};
+    background: ${(p) => _(p.theme, 'primary', 'color')};
+  }
+`;
+
 export const Container = styled.div`
+  height: 25px;
   overflow: hidden;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   position: relative;
   box-sizing: border-box;
+  display: inline-block;
   padding: 0;
-  height: 30px;
+  width: 100%;
   background-clip: padding-box;
   border: 2px solid ${(p) => _(p.theme, 'primary', 'borderColor')};
   transition: left 1.8s ease-in-out;
@@ -55,36 +111,18 @@ export const Container = styled.div`
     visibility: hidden;
   }
 
-  ${(p: SP) => getInputsTransition(p.hasCustomValue)}
-`;
-
-export const Label = styled.label`
-  position: relative;
-  z-index: 1;
-  float: left;
-  width: ${({ hasCustomValue }: SP) => getFieldWidth(hasCustomValue)}px;
-  cursor: pointer;
-  text-align: center;
-  color: ${(p) => _(p.theme, 'primary', 'color')};
-  transition: all 500ms ease-in-out;
-`;
-
-export const CustomValue = styled(Input)`
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  outline: none;
-  border: none;
-  width: 40px;
-  margin-right: 15px;
-  box-sizing: border-box;
-
-  &:placeholder-shown {
-    color: ${(p) => _(p.theme, 'disabled', 'color')};
+  div {
+    display: inline-block;
+    & > input {
+      padding: 0 5px 0 5px;
+    }
   }
 
-  &:focus {
-    color: ${(p) => _(p.theme, 'primary', 'color')};
-  }
+  ${({ hasCustomValue }: SP) => `
+    ${Label}, ${Slider}, ${CustomValue}, div {
+      width: ${getFieldWidth(hasCustomValue)}px;
+    }
+  `}
+
+  ${({ hasCustomValue }: SP) => getInputTransitions(hasCustomValue)}
 `;
