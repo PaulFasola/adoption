@@ -13,6 +13,7 @@ export interface IInputProps {
   autoComplete?: 'on' | 'off';
   autoFill?: 'on' | 'off';
   style?: React.CSSProperties;
+  regex?: string | undefined;
 
   onValueChange?: (value: string) => void;
   onFocus?: () => void;
@@ -23,4 +24,6 @@ export interface IProps extends IInputProps {
   type: 'text' | 'number' | 'decimal';
   maximumFractionDigits?: number;
   style?: React.CSSProperties;
+
+  beforeValueChange?: (value: string) => string | null;
 }

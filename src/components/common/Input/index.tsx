@@ -40,11 +40,21 @@ const Input: React.FC<IProps> = (props) => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void | boolean => {
-    const value = e.target.value;
+    let value = e.target.value;
 
     if (inputProps.pattern && !value.match(inputProps.pattern)) {
       e.preventDefault();
       return false;
+    }
+
+    if (typeof props.beforeValueChange === 'function') {
+      const adjustedValue = props.beforeValueChange(value);
+
+      if (adjustedValue) {
+        value = adjustedValue;
+      } else {
+        return false;
+      }
     }
 
     setInputProps({ ...inputProps, value });
