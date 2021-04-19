@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { ITheme } from '../../../providers/theme/ITheme';
 import _ from '../../../providers/theme/styleFetcher';
 import { Input } from '../Input';
+import { centerContent } from '../style';
 
 interface IStyleProps {
   theme: ITheme;
@@ -48,13 +49,12 @@ const getInputTransitions = (hasCustomValue?: boolean): string => {
 };
 
 export const Label = styled.label`
+  ${centerContent}
   z-index: 1;
   position: relative;
-  vertical-align: middle;
   height: 100%;
   float: left;
   cursor: pointer;
-  text-align: center;
   color: ${(p) => _(p.theme, 'primary', 'color')};
   transition: all 500ms ease-in-out;
 
@@ -63,7 +63,6 @@ export const Label = styled.label`
   }
 
   span {
-    vertical-align: middle;
     user-select: none;
   }
 `;
@@ -71,12 +70,13 @@ export const Label = styled.label`
 export const CustomValue = styled(Input)`
   position: relative;
   z-index: 1;
-  width: 30%;
   outline: none;
   border: none;
-  margin-right: 15px;
   box-sizing: border-box;
-  vertical-align: middle;
+  font-size: 1em;
+  overflow: hiddenl
+  width: 65px;
+
   &:placeholder-shown {
     color: ${(p) => _(p.theme, 'disabled', 'color')};
   }
@@ -92,19 +92,18 @@ export const CustomValue = styled(Input)`
 `;
 
 export const Container = styled.div`
-  height: 25px;
   overflow: hidden;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
   position: relative;
+  flex-wrap: nowrap;
   box-sizing: border-box;
   display: inline-block;
   padding: 0;
   width: 100%;
+  height: 2rem;
   background-clip: padding-box;
   border: 2px solid ${(p) => _(p.theme, 'primary', 'borderColor')};
   transition: left 1.8s ease-in-out;
+  ${centerContent}
 
   input[type='radio'] {
     position: absolute;
@@ -114,8 +113,16 @@ export const Container = styled.div`
   div {
     display: inline-block;
     & > input {
-      padding: 0 5px 0 5px;
+      padding: 0 15px 0 8px;
+      width: 95% !important;
     }
+  }
+
+  span.suffix {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    padding-right: 5px;
   }
 
   ${({ hasCustomValue }: SP) => `

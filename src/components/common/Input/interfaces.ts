@@ -24,6 +24,7 @@ export interface IProps extends IInputProps {
   type: 'text' | 'number' | 'decimal';
   maximumFractionDigits?: number;
   style?: React.CSSProperties;
+  suffix?: string;
 
   beforeValueChange?: (value: string) => string | null;
 }

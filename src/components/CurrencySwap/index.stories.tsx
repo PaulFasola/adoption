@@ -10,6 +10,7 @@ export default {
   title: 'Components/CurrencySwap',
 } as Meta;
 
+const MAX_CUSTOM_PERCENTAGE = 150;
 export const Basic: Story<IProps> = (args) => (
   <>
     <div style={{ display: 'inline-block' }}>
@@ -27,7 +28,29 @@ export const Basic: Story<IProps> = (args) => (
             customInput: {
               type: 'decimal',
               placeholder: '0.00',
+              suffix: '%',
+              beforeValueChange: (value: string) => {
+                const percentage = Number(value);
+
+                if (isNaN(percentage)) {
+                  return null;
+                }
+
+                if (percentage > MAX_CUSTOM_PERCENTAGE) {
+                  return MAX_CUSTOM_PERCENTAGE.toString();
+                }
+
+                // Note: a trailing dot will not bother us here (Number(X.) = X)
+                return value;
+              },
             },
+          },
+          deadline: {
+            visible: true,
+            type: 'number',
+            label: 'Transaction deadline',
+            hint:
+              'The deadline before reverting your transaction that is still pending past this time',
           },
         }}
         {...args}
