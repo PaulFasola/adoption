@@ -11,6 +11,23 @@ export default {
 } as Meta;
 
 const MAX_CUSTOM_PERCENTAGE = 150;
+const MAX_DEADLINE_MINS = 1440;
+
+const handleBeforeValueChange = (maxValue: number) => (value: string) => {
+  const percentage = Number(value);
+
+  if (isNaN(percentage)) {
+    return null;
+  }
+
+  if (percentage > maxValue) {
+    return maxValue.toString();
+  }
+
+  // Note: a trailing dot will not bother us here (Number(X.) = X)
+  return value;
+};
+
 export const Basic: Story<IProps> = (args) => (
   <>
     <div style={{ display: 'inline-block' }}>
@@ -29,28 +46,29 @@ export const Basic: Story<IProps> = (args) => (
               type: 'decimal',
               placeholder: '0.00',
               suffix: '%',
-              beforeValueChange: (value: string) => {
-                const percentage = Number(value);
-
-                if (isNaN(percentage)) {
-                  return null;
-                }
-
-                if (percentage > MAX_CUSTOM_PERCENTAGE) {
-                  return MAX_CUSTOM_PERCENTAGE.toString();
-                }
-
-                // Note: a trailing dot will not bother us here (Number(X.) = X)
-                return value;
-              },
+              beforeValueChange: handleBeforeValueChange(MAX_CUSTOM_PERCENTAGE),
             },
           },
           deadline: {
             visible: true,
             type: 'number',
             label: 'Transaction deadline',
+            text: 'Minutes',
+            customInput: {
+              type: 'number',
+              min: 1,
+              max: 1440, // 24h
+              value: 5,
+              beforeValueChange: handleBeforeValueChange(MAX_DEADLINE_MINS),
+            },
             hint:
               'The deadline before reverting your transaction that is still pending past this time',
+          },
+          aCoolToggle: {
+            visible: true,
+            type: 'boolean',
+            label: 'Activate god mode',
+            hint: 'This toggle doesn`t do anything in this example, like the other fields :p',
           },
         }}
         {...args}
