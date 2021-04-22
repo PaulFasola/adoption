@@ -9,6 +9,7 @@ import { IProps as IInputProps } from '../../../common/Input/interfaces';
 export interface IProps {
   name: string;
   type: SettingType;
+  text?: string;
   value?: Record<string, unknown>;
 
   onChange: (name: string, value: any) => void;
@@ -19,7 +20,7 @@ export const buildField = (props: IProps, customInput?: IInputProps): ReactNode 
     case 'string':
       return <TextField {...props} />;
     case 'number':
-      return <TextField {...props} />;
+      return <TextField {...props} customInput={customInput} />;
     case 'boolean':
       return <BooleanField {...props} />;
     case 'radio':

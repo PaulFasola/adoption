@@ -17,6 +17,7 @@ export interface ISetting {
   visible: boolean;
   type: SettingType;
   label: string;
+  text?: string;
   hint?: string;
   customInput?: IInputProps;
   value?: any;
