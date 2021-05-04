@@ -47,7 +47,7 @@
     "@babel/core": "7.14.0",
     "@commitlint/cli": "12.1.1",
     "@commitlint/config-conventional": "12.1.1",
-    "@rollup/plugin-commonjs": "18.0.0",
+    "@rollup/plugin-commonjs": "18.1.0",
     "@rollup/plugin-node-resolve": "11.2.1",
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/commit-analyzer": "8.0.1",
