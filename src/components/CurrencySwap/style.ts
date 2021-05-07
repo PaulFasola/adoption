@@ -126,13 +126,14 @@ export const SettingsButton = styled(Icon)`
   margin: 0;
 
   > div {
-    background-color: white;
+    background-color: ${(p) => _(p.theme, 'primary', 'backgroundColor')};
     padding: 0 5px 0 5px;
     border-radius: 30px;
 
     svg {
       width: 18px;
       margin-top: 5px;
+      fill: ${(p) => _(p.theme, 'primary', 'color')};
     }
   }
 
@@ -152,7 +153,6 @@ export const SettingsButton = styled(Icon)`
 
     > div {
       border: 1px solid ${_(p.theme, 'disabled', 'color')};
-
       svg {
         width: 16px;
       }

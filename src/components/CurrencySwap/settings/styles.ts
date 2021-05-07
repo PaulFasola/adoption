@@ -32,10 +32,13 @@ export const Content = styled.div`
 `;
 
 export const Field = styled.div`
+  margin-top: 0.75rem;
   color: ${(p) => _(p.theme, 'primary', 'color')};
 `;
 
 export const Label = styled.label`
+  margin-top: 1rem;
+
   div[type='help-circle-o'] {
     width: 13px;
     margin-left: 5px;
