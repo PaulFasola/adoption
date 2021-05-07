@@ -107,7 +107,7 @@
     "rollup-plugin-typescript2": "0.30.0",
     "semantic-release": "17.4.2",
     "storybook-addon-react-docgen": "1.2.43-canary.124.1666.0",
-    "storybook-dark-mode": "1.0.8-canary.147.3302.0",
+    "storybook-dark-mode": "1.0.8-canary.150.3336.0",
     "ts-jest": "26.5.6",
     "ts-loader": "9.1.2",
     "typescript": "4.2.4",
