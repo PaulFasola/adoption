@@ -14,7 +14,9 @@ export const RadioField: React.FC<IProps & ILocalProps> = ({
   onChange,
 }) => {
   if (!Array.isArray(value)) {
-    console.warn(`[WARN] Adoption CurrencySwap settings - `);
+    console.warn(
+      `[WARN] Adoption CurrencySwap settings - Provided value for radio "${name}" is not an array. Got ${typeof value} instead.`
+    );
     return null;
   }
 
