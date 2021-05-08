@@ -1,10 +1,13 @@
 import { IProps as IInputProps } from '../../common/Input/interfaces';
 import { IProps } from '../interfaces';
 
+export type SettingChangedCallback = (key: string, value: any) => void;
+
 export interface ISettingsProps extends Pick<IProps, 'settings'> {
   settings: ISettings;
   visible?: boolean;
   renderable?: boolean;
+  onSettingChanged?: SettingChangedCallback;
 }
 
 export interface ISettings {

@@ -1,5 +1,5 @@
 import { IProtocol } from '../ProtocolSelector/interfaces';
-import { ISettings } from './settings/interfaces';
+import { ISettings, SettingChangedCallback } from './settings/interfaces';
 
 export type ProtocolEnd = 'input' | 'output';
 
@@ -26,6 +26,7 @@ export interface IProps {
   settings?: ISettings;
 
   onSubmit?: (submission: ISwapSubmission) => void;
+  onSettingChanged?: SettingChangedCallback;
 }
 
 export interface ISwapValues {

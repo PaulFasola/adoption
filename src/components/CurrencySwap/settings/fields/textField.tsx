@@ -72,7 +72,7 @@ export const TextField: React.FC<IProps & ILocalProps> = ({
   const handleValueChange = (value: string) => {
     const sanitizedValue = sanitizeValue(value);
     setValue(sanitizedValue);
-    onChange(name, sanitizedValue);
+    onChange?.(name, sanitizedValue);
   };
 
   return (

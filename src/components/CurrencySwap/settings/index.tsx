@@ -6,17 +6,13 @@ import { Container, Content, Field, Label } from './styles';
 
 export const Settings: React.FC<ISettingsProps> = (props) => {
   const renderSetting = (name: string, data: ISetting, index: number): ReactNode => {
-    const handleValueChange = (key: string, value: any) => {
-      console.log('handleValueChange', key, value);
-    };
-
     return (
       <Field key={index}>
         <Label>
           {data['label']}
           {data.hint && <Icon type={IconType.HelpCircleO} title={data.hint} />}
         </Label>
-        {buildField({ name, ...data, onChange: handleValueChange }, data.customInput)}
+        {buildField({ name, ...data, onChange: props.onSettingChanged }, data.customInput)}
       </Field>
     );
   };

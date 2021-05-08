@@ -1,5 +1,5 @@
 import React from 'react';
-import { SettingType } from '../interfaces';
+import { SettingChangedCallback, SettingType } from '../interfaces';
 import { ReactNode } from 'react';
 import { BooleanField } from './booleanField';
 import { RadioField } from './radioField';
@@ -12,7 +12,7 @@ export interface IProps {
   text?: string;
   value?: Record<string, unknown>;
 
-  onChange: (name: string, value: any) => void;
+  onChange?: SettingChangedCallback;
 }
 
 export const buildField = (props: IProps, customInput?: IInputProps): ReactNode => {

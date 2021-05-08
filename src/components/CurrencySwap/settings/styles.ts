@@ -37,6 +37,7 @@ export const Field = styled.div`
 `;
 
 export const Label = styled.label`
+  display: block;
   margin-top: 1rem;
 
   div[type='help-circle-o'] {

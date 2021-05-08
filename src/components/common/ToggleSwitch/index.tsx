@@ -24,7 +24,7 @@ export const ToggleSwitch: React.FC<IToggleSwitchProps> = ({
         <input
           id={id}
           type='checkbox'
-          onChange={(e) => onChange && onChange(e.target.checked)}
+          onChange={(e) => onChange?.(e.target.checked)}
           checked={checked}
           disabled={disabled}
         />

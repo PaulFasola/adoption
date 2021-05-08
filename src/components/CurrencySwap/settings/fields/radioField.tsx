@@ -23,7 +23,7 @@ export const RadioField: React.FC<IProps & ILocalProps> = ({
   return (
     <MultiSwitch
       name={`radio-${name}`}
-      onChange={(value) => onChange(name, value)}
+      onChange={(value) => onChange?.(name, value)}
       values={value}
       customValue={customInput}
     />

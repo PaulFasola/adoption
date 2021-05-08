@@ -284,7 +284,11 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         />
       </SubmitButton>
       {settingsPanel.renderable && props.settings && (
-        <Settings settings={props.settings} visible={settingsPanel.visible} />
+        <Settings
+          settings={props.settings}
+          visible={settingsPanel.visible}
+          onSettingChanged={props.onSettingChanged}
+        />
       )}
     </Container>
   );
