@@ -2,12 +2,8 @@ import styled from 'styled-components';
 import _ from '../../../providers/theme/styleFetcher';
 
 export const Container = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: center;
-
-  label {
-    margin-left: 5px;
-  }
 `;
 
 export const Slider = styled.span`
@@ -19,18 +15,18 @@ export const Slider = styled.span`
   right: 0;
   bottom: 0;
   transition: 0.4s;
-  border-radius: 34px;
-  border: 2px solid ${({ theme }) => _(theme, 'disabled', 'color')};
+  border-radius: 32px;
+  border: 1px solid ${({ theme }) => _(theme, 'primary', 'borderColor')};
 
   &:before {
     position: absolute;
     content: '';
-    height: 25px;
-    width: 25px;
-    left: 3px;
-    bottom: 3px;
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
     background-color: ${({ theme }) => _(theme, 'disabled', 'color')};
-    transition: 0.4s;
+    transition: transform 0.25s;
     border-radius: 50%;
   }
 `;
@@ -39,7 +35,7 @@ export const Switch = styled.label`
   position: relative;
   display: inline-block;
   width: 60px;
-  height: 34px;
+  height: 32px;
 
   input {
     opacity: 0;
@@ -51,7 +47,7 @@ export const Switch = styled.label`
     }
 
     &:checked + ${Slider}:before {
-      transform: translateX(25px);
+      transform: translateX(28px);
     }
   }
 `;

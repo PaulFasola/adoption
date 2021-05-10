@@ -14,7 +14,7 @@ interface SP extends IStyleProps {}
 
 const getFieldWidth = (hasCustomValue?: boolean) => {
   // TODO: handle size for 3 & 4 radios
-  return hasCustomValue ? 65 : 82;
+  return hasCustomValue ? 66 : 82;
 };
 
 export const Slider = styled.span`
@@ -56,7 +56,6 @@ export const Label = styled.label`
   float: left;
   cursor: pointer;
   color: ${(p) => _(p.theme, 'primary', 'color')};
-  transition: all 500ms ease-in-out;
 
   &:focus {
     outline: none;
@@ -101,7 +100,7 @@ export const Container = styled.div`
   width: 100%;
   height: 2rem;
   background-clip: padding-box;
-  border: 2px solid ${(p) => _(p.theme, 'primary', 'borderColor')};
+  border: 1px solid ${(p) => _(p.theme, 'primary', 'borderColor')};
   transition: left 1.8s ease-in-out;
   ${centerContent}
 

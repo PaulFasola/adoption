@@ -21,7 +21,7 @@ const Container = styled.div`
     height: 30px;
 
     input {
-      border: 2px solid ${(p) => _(p.theme, 'disabled', 'color')};
+      border: 1px solid ${(p) => _(p.theme, 'primary', 'borderColor')};
       -webkit-appearance: none;
       -moz-appearance: none;
       width: 80%;
@@ -46,7 +46,7 @@ export const TextField: React.FC<IProps & ILocalProps> = ({
   customInput,
   text,
   onChange,
-  debounce
+  debounce,
 }) => {
   const [value, setValue] = useState<string | number>('');
   const debouncedvalue = useDebounce(value, DEFAULT_DEBOUNCE_DELAY, debounce);
@@ -71,7 +71,7 @@ export const TextField: React.FC<IProps & ILocalProps> = ({
   useEffect(() => {
     const sanitizedValue = sanitizeValue(debouncedvalue);
     onChange?.(name, sanitizedValue);
-  }, [debouncedvalue, onChange, sanitizeValue, name])
+  }, [debouncedvalue, onChange, sanitizeValue, name]);
 
   useEffect(() => {
     const inputValue: string | number = sanitizeValue(customInput?.value?.toString() ?? '');
