@@ -4,6 +4,8 @@ import { Input } from '../../../common/Input';
 import { IProps as IInputProps } from '../../../common/Input/interfaces';
 import _ from '../../../../providers/theme/styleFetcher';
 import { IProps } from './fieldBuilder';
+import { useDebounce } from '../../../../hooks/useDebounce';
+import { DEFAULT_DEBOUNCE_DELAY } from '../constants';
 
 interface ILocalProps {
   customInput?: IInputProps;
@@ -44,8 +46,10 @@ export const TextField: React.FC<IProps & ILocalProps> = ({
   customInput,
   text,
   onChange,
+  debounce
 }) => {
   const [value, setValue] = useState<string | number>('');
+  const debouncedvalue = useDebounce(value, DEFAULT_DEBOUNCE_DELAY, debounce);
 
   const sanitizeValue = useCallback(
     (value: string | number) => {
@@ -65,21 +69,20 @@ export const TextField: React.FC<IProps & ILocalProps> = ({
   );
 
   useEffect(() => {
+    const sanitizedValue = sanitizeValue(debouncedvalue);
+    onChange?.(name, sanitizedValue);
+  }, [debouncedvalue, onChange, sanitizeValue, name])
+
+  useEffect(() => {
     const inputValue: string | number = sanitizeValue(customInput?.value?.toString() ?? '');
     setValue(inputValue);
   }, [customInput, sanitizeValue]);
-
-  const handleValueChange = (value: string) => {
-    const sanitizedValue = sanitizeValue(value);
-    setValue(sanitizedValue);
-    onChange?.(name, sanitizedValue);
-  };
 
   return (
     <Container>
       <Input
         {...customInput}
-        onValueChange={handleValueChange}
+        onValueChange={(value) => setValue(value)}
         type={type === 'number' ? 'number' : 'text'}
         value={value}
       />

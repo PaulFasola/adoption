@@ -77,6 +77,7 @@ export const WithSettings: Story<IProps> = () => {
               type: 'radio',
               hint: 'The tolerated difference between the executed price and the expected price.',
               value: ['0.1%', '0.5%', '1%', '2%'],
+              debounce: true,
               customInput: {
                 type: 'decimal',
                 placeholder: '0.00',
@@ -89,6 +90,7 @@ export const WithSettings: Story<IProps> = () => {
               type: 'number',
               label: 'Transaction deadline',
               text: 'Minutes',
+              debounce: true,
               customInput: {
                 type: 'number',
                 min: 1,
@@ -105,6 +107,7 @@ export const WithSettings: Story<IProps> = () => {
               label: 'Activate god mode',
               hint: 'This toggle doesn`t do anything in this example, like the other fields :p',
               text: godToggleText,
+              debounce: true,
             },
           }}
         />

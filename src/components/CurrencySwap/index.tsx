@@ -18,8 +18,7 @@ import { useLocale } from '../../hooks/useLocale';
 import { IStrings } from './strings';
 import { Settings } from './settings';
 import { ISettingsProps } from './settings/interfaces';
-
-const DEFAULT_MAX_FRACTION_DIGITS = 8;
+import { DEFAULT_MAX_FRACTION_DIGITS } from './settings/constants';
 
 const CurrencySwap: React.FC<IProps> = (props) => {
   const locale = useLocale();

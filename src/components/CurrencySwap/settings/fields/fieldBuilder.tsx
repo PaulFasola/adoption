@@ -11,6 +11,7 @@ export interface IProps {
   type: SettingType;
   text?: string;
   value?: Record<string, unknown>;
+  debounce?: boolean;
 
   onChange?: SettingChangedCallback;
 }

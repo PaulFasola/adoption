@@ -23,5 +23,6 @@ export interface ISetting {
   text?: string;
   hint?: string;
   customInput?: IInputProps;
+  debounce?: boolean;
   value?: any;
 }
