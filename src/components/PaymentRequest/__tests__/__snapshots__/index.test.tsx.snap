@@ -988,7 +988,6 @@ exports[`PaymentRequest Detailed Should be fully string customizable 1`] = `
                             >
                               <g>
                                 <polygon
-                                  id="Path"
                                   points="0 0 24 0 24 24 0 24"
                                 />
                                 <path
