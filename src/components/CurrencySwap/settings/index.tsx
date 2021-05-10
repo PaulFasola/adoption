@@ -7,11 +7,11 @@ import { Container, Content, Field, Label } from './styles';
 export const SettingsPanel: React.FC<ISettingsProps> = (props) => {
   const renderSetting = (name: string, data: ISetting, index: number): ReactNode => (
     <Field key={index}>
-      <Label>
-        {data['label']}
+      <Label htmlFor={name}>
+        {data.label}
         {data.hint && <Icon type={IconType.HelpCircleO} title={data.hint} />}
+        {buildField({ name, ...data, onChange: props.onSettingChanged }, data.customInput)}
       </Label>
-      {buildField({ name, ...data, onChange: props.onSettingChanged }, data.customInput)}
     </Field>
   );
 

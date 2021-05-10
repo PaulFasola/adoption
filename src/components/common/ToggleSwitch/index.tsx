@@ -23,6 +23,7 @@ export const ToggleSwitch: React.FC<IToggleSwitchProps> = ({
       <Switch>
         <input
           id={id}
+          placeholder={label}
           type='checkbox'
           onChange={(e) => onChange?.(e.target.checked)}
           checked={checked}
@@ -30,7 +31,6 @@ export const ToggleSwitch: React.FC<IToggleSwitchProps> = ({
         />
         <Slider />
       </Switch>
-      {label && <label htmlFor={id}>{label}</label>}
     </Container>
   );
 };

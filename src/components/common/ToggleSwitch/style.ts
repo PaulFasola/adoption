@@ -31,7 +31,7 @@ export const Slider = styled.span`
   }
 `;
 
-export const Switch = styled.label`
+export const Switch = styled.div`
   position: relative;
   display: inline-block;
   width: 60px;

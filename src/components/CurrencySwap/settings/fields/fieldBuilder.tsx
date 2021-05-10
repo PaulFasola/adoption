@@ -10,6 +10,7 @@ export interface IProps {
   name: string;
   type: SettingType;
   text?: string;
+  label: string;
   value?: Record<string, unknown>;
   debounce?: boolean;
 

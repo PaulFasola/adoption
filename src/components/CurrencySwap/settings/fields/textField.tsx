@@ -82,6 +82,7 @@ export const TextField: React.FC<IProps & ILocalProps> = ({
     <Container>
       <Input
         {...customInput}
+        id={name}
         onValueChange={(value) => setValue(value)}
         type={type === 'number' ? 'number' : 'text'}
         value={value}
