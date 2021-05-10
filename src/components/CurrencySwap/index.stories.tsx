@@ -107,7 +107,7 @@ export const WithSettings: Story<IProps> = () => {
               label: 'Activate god mode',
               hint: 'This toggle doesn`t do anything in this example, like the other fields :p',
               text: godToggleText,
-              debounce: true,
+              debounce: false,
             },
           }}
         />

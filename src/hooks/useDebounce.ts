@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
 /*
-	From https://usehooks.com/useDebounce
-	Adjusted to support generically typed values.
+  From https://usehooks.com/useDebounce
+  Adjusted to support generically typed values.
 */
 export const useDebounce = <T>(value: T, delay: number, enabled = true): T => {
   // State and setters for debounced value
@@ -10,7 +10,10 @@ export const useDebounce = <T>(value: T, delay: number, enabled = true): T => {
 
   useEffect(
     () => {
-      if (!enabled) return;
+      if (!enabled) {
+        setDebouncedValue(value);
+        return;
+      }
 
       // Update debounced value after delay
       const handler = setTimeout(() => {
