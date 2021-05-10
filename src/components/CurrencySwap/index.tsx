@@ -16,7 +16,7 @@ import { preventCommonSymbol } from './utils';
 import { usePrevious } from '../../hooks/usePrevious';
 import { useLocale } from '../../hooks/useLocale';
 import { IStrings } from './strings';
-import { Settings } from './settings';
+import { SettingsPanel } from './settings';
 import { ISettingsProps } from './settings/interfaces';
 import { DEFAULT_MAX_FRACTION_DIGITS } from './settings/constants';
 
@@ -283,7 +283,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         />
       </SubmitButton>
       {settingsPanel.renderable && props.settings && (
-        <Settings
+        <SettingsPanel
           settings={props.settings}
           visible={settingsPanel.visible}
           onSettingChanged={props.onSettingChanged}
