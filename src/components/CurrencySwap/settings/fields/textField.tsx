@@ -69,6 +69,7 @@ export const TextField: React.FC<IProps & ILocalProps> = ({
   );
 
   useEffect(() => {
+    if (!debouncedvalue) return;
     const sanitizedValue = sanitizeValue(debouncedvalue);
     onChange?.(name, sanitizedValue);
   }, [debouncedvalue, onChange, sanitizeValue, name]);

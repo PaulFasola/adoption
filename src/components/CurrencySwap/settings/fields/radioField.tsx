@@ -20,6 +20,7 @@ export const RadioField: React.FC<IProps & ILocalProps> = ({
   const debouncedvalue = useDebounce(switchValue, DEFAULT_DEBOUNCE_DELAY, debounce);
 
   useEffect(() => {
+    if (typeof debouncedvalue === 'undefined') return;
     onChange?.(name, debouncedvalue);
   }, [debouncedvalue, onChange, name]);
 

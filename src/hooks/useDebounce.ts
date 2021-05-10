@@ -1,16 +1,21 @@
+/* istanbul ignore file */
 import { useState, useEffect } from 'react';
 
 /*
   From https://usehooks.com/useDebounce
   Adjusted to support generically typed values.
 */
-export const useDebounce = <T>(value: T, delay: number, enabled = true): T => {
+export const useDebounce = <T>(
+  value: T | null,
+  delay: number,
+  enabled = true
+): T | null | undefined => {
   // State and setters for debounced value
-  const [debouncedValue, setDebouncedValue] = useState(value);
+  const [debouncedValue, setDebouncedValue] = useState<T | null | undefined>();
 
   useEffect(
     () => {
-      if (!enabled) {
+      if (!enabled && typeof value !== 'undefined') {
         setDebouncedValue(value);
         return;
       }

@@ -19,6 +19,7 @@ export const BooleanField: React.FC<IProps> = ({ name, onChange, text, debounce 
   const debouncedvalue = useDebounce(newState, DEFAULT_DEBOUNCE_DELAY, debounce);
 
   useEffect(() => {
+    if (typeof debouncedvalue === 'undefined') return;
     onChange?.(name, debouncedvalue);
   }, [debouncedvalue, onChange, name]);
 
