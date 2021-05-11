@@ -163,7 +163,7 @@ Animated.parameters = {
   controls: { hideNoControlsWarning: true },
 };
 
-export const Simulation: Story<IProps> = () => {
+export const Scenario: Story<IProps> = () => {
   interface ITransaction {
     sender: IAddress;
     receiver: IAddress;
@@ -184,7 +184,7 @@ export const Simulation: Story<IProps> = () => {
     return () => _clearTimeout();
   }, []);
 
-  const runSimulation = (): void => {
+  const runScenario = (): void => {
     _clearTimeout();
 
     _delay(3 * 1000)
@@ -224,12 +224,12 @@ export const Simulation: Story<IProps> = () => {
   const _handleReset = (): void => {
     setTx({});
     setStatus(TxStatus.PENDING);
-    runSimulation();
+    runScenario();
   };
 
   const _handleInit = (): void => {
     setIsInit(true);
-    runSimulation();
+    runScenario();
   };
 
   if (!isInit) {
@@ -263,6 +263,6 @@ export const Simulation: Story<IProps> = () => {
     </Spacer>
   );
 };
-Simulation.parameters = {
+Scenario.parameters = {
   controls: { hideNoControlsWarning: true },
 };

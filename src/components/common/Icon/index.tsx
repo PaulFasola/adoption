@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { ITheme } from '../../../providers/theme/ITheme';
 import { IconContainer, Link } from './style';
 
 export enum IconType {
@@ -17,7 +18,7 @@ export interface IProps {
   style?: React.CSSProperties;
   className?: string;
   targetBlank?: boolean;
-  defaultTheme?: boolean;
+  overrideTheme?: ITheme;
   disabled?: boolean;
   hidden?: boolean;
 

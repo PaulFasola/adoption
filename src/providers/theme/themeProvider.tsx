@@ -11,10 +11,23 @@ interface IProps {
   customThemes?: Record<string, Partial<ITheme>>;
 }
 
-export const defaultTheme = {
-  name: 'light',
-  palette: defaultThemes.light,
+const getDefaultTheme = (): IViableTheme => {
+  /* TODO: handle user theme pref + priorities (selected theme > user pref > default theme)
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')) {
+        return {
+          name: 'dark',
+          palette: defaultThemes.dark,
+        }
+    }
+  */
+
+  return {
+    name: 'light',
+    palette: defaultThemes.light,
+  };
 };
+
+export const defaultTheme = getDefaultTheme();
 
 /* istanbul ignore next */
 export const ThemeContext = React.createContext<IThemeContext>({

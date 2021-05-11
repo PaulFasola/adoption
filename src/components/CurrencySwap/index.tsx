@@ -81,7 +81,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
   );
 
   const reflectProtocolsAndPrices = useCallback(
-    (end: ProtocolEnd, value: number): void => {
+    (end: ProtocolEnd, value: number) => {
       if (!activeProtocols || !activeProtocols[end]) return;
 
       const currentProto = activeProtocols[end] as IProtocol;
@@ -143,7 +143,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     return setCanSwap(!props.locked);
   }, [props.locked, activeProtocols, swapValues]);
 
-  const handleValueChange = (end: ProtocolEnd) => (newValue: string): void => {
+  const handleValueChange = (end: ProtocolEnd) => (newValue: string) => {
     const value = Number(newValue);
     setSwapValues({ input: undefined, output: undefined });
 
@@ -151,8 +151,12 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     reflectProtocolsAndPrices(end, value);
   };
 
-  const handleProtocolChange = (end: ProtocolEnd) => (newProto: IProtocol) => {
-    setActiveProtocols({ ...activeProtocols, ...{ [end]: newProto } });
+  // TODO: use a proper e2e to test accessibility
+  /* istanbul ignore next */
+  const handleKeyboardSubmission = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && canSwap) {
+      handleSubmit();
+    }
   };
 
   const handleSubmit = () => {
@@ -191,6 +195,27 @@ const CurrencySwap: React.FC<IProps> = (props) => {
     );
   };
 
+  const getSwapInput = (end: ProtocolEnd): React.ReactNode => (
+    <div>
+      <SwapInput
+        type='decimal'
+        maxLength={19}
+        placeholder='0.00'
+        value={swapValues[end]}
+        onValueChange={handleValueChange(end)}
+      />
+      <div>
+        <ProtocolSelector
+          current={activeProtocols ? activeProtocols[end] : undefined}
+          list={protocols[end].filter((x) => !x.hidden)}
+          onChange={(newProto) =>
+            setActiveProtocols({ ...activeProtocols, ...{ [end]: newProto } })
+          }
+        />
+      </div>
+    </div>
+  );
+
   const getButtonValue = (): string => {
     const { insufficientBalance, unlockWallet, proceed } = strs.submitButton;
 
@@ -214,7 +239,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
 
   return (
     <Container noShadow={props.noShadow}>
-      <InputWrapper>
+      <InputWrapper onKeyPress={handleKeyboardSubmission}>
         <div>
           <span>{strs.from}</span>
           {activeProtocols?.input && (
@@ -223,26 +248,19 @@ const CurrencySwap: React.FC<IProps> = (props) => {
             </Overview>
           )}
         </div>
-        <div>
-          <SwapInput
-            type='decimal'
-            maxLength={19}
-            placeholder='0.00'
-            value={swapValues.input}
-            onValueChange={handleValueChange('input')}
-          />
-          <div>
-            <ProtocolSelector
-              current={activeProtocols?.input}
-              list={protocols.input.filter((x) => !x.hidden)}
-              onChange={handleProtocolChange('input')}
-            />
-          </div>
-        </div>
+        {getSwapInput('input')}
       </InputWrapper>
       <SwapButton
         aria-label={strs.buttonLabels.swap}
-        onClick={() => {
+        onClick={(e) => {
+          // TODO: use a proper e2e to test accessibility
+          /* istanbul ignore next */
+          if (e.screenX > 0 && e.screenY) {
+            // unfocus when the user clicks on the button since this last will keep the focus
+            // that event shouldn't be trigerred while using keyboard navigation for accessibility reasons
+            e.currentTarget.blur();
+          }
+
           setSwapValues({ input: swapValues.output, output: swapValues.input });
           /* istanbul ignore next */
           setActiveProtocols({ input: activeProtocols?.output, output: activeProtocols?.input });
@@ -250,25 +268,10 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       >
         <Icon type={IconType.ArrowDown} />
       </SwapButton>
-      <InputWrapper>
+      <InputWrapper onKeyPress={handleKeyboardSubmission}>
         <span>{strs.from}</span>
         {getPriceEquiv()}
-        <div>
-          <SwapInput
-            type='decimal'
-            maxLength={19}
-            placeholder='0.00'
-            value={swapValues.output}
-            onValueChange={handleValueChange('output')}
-          />
-          <div>
-            <ProtocolSelector
-              current={activeProtocols?.output}
-              list={protocols.output.filter((x) => !x.hidden)}
-              onChange={handleProtocolChange('output')}
-            />
-          </div>
-        </div>
+        {getSwapInput('output')}
       </InputWrapper>
       <SubmitButton aria-label='Submit' disabled={!canSwap} onClick={handleSubmit}>
         <div>{getButtonValue()}</div>

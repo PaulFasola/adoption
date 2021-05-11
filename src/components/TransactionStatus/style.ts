@@ -28,6 +28,11 @@ export const Container = styled.div`
   overflow: hidden;
   transition: max-height 0.4s;
   box-shadow: ${(p) => _(p.theme, 'primary', 'boxShadow')};
+  color: ${(p) => _(p.theme, 'primary', 'color')};
+
+  a {
+    color: ${(p) => _(p.theme, 'primary', 'color')};
+  }
 
   ${(p: SP) =>
     p.noShadow &&
@@ -221,11 +226,13 @@ export const Arrow = styled.div`
 
 export const TxFees = styled.div`
   text-align: center;
+  color: ${(p) => _(p.theme, 'primary', 'color')};
 `;
 
 export const CustomComponent = styled.div`
   overflow: auto;
   max-width: 100%;
   margin-top: 10px;
+  color: ${(p) => _(p.theme, 'primary', 'color')};
 `;
 // # DetailedView end

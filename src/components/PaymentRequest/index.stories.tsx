@@ -171,7 +171,7 @@ CustomStrings.args = {
   customStatusText: 'Custom status message',
 };
 
-export const Simulation: Story<IProps> = () => {
+export const Scenario: Story<IProps> = () => {
   const [status, setStatus] = useState<PaymentStatus>();
 
   const handleClick = (status: PaymentStatus) => (): void => setStatus(status);
@@ -217,6 +217,6 @@ export const Simulation: Story<IProps> = () => {
     </Fragment>
   );
 };
-Simulation.parameters = {
+Scenario.parameters = {
   controls: { hideNoControlsWarning: true },
 };
