@@ -23,6 +23,11 @@ export const MultiSwitch: React.FC<IProps> = (props) => {
     setSelectedValue(value);
   };
 
+  const unselectValue = () => {
+    /* istanbul ignore next */
+    setSelectedValue(null);
+  }
+
   return (
     <Container hasCustomValue={props.customValue != null}>
       {props.values.map((value, i) => (
@@ -45,8 +50,8 @@ export const MultiSwitch: React.FC<IProps> = (props) => {
           <CustomValue
             {...props.customValue}
             onValueChange={(value) => handleChange(value, true)}
-            onFocus={() => setSelectedValue(null)}
-            onBlur={() => setSelectedValue(null)}
+            onFocus={unselectValue}
+            onBlur={unselectValue}
           />
           <span className='suffix'>{props.customValue?.suffix}</span>
         </Fragment>
