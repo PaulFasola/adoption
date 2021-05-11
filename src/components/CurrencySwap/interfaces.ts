@@ -1,4 +1,5 @@
 import { IProtocol } from '../ProtocolSelector/interfaces';
+import { ISettings, SettingChangedCallback } from './settings/interfaces';
 
 export type ProtocolEnd = 'input' | 'output';
 
@@ -22,8 +23,10 @@ export interface IProps {
   noShadow?: boolean;
   protocols: Partial<IProtocolArrayPipe>;
   maxFractionDigits?: number;
+  settings?: ISettings;
 
   onSubmit?: (submission: ISwapSubmission) => void;
+  onSettingChanged?: SettingChangedCallback;
 }
 
 export interface ISwapValues {

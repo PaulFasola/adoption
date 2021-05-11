@@ -23,3 +23,9 @@ export const scrollbar = css`
     border: 1px solid #dedede;
   }
 `;
+
+export const centerContent = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

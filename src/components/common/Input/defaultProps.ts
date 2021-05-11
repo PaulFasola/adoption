@@ -1,6 +1,6 @@
-import { InputProps } from './interfaces';
+import { IInputProps } from './interfaces';
 
-export const defaultInputProps: InputProps = {
+export const defaultInputProps: IInputProps = {
   autoComplete: 'off',
   autoFill: 'off',
 };

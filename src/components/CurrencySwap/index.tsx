@@ -1,5 +1,13 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { Container, SwapButton, SwapInput, InputWrapper, SubmitButton, Overview } from './style';
+import {
+  Container,
+  SwapButton,
+  SwapInput,
+  InputWrapper,
+  SubmitButton,
+  Overview,
+  SettingsIcon,
+} from './style';
 import { IProps, IProtocolArrayPipe, IProtocolPipe, ProtocolEnd, ISwapValues } from './interfaces';
 import { Icon, IconType } from '../common/Icon';
 import { ProtocolSelector } from '../ProtocolSelector';
@@ -8,8 +16,9 @@ import { preventCommonSymbol } from './utils';
 import { usePrevious } from '../../hooks/usePrevious';
 import { useLocale } from '../../hooks/useLocale';
 import { IStrings } from './strings';
-
-const DEFAULT_MAX_FRACTION_DIGITS = 8;
+import { SettingsPanel } from './settings';
+import { ISettingsProps } from './settings/interfaces';
+import { DEFAULT_MAX_FRACTION_DIGITS } from './settings/constants';
 
 const CurrencySwap: React.FC<IProps> = (props) => {
   const locale = useLocale();
@@ -19,6 +28,9 @@ const CurrencySwap: React.FC<IProps> = (props) => {
   const [activeProtocols, setActiveProtocols] = useState<IProtocolPipe>();
   const [swapValues, setSwapValues] = useState<ISwapValues>({});
   const [canSwap, setCanSwap] = useState<boolean>(false);
+  const [settingsPanel, setSettingsPanel] = useState<Omit<ISettingsProps, 'settings'>>({
+    renderable: false,
+  });
 
   const dataRef = usePrevious(activeProtocols);
 
@@ -32,6 +44,28 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       output: output ?? inputList,
     });
   }, [props.protocols]);
+
+  useEffect(() => {
+    const isRenderable = (): boolean => {
+      if (!props.settings) return false;
+
+      let show = false;
+      Object.values(props.settings).every((setting): boolean => {
+        if (setting && Boolean(setting['visible'])) {
+          show = true;
+          return false;
+        }
+        return true;
+      });
+
+      return show;
+    };
+
+    setSettingsPanel((prevState) => ({
+      ...prevState,
+      renderable: isRenderable(),
+    }));
+  }, [props.settings]);
 
   const getMaxFractionDigits = useCallback(
     (decimals?: number): number => {
@@ -217,7 +251,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         {getSwapInput('input')}
       </InputWrapper>
       <SwapButton
-        aria-label={strs.swapBtnLabel}
+        aria-label={strs.buttonLabels.swap}
         onClick={(e) => {
           // TODO: use a proper e2e to test accessibility
           /* istanbul ignore next */
@@ -232,7 +266,7 @@ const CurrencySwap: React.FC<IProps> = (props) => {
           setActiveProtocols({ input: activeProtocols?.output, output: activeProtocols?.input });
         }}
       >
-        <Icon type={IconType.ArrowDown} style={{ width: '18px' }} />
+        <Icon type={IconType.ArrowDown} />
       </SwapButton>
       <InputWrapper onKeyPress={handleKeyboardSubmission}>
         <span>{strs.from}</span>
@@ -240,8 +274,24 @@ const CurrencySwap: React.FC<IProps> = (props) => {
         {getSwapInput('output')}
       </InputWrapper>
       <SubmitButton aria-label='Submit' disabled={!canSwap} onClick={handleSubmit}>
-        {getButtonValue()}
+        <div>{getButtonValue()}</div>
+        <SettingsIcon
+          hidden={!settingsPanel.renderable}
+          title={strs.buttonLabels.settings}
+          type={settingsPanel.visible ? IconType.Times : IconType.Settings}
+          settingsVisible={settingsPanel.visible}
+          onClick={() =>
+            setSettingsPanel((prevState) => ({ ...prevState, visible: !settingsPanel.visible }))
+          }
+        />
       </SubmitButton>
+      {settingsPanel.renderable && props.settings && (
+        <SettingsPanel
+          settings={props.settings}
+          visible={settingsPanel.visible}
+          onSettingChanged={props.onSettingChanged}
+        />
+      )}
     </Container>
   );
 };

@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import _ from '../../providers/theme/styleFetcher';
 import { ITheme } from '../../providers/theme/ITheme';
 import { Input } from '../common/Input';
+import { Icon } from '../common/Icon';
 
 export interface IStyleProps {
   theme: ITheme;
   noShadow?: boolean;
+  settingsVisible?: boolean;
 }
 
 interface SP extends IStyleProps {}
@@ -77,10 +79,24 @@ export const SwapButton = styled.button`
     width: 35px;
     margin: auto;
     overflow: visible;
+
+    svg {
+      width: 18px;
+    }
   }
 `;
 
+export const Overview = styled.span`
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  color: ${(p) => _(p.theme, 'primary', 'color')};
+`;
+
 export const SubmitButton = styled.button`
+  display: flex;
   position: relative;
   font-size: 1.2em;
   background-color: ${(p) => _(p.theme, 'defaultButton', 'backgroundColor')};
@@ -91,6 +107,13 @@ export const SubmitButton = styled.button`
   padding: 15px;
   outline: none;
   cursor: pointer;
+  align-items: baseline;
+
+  div {
+    display: inline-block;
+    flex-grow: 1;
+    padding-left: 30px;
+  }
 
   &:disabled {
     color: ${(p) => _(p.theme, 'disabled', 'color')};
@@ -106,11 +129,41 @@ export const SubmitButton = styled.button`
   }
 `;
 
-export const Overview = styled.span`
-  position: absolute;
-  right: 10px;
-  top: 8px;
-  font-size: 0.7em;
-  text-transform: uppercase;
-  color: ${(p) => _(p.theme, 'primary', 'color')};
+export const SettingsIcon = styled(Icon)`
+  justify-content: right;
+  margin: 0;
+
+  > div {
+    background-color: ${(p) => _(p.theme, 'primary', 'backgroundColor')};
+    padding: 0 5px 0 5px;
+    border-radius: 30px;
+
+    svg {
+      width: 18px;
+      margin-top: 5px;
+      fill: ${(p) => _(p.theme, 'primary', 'color')};
+    }
+  }
+
+  &:hover {
+    opacity: 1;
+
+    svg {
+      transition: transform 0.1s;
+      transform: scale(1.1);
+    }
+  }
+
+  ${(p: SP) =>
+    p.settingsVisible &&
+    `
+    z-index: 1;
+
+    > div {
+      border: 1px solid ${_(p.theme, 'disabled', 'color')};
+      svg {
+        width: 16px;
+      }
+    }
+  `}
 `;

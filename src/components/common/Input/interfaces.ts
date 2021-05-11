@@ -1,4 +1,4 @@
-export interface InputProps {
+export interface IInputProps {
   id?: string;
   pattern?: string;
   className?: string;
@@ -13,12 +13,18 @@ export interface InputProps {
   autoComplete?: 'on' | 'off';
   autoFill?: 'on' | 'off';
   style?: React.CSSProperties;
+  regex?: string | undefined;
 
   onValueChange?: (value: string) => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }
 
-export interface IProps extends InputProps {
+export interface IProps extends IInputProps {
   type: 'text' | 'number' | 'decimal';
   maximumFractionDigits?: number;
   style?: React.CSSProperties;
+  suffix?: string;
+
+  beforeValueChange?: (value: string) => string | null;
 }

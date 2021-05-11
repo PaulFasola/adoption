@@ -168,4 +168,41 @@ describe('Input component', () => {
 
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it('should adjust the value depending on beforeValueChange output', async () => {
+    const TEST_STR = 'Value has been';
+
+    const wrapper = mount(
+      <Input
+        aria-label='test'
+        type='text'
+        label='Test'
+        placeholder='placeholder'
+        beforeValueChange={(val) => `${val} intercepted!`} />
+    );
+
+    const input = wrapper.find('input');
+    input.simulate('change', { target: { value: TEST_STR } });
+
+    expect(input.getDOMNode<HTMLInputElement>().value).toEqual(`${TEST_STR} intercepted!`);
+  });
+
+  it('should prevent a value update when beforeValueChange returns null', async () => {
+    const TEST_STR = 'I will not appear';
+
+    const wrapper = mount(
+      <Input
+        aria-label='test'
+        type='text'
+        label='Test'
+        placeholder='placeholder'
+        beforeValueChange={() => null} />
+    );
+
+    const input = wrapper.find('input');
+    input.simulate('change', { target: { value: TEST_STR } });
+
+    expect(input.getDOMNode<HTMLInputElement>().value).toEqual('');
+  });
+
 });
