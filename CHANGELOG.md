@@ -1,5 +1,12 @@
 # Adoption Changelog
 
+## [1.4.0](https://github.com/PaulFasola/adoption/compare/v1.3.3...v1.4.0) (2021-05-11)
+
+
+### Features
+
+* **currencyswap:** implements flexible swap settings feature ([df0cc68](https://github.com/PaulFasola/adoption/commit/df0cc6856717374f0f57f75c3a24d0aadd9b9223))
+
 ### [1.3.3](https://github.com/PaulFasola/adoption/compare/v1.3.2...v1.3.3) (2021-04-05)
 
 ### Bug Fixes
