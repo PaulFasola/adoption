@@ -2,11 +2,12 @@ import React from 'react';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { render } from '@testing-library/react';
 import { configure, shallow } from 'enzyme';
-import 'jest-styled-components';
 import { BooleanField } from '../booleanField';
 import { DEFAULT_DEBOUNCE_DELAY } from '../../constants';
 import { IProps } from '../fieldBuilder';
 import { act } from 'react-dom/test-utils';
+
+import 'jest-styled-components';
 
 configure({ adapter: new Adapter() });
 
@@ -14,7 +15,7 @@ const getComponent = (props?: Partial<IProps>) => (
   <BooleanField {...props} name='test' label='test' type='boolean' />
 );
 
-describe(`PaymentRequest - Edge cases`, () => {
+describe(`CurrencySwap - Settings - BooleanField`, () => {
   it('should render', () => {
     shallow(getComponent());
   });
@@ -40,6 +41,7 @@ describe(`PaymentRequest - Edge cases`, () => {
 
     const component = getComponent({
       debounce: true,
+      label: 'test',
       onChange: mockedOnChangeCb,
     });
 
@@ -56,6 +58,22 @@ describe(`PaymentRequest - Edge cases`, () => {
           return res(true);
         }, DEFAULT_DEBOUNCE_DELAY + 100)
       );
+    });
+  });
+
+  it(`should instantly update the value when debouncing is disabled`, async () => {
+    const mockedOnChangeCb = jest.fn();
+
+    const component = getComponent({
+      onChange: mockedOnChangeCb,
+    });
+
+    const { container } = render(component);
+    const input = container.querySelector('input');
+
+    await act(async () => {
+      input?.click();
+      setTimeout(() => expect(mockedOnChangeCb).toBeCalled(), 15);
     });
   });
 });

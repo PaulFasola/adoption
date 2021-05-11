@@ -7,7 +7,7 @@ import { IProps } from './fieldBuilder';
 import { useDebounce } from '../../../../hooks/useDebounce';
 import { DEFAULT_DEBOUNCE_DELAY } from '../constants';
 
-interface ILocalProps {
+export interface ILocalProps {
   customInput?: IInputProps;
 }
 

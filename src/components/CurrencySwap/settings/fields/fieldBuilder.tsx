@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React from 'react';
 import { SettingChangedCallback, SettingType } from '../interfaces';
 import { ReactNode } from 'react';
@@ -11,7 +12,8 @@ export interface IProps {
   type: SettingType;
   text?: string;
   label: string;
-  value?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  value?: object;
   debounce?: boolean;
 
   onChange?: SettingChangedCallback;

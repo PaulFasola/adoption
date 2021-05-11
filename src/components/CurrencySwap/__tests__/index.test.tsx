@@ -10,6 +10,7 @@ import { ISwapSubmission, ProtocolEnd } from '../interfaces';
 import { IProtocol } from '../../ProtocolSelector/interfaces';
 
 import 'jest-styled-components';
+import { ISettings } from '../settings/interfaces';
 
 const SUBMIT_BUTTON_SELECTOR = 'button[aria-label="Submit"]';
 
@@ -21,7 +22,7 @@ const selectProtocol = (
   select: ProtocolEnd,
   protoPos: number
 ): ReactWrapper => {
-  if (protoPos < 0) throw "Protocol DOM poisiton can't be < 0.";
+  if (protoPos < 0) throw "Protocol DOM positon can't be < 0.";
 
   const selectPos = select === 'input' ? 0 : 1;
   const button = wrapper
@@ -358,9 +359,73 @@ describe('CurrencySwap component', () => {
   });
 
   /**
+   * Settings
+   */
+  it('should renders settings button when at least one setting is visible', () => {
+    const getContainer = (visible: boolean) => {
+      const settings: ISettings = {
+        testToggle: {
+          type: 'boolean',
+          label: 'Test toggle',
+          hint: 'This toggle doesn`t do anything in this example',
+          visible,
+        },
+      };
+
+      return (
+        <CurrencySwap
+          protocols={{
+            input: activeProtocols,
+          }}
+          settings={settings}
+        />
+      );
+    };
+
+    expect(
+      render(getContainer(true)).container.querySelector('div[aria-label="Settings"]')
+    ).toBeVisible();
+
+    expect(
+      render(getContainer(false)).container.querySelector('div[aria-label="Settings"]')
+    ).not.toBeVisible();
+  });
+
+  it('should open the settings panel when clicked on the settings icon', () => {
+    const component = (
+      <CurrencySwap
+        protocols={{
+          input: activeProtocols,
+        }}
+        settings={{
+          testToggle: {
+            type: 'boolean',
+            label: 'Test toggle',
+            hint: 'This toggle doesn`t do anything in this example',
+            visible: true,
+          },
+        }}
+      />
+    );
+
+    const { container } = render(component);
+    const settingsIcon = container.querySelector('div[aria-label="Settings"]');
+
+    if (settingsIcon && settingsIcon.parentElement) {
+      settingsIcon.parentElement.click();
+    }
+
+    // The icon should change
+    expect(settingsIcon?.getAttribute('type')).toEqual('times');
+
+    // The settings panel is visible
+    const settingsLabel = container.querySelector('label[for="testToggle"]');
+    expect(settingsLabel).toBeVisible();
+  });
+
+  /**
    * ACCESSIBILITY
    */
-
   it('should not have any accessibility issues', async () => {
     const { container } = render(
       <CurrencySwap
