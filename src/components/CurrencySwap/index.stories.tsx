@@ -119,25 +119,6 @@ export const WithSettings: Story<IProps> = () => {
   );
 };
 
-export const TEST: Story<IProps> = (args) => (
-  <CurrencySwap
-    protocols={{
-      input: activeProtocols,
-    }}
-    locked={true}
-    settings={{
-      aCoolToggle: {
-        visible: true,
-        type: 'boolean',
-        label: 'Activate god mode',
-        hint: 'This toggle doesn`t do anything in this example, like the other fields :p',
-        text: 'test',
-        debounce: false,
-      },
-    }}
-  />
-);
-
 export const Themed: Story<IProps> = (args) => (
   <ThemeWrapper>
     <Basic {...args} />

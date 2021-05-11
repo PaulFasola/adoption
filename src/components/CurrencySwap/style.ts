@@ -129,7 +129,7 @@ export const SubmitButton = styled.button`
   }
 `;
 
-export const SettingsButton = styled(Icon)`
+export const SettingsIcon = styled(Icon)`
   justify-content: right;
   margin: 0;
 

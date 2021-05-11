@@ -6,7 +6,7 @@ import {
   InputWrapper,
   SubmitButton,
   Overview,
-  SettingsButton,
+  SettingsIcon,
 } from './style';
 import { IProps, IProtocolArrayPipe, IProtocolPipe, ProtocolEnd, ISwapValues } from './interfaces';
 import { Icon, IconType } from '../common/Icon';
@@ -275,9 +275,9 @@ const CurrencySwap: React.FC<IProps> = (props) => {
       </InputWrapper>
       <SubmitButton aria-label='Submit' disabled={!canSwap} onClick={handleSubmit}>
         <div>{getButtonValue()}</div>
-        <SettingsButton
+        <SettingsIcon
           hidden={!settingsPanel.renderable}
-          aria-label={strs.buttonLabels.settings}
+          title={strs.buttonLabels.settings}
           type={settingsPanel.visible ? IconType.Times : IconType.Settings}
           settingsVisible={settingsPanel.visible}
           onClick={() =>

@@ -383,11 +383,11 @@ describe('CurrencySwap component', () => {
     };
 
     expect(
-      render(getContainer(true)).container.querySelector('div[aria-label="Settings"]')
+      render(getContainer(true)).container.querySelector('div[title="Settings"]')
     ).toBeVisible();
 
     expect(
-      render(getContainer(false)).container.querySelector('div[aria-label="Settings"]')
+      render(getContainer(false)).container.querySelector('div[title="Settings"]')
     ).not.toBeVisible();
   });
 
@@ -409,7 +409,7 @@ describe('CurrencySwap component', () => {
     );
 
     const { container } = render(component);
-    const settingsIcon = container.querySelector('div[aria-label="Settings"]');
+    const settingsIcon = container.querySelector('div[title="Settings"]');
 
     if (settingsIcon && settingsIcon.parentElement) {
       settingsIcon.parentElement.click();
