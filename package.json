@@ -108,7 +108,7 @@
     "semantic-release": "17.4.4",
     "storybook-addon-react-docgen": "1.2.43-canary.128.1770.0",
     "storybook-dark-mode": "1.0.8",
-    "ts-jest": "27.0.3",
+    "ts-jest": "27.0.4",
     "ts-loader": "9.2.3",
     "typescript": "4.3.5",
     "webpack": "4.46.0"
