@@ -76,7 +76,7 @@
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "@wojtekmaj/enzyme-adapter-react-17": "0.6.3",
-    "babel-loader": "8.2.2",
+    "babel-loader": "8.2.3",
     "babel-register": "6.26.0",
     "conventional-changelog-conventionalcommits": "4.6.1",
     "cross-env": "7.0.3",
