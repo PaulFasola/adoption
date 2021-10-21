@@ -90,7 +90,7 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "full-icu": "1.4.0",
     "html-webpack-plugin": "5.4.0",
-    "husky": "7.0.2",
+    "husky": "7.0.4",
     "jest": "27.3.1",
     "jest-axe": "5.0.1",
     "jest-date-mock": "1.0.8",
