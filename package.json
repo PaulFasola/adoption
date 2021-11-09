@@ -87,7 +87,7 @@
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "3.4.1",
     "eslint-plugin-react": "7.26.1",
-    "eslint-plugin-react-hooks": "4.2.0",
+    "eslint-plugin-react-hooks": "4.3.0",
     "full-icu": "1.4.0",
     "html-webpack-plugin": "5.5.0",
     "husky": "7.0.4",
