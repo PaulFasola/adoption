@@ -96,7 +96,7 @@
     "jest-date-mock": "1.0.8",
     "jest-styled-components": "7.0.6",
     "prettier": "2.4.1",
-    "pretty-quick": "3.1.1",
+    "pretty-quick": "3.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "rimraf": "3.0.2",
