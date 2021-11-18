@@ -67,7 +67,7 @@
     "@types/enzyme": "3.10.10",
     "@types/enzyme-adapter-react-16": "1.0.6",
     "@types/enzyme-to-json": "1.5.4",
-    "@types/jest": "27.0.2",
+    "@types/jest": "27.0.3",
     "@types/jest-axe": "3.5.3",
     "@types/node": "15.12.2",
     "@types/react": "17.0.35",
