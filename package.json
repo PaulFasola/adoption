@@ -91,7 +91,7 @@
     "full-icu": "1.4.0",
     "html-webpack-plugin": "5.5.0",
     "husky": "7.0.4",
-    "jest": "27.4.1",
+    "jest": "27.4.2",
     "jest-axe": "5.0.1",
     "jest-date-mock": "1.0.8",
     "jest-styled-components": "7.0.8",
