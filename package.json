@@ -44,7 +44,7 @@
     "react-dom": ">=17.0.2"
   },
   "devDependencies": {
-    "@babel/core": "7.17.7",
+    "@babel/core": "7.17.8",
     "@commitlint/cli": "16.2.3",
     "@commitlint/config-conventional": "16.2.1",
     "@rollup/plugin-commonjs": "21.0.2",
@@ -76,7 +76,7 @@
     "@typescript-eslint/eslint-plugin": "5.13.0",
     "@typescript-eslint/parser": "5.13.0",
     "@wojtekmaj/enzyme-adapter-react-17": "0.6.6",
-    "babel-loader": "8.2.3",
+    "babel-loader": "8.2.4",
     "babel-register": "6.26.0",
     "conventional-changelog-conventionalcommits": "4.6.3",
     "cross-env": "7.0.3",
