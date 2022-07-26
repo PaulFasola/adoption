@@ -2,8 +2,8 @@ coverage:
   status:
     project:
       default:
-        target: 90%
+        target: 80%
         threshold: 2%
         if_ci_failed: error
 fixes:
-  - "/home/runner/work/paulfasola/adoption/::"
+  - '/home/runner/work/paulfasola/adoption/::'
