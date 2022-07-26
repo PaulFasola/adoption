@@ -6,6 +6,7 @@ node_modules
 
 .cache
 .env*
+.DS-Store
 
 npm-debug.log
 yarn-error.log
