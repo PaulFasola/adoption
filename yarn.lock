@@ -9278,7 +9278,7 @@ jest-each@^28.1.3:
     jest-util "^28.1.3"
     pretty-format "^28.1.3"
 
-jest-environment-jsdom@^28.1.3:
+jest-environment-jsdom@28.1.3:
   version "28.1.3"
   resolved "https://registry.npmjs.org/jest-environment-jsdom/-/jest-environment-jsdom-28.1.3.tgz"
   integrity sha512-HnlGUmZRdxfCByd3GM2F100DgQOajUBzEitjGqIREcb45kGjZvRrKUdlaF6escXBdcXNl0OBh+1ZrfeZT3GnAg==
