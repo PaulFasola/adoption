@@ -3291,10 +3291,10 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest-axe@3.5.4":
-  version "3.5.4"
-  resolved "https://registry.npmjs.org/@types/jest-axe/-/jest-axe-3.5.4.tgz"
-  integrity sha512-S0M+Etke9v3o0PjjfA4ijoU8G0+eI+lblpGYFYw2t+PPPnPPzJBX7UKLoQjz1SfIp+Hf/bNMFvoBX8zlFVzdrQ==
+"@types/jest-axe@3.5.5":
+  version "3.5.5"
+  resolved "https://registry.npmjs.org/@types/jest-axe/-/jest-axe-3.5.5.tgz"
+  integrity sha512-b8WDIdoeKtr/JDJ2+QjFXMuS8UhfdMA6+15Z5KjjIie3jQrSXD9KZWMSQxc0nPtx7L9rIFKdiDpQk+m7s4a/8w==
   dependencies:
     "@types/jest" "*"
     axe-core "^3.5.5"
