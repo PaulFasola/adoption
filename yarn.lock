@@ -1630,34 +1630,34 @@
     "@jridgewell/set-array" "^1.0.0"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@jridgewell/gen-mapping@^0.3.0", "@jridgewell/gen-mapping@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.3.2.tgz"
-  integrity sha512-mh65xKQAzI6iBcFzwv28KVWSmCkdRBWoOh+bYQGW3+6OZvbbN3TqMGo5hqYxQniRcH9F2VZIoJCm4pa3BPDK/A==
+"@jridgewell/gen-mapping@^0.3.2", "@jridgewell/gen-mapping@^0.3.5":
+  version "0.3.5"
+  resolved "https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.3.5.tgz"
+  integrity sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==
   dependencies:
-    "@jridgewell/set-array" "^1.0.1"
+    "@jridgewell/set-array" "^1.2.1"
     "@jridgewell/sourcemap-codec" "^1.4.10"
-    "@jridgewell/trace-mapping" "^0.3.9"
+    "@jridgewell/trace-mapping" "^0.3.24"
 
-"@jridgewell/resolve-uri@^3.0.3":
+"@jridgewell/resolve-uri@^3.0.3", "@jridgewell/resolve-uri@^3.1.0":
   version "3.1.0"
   resolved "https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.1.0.tgz"
   integrity sha512-F2msla3tad+Mfht5cJq7LSXcdudKTWCVYUgw6pLFOOHSTtZlj6SWNYAp+AhuqLmWdBO2X5hPrLcu8cVP8fy28w==
 
-"@jridgewell/set-array@^1.0.0", "@jridgewell/set-array@^1.0.1":
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/@jridgewell/set-array/-/set-array-1.1.2.tgz"
-  integrity sha512-xnkseuNADM0gt2bs+BvhO0p78Mk762YnZdsuzFV018NoG1Sj1SCQvpSqa7XUaTam5vAGasABV9qXASMKnFMwMw==
+"@jridgewell/set-array@^1.0.0", "@jridgewell/set-array@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/@jridgewell/set-array/-/set-array-1.2.1.tgz"
+  integrity sha512-R8gLRTZeyp03ymzP/6Lil/28tGeGEzhx1q2k703KGWRAI1VdvPIXdG70VJc2pAMw3NA6JKL5hhFu1sJX0Mnn/A==
 
-"@jridgewell/source-map@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.npmjs.org/@jridgewell/source-map/-/source-map-0.3.2.tgz"
-  integrity sha512-m7O9o2uR8k2ObDysZYzdfhb08VuEml5oWGiosa1VdaPZ/A6QyPkAJuwN0Q1lhULOf6B7MtQmHENS743hWtCrgw==
+"@jridgewell/source-map@^0.3.3":
+  version "0.3.6"
+  resolved "https://registry.npmjs.org/@jridgewell/source-map/-/source-map-0.3.6.tgz"
+  integrity sha512-1ZJTZebgqllO79ue2bm3rIGud/bOe0pP5BjSRCRxxYkEZS8STV7zN84UBbiYu7jy+eCKSnVIUgoWWE/tt+shMQ==
   dependencies:
-    "@jridgewell/gen-mapping" "^0.3.0"
-    "@jridgewell/trace-mapping" "^0.3.9"
+    "@jridgewell/gen-mapping" "^0.3.5"
+    "@jridgewell/trace-mapping" "^0.3.25"
 
-"@jridgewell/sourcemap-codec@^1.4.10":
+"@jridgewell/sourcemap-codec@^1.4.10", "@jridgewell/sourcemap-codec@^1.4.14":
   version "1.4.14"
   resolved "https://registry.npmjs.org/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.14.tgz"
   integrity sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==
@@ -1670,13 +1670,13 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@jridgewell/trace-mapping@^0.3.12", "@jridgewell/trace-mapping@^0.3.13", "@jridgewell/trace-mapping@^0.3.7", "@jridgewell/trace-mapping@^0.3.9":
-  version "0.3.14"
-  resolved "https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.14.tgz"
-  integrity sha512-bJWEfQ9lPTvm3SneWwRFVLzrh6nhjwqw7TUFFBEMzwvg7t7PCDenf2lDwqo4NQXzdpgBXyFgDWnQA+2vkruksQ==
+"@jridgewell/trace-mapping@^0.3.12", "@jridgewell/trace-mapping@^0.3.13", "@jridgewell/trace-mapping@^0.3.24", "@jridgewell/trace-mapping@^0.3.25", "@jridgewell/trace-mapping@^0.3.7", "@jridgewell/trace-mapping@^0.3.9":
+  version "0.3.25"
+  resolved "https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.25.tgz"
+  integrity sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==
   dependencies:
-    "@jridgewell/resolve-uri" "^3.0.3"
-    "@jridgewell/sourcemap-codec" "^1.4.10"
+    "@jridgewell/resolve-uri" "^3.1.0"
+    "@jridgewell/sourcemap-codec" "^1.4.14"
 
 "@mdx-js/mdx@^1.6.22":
   version "1.6.22"
@@ -2063,6 +2063,13 @@
     is-builtin-module "^3.1.0"
     is-module "^1.0.0"
     resolve "^1.19.0"
+
+"@rollup/plugin-terser@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/@rollup/plugin-terser/-/plugin-terser-0.1.0.tgz"
+  integrity sha512-N2KK+qUfHX2hBzVzM41UWGLrEmcjVC37spC8R3c9mt3oEDFKh3N2e12/lLp9aVSt86veR0TQiCNQXrm8C6aiUQ==
+  dependencies:
+    terser "^5.15.1"
 
 "@rollup/pluginutils@^3.1.0":
   version "3.1.0"
@@ -3986,10 +3993,10 @@ acorn@^7.1.1, acorn@^7.4.1:
   resolved "https://registry.npmjs.org/acorn/-/acorn-7.4.1.tgz"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
-acorn@^8.4.1, acorn@^8.5.0, acorn@^8.7.1, acorn@^8.8.0:
-  version "8.8.0"
-  resolved "https://registry.npmjs.org/acorn/-/acorn-8.8.0.tgz"
-  integrity sha512-QOxyigPVrpZ2GXT+PFyZTl6TtOFc5egxHIP9IlQ+RbupQuX4RkT/Bee4/kQuC02Xkzg84JcT7oLYtDIQxp+v7w==
+acorn@^8.4.1, acorn@^8.5.0, acorn@^8.7.1, acorn@^8.8.0, acorn@^8.8.2:
+  version "8.12.1"
+  resolved "https://registry.npmjs.org/acorn/-/acorn-8.12.1.tgz"
+  integrity sha512-tcpGyI9zbizT9JbV6oYE477V6mTlXvvi0T0G3SNIYE2apm/G5huBa1+K89VGeovbg+jycCrfhl3ADxErOuO6Jg==
 
 address@^1.0.1:
   version "1.2.1"
@@ -6409,9 +6416,9 @@ diff@^4.0.1:
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
 
 diff@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/diff/-/diff-5.1.0.tgz#bc52d298c5ea8df9194800224445ed43ffc87e40"
-  integrity sha512-D+mk+qE8VC/PAUrlAU34N+VfXev0ghe5ywmpqrawphmVZc1bEfn56uo9qpyGp1p4xpzOHkSW4ztBd6L7Xx4ACw==
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/diff/-/diff-5.2.0.tgz#26ded047cd1179b78b9537d5ef725503ce1ae531"
+  integrity sha512-uIFDxqpRZGZ6ThOk84hEfqWoHx2devRFvpTZcTHur85vImfaxUbTW9Ryh4CpCuDnToOP1CEtXKIgytHBPVff5A==
 
 diffie-hellman@^5.0.0:
   version "5.0.3"
@@ -7176,6 +7183,11 @@ expect@^28.0.0, expect@^28.1.3:
     jest-matcher-utils "^28.1.3"
     jest-message-util "^28.1.3"
     jest-util "^28.1.3"
+
+exponential-backoff@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/exponential-backoff/-/exponential-backoff-3.1.1.tgz#64ac7526fe341ab18a39016cd22c787d01e00bf6"
+  integrity sha512-dX7e/LHVJ6W3DE1MHWi9S1EYzDESENfLrYohG2G++ovZrYOkm4Knwa0mc1cn84xJOR4KEU0WSchhLbd0UklbHw==
 
 express@^4.17.1:
   version "4.18.2"
@@ -8590,6 +8602,14 @@ invariant@^2.2.2, invariant@^2.2.4:
   dependencies:
     loose-envify "^1.0.0"
 
+ip-address@^9.0.5:
+  version "9.0.5"
+  resolved "https://registry.yarnpkg.com/ip-address/-/ip-address-9.0.5.tgz#117a960819b08780c3bd1f14ef3c1cc1d3f3ea5a"
+  integrity sha512-zHtQzGojZXTwZTHQqra+ETKd4Sn3vgi7uBmlPoXVWZqYvuKmtI0l/VZTjqGmJY9x88GGOaZ9+G9ES8hC4T4X8g==
+  dependencies:
+    jsbn "1.1.0"
+    sprintf-js "^1.1.3"
+
 ip-regex@^4.1.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/ip-regex/-/ip-regex-4.3.0.tgz"
@@ -9603,7 +9623,7 @@ jest-watcher@^28.1.3:
     jest-util "^28.1.3"
     string-length "^4.0.1"
 
-jest-worker@^26.2.1, jest-worker@^26.5.0, jest-worker@^26.6.2:
+jest-worker@^26.5.0, jest-worker@^26.6.2:
   version "26.6.2"
   resolved "https://registry.npmjs.org/jest-worker/-/jest-worker-26.6.2.tgz"
   integrity sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==
@@ -9674,6 +9694,11 @@ js-yaml@^4.1.0:
   integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
   dependencies:
     argparse "^2.0.1"
+
+jsbn@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-1.1.0.tgz#b01307cb29b618a1ed26ec79e911f803c4da0040"
+  integrity sha512-4bYVV3aAMtDTTu4+xsDYa6sy9GyJ69/amsu9sYF2zqjiEoZA5xJi3BrfX3uY+/IekIu7MwdObdbDWpoZdBv3/A==
 
 jsdom@^19.0.0:
   version "19.0.0"
@@ -10866,11 +10891,12 @@ node-fetch@^2.6.1, node-fetch@^2.6.7:
     whatwg-url "^5.0.0"
 
 node-gyp@^9.0.0:
-  version "9.3.1"
-  resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-9.3.1.tgz#1e19f5f290afcc9c46973d68700cbd21a96192e4"
-  integrity sha512-4Q16ZCqq3g8awk6UplT7AuxQ35XN4R/yf/+wSAwcBUAjg7l58RTactWaP8fIDTi0FzI7YcVLujwExakZlfWkXg==
+  version "9.4.1"
+  resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-9.4.1.tgz#8a1023e0d6766ecb52764cc3a734b36ff275e185"
+  integrity sha512-OQkWKbjQKbGkMf/xqI1jjy3oCTgMKJac58G2+bjZb3fza6gW2YrCSdMQYaoTb70crvE//Gngr4f0AgVHmqHvBQ==
   dependencies:
     env-paths "^2.2.0"
+    exponential-backoff "^3.1.1"
     glob "^7.1.4"
     graceful-fs "^4.2.6"
     make-fetch-happen "^10.0.3"
@@ -13192,16 +13218,6 @@ rollup-plugin-postcss@4.0.2:
     safe-identifier "^0.4.2"
     style-inject "^0.3.0"
 
-rollup-plugin-terser@7.0.2:
-  version "7.0.2"
-  resolved "https://registry.npmjs.org/rollup-plugin-terser/-/rollup-plugin-terser-7.0.2.tgz"
-  integrity sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==
-  dependencies:
-    "@babel/code-frame" "^7.10.4"
-    jest-worker "^26.2.1"
-    serialize-javascript "^4.0.0"
-    terser "^5.0.0"
-
 rollup-plugin-typescript2@0.34.1:
   version "0.34.1"
   resolved "https://registry.npmjs.org/rollup-plugin-typescript2/-/rollup-plugin-typescript2-0.34.1.tgz"
@@ -13645,11 +13661,11 @@ socks-proxy-agent@^7.0.0:
     socks "^2.6.2"
 
 socks@^2.6.2:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/socks/-/socks-2.7.1.tgz#d8e651247178fde79c0663043e07240196857d55"
-  integrity sha512-7maUZy1N7uo6+WVEX6psASxtNlKaNVMlGQKkG/63nEDdLOWNbiUMoLK7X4uYoLhQstau72mLgfEWcXcwsaHbYQ==
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/socks/-/socks-2.8.3.tgz#1ebd0f09c52ba95a09750afe3f3f9f724a800cb5"
+  integrity sha512-l5x7VUUWbjVFbafGLxPWkYsHIhEvmF85tbIeFZWc8ZPtoMyybuEhL7Jye/ooC4/d48FgOjSJXgsF/AJPYCW8Zw==
   dependencies:
-    ip "^2.0.0"
+    ip-address "^9.0.5"
     smart-buffer "^4.2.0"
 
 source-list-map@^2.0.0:
@@ -13779,6 +13795,11 @@ split@^1.0.0:
   integrity sha512-mTyOoPbrivtXnwnIxZRFYRrPNtEFKlpB2fvjSnCQUiAA6qAZzqwna5envK4uk6OIeP17CsdF3rSBGYVBsU0Tkg==
   dependencies:
     through "2"
+
+sprintf-js@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.3.tgz#4914b903a2f8b685d17fdf78a70e917e872e444a"
+  integrity sha512-Oo+0REFV59/rz3gfJNKQiBlwfHaSESl1pcGyABQsnnIfWOFt6JNj5gCog2U6MLZ//IGYD+nA8nI+mTShREReaA==
 
 sprintf-js@~1.0.2:
   version "1.0.3"
@@ -14302,13 +14323,13 @@ terser@^4.1.2, terser@^4.6.3:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
-terser@^5.0.0, terser@^5.10.0, terser@^5.3.4, terser@^5.7.2:
-  version "5.14.2"
-  resolved "https://registry.npmjs.org/terser/-/terser-5.14.2.tgz"
-  integrity sha512-oL0rGeM/WFQCUd0y2QrWxYnq7tfSuKBiqTjRPWrRgB46WD/kiwHwF8T23z78H6Q6kGCuuHcPB+KULHRdxvVGQA==
+terser@^5.10.0, terser@^5.15.1, terser@^5.3.4, terser@^5.7.2:
+  version "5.34.1"
+  resolved "https://registry.npmjs.org/terser/-/terser-5.34.1.tgz"
+  integrity sha512-FsJZ7iZLd/BXkz+4xrRTGJ26o/6VTjQytUk8b8OxkwcD2I+79VPJlz7qss1+zE7h8GNIScFqXcDyJ/KqBYZFVA==
   dependencies:
-    "@jridgewell/source-map" "^0.3.2"
-    acorn "^8.5.0"
+    "@jridgewell/source-map" "^0.3.3"
+    acorn "^8.8.2"
     commander "^2.20.0"
     source-map-support "~0.5.20"
 
