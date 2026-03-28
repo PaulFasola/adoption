@@ -80,7 +80,7 @@
     "babel-register": "6.26.0",
     "conventional-changelog-conventionalcommits": "5.0.0",
     "cross-env": "7.0.3",
-    "dompurify": "2.4.0",
+    "dompurify": "3.3.2",
     "enzyme": "3.11.0",
     "enzyme-to-json": "3.6.2",
     "eslint": "8.26.0",
